@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Login</title>
+    <style>
+        select {
+            /*Clear select style*/
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -ms-appearance: none;
+            width: 25px;
+            margin-right: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            /*Style arrow css*/
+            background: url("img/arrow.svg") no-repeat scroll right #fff;
+            font-family: 'Poppins', serif;
+            font-size: 16px;
+            color: #666;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!--<img src="img/login_left_bg.svg" id="login_left_bg" />-->
+
+        <div class="left-half"></div>
+
+        <div class="right-half">
+            <div id="circle_bg"></div>
+            <div id="circle_bg2"></div>
+            <!-- Tab links -->
+            <div id="container" class="tab">
+                <button class="tablinks shape" id="defaultOpen" onclick="openSection(event, 'patient')">Author/Reviewer</button>
+                <button class="tablinks shape2" onclick="openSection(event, 'employee')">Employee</button>
+                <!------------------------------------------------------------------------------------------------->
+                <!-- Patient Tab content -->
+                <div id="patient" class="tabcontent">
+                    <p class="textHeader1">Welcome to</p>
+                    <p class="textHeader2"> PotatoPopcorn</p> <br />
+                    <!-- form -->
+                    <form>
+                        <div class="input-container">
+                            <img class="icon" src="img/userName_icon.svg" />
+                            <input class="input-field" type="text" placeholder="Username" name="userName">
+                        </div>
+                        <br />
+                        <div class="input-container">
+                            <img class="icon" src="img/password_icon.svg" />
+                            <input class="input-field" type="password" placeholder="Password" name="password">
+                        </div><br />
+                        <button type="submit" id="login_btn">Login</button>
+                    </form>
+                </div>
+                <!------------------------------------------------------------------------------------------------->
+                <!--Employee Tab content -->
+                <div id="employee" class="tabcontent">
+                    <p class="textHeader3"> Employee Login </p> <br />
+                    <!-- form -->
+                    <form>
+                        <div class="input-container">
+                            <img class="icon" src="img/userName_icon.svg" />
+                            <input class="input-field" type="text" placeholder="Username" name="userName">
+                        </div>
+                        <br />
+                        <div class="input-container">
+                            <img class="icon" src="img/password_icon.svg" />
+                            <input class="input-field" type="password" placeholder="Password" name="password">
+                        </div><br />
+                        <div class="input-container">
+                            <img class="icon" src="img/userType_icon.svg" />
+                            <select class="input-field">
+                                <option value="usertype2.1">Conference chair</option>
+                                <option value="userAdmin">User Admin</option>
+                            </select>
+                        </div><br />
+                        <button type="submit" id="login_btn">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Javascript for the Tap -->
+    <script>
+        function openSection(evt, userType) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(userType).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+
+</html>
