@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <title>AdminLTE 3 | Dashboard</title> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontawesome-free@1.0.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
@@ -21,7 +20,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Doctor</title>
+    <title>Admin</title>
     <style>
         div {
             height: auto;
@@ -139,7 +138,15 @@
                         <div>
                             <p class="searchLeft">Enter User NRIC: </p>
                             <!-- search User ID -->
-                            <input type="search" id="searchName" class="form-control form-control-lg" placeholder="Search User ID">
+                            <input type="search" id="searchNameNric" class="form-control form-control-lg" placeholder="Search User NRIC/ Name">
+                            <select id="searchNameID" class="form-control" style="width: 200px;display: inline-block">
+
+                                <option>All</option>
+                                <option>Reviewers</option>
+                                <option>Authors</option>
+                                <option>User Admin</option>
+
+                            </select>
                             <button type="submit" class="btn btn-outline-primary search_button">search</button>
                         </div>
 
@@ -209,49 +216,49 @@
                     <p>User Profile:&nbsp;</p>
                     <div class="detail">
                         <!-- get userName from DB-->
-                        <label class="SearchUserProfile">Author</label>
+                        <label class="admin_searchUserProfile">Author</label>
                     </div>
                     <p>NRIC:&nbsp;</p>
                     <div class="detail">
                         <!-- get userID from DB-->
-                        <label class="SearchUserNRIC">Ab1234567</label>
+                        <label class="admin_searchUserNRIC">Ab1234567</label>
                     </div>
                     <p>Username:&nbsp;</p>
                     <div class="detail">
                         <!-- get userName from DB-->
-                        <label class="SearchUserUsername">lucid123</label>
+                        <label class="admin_searchUserUsername">lucid123</label>
                     </div>
                     <p>Full name:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userID from DB-->
-                        <label class="SearchUserFullName">Lucid Marry</label>
+                        <!-- get userFullName from DB-->
+                        <label class="admin_searchUserFullName">Lucid Marry</label>
                     </div>
                     <p>Age:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userName from DB-->
-                        <label class="SearchUserProfile">38</label>
+                        <!-- get UserAge from DB-->
+                        <label class="admin_searchUserAge">38</label>
                     </div>
                     <p>Sex:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userID from DB-->
-                        <label class="SearchUserNRIC">F</label>
+                        <!-- get UserNRIC from DB-->
+                        <label class="admin_searchUserGender">F</label>
                     </div>
                     <p>Contact:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userName from DB-->
-                        <label class="SearchUserUsername">(+65)8501230</label>
+                        <!-- get UserPhoneNo from DB-->
+                        <label class="admin_searchUserPhoneNo">(+65)8501230</label>
                     </div>
                     <p>Email:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userID from DB-->
-                        <label class="SearchUserFullName">user123@gmai.com</label>
+                        <!-- get UserEmail from DB-->
+                        <label class="admin_searchUserEmail">user123@gmai.com</label>
                     </div>
                     <button type="button" style="float: left;margin-right: 20px;" class="blue_btn" data-toggle="modal" data-target="#editModal">
                         Edit Detail
                     </button>
-                    <button type="button" class="red_btn" data-toggle="modal" data-target="#deleteModal">
+<!--                    <button type="button" class="red_btn" data-toggle="modal" data-target="#deleteModal">
                         delete user
-                    </button>
+                    </button>-->
 
                 </div>
                 <div class="modal-footer" style="border: none;">
@@ -306,23 +313,11 @@
                         </button> -->
                 </div>
                 <div class="modal-body">
-                    <!--<p>NRIC:&nbsp;</p>
-                    <div class="detail">-->
-                        <!-- get userID from DB-->
-                        <!--<label class="deleteUserNRIC">Ab1234567</label>
-                    </div>
-                    <p>User Profile:&nbsp;</p>
-                    <div class="detail">-->
-                        <!-- get userName from DB-->
-                        <!--<label class="deleteUserProfile">Author</label>
-                    </div>-->
                     <p class="deleteText">Are you sure you want to save?</p>
-
-
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="saveEdit()">
                         Confirm save
                     </button>
                 </div>
@@ -349,29 +344,29 @@
                     <div class="edit-group">
                         <p>NRIC:&nbsp;</p>
                         <div class="detail">
-                            <!-- get userID from DB-->
-                            <label class="SearchUserNRIC">Ab1234567</label>
+                            <!-- get userNRIC from DB-->
+                            <label id="admin_editNRIC">Ab1234567</label>
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Username:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="username">
+                            <input type="text" class="form-control" id="admin_editUsername">
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Password:&nbsp;</p>
                         <div class="detail">
-                            <!-- get userName from DB-->
-                            <input type="password" class="form-control" id="adminFullName">
+                            <!-- get userFullName from DB-->
+                            <input type="password" class="form-control" id="admin_editPassword">
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>User Profile:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <select class="form-control" style="width: 200px;display: inline-block">
+                            <select class="form-control" style="width: 200px;display: inline-block" id="admin_editUserProfile"">
                                 <option>Reviewer</option>
                                 <option>Author</option>
                                 <option>User Admin</option>
@@ -388,23 +383,25 @@
                         <p>Full Name:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="fullName">
+                            <input type="text" class="form-control" id="admin_editFullName">
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Sex:&nbsp;</p>
                         <div class="detail">
-                            <input type="radio" class="sex_input" id="female" name="sex" value="F">
-                            <label for="female" class="sex_label">F</label>
-                            <input type="radio" class="sex_input" id="male" name="sex" value="M">
-                            <label for="male" class="sex_label">M</label><br>
+                            <!--       <input type="radio" class="sex_input" id="admin_editFemale" name="sex" value="F">
+           <label for="female" class="sex_label">F</label>
+           <input type="radio" class="sex_input" id="male" name="sex" value="M">
+           <label for="male" class="sex_label">M</label><br>-->
+                            <label class="admin_editGender">F</label>
+
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Age:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="number" class="form-control" id="age" min="1">
+                            <input type="number" class="form-control" id="admin_editAge" min="1" maxlength="3">
                         </div>
                     </div>
 
@@ -416,7 +413,7 @@
                         <p>Contact:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="contact">
+                            <input type="text" class="form-control" id="admin_editContact">
                         </div>  
                     </div>
                     <div class="edit-group">
@@ -460,12 +457,7 @@
             $(this).addClass("active");
         });
     </script>
-    <!-- OPTIONAL SCRIPTS -->
-    <!-- <script src="plugins/chart.js/Chart.min.js "></script> -->
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="dist/js/demo.js "></script> -->
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <!-- <script src="dist/js/pages/dashboard3.js "></script> -->
+
 </body>
 
 </html>

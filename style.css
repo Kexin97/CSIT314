@@ -293,12 +293,12 @@
         box-shadow: 0px 4px 10px rgba(16, 156, 241, 0.24);
     }
 
-    #searchName,
-    #searchName_2 {
-        font-size: 16px;
-        display: inline-block;
-        width: 300px;
-    }
+#searchNameNric,
+#searchName_2 {
+    font-size: 16px;
+    display: inline-block;
+    width: 300px;
+}
     .searchLeft {
         margin-right: 10px;
         margin-top: 5px;
