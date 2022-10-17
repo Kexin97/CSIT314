@@ -363,3 +363,8 @@
     float: right;
     margin-right: 20px;
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #404e67;
+    border-right: 0;
+}
