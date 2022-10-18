@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Admin</title>
@@ -89,7 +89,7 @@
                         </li>
                         <li class="nav-item active">
                             <a href="admin_addUserProfile.html" class="nav-link">
-                                <i class="nav-icon"><img src="img/search.svg"></i>
+                                <i class="nav-icon"><img src="img/file.png"></i>
                                 <p class="navHeader">
                                     Pending user profile
 
@@ -146,7 +146,7 @@
                                 <label for="inputUserName" class="col-sm-2 col-form-label">User Profile:</label>
                                 <div class="col-sm-4">
                                     <!--   <select class="form-control" id="userUserProfile">-->
-                                    <select class="form-control select2" id="userUserProfile"  data-dropdown-css-class="select2-purple"  multiple="multiple" style="width: 100%;">
+                                    <select class="form-control select2" id="userUserProfile" data-dropdown-css-class="select2-purple" multiple="multiple" style="width: 100%;">
                                         <option>Reviewer</option>
                                         <option>Author</option>
                                         <option>User Admin</option>
@@ -218,15 +218,15 @@
     <!-- datatable -->
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>-->
-<!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>-->
+    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>-->
+    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
     <script>
-        $(".nav .nav-link").on("click", function () {
+        $(".nav .nav-link").on("click", function() {
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
-        $(function () {
+        $(function() {
             //Initialize Select2 Elements
             $('.select2').select2();
 
@@ -234,7 +234,7 @@
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             });
-            $(function () {
+            $(function() {
 
                 $('#searchUser').DataTable({
                     "paging": true,
