@@ -89,6 +89,16 @@
                             </a>
                         </li>
                         <li class="nav-item active">
+                            <a href="admin_addUserProfile.html" class="nav-link">
+                                <i class="nav-icon"><img src="img/search.svg"></i>
+                                <p class="navHeader">
+                                    Pending user profile
+
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item active">
                             <a href="admin_searchUserPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="img/search.svg"></i>
                                 <p class="navHeader">
@@ -137,7 +147,7 @@
                         <div>
                             <p class="searchLeft">Enter User Name: </p>
                             <!-- search User ID -->
-                            <input type="search" id="searchName" class="form-control form-control-lg" placeholder="Search User NRIC/ Name">
+                            <input type="search" id="searchName" class="form-control form-control-lg" placeholder="Search User Name">
                             <select id="searchNameID" class="form-control" style="width: 200px;display: inline-block">
 
                                 <option>All</option>
@@ -167,34 +177,36 @@
             </div>
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
-                    <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                        <thead>
-                            <tr>
-                                <!--<th>NRIC</th>-->
-                                <th>Full Name</th>
-                                <th>User Profile</th>
+                    <div class="card-body">
+                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <!--<th>NRIC</th>-->
+                                    <th>Full Name</th>
+                                    <th>User Profile</th>
 
-                                <th>Action</th>
+                                    <th>Action</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <!--              <td>S12345678</td>-->
-                                <td>Mike Doe</td>
-                                <td>Author</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!--              <td>S12345678</td>-->
+                                    <td>Mike Doe</td>
+                                    <td>Author</td>
 
 
-                                <td>
-                                    <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchUserModal">
-                                        Details
-                                    </button>
-                                </td>
+                                    <td>
+                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchUserModal">
+                                            Details
+                                        </button>
+                                    </td>
 
-                            </tr>
+                                </tr>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>  
                 </div>
             </div>
 
@@ -222,11 +234,11 @@
                     <!-- get userID from DB-->
                     <!--<label class="admin_searchUserNRIC">Ab1234567</label>
                     </div>-->
-                    <p>Username:&nbsp;</p>
-                    <div class="detail">
+                    <!--<p>Username:&nbsp;</p>
+                    <div class="detail">-->
                         <!-- get userName from DB-->
-                        <label class="admin_searchUserUsername">lucid123</label>
-                    </div>
+                        <!--<label class="admin_searchUserUsername">lucid123</label>
+                    </div>-->
                     <p>Full name:&nbsp;</p>
                     <div class="detail">
                         <!-- get userFullName from DB-->
@@ -347,13 +359,14 @@
                     <!--<label id="admin_editNRIC">Ab1234567</label>
                         </div>
                     </div>-->
-                    <div class="edit-group">
+                    <!--<div class="edit-group">
                         <p>Username:&nbsp;</p>
-                        <div class="detail">
+                        <div class="detail">-->
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="admin_editUsername">
+                            <!--<input type="text" class="form-control" id="admin_editUsername">
                         </div>
-                    </div>
+                    </div>-->
+
                     <div class="edit-group">
                         <p>Password:&nbsp;</p>
                         <div class="detail">
@@ -455,6 +468,19 @@
         $(".nav .nav-link").on("click", function () {
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
+        });
+        
+        $(function () {
+
+            $('#searchUser').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
+            });
         });
     </script>
 
