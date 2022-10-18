@@ -89,7 +89,7 @@
                         </li>
                         <li class="nav-item active">
                             <a href="admin_addUserProfile.html" class="nav-link">
-                                <i class="nav-icon"><img src="img/add.svg"></i>
+                                <i class="nav-icon"><img src="img/file.png"></i>
                                 <p class="navHeader">
                                     Pending user profile
 
@@ -183,11 +183,12 @@
                             </div>
                             <div class="form-group row">
                                 <label for="inputSex" class="col-sm-2 col-form-label">Sex：</label>
-                                <div class="col-sm-4" style="display: inherit;">
-                                    <input type="radio" class="sex_input" id="admin_addFemale" name="sex" value="F">
-                                    <label for="female" class="sex_label">F</label>
+                                <div class="col-sm-4">
                                     <input type="radio" class="sex_input" id="admin_addMale" name="sex" value="M">
                                     <label for="male" class="sex_label">M</label>
+                                    <input type="radio" class="sex_input" id="admin_addFemale" name="sex" value="F">
+                                    <label for="female" class="sex_label">F</label>
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -275,7 +276,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
 
     <script>
-        $(".nav .nav-link").on("click", function () {
+        $(".nav .nav-link").on("click", function() {
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
