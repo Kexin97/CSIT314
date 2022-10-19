@@ -81,7 +81,7 @@
         </style>
     </head>
 
-    <body onload="openSection(event, 'patient')">
+    <body onload="openSection(event, 'reAu')">
         <section>
             <!--<img src="img/login_left_bg.svg" id="login_left_bg" />-->
 
@@ -92,7 +92,7 @@
                 <div id="circle_bg2"></div>
                 <!-- Tab links -->
                 <div id="container" class="tab">
-                    <button class="tablinks shape" id="defaultOpen" onclick="openSection(event, 'patient')">Author/Reviewer</button>
+                    <button class="tablinks shape" id="defaultOpen" onclick="openSection(event, 'reAu')">Author/Reviewer</button>
                     <button class="tablinks shape2" onclick="openSection(event, 'employee')">Employee</button>
                     <!------------------------------------------------------------------------------------------------->
                     <!-- Patient Tab content -->
