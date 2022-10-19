@@ -110,6 +110,13 @@
                                 <img class="icon" src="../img/password_icon.svg" />
                                 <input class="input-field" type="password" placeholder="Password" id="userPassword" name="userPassword">
                             </div><br />
+                            <div class="input-container">
+                            <img class="icon" src="img/userType_icon.svg" />
+                            <select class="input-field">
+                                <option value="userAuthor">Author</option>
+                                <option value="userReviewer">Reviewer</option>
+                            </select>
+                        </div><br />
                             <input type="submit" id="user_login_btn" name="user_login_btn" value="Login">
                         </form>
                     </div>
@@ -131,7 +138,7 @@
                             <div class="input-container">
                                 <img class="icon" src="../img/userType_icon.svg" />
                                 <select class="input-field">
-                                    <option value="usertype2.1">Conference chair</option>
+                                    <option value="userCC">Conference chair</option>
                                     <option value="userAdmin">User Admin</option>
                                 </select>
                             </div><br />
