@@ -385,3 +385,7 @@
     .select2-selection__choice__remove {
         border-right: 0 !important;
     }
+    
+    .select2-container--open {
+        z-index: 9999999
+    }
