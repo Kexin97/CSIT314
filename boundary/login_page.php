@@ -15,6 +15,30 @@
             document.getElementById(userType).style.display = "block";
             evt.currentTarget.className += " active";
         }
+        
+        function setCookie(nameCookie, valueCookie, timeCookie){
+            const date = new Date();
+            date.setTime(date.getTime() +  (timeCookie * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + date.toUTCString();
+            document.cookie = `${nameCookie}=${valueCookie}; ${expires}; path=/`
+        }
+
+        function deleteCookie(nameOfCookie){
+            setCookie(nameOfCookie, null, null);
+        }
+
+        function getCookie(name){
+            const cDecoded = decodeURIComponent(document.cookie);
+            const cArray = cDecoded.split("; ");
+            let result = null;
+            
+            cArray.forEach(element => {
+                if(element.indexOf(name) == 0){
+                    result = element.substring(name.length + 1)
+                }
+            })
+            return result;
+        }
     </script>
     <?php
         //$_POST['userEmail'], $_POST['userPassword'],
@@ -57,7 +81,16 @@
             }
             if($vl[0] == 'validLogin') {
                 $profileType = new accountProfileController();
-                $loginType = $profileType->validateAccountType($vl[1], $selectOption);
+                $loginType = $profileType->validateAccountType($vl[1], $selectOption); 
+
+                echo "<script>setCookie('accountEmail', '". $vl[1] . "', 7);</script>";
+                echo "<script>setCookie('accountPassword', '". $vl[2] . "', 7);</script>";
+                echo "<script>setCookie('accountAccountID', '". $vl[3] . "', 7);</script>";
+                echo "<script>setCookie('accountFullName', '". $vl[4] . "', 7);</script>";
+                echo "<script>setCookie('accountSex', '". $vl[5] . "', 7);</script>";
+                echo "<script>setCookie('accountAge', '". $vl[6] . "', 7);</script>";
+                echo "<script>setCookie('accountContact', '". $vl[7] . "', 7);</script>";
+                
                 checkType($loginType[1]);
             }
 
