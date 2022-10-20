@@ -171,14 +171,14 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search User</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search paper</p>
                     </div>
 
                     <div class="card-body">
                         <div>
                             <p class="searchLeft">Enter paper name: </p>
                             <!-- search User ID -->
-                            <input type="search" id="author_searchPaperName" class="form-control form-control-lg" placeholder="Search User Name/Account ID"> -->
+                            <input type="search" id="author_searchEnterPaperName" class="form-control form-control-lg">
                             <button type="submit" class="btn btn-outline-primary search_button">search</button>
                         </div>
 
@@ -191,8 +191,8 @@
                         <table id="author_searchPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Account ID</th>
-                                    <th>Full Name</th>
+                                    <th>Paper ID</th>
+                                    <th>Paper Name</th>
                                     <!-- <th>User Profile</th> -->
                                     <th>Action</th>
 
@@ -204,7 +204,7 @@
                                     <td>Mike Doe</td>
                                     <!-- <td>Author</td> -->
                                     <td>
-                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchUserModal">
+                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchPaperModal">
                                             Details
                                         </button>
                                     </td>
@@ -217,8 +217,125 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="searchPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Paper ID:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get paperID from DB-->
+                            <label class="author_searchPaperID">12345678</label>
+                        </div>
+                        <p>Paper name:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get userFullName from DB-->
+                            <label class="author_searchPaperName">Mike Doe</label>
+                        </div>
+
+                        <button type="button" class="blue_btn" data-toggle="modal" data-target="#editPaperModal" id="author_editDetail_btn">
+                            Edit Detail
+                        </button>
+                        <button type="button" class="red_btn" data-toggle="modal" data-target="#deletePapereModal">
+                                                Delete paper
+                          </button>
+
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Paper ID:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get paperID from DB-->
+                            <label class="author_searchPaperID">12345678</label>
+                        </div>
+                        <p>Paper name:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get PaperName from DB-->
+                            <input type="text " class="form-control " id="author_editPaperName ">
+
+                        </div>
+                        <div class="form-group">
+                            <p for="exampleInputFile">File input</p>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
+                            Back
+                        </button>
+                        <button type="button " id="author_saveEditPaper" style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
+                            Save
+                        </button>
+
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deletePapereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Paper?</p>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button> -->
+                    </div>
+                    <div class="modal-body">
+                        <p>Paper ID:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get paperID from DB-->
+                            <label class="author_deletePaperID">12345678</label>
+                        </div>
+                        <p>Paper name:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get userFullName from DB-->
+                            <label class="author_deletePaperName">Mike Doe</label>
+                        </div>
+
+                        <p class="deleteText">Deleting this paper mean you would be able to resubmit the correct version.</p>
 
 
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                                Cancel
+                        </button>
+                        <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm Deletion
+                        </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>
@@ -241,7 +358,7 @@
 
             $(function() {
 
-                $('#searchUser').DataTable({
+                $('#author_searchPaper').DataTable({
                     "paging ": true,
                     "lengthChange ": true,
                     "searching ": true,
