@@ -112,7 +112,7 @@
 
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="admin_profilePage.php" class="nav-link ">
+                            <a href="admin_profilePage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -121,7 +121,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="pages/widgets.php " class="nav-link ">
+                            <a href="../boundary/login_page.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
