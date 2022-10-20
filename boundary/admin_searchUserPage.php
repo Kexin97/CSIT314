@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="pages/widgets.php " class="nav-link ">
+                            <a href="../boundary/login_page.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
