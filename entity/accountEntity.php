@@ -69,6 +69,38 @@
             return $this->account_ID;
         } 
 
+        function setFullName($account_fullName){
+            $this->account_fullName = $account_fullName;
+        }
+
+        function getFullName(){
+            return $this->account_fullName;
+        }
+
+        function setSex($account_sex){
+            $this->account_sex = $account_sex;
+        }
+
+        function getSex(){
+            return $this->account_sex;
+        }
+
+        function setAge($account_age){
+            $this->account_age = $account_age;
+        }
+
+        function getAge(){
+            return $this->account_age;
+        }
+
+        function setContact($account_contact){
+            $this->account_contact = $account_contact;
+        }
+
+        function getContact(){
+            return $this->account_contact;
+        } 
+
         //Verify login
         function verifyLogin(){
             $validityCheck;
@@ -94,11 +126,15 @@
                 $qGet1 = $this->conn->query($query1);
                 
                 if(($res = $qGet1->num_rows) > 0){
-                    $i = 0;
-
                     while(($Row = $qGet1->fetch_assoc()) !== NULL){
                         if($Row["account_email"] == $this->account_email){
+                            $this->setEmail($Row["account_email"]);
+                            $this->setPassword($Row["account_password"]);
                             $this->setAccountID($Row["account_ID"]);
+                            $this->setFullName($Row["account_fullName"]);
+                            $this->setSex($Row["account_sex"]);
+                            $this->setAge($Row["account_age"]);
+                            $this->setContact($Row["account_contact"]);
                         }
                     }
                 }

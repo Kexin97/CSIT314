@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="loadProfile()">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -158,31 +158,31 @@
                             <div class="form-group row">
                                 <label for="adminName" class="col-sm-2 col-form-label">Admin Name:</label>
                                 <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileName" style="border: none; margin-left: -10px;">Admin A </p>
+                                    <p class="form-control" id="admin_profileName" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
                                 <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileGender" style="border: none; margin-left: -10px;">F</p>
+                                    <p class="form-control" id="admin_profileGender" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileAge" style="border: none; margin-left: -10px;">38</p>
+                                    <p class="form-control" id="admin_profileAge" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
-                                    <input type="tel" class="form-control" id="admin_profileContact" placeholder="Contact Number">
+                                    <input type="text" class="form-control" id="admin_profileContact" placeholder="Contact Number">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
-                                    <input type="tel" class="form-control " id="admin_profileEmail" placeholder="Email">
+                                    <input type="text" class="form-control " id="admin_profileEmail" placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -218,6 +218,38 @@
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
+
+        function setCookie(nameCookie, valueCookie, timeCookie){
+            const date = new Date();
+            date.setTime(date.getTime() +  (timeCookie * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + date.toUTCString();
+            document.cookie = `${nameCookie}=${valueCookie}; ${expires}; path=/`
+        }
+
+        function deleteCookie(nameOfCookie){
+            setCookie(nameOfCookie, null, null);
+        }
+
+        function getCookie(name){
+            const cDecoded = decodeURIComponent(document.cookie);
+            const cArray = cDecoded.split("; ");
+            let result = null;
+            
+            cArray.forEach(element => {
+                if(element.indexOf(name) == 0){
+                    result = element.substring(name.length + 1)
+                }
+            })
+            return result;
+        }
+
+        function loadProfile(){
+            document.getElementById('admin_profileName').innerHTML = getCookie("accountFullName");
+            document.getElementById('admin_profileGender').innerHTML = getCookie("accountSex");
+            document.getElementById('admin_profileAge').innerHTML = getCookie("accountAge");
+            document.getElementById('admin_profileContact').value = getCookie("accountContact");
+            document.getElementById('admin_profileEmail').value = getCookie("accountEmail");
+        }
     </script>
 
 </body>
