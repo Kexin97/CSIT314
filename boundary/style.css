@@ -42,7 +42,7 @@
         overflow: hidden;
     }
     /* right bg image */
-
+    
     #circle_bg {
         position: fixed;
         top: 0;
@@ -53,7 +53,7 @@
         height: 50vh;
         box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
     }
-
+    
     #circle_bg2 {
         position: fixed;
         bottom: 0;
@@ -64,6 +64,7 @@
         height: 50vh;
         box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
     }
+    
     #container {
         position: relative;
         top: 50%;
@@ -85,7 +86,7 @@
         color: black;
         font-weight: 500;
     }
-/* Header:PotatoPopcorn*/
+    /* Header:PotatoPopcorn*/
     
     .textHeader2 {
         font-size: 30px;
@@ -242,12 +243,15 @@
         }
     }
     /*admin*/
+    
     #navleft {
         background-color: #404e67;
     }
+    
     #navleft .noline {
         border-bottom: none
     }
+    
     #platform_name {
         top: 0;
         font-size: 16px;
@@ -256,6 +260,7 @@
         color: white;
         opacity: 0.7;
     }
+    
     #company_name {
         color: white;
         font-style: bold;
@@ -263,16 +268,17 @@
         font-size: 25px;
         padding-top: 30px;
     }
-
+    
     #company_name span {
         padding-top: 30px;
         margin-left: 1px;
     }
+    
     [class*=sidebar-dark] .user-panel {
         border-bottom: none;
         overflow: visible;
     }
-
+    
     .navHeader {
         color: white;
         font-style: bold;
@@ -280,6 +286,7 @@
         font-size: 16px;
     }
     /*search*/
+    
     .detail_action_btn,
     .modify_btn {
         background-color: #404e67;
@@ -292,19 +299,21 @@
         padding-bottom: 5px;
         box-shadow: 0px 4px 10px rgba(16, 156, 241, 0.24);
     }
-
-#searchName,
-#searchName_2 {
-    font-size: 16px;
-    display: inline-block;
-    width: 300px;
-}
+    
+    #admin_searchUserName,
+    #searchUserProfile {
+        font-size: 16px;
+        display: inline-block;
+        width: 300px;
+    }
+    
     .searchLeft {
         margin-right: 10px;
         margin-top: 5px;
-        width: 130px;
+        /* width: 130px; */
         display: inline-block;
     }
+    
     .modal-body p {
         color: #334D6E;
         opacity: 0.8;
@@ -314,10 +323,12 @@
         float: left;
         clear: left;
     }
+    
     .detail {
         width: 50%;
         float: right;
     }
+    
     .white_btn {
         background-color: white;
         color: #506DFF;
@@ -331,19 +342,21 @@
         margin-top: 20px;
         border-style: solid;
     }
-.red_btn {
-    background-color: white;
-    color: red;
-    border: red;
-    border-radius: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
-    margin-top: 20px;
-    border-style: solid;
-}
+    
+    .red_btn {
+        background-color: white;
+        color: red;
+        border: red;
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
+        margin-top: 20px;
+        border-style: solid;
+    }
+    
     .blue_btn {
         background-color: #404e67;
         color: white;
@@ -356,18 +369,57 @@
         /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
         margin-top: 20px;
     }
-/*#male{
+    /*#male{
     margin-left:10px;
 }*/
-#editDetail_btn {
-    float: right;
-    margin-right: 20px;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #404e67;
-
-}
-.select2-selection__choice__remove {
-    border-right: 0 !important;
-}
+    
+    #editDetail_btn {
+        float: right;
+        margin-right: 20px;
+    }
+    
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #404e67;
+    }
+    
+    .select2-selection__choice__remove {
+        border-right: 0 !important;
+    }
+    
+    .select2-container--open {
+        z-index: 9999999
+    }
+    
+    .nav-link {
+        width: 46px;
+        height: 40px;
+    }
+    
+    .sss {
+        height: 17px;
+        line-height: 17px;
+        width: 17px;
+        font-family: Ubuntu-Medium, Arial, Helvetica, sans-serif;
+        font-weight: 500;
+        font-size: .7rem;
+        background: #e44057;
+        border-radius: 50%;
+        color: #fff;
+        height: 18px;
+        left: 15px;
+        line-height: 18px;
+        position: absolute;
+        text-align: center;
+        top: 7px;
+        width: 18px;
+    }
+    
+    .nav-icon img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .inlineBlock {
+        display: inline-block;
+        padding: 0;
+    }
