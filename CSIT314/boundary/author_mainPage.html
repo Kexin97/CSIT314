@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontawesome-free@1.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
@@ -43,7 +43,34 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <!-- <i class="fa-solid fa-bell"></i> -->
+                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
+                        <span class="sss">15</span>
 
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">
+                            <span id="author_noOfEmailNoti">
+                                4
+                            </span> Notifications
+                        </span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span id="author_noOfEmailNoti">
+                                4
+                            </span> new messages
+                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.html" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -109,10 +136,17 @@
                             <a href="" class="nav-link">
                                 <i class="nav-icon"><img src="img/file.png"></i>
                                 <p class="navHeader">
-                                    View submitted paper
+                                    View paper
                                 </p>
                             </a>
-
+                        </li>
+                        <li class="nav-item active">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon"><img src="img/email.png"></i>
+                                <p class="navHeader">
+                                    View email
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
@@ -147,6 +181,18 @@
                         <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">Personal Profile</p>
                     </div>
                     <div id="settings" style="padding: 30px;">
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <div class="input-group col-sm-4">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile"></label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
