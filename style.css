@@ -153,7 +153,8 @@
     }
     /*Login button*/
     
-    #login_btn {
+    #employee_login_btn,
+    #user_login_btn {
         background-color: #404e67;
         color: white;
         padding: 15px 20px;
@@ -164,7 +165,8 @@
         border-radius: 10px;
     }
     
-    #login_btn:hover {
+    #employee_login_btn:hover,
+    #user_login_btn:hover {
         opacity: 1;
     }
     /* Style the tab */
@@ -339,7 +341,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
         /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
-        margin-top: 20px;
+        margin-top: 15%;
         border-style: solid;
     }
     
@@ -353,7 +355,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
         /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
-        margin-top: 20px;
+        margin-top: 15%;
         border-style: solid;
     }
     
@@ -367,7 +369,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
         /* box-shadow: 0px 4px 10px rgb(16 156 241 / 24%); */
-        margin-top: 20px;
+        margin-top: 15%;
     }
     /*#male{
     margin-left:10px;
