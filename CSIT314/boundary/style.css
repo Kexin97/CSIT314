@@ -418,3 +418,8 @@
         width: 28px;
         height: 28px;
     }
+    
+    .inlineBlock {
+        display: inline-block;
+        padding: 0;
+    }
