@@ -389,3 +389,32 @@
     .select2-container--open {
         z-index: 9999999
     }
+    
+    .nav-link {
+        width: 46px;
+        height: 40px;
+    }
+    
+    .sss {
+        height: 17px;
+        line-height: 17px;
+        width: 17px;
+        font-family: Ubuntu-Medium, Arial, Helvetica, sans-serif;
+        font-weight: 500;
+        font-size: .7rem;
+        background: #e44057;
+        border-radius: 50%;
+        color: #fff;
+        height: 18px;
+        left: 15px;
+        line-height: 18px;
+        position: absolute;
+        text-align: center;
+        top: 7px;
+        width: 18px;
+    }
+    
+    .nav-icon img {
+        width: 28px;
+        height: 28px;
+    }
