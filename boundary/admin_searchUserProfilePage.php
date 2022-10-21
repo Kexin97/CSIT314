@@ -307,12 +307,14 @@
 
                 </div>
                 <div class="modal-footer " style="border: none; ">
-                    <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
-                        Back
-                    </button>
-                    <button type="button " style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
-                        Save
-                    </button>
+                    <div class="admin_searchUserProfileEditDetail_btn">
+                        <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="editDetail_btn">
+                            Save
+                        </button>
+                        <button type="button" class="white_btn " data-dismiss="modal" aria-label="Close">
+                            Back
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
