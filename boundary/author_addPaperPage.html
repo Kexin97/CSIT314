@@ -106,14 +106,14 @@
 
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_home_icon.svg"></i>
                                 <p class="navHeader">
                                     Home
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item active">
                             <a href="author_addPaperPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
@@ -181,24 +181,50 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="searchLeft col-sm-2 ">Select conference </label>
+                            <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
+                            <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
+                            <!-- retrieve conference number from db -->
+                            <option>Conference1 </option>
+                            <option>Conference2</option>
+                            <option>Conference3</option>
+                            <option>Conference4</option>
+                            <option>Conference5</option>
+                            </select>
+                        </div>
+                        <!-- <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Minimal</label>
+                                        <select class="form-control select2" style="width: 100%;" multiple="multiple">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
 
                             <label class="searchLeft col-sm-2 ">Select author </label>
-
-                            <!-- <input type="search" id="searchName" class="form-control form-control-lg" placeholder="Search User Name"> -->
-                            <select id="searchUserProfile" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple">
-                                <!-- retrieve author number from db -->
+                            <select id="author_addAuthorName" class="form-control select2 col-sm-4 inlineBlock" multiple="multiple">
+                                <!-- retrieve author name from db -->
                                 <option>Author1 </option>
-                                <option>Authors2</option>
-                                <option>Authors3</option>
-                                <option>Authors4</option>
-                                <option>Authors5</option>
+                                <option>Author2</option>
+                                <option>Author3</option>
+                                <option>Author4</option>
+                                <option>Author5</option>
 
                             </select>
-
-                            <!-- <label for="exampleInputFile">File input</label> -->
                         </div>
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2" for="exampleInputFile">File input</label>
+                            <label class="searchLeft col-sm-2" for="exampleInputFile">Upload paper:</label>
                             <div class="col-sm-4 inlineBlock">
                                 <div class="input-group">
                                     <div class="custom-file">
