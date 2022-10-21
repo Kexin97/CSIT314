@@ -432,3 +432,7 @@
     .detail label {
         margin-bottom: 16px;
     }
+    
+    .detail>.form-control {
+        width: 100% !important;
+    }
