@@ -89,7 +89,7 @@
                             <a href="admin_addUserProfile.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Pending user profile
+                                Add user profile
 
                                 </p>
                             </a>
@@ -105,7 +105,14 @@
                             </a>
 
                         </li>
-
+                        <li class="nav-item active">
+                            <a href="admin_searchUserProfilePage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/search.svg"></i>
+                                <p class="navHeader">
+                                    Search user profile
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
                             <a href="admin_profilePage.php" class="nav-link ">
