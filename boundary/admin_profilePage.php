@@ -250,6 +250,8 @@
             document.getElementById('admin_profileContact').value = getCookie("accountContact");
             document.getElementById('admin_profileEmail').value = getCookie("accountEmail");
         }
+
+        console.log(document.cookie);
     </script>
 
 </body>
