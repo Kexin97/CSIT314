@@ -211,7 +211,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">View User Profile</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -241,7 +241,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Account and data?</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save User Profile?</p>
                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button> -->
