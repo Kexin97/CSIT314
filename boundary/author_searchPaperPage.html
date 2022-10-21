@@ -195,7 +195,7 @@
                                     <th>Paper Name</th>
                                     <!-- <th>User Profile</th> -->
                                     <th>Action</th>
-
+                                    <th>Paper Review and Rating</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -206,6 +206,11 @@
                                     <td>
                                         <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchPaperModal">
                                             Details
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchPaperModal">
+                                            View
                                         </button>
                                     </td>
 
@@ -222,7 +227,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Edit paper</p>
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">View paper</p>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -257,7 +262,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Edit paper</p>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -274,8 +279,35 @@
                             <input type="text " class="form-control " id="author_editPaperName ">
 
                         </div>
+                        <p class="searchLeft">Select conference </p>
+                        <div class="detail">
+
+                            <select id="author_editConference" class="form-control select2" style="width: 100% !important;">
+                            <!-- retrieve conference number from db -->
+                            <option>Conference1 </option>
+                            <option>Conference2</option>
+                            <option>Conference3</option>
+                            <option>Conference4</option>
+                            <option>Conference5</option>
+                            </select>
+                        </div>
+                        <p class="searchLeft">Select author </p>
+                        <div class="detail">
+
+
+                            <select id="author_editAuthorName" class="form-control select2 col-sm-4 " multiple="multiple" style="width: 100% !important;">
+                                <!-- retrieve author name from db -->
+                                <option>Author1 </option>
+                                <option>Author2</option>
+                                <option>Author3</option>
+                                <option>Author4</option>
+                                <option>Author5</option>
+
+                            </select>
+                        </div>
+                        <p for="exampleInputFile">Upload paper:</p>
                         <div class="form-group">
-                            <p for="exampleInputFile">File input</p>
+
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="exampleInputFile">
