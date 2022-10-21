@@ -270,6 +270,10 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <button type="button" id="author_ addReviewRating" class="blue_btn" data-toggle="modal" data-target="#addReviewRatingModal">
+                                                 Add review rating
+                                            </button>
+
                                         </div>
                                         <div class="row">
                                             <p class="col-sm-4">Paper review:</p>
@@ -365,7 +369,31 @@
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                        <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="saveEdit()">
+                        <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to add review?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                        <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                         Confirm save
                     </button>
                     </div>
