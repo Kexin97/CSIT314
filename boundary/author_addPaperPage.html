@@ -206,12 +206,13 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2" for="exampleInputFile">Upload paper:</label>
+                            <label class="searchLeft col-sm-2" for="author_addPaperUploadFile">Upload paper:</label>
                             <div class="col-sm-4 inlineBlock">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        <!-- save the file upload in db -->
+                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile">
+                                        <label class="custom-file-label" for="author_addPaperUploadFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text">Upload</span>
@@ -219,6 +220,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- insert into database paper detail: paper name, conference, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value="Add Paper">
 
                     </div>
