@@ -152,6 +152,7 @@
 
                     <div class="card-body">
                     <div>
+					
                             <p class="searchLeft">Enter User Name/Account ID: </p>
                             <!-- search User ID -->
                             <input type="search" id="admin_searchUserName" class="form-control form-control-lg" placeholder="Search User Name/Account ID">
@@ -161,9 +162,10 @@
                                 <option>Reviewers</option>
                                 <option>Authors</option>
                                 <option>User Admin</option>
-
                             </select> -->
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
+					<form method='post'>		
+                            <input type="submit" name="submit" value="Search">
+					</form>
                         </div>
 
                     </div>
@@ -182,13 +184,31 @@
                     </div>
                 </div>-->
             </div>
-            <div class="col-12">
-                <div class="card" style="margin-top: 20px;">
-                    <div class="card-body">
-                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+			
+            <?php
+			
+			require("../controller/viewUserController.php");
+			
+			
+				displayAllUsers2();
+			
+		
+			
+			//for search
+			function displayUserInfo(){
+				echo "search";
+			}
+            
+			function displayAllUsers() {
+				$control = new ViewAccountController();
+				$list = $control->viewUsers();
+				
+				echo "<div class='col-12'>
+                <div class='card' style='margin-top: 20px;'>
+                    <div class='card-body'>
+                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
                             <thead>
                                 <tr>
-                                    <!--<th>NRIC</th>-->
                                     <th>Full Name</th>
                                     <th>User Profile</th>
 
@@ -196,31 +216,84 @@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <!--              <td>S12345678</td>-->
-                                    <td>Mike Doe</td>
-                                    <td>Author</td>
-
-
-                                    <td>
-                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchUserModal">
+							<tbody>";
+				
+				for($i = 0; $i < count($list); $i++)
+				{
+					echo "<tr><td>" . $list[$i]["account_fullName"] . "</td>";
+					echo "<td>" . $list[$i]["reviewer_type"]."  ";
+					echo $list[$i]["author_type"]."  ";
+					echo $list[$i]["conferenceChair_type"]."  ";
+					echo $list[$i]["userAdmin_type"] . "</td>";
+					 
+					echo "<td>
+                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
                                             Details
                                         </button>
-                                    </td>
+                                    </td></tr>";
+				}
+				
+			
+				
+
+				echo "</tbody>
+							</table>
+						</div>  
+					</div>
+				</div>";
+			}
+			
+			
+			function displayAllUsers2() {
+				$control = new ViewAccountController();
+				$list = $control->viewUsers2();
+				
+				echo "<div class='col-12'>
+                <div class='card' style='margin-top: 20px;'>
+                    <div class='card-body'>
+                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+
+                                    <th>Action</th>
 
                                 </tr>
+                            </thead>
+							<tbody>";
+				
+				for($i = 0; $i < count($list); $i++)
+				{
+					echo "<tr><td>" . $list[$i]["account_fullName"] . "</td>";
+					echo "<td>" . $list[$i]["account_email"] . "</td>";
+					 
+					echo "<td>
+                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
+                                            Details
+                                        </button>
+                                    </td></tr>";
+				}
+				
+			
+				
 
-                            </tbody>
-                        </table>
-                    </div>  
-                </div>
-            </div>
+				echo "</tbody>
+							</table>
+						</div>  
+					</div>
+				</div>";
+			}
+			
+			
+			?>
+			
 
         </div>
     </div>
 
-    <div class="modal fade" id="searchUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<?php
+    /*<div class="modal fade" id="userD0" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -283,7 +356,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*/
+	
+	?>
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -493,6 +568,8 @@
             });
         });
     </script>
+	
+	
 
 </body>
 

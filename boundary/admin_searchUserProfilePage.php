@@ -162,46 +162,88 @@
                                 <option>Conference Chair</option>
 
                             </select>
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
+							<input type="submit" class="btn btn-outline-primary search_button" name="search" id="search" value="Search">
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="card" style="margin-top: 20px;">
-                    <div class="card-body">
-                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+			<?php
+			require("../controller/viewProfileController.php");
+
+			displayAllProfile();
+			
+						
+			function displayAllProfile() {
+				$control = new ViewProfileController();
+				$list = $control->viewProfile();
+				$tempLoc = "";
+				
+				echo "<div class='col-12'>
+                <div class='card' style='margin-top: 20px;'>
+                    <div class='card-body'>
+                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
                             <thead>
                                 <tr>
-                                    <!--<th>NRIC</th>-->
-                                    <th>Full Name</th>
-                                    <th>User Profile</th>
-
+                                    <th>Email</th>
+									<th>User Profile</th>
                                     <th>Action</th>
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <!--              <td>S12345678</td>-->
-                                    <td>Mike Doe</td>
-                                    <td>Author</td>
-
-
-                                    <td>
-                                        <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#searchUserModal">
+							<tbody>";
+				
+				for($i = 0; $i < count($list); $i++)
+				{
+					echo "<tr><td>" . $list[$i]["account_email"] . "</td>";
+					
+					$tempLoc = $list[$i]["reviewer_type"];
+					echo "<td>" . $tempLoc;
+					
+					if ($tempLoc != ""){
+						echo "<br>";
+					}
+					
+					$tempLoc = $list[$i]["author_type"];
+					echo $tempLoc;
+					
+					if ($tempLoc != ""){
+						echo "<br>";
+					}
+					
+					$tempLoc = $list[$i]["conferenceChair_type"];
+					echo $tempLoc;
+					
+					if ($tempLoc != ""){
+						echo "<br>";
+					}
+					
+					$tempLoc = $list[$i]["userAdmin_type"];
+					echo $tempLoc;
+					
+					if ($tempLoc != ""){
+						echo "<br>";
+					}
+					
+					echo "</td>";
+					 
+					echo "<td>
+                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
                                             Details
                                         </button>
-                                    </td>
+                                    </td></tr>";
+				}
+				
+			
+				
 
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+				echo "</tbody>
+							</table>
+						</div>  
+					</div>
+				</div>";
+			}
+			?>
 
         </div>
     </div>

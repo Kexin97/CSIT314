@@ -141,5 +141,98 @@
             }
             return $validityCheck;
         }
+		
+		//view useraccount
+		function viewUserAccount(){
+            $SQLGet = "SELECT account.account_ID,account.account_email,account.account_password,account.account_fullName,account.account_sex,account.account_age,account.account_contact,account.account_status,account_profile.reviewer_type,account_profile.author_type,account_profile.conferenceChair_type,account_profile.userAdmin_type FROM `account` 
+JOIN account_profile ON account.account_email=account_profile.account_email";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+                    $dataArray[$i]["account_ID"] = $Row["account_ID"];
+                    $dataArray[$i]["account_password"] = $Row["account_password"];
+					$dataArray[$i]["reviewer_type"] = $Row["reviewer_type"];
+					$dataArray[$i]["author_type"] = $Row["author_type"];
+					$dataArray[$i]["conferenceChair_type"] = $Row["conferenceChair_type"];
+					$dataArray[$i]["userAdmin_type"] = $Row["userAdmin_type"];
+					$dataArray[$i]["account_fullName"] = $Row["account_fullName"];
+					$dataArray[$i]["account_sex"] = $Row["account_sex"];
+					$dataArray[$i]["account_age"] = $Row["account_age"];
+					$dataArray[$i]["account_contact"] = $Row["account_contact"];
+					$dataArray[$i]["account_email"] = $Row["account_email"];
+					$dataArray[$i]["account_status"] = $Row["account_status"];
+
+                    $i++;
+                }
+            }
+            
+            
+            $this->dataArray = $dataArray;
+
+            return $dataArray;
+        }
+		
+		//view useraccount
+		function viewUserAccount2(){
+            $SQLGet = "SELECT * FROM account";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+                    $dataArray[$i]["account_ID"] = $Row["account_ID"];
+                    $dataArray[$i]["account_password"] = $Row["account_password"];
+					$dataArray[$i]["account_fullName"] = $Row["account_fullName"];
+					$dataArray[$i]["account_sex"] = $Row["account_sex"];
+					$dataArray[$i]["account_age"] = $Row["account_age"];
+					$dataArray[$i]["account_contact"] = $Row["account_contact"];
+					$dataArray[$i]["account_email"] = $Row["account_email"];
+					$dataArray[$i]["account_status"] = $Row["account_status"];
+
+                    $i++;
+                }
+            }
+            
+            
+            $this->dataArray = $dataArray;
+
+            return $dataArray;
+        }
+		
+		//view userprofile
+		function viewUserProfile(){
+            $SQLGet = "SELECT * FROM account_profile";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+                    $dataArray[$i]["profile_ID"] = $Row["profile_ID"];
+					$dataArray[$i]["account_email"] = $Row["account_email"];
+                    $dataArray[$i]["reviewer_type"] = $Row["reviewer_type"];
+					$dataArray[$i]["author_type"] = $Row["author_type"];
+					$dataArray[$i]["conferenceChair_type"] = $Row["conferenceChair_type"];
+					$dataArray[$i]["userAdmin_type"] = $Row["userAdmin_type"];
+
+                    $i++;
+                }
+            }
+            
+            
+            $this->dataArray = $dataArray;
+
+            return $dataArray;
+        }
     }
 ?>
