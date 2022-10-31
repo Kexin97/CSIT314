@@ -157,9 +157,9 @@
                             <div class="form-group row">
                                 <label for="inputSex" class="col-sm-2 col-form-label">Sex：</label>
                                 <div class="col-sm-4" style="display: inherit;">
-                                    <input type="radio" class="sex_input" name="admin_addGender" value="F">
+                                    <input type="radio" class="sex_input" name="admin_addGender" id="F" value="F">
                                     <label for="female" class="sex_label">F</label>
-                                    <input type="radio" class="sex_input" name="admin_addGender" value="M">
+                                    <input type="radio" class="sex_input" name="admin_addGender" id="M" value="M">
                                     <label for="male" class="sex_label">M</label>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
 
-                                    <input type="number" class="form-control" id="admin_addAge" name="admin_addAge" placeholder="Age" maxlength="2">
+                                    <input type="number" class="form-control" id="admin_addAge" name="admin_addAge" placeholder="Age" max="99">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -182,7 +182,7 @@
                                     <input type="email" class="form-control" id="admin_addEmail" name="admin_addEmail" placeholder="Email">
                                 </div>
                             </div>
-                            <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addUserModal" value="Add user">       
+                            <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addUserModal" value="Add user" onclick="check()">       
                     </div>
                 </div>
             </div>
@@ -201,21 +201,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>NRIC:&nbsp;</p>
+                    <p>Full Name:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserNRIC from DB-->
-                        <label id="addNRIC">Ab1234567</label>
+                        <label id="addName"></label>
                     </div>
-                    <p>User Profile:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get UserProfile from DB-->
-                        <label id="addUserProfile">User</label>
-                    </div>
-
                     <p>Password:&nbsp;</p>
                     <div class="detail">
+                        <!-- get UserProfile from DB-->
+                        <label id="addPwd"></label>
+                    </div>
+
+                    <p>Sex:&nbsp;</p>
+                    <div class="detail">
                         <!-- get UserAge from DB-->
-                        <label id="addPassword">.............</label>
+                        <label id="addSex"></label>
+                    </div>
+					
+                    <p>Age:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get UserAge from DB-->
+                        <label id="addAge"></label>
+                    </div>
+					
+                    <p>Contact:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get UserAge from DB-->
+                        <label id="addContact"></label>
+                    </div>
+					
+                    <p>Email:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get UserAge from DB-->
+                        <label id="addEmail"></label>
                     </div>
                     <input type="submit" style="float: right;" class="detail_action_btn" name="create" id="create" value="Confirm">
                 </div>
@@ -247,6 +265,35 @@
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
+		
+		function check()
+		{
+			var name = document.getElementById("admin_addFullName").value;
+			document.getElementById("addName").innerHTML = name;
+			
+			var pwd = document.getElementById("admin_addPassword").value;
+			document.getElementById("addPwd").innerHTML = pwd;
+			
+			var sexF = document.getElementById("F").checked;
+			var sexM = document.getElementById("M").checked;
+			if (sexF == true)
+				document.getElementById("addSex").innerHTML = "F";
+			else if(sexM == true){
+				document.getElementById("addSex").innerHTML = "M";
+			}
+			
+			var age = document.getElementById("admin_addAge").value;
+			document.getElementById("addAge").innerHTML = age;
+			
+			var contact = document.getElementById("admin_addContact").value;
+			document.getElementById("addContact").innerHTML = contact;
+			
+			var email = document.getElementById("admin_addEmail").value;
+			document.getElementById("addEmail").innerHTML = email;
+			
+			
+			
+		}
     </script>
     <?php
         require("../controller/addUserController.php");

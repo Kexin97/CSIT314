@@ -26,6 +26,49 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+<?php
+			require("../controller/viewProfileController.php");
+			require("../controller/updateProfileController.php");
+			
+			$control = new ViewProfileController();
+			$list = $control->viewProfile();
+			
+			
+			if(isset($_POST['update'])){
+				$profile_type = $_POST["admin_editUserProfile"];
+				$account_email = $_POST["admin_editEmail"];
+				
+
+				if(empty($profile_type)){
+					
+						echo "<script> alert('Update failed! Please fill in user profile!'); </script>";
+					
+				}
+				else{
+					$updateC = new updateProfileController();
+					$preupdate = $updateC->updateProfile($account_email);
+					$counter = 0;
+					foreach ($profile_type as $userProfile){
+						$controller = new updateProfileController();
+						$result = $controller->profileDetails($account_email, $userProfile);
+						if($result["result"] != TRUE)
+						{
+							echo "<script> alert('" . $result["errorMsg"] . "')</script>";
+							$counter++;
+						}
+					}
+					if ($counter == 0)
+					{
+						echo "<script> alert('Update successful!')</script>";
+						$control = new ViewProfileController();
+						$list = $control->viewProfile();
+					}
+						
+					
+				}
+			}
+			
+?>
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -77,7 +120,7 @@
                 <hr color="#EBEFF2" style="border:1; margin-top:35px; opacity: 0.8;">
 
                 <nav class=" mt-2 ">
-                <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
+                    <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item">
                             <a href="admin_addUserPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
@@ -90,7 +133,7 @@
                             <a href="admin_addUserProfile.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Pending user profile
+                                    Add user profile
 
                                 </p>
                             </a>
@@ -101,10 +144,8 @@
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     Search user
-
                                 </p>
                             </a>
-
                         </li>
                         <li class="nav-item active">
                             <a href="admin_searchUserProfilePage.php" class="nav-link">
@@ -120,12 +161,11 @@
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
-
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <a href="../boundary/login_page.php " class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
@@ -148,12 +188,12 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search User Profile</p>
                     </div>
 
-                    <div class="card-body">
+                    <!--<div class="card-body">
                         <div>
                             <p class="searchLeft">Select User Profile: </p>
                             <!-- search User ID -->
                             <!-- <input type="search" id="searchName" class="form-control form-control-lg" placeholder="Search User Name"> -->
-                            <select id="searchUserProfile" class="form-control select2" style="width: 200px;display: inline-block" data-dropdown-css-class="select2-purple" multiple="multiple">
+                            <!--<select id="searchUserProfile" class="form-control select2" style="width: 200px;display: inline-block" data-dropdown-css-class="select2-purple" multiple="multiple">
 
                                 <option>All</option>
                                 <option>Reviewers</option>
@@ -162,88 +202,67 @@
                                 <option>Conference Chair</option>
 
                             </select>
-							<input type="submit" class="btn btn-outline-primary search_button" name="search" id="search" value="Search">
+                            <button type="submit" class="btn btn-outline-primary search_button" onsubmit="return true;">search</button>
                         </div>
 
-                    </div>
+                    </div>-->
                 </div>
             </div>
-			<?php
-			require("../controller/viewProfileController.php");
-
-			displayAllProfile();
-			
+            <div class="col-12">
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
 						
-			function displayAllProfile() {
-				$control = new ViewProfileController();
-				$list = $control->viewProfile();
-				$tempLoc = "";
-				
-				echo "<div class='col-12'>
-                <div class='card' style='margin-top: 20px;'>
-                    <div class='card-body'>
-                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
+                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Email</th>
-									<th>User Profile</th>
+                                    <th>User Profile</th>
                                     <th>Action</th>
 
                                 </tr>
                             </thead>
-							<tbody>";
-				
-				for($i = 0; $i < count($list); $i++)
-				{
-					echo "<tr><td>" . $list[$i]["account_email"] . "</td>";
-					
-					$tempLoc = $list[$i]["reviewer_type"];
-					echo "<td>" . $tempLoc;
-					
-					if ($tempLoc != ""){
-						echo "<br>";
-					}
-					
-					$tempLoc = $list[$i]["author_type"];
-					echo $tempLoc;
-					
-					if ($tempLoc != ""){
-						echo "<br>";
-					}
-					
-					$tempLoc = $list[$i]["conferenceChair_type"];
-					echo $tempLoc;
-					
-					if ($tempLoc != ""){
-						echo "<br>";
-					}
-					
-					$tempLoc = $list[$i]["userAdmin_type"];
-					echo $tempLoc;
-					
-					if ($tempLoc != ""){
-						echo "<br>";
-					}
-					
-					echo "</td>";
-					 
-					echo "<td>
-                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
-                                            Details
-                                        </button>
-                                    </td></tr>";
-				}
-				
-			
-				
-
-				echo "</tbody>
-							</table>
-						</div>  
-					</div>
-				</div>";
-			}
-			?>
+							
+                            <tbody>
+							<?php for($i = 0; $i < count($list); $i++): ?>
+									<tr>
+									  <td><?php echo $list[$i]["account_email"]; ?></td>
+									  <?php
+										echo "<td id=profile". $i .">" ;
+										$tempLoc = $list[$i]["reviewer_type"];
+										if ($list[$i]["reviewer_type"]!= ""){
+											$tempLoc = $tempLoc."<br>";
+										}
+										
+										$tempLoc = $tempLoc . $list[$i]["author_type"];
+										if ($list[$i]["author_type"] != ""){
+											$tempLoc = $tempLoc."<br>";
+										}
+										
+										$tempLoc = $tempLoc . $list[$i]["conferenceChair_type"];
+										if ($list[$i]["conferenceChair_type"] != ""){
+											$tempLoc = $tempLoc."<br>";
+										}
+										
+										$tempLoc = $tempLoc . $list[$i]["userAdmin_type"];
+										if ($list[$i]["userAdmin_type"] != ""){
+											$tempLoc = $tempLoc."<br>";
+										} 
+										echo $tempLoc;
+										
+										echo "</td>";
+										
+										$temp = $list[$i]["account_email"];
+										echo "<td><button id='detail" . $i . "' type='button' class='detail_action_btn' data-toggle='modal' data-target='#searchUserModal' onclick='detail(" . $i . ")' value='" . $temp . "'>
+                                            Details</button></td>
+										</tr>";
+									?>
+							<?php endfor; ?>
+                            </tbody>
+                        </table>
+						
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -252,24 +271,26 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">View User Profile</p>
+                    <div style="float:left;width: 3px;height: 25px; background: #FED666;"></div>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 20px; margin-left: 10px; display: inline;">User Details</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+					
                     <p>Full name:&nbsp;</p>
                     <div class="detail">
                         <!-- get userFullName from DB-->
-                        <label class="admin_searchUserFullName">Lucid Marry</label>
+                        <label class="admin_searchUserFullName" id="admin_searchUserFullName" value=""></label>
                     </div>
                     <p>User Profile:&nbsp;</p>
                     <div class="detail">
                         <!-- get userName from DB-->
-                        <label class="admin_searchUserProfile">Author</label>
+                        <label class="admin_searchUserProfile" id="admin_searchUserProfile"></label>
                     </div>
-                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#editModal" id="editDetail_btn">
+					<br><br><br><br><br>
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#editModal" id="editDetail_btn" onclick="edit()">
                         Edit Detail
                     </button>
                 </div>
@@ -278,30 +299,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save User Profile?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to save?</p>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
-                    </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="saveEdit()">
-                        Confirm save
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
-                </div>
-            </div>
-        </div>
-    </div>
+    
+	<form method="POST">
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -313,15 +312,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
+				
                     <div>
                         <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute; "></div>
                         <p style="font-size:16px; color: black; margin-left: 10px; display: inline; ">Info</p>
                     </div>
                     <div class="edit-group ">
-                        <p>Full Name:&nbsp;</p>
+                        <p>Email:&nbsp;</p>
                         <div class="detail ">
                             <!-- get userName from DB-->
-                            <input type="text " class="form-control " id="admin_editFullName ">
+                            <input type="text " class="form-control " id="admin_editEmail" name="admin_editEmail" value="" readonly='true'>
                         </div>
                     </div>
                     <div style="clear: both; ">
@@ -333,11 +333,11 @@
                         <p>User Profile:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <select class="form-control select2" id="admin_editUserProfile" multiple="multiple" style="width: 100%; z-index: 1050;">
-                                <option value="Reviewer ">Reviewer</option>
-                                <option value="Author ">Author</option>
-                                <option value="User Admin ">User Admin</option>
-                                <option value="Conference Chair ">Conference Chair</option>
+                            <select class="form-control select2" id="admin_editUserProfile[]" name="admin_editUserProfile[]" multiple="multiple" style="width: 100%; z-index: 1050;">
+                                <option value="reviewer">Reviewer</option>
+                                <option value="author">Author</option>
+                                <option value="userAdmin">User Admin</option>
+                                <option value="conferenceChair">Conference Chair</option>
 
                             </select>
                         </div>
@@ -346,10 +346,11 @@
 
 
 
-
+				
                 </div>
                 <div class="modal-footer " style="border: none; ">
                     <div class="admin_searchUserProfileEditDetail_btn">
+
                         <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="editDetail_btn">
                             Save
                         </button>
@@ -358,9 +359,35 @@
                         </button>
                     </div>
                 </div>
+				
             </div>
         </div>
     </div>
+	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Account and data?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to save?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="submit" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="update">
+                        Confirm save
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+	</form>
 
     <!-- ./wrapper -->
     <!-- jQuery -->
@@ -401,7 +428,27 @@
                 theme: 'bootstrap4'
             });
         });
+		
+		function detail(i)
+		{
+			var id = "detail" + i;
+			var x = document.getElementById(id).value;
+			document.getElementById("admin_searchUserFullName").innerHTML = x;
+			document.getElementById("admin_searchUserFullName").value = x;
+			
+			var y = document.getElementById("profile"+i).outerHTML;
+			document.getElementById("admin_searchUserProfile").innerHTML = y;
+		}
+		
+		function edit()
+		{
+			var x = document.getElementById("admin_searchUserFullName").value;
+			document.getElementById("admin_editEmail").value = x;
+			
+		}
+
     </script>
+
 
 </body>
 

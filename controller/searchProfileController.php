@@ -1,7 +1,7 @@
 <?php
     require_once("../entity/accountEntity.php");
 
-    class ViewAccountController
+    class ViewProfileController
     {
         protected $entity;
         protected $result;
@@ -13,9 +13,9 @@
             $this->result = array();
         }
 
-		public function viewUsers()
+        public function viewProfile()
         {
-            $this->result = $this->entity->viewUserAccount();
+            $this->result = $this->entity->viewUserProfile();
 
             return $this->result;
         }

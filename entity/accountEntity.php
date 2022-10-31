@@ -142,8 +142,8 @@
             return $validityCheck;
         }
 		
-		//view useraccount
-		function viewUserAccount(){
+		//view userprofile
+		function viewUserProfile(){
             $SQLGet = "SELECT account.account_ID,account.account_email,account.account_password,account.account_fullName,account.account_sex,account.account_age,account.account_contact,account.account_status,account_profile.reviewer_type,account_profile.author_type,account_profile.conferenceChair_type,account_profile.userAdmin_type FROM `account` 
 JOIN account_profile ON account.account_email=account_profile.account_email";
             $qGet = $this->conn->query($SQLGet);
@@ -178,7 +178,7 @@ JOIN account_profile ON account.account_email=account_profile.account_email";
         }
 		
 		//view useraccount
-		function viewUserAccount2(){
+		function viewUserAccount(){
             $SQLGet = "SELECT * FROM account";
             $qGet = $this->conn->query($SQLGet);
 
@@ -207,32 +207,121 @@ JOIN account_profile ON account.account_email=account_profile.account_email";
             return $dataArray;
         }
 		
-		//view userprofile
-		function viewUserProfile(){
-            $SQLGet = "SELECT * FROM account_profile";
-            $qGet = $this->conn->query($SQLGet);
+		//update userprofile
+		function updateUserProfile($account_email, $profile_type){
+            $this->account_email = $account_email;
+            $this->profile_type = $profile_type;
+            try
+            {   
+				if(empty($this->profile_type)){	
+					$data["result"] = FALSE;
+					$data["errorMsg"] = "Please fill in all fields";
+					
+					$this->data = $data;
+					return $this->data;
+				}	
+                
+                        $tempProfile = $this->profile_type.'_type';
+                        $SQLCheckP = "SELECT * FROM account_profile WHERE account_email = '$this->account_email' AND $tempProfile = '$this->profile_type'";
+                        $qCheckP = $this->conn->query($SQLCheckP);
+                        if(($res = $qCheckP->num_rows) == 0){   
+                            $SQLInsert = "UPDATE account_profile SET " . $this->profile_type . "_type = '$this->profile_type'" . 
+                                    " WHERE account_email = '$this->account_email'";
+                            $qInsert = $this->conn->query($SQLInsert);
+                            if($qInsert == TRUE){   
+                                $data["result"] = TRUE;
+                            }    
+                            else{
+                                $data["result"] = FALSE;
+                                $data["errorMsg"] = "Cannot create: " . $profile_type;
+                            }
+                            $this->data = $data;
 
-            if(($res = $qGet->num_rows) > 0)
-            {
-                $i = 0;
+                            return $data;
+                        }
+                        else{
+                            $data["result"] = FALSE;
+                            $data["errorMsg"] = "Profile type already exists: " . $profile_type;
 
-                while(($Row = $qGet->fetch_assoc()) !== NULL)
-                {
-                    $dataArray[$i]["profile_ID"] = $Row["profile_ID"];
-					$dataArray[$i]["account_email"] = $Row["account_email"];
-                    $dataArray[$i]["reviewer_type"] = $Row["reviewer_type"];
-					$dataArray[$i]["author_type"] = $Row["author_type"];
-					$dataArray[$i]["conferenceChair_type"] = $Row["conferenceChair_type"];
-					$dataArray[$i]["userAdmin_type"] = $Row["userAdmin_type"];
-
-                    $i++;
-                }
+                            return $data;
+                        }
+                        
+                    
+                
             }
-            
-            
-            $this->dataArray = $dataArray;
-
-            return $dataArray;
+            catch(mysqli_sql_exception $e){
+                //To ensure that the instance variables is empty if there is an error detected
+                $this->profile_ID = "";
+                $this->account_email = "";
+                $this->profile_type = "";
+                $this->checkProfile = "";
+            }
         }
-    }
+		
+		function b4updateUserProfile($account_email)
+		{
+			$this->account_email = $account_email;
+			$SQLupdate = "UPDATE account_profile SET reviewer_type = '', author_type = '',
+							conferenceChair_type = '', userAdmin_type = '' 
+							WHERE account_email = '$this->account_email'";
+			$qGet = $this->conn->query($SQLupdate);
+		}
+		
+		//update useraccount
+		function updateUserAccount($account_email, $account_password, $account_fullName, $account_sex, $account_age, $account_contact){
+            $this->account_email = $account_email;
+            $this->account_password = $account_password;
+            $this->account_fullName = $account_fullName;
+            $this->account_sex = $account_sex;
+            $this->account_age = $account_age;
+            $this->account_contact = $account_contact;
+            try
+            {   
+                $SQLCheckP = "SELECT * FROM account WHERE account_email = '$this->account_email' 
+								AND account_password = '$this->account_password' 
+								AND account_fullName = '$this->account_fullName' 
+								AND account_sex = '$this->account_sex' 
+								AND account_age = '$this->account_age' 
+								AND account_contact = '$this->account_contact'";
+								
+                $qCheckP = $this->conn->query($SQLCheckP);
+                if(($res = $qCheckP->num_rows) == 0){   
+                    $SQLUpdate = "UPDATE account SET account_password = '$this->account_password',
+									account_fullName = '$this->account_fullName' ,
+									account_sex = '$this->account_sex' ,
+									account_age = '$this->account_age' ,
+									account_contact = '$this->account_contact'
+									WHERE account_email = '$this->account_email'";
+                    $qInsert = $this->conn->query($SQLUpdate);
+                    if($qInsert == TRUE){   
+                        $data["result"] = TRUE;
+                    }    
+                    else{
+                        $data["result"] = FALSE;
+                        $data["errorMsg"] = "Update failed";
+                    }
+							
+                    $this->data = $data;
+
+                    return $data;
+                }
+                else{
+                    $data["result"] = FALSE;
+                    $data["errorMsg"] = "No data change";
+
+                    return $data;
+                }
+                        
+                    
+                
+            }
+            catch(mysqli_sql_exception $e){
+                //To ensure that the instance variables is empty if there is an error detected
+                $this->profile_ID = "";
+                $this->account_email = "";
+                $this->profile_type = "";
+                $this->checkProfile = "";
+            }
+        }
+	}
 ?>

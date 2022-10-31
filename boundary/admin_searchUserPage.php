@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
-    <!-- <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <title>Admin</title>
@@ -28,6 +26,43 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+	<?php
+	require("../controller/viewUserController.php");
+	require("../controller/updateUserController.php");
+	
+	$control = new ViewAccountController();
+	$list = $control->viewUsers();
+	
+	if(isset($_POST['update'])){
+				$account_email = $_POST["admin_editemail"];
+				$account_password = $_POST["admin_editPassword"];
+				$account_fullName = $_POST["admin_editFullName"];
+				$account_sex = $_POST["admin_editGender"];
+				$account_age = $_POST["admin_editAge"];
+				$account_contact = $_POST["admin_editContact"];
+				
+				
+
+				if(empty($account_password) || empty($account_fullName) || empty($account_sex) || empty($account_age) ||  empty($account_contact)){
+					
+						echo "<script> alert('Update failed! Please fill in user profile!'); </script>";
+					
+				}
+				else{
+					$controller = new updateUserController();
+					$result = $controller->userDetails($account_email, $account_password, $account_fullName, $account_sex, $account_age, $account_contact);
+					if($result["result"] != TRUE)
+						{
+							echo "<script> alert('" . $result["errorMsg"] . "')</script>";
+						}
+						
+					$control = new ViewAccountController();
+					$list = $control->viewUsers();
+				}
+			}
+	
+	?>
+	
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -92,21 +127,17 @@
                             <a href="admin_addUserProfile.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Pending user profile
-
+                                    Add user profile
                                 </p>
                             </a>
-
                         </li>
                         <li class="nav-item active">
                             <a href="admin_searchUserPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     Search user
-
                                 </p>
                             </a>
-
                         </li>
                         <li class="nav-item active">
                             <a href="admin_searchUserProfilePage.php" class="nav-link">
@@ -127,7 +158,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <a href="login.php " class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
@@ -150,201 +181,119 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search User</p>
                     </div>
 
-                    <div class="card-body">
-                    <div>
-					
-                            <p class="searchLeft">Enter User Name/Account ID: </p>
+                    <!--<div class="card-body">
+                        <div>
+                            <p class="searchLeft">Enter User Name/Account ID: </p>-->
                             <!-- search User ID -->
-                            <input type="search" id="admin_searchUserName" class="form-control form-control-lg" placeholder="Search User Name/Account ID">
+                            <!--<input type="search" id="admin_searchUserName" class="form-control form-control-lg" placeholder="Search User Name/Account ID">
                             <!-- <select id="searchUserProfile" class="form-control" style="width: 200px;display: inline-block">
 
                                 <option>All</option>
                                 <option>Reviewers</option>
                                 <option>Authors</option>
                                 <option>User Admin</option>
+
                             </select> -->
-					<form method='post'>		
-                            <input type="submit" name="submit" value="Search">
-					</form>
+                            <!--<button type="submit" class="btn btn-outline-primary search_button">search</button>
                         </div>
 
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Full Name</th>
+									<th>Email</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for($i = 0; $i < count($list); $i++): ?>
+									<tr>
+									<td><?php echo $list[$i]["account_fullName"]; ?></td>
+									<td><?php echo $list[$i]["account_email"]; ?></td>
+									<td><?php 
+											$temp = $list[$i]["account_email"];
+											echo "<button id='detail" . $i . "' type='button' class='detail_action_btn' data-toggle='modal' data-target='#searchUserModal' onclick='detail(" . $i . ")' value='" . $temp . "'>
+                                            Details</button>"; 
+											//hidden, get data for detail use
+											echo "<input id='getID" . $i . "' type='hidden' value='" . $list[$i]["account_ID"] . "'>";
+											echo "<input id='getAge" . $i . "' type='hidden' value='" . $list[$i]["account_age"] . "'>";
+											echo "<input id='getSex" . $i . "' type='hidden' value='" . $list[$i]["account_sex"] . "'>";
+											echo "<input id='getContact" . $i . "' type='hidden' value='" . $list[$i]["account_contact"] . "'>";
+											echo "<input id='getPwd" . $i . "' type='hidden' value='" . $list[$i]["account_password"] . "'>";
+											echo "<input id='getName" . $i . "' type='hidden' value='" . $list[$i]["account_fullName"] . "'>";
+										?></td>
+									
+								<?php endfor; ?>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <!--<div class="card" style="">
-                    <div class="card-body">
-                        <p class="searchLeft">Select Profile: </p>
-                        <select class="form-control" style="width: 200px;display: inline-block">
-
-                            <option>All</option>
-                            <option>reviewers</option>
-                            <option>authors</option>
-                                 <option>User Admin</option>
-
-                        </select>
-                    </div>
-                </div>-->
             </div>
-			
-            <?php
-			
-			require("../controller/viewUserController.php");
-			
-			
-				displayAllUsers2();
-			
-		
-			
-			//for search
-			function displayUserInfo(){
-				echo "search";
-			}
-            
-			function displayAllUsers() {
-				$control = new ViewAccountController();
-				$list = $control->viewUsers();
-				
-				echo "<div class='col-12'>
-                <div class='card' style='margin-top: 20px;'>
-                    <div class='card-body'>
-                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>User Profile</th>
-
-                                    <th>Action</th>
-
-                                </tr>
-                            </thead>
-							<tbody>";
-				
-				for($i = 0; $i < count($list); $i++)
-				{
-					echo "<tr><td>" . $list[$i]["account_fullName"] . "</td>";
-					echo "<td>" . $list[$i]["reviewer_type"]."  ";
-					echo $list[$i]["author_type"]."  ";
-					echo $list[$i]["conferenceChair_type"]."  ";
-					echo $list[$i]["userAdmin_type"] . "</td>";
-					 
-					echo "<td>
-                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
-                                            Details
-                                        </button>
-                                    </td></tr>";
-				}
-				
-			
-				
-
-				echo "</tbody>
-							</table>
-						</div>  
-					</div>
-				</div>";
-			}
-			
-			
-			function displayAllUsers2() {
-				$control = new ViewAccountController();
-				$list = $control->viewUsers2();
-				
-				echo "<div class='col-12'>
-                <div class='card' style='margin-top: 20px;'>
-                    <div class='card-body'>
-                        <table id='searchUser' class='table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline' style='width:100%'>
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-
-                                    <th>Action</th>
-
-                                </tr>
-                            </thead>
-							<tbody>";
-				
-				for($i = 0; $i < count($list); $i++)
-				{
-					echo "<tr><td>" . $list[$i]["account_fullName"] . "</td>";
-					echo "<td>" . $list[$i]["account_email"] . "</td>";
-					 
-					echo "<td>
-                                        <button type='button' class='detail_action_btn' data-toggle='modal' data-target='#userD".$i."'>
-                                            Details
-                                        </button>
-                                    </td></tr>";
-				}
-				
-			
-				
-
-				echo "</tbody>
-							</table>
-						</div>  
-					</div>
-				</div>";
-			}
-			
-			
-			?>
-			
 
         </div>
     </div>
 
-	<?php
-    /*<div class="modal fade" id="userD0" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="searchUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">View User</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>User Profile:&nbsp;</p>
+                    <!-- <p>User Profile:&nbsp;</p>
+                    <div class="detail"> -->
+                    <!-- get userProfile from DB-->
+                    <!-- <label class="admin_searchUserProfile">Author</label>
+                    </div> -->
+                    <p>Account ID:&nbsp;</p>
                     <div class="detail">
-                        <!-- get userName from DB-->
-                        <label class="admin_searchUserProfile">Author</label>
+                        <!-- get userID from DB-->
+                        <label class="admin_searchUserAccountID" id="admin_searchUserAccountID"></label>
                     </div>
-                    <!--<p>NRIC:&nbsp;</p>
-                    <div class="detail">-->
-                    <!-- get userID from DB-->
-                    <!--<label class="admin_searchUserNRIC">Ab1234567</label>
-                    </div>-->
-                    <!--<p>Username:&nbsp;</p>
-                    <div class="detail">-->
-                        <!-- get userName from DB-->
-                        <!--<label class="admin_searchUserUsername">lucid123</label>
-                    </div>-->
                     <p>Full name:&nbsp;</p>
                     <div class="detail">
                         <!-- get userFullName from DB-->
-                        <label class="admin_searchUserFullName">Lucid Marry</label>
+                        <label class="admin_searchUserFullName" id="admin_searchUserFullName"></label>
                     </div>
                     <p>Age:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserAge from DB-->
-                        <label class="admin_searchUserAge">38</label>
+                        <label class="admin_searchUserAge" id="admin_searchUserAge"></label>
                     </div>
                     <p>Sex:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserNRIC from DB-->
-                        <label class="admin_searchUserGender">F</label>
+                        <label class="admin_searchUserGender" id="admin_searchUserGender"></label>
                     </div>
                     <p>Contact:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserPhoneNo from DB-->
-                        <label class="admin_searchUserPhoneNo">(+65)8501230</label>
+                        <label class="admin_searchUserPhoneNo" id="admin_searchUserPhoneNo"></label>
                     </div>
                     <p>Email:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserEmail from DB-->
-                        <label class="admin_searchUserEmail">user123@gmai.com</label>
+                        <label class="admin_searchUserEmail" id="admin_searchUserEmail"></label>
                     </div>
-                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#editModal" id="editDetail_btn">
+                    <p>Password:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get UserEmail from DB-->
+                        <label class="admin_searchUserPwd" id="admin_searchUserPwd"></label>
+                    </div>
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#editModal" id="editDetail_btn" onclick="edit()">
                         Edit Detail
                     </button>
                     <!--                    <button type="button" class="red_btn" data-toggle="modal" data-target="#deleteModal">
@@ -356,69 +305,9 @@
                 </div>
             </div>
         </div>
-    </div>*/
-	
-	?>
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Account and data?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <!--<p>NRIC:&nbsp;</p>
-                    <div class="detail">-->
-                    <!-- get userID from DB-->
-                    <!--<label class="deleteUserNRIC">Ab1234567</label>-->
-                </div>
-                <p>User Profile:&nbsp;</p>
-                <div class="detail">
-                    <!-- get userName from DB-->
-                    <label class="deleteUserProfile">Author</label>
-                </div>
-                <p class="deleteText">Deleting this person’s account will remove all their data from this system ,including user infomations and records.</p>
-
-
-                <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                    Cancel
-                </button>
-                <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" data-toggle="modal" data-target="#deleteModal">
-                    Confirm Deletion
-                </button>
-            </div>
-            <div class="modal-footer" style="border: none;">
-            </div>
-        </div>
     </div>
-    </div>
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save user detail?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to save?</p>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
-                    </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="saveEdit()">
-                        Confirm save
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
-                </div>
-            </div>
-        </div>
-    </div>
+    <form method="POST">
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -434,66 +323,47 @@
                         <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute;"></div>
                         <p style="font-size:16px; color: black; margin-left: 10px; display: inline;">Account</p>
                     </div>
-                    <!--<div class="edit-group">
-                        <p>NRIC:&nbsp;</p>
-                        <div class="detail">-->
-                                    <!-- get userNRIC from DB-->
-                                    <!--<label id="admin_editNRIC">Ab1234567</label>
+                    <div class="edit-group">
+                        <p>Account ID:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get userID from DB-->
+							<input type="text " class="form-control " id="admin_editID" name="admin_editID" readonly='true'>
                         </div>
-                    </div>-->
-                                    <!--<div class="edit-group">
-                        <p>Username:&nbsp;</p>
-                        <div class="detail">-->
-                                    <!-- get userName from DB-->
-                                    <!--<input type="text" class="form-control" id="admin_editUsername">
-                        </div>
-                    </div>-->
+                    </div>
+					
                     <div class="edit-group">
                         <p>Email:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="email" class="form-control" id="contact">
+                            <input type="email" class="form-control" id="admin_editemail" name="admin_editemail" readonly='true'>
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Password:&nbsp;</p>
                         <div class="detail">
                             <!-- get userFullName from DB-->
-                            <input type="password" class="form-control" id="admin_editPassword">
+                            <input type="password" class="form-control" id="admin_editPassword" name="admin_editPassword">
                         </div>
                     </div>
-                    <div class="edit-group">
-                        <p>User Profile:&nbsp;</p>
-                        <div class="detail">
-                            <!-- get userName from DB-->
-                            <select class="form-control" style="display: inline-block" id="admin_editUserProfile" ">
-                                <option value="Reviewer">Reviewer</option>
-                                <option value="Author">Author</option>
-                                <option value="User Admin">User Admin</option>
-                                <option value="Conference Chair">Conference Chair</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div style="clear: both;">
-                        <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute;"></div>
-                        <p style="font-size:16px; color: black; margin-left: 10px; display: inline;">Info</p>
+                    
+                    <div style="clear: both; ">
+                        <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute; "></div>
+                        <p style="font-size:16px; color: black; margin-left: 10px; display: inline; ">Info</p>
                     </div>
                     <div class="edit-group">
                         <p>Full Name:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="admin_editFullName">
+                            <input type="text" class="form-control" id="admin_editFullName" name="admin_editFullName">
                         </div>
                     </div>
                     <div class="edit-group">
                         <p>Sex:&nbsp;</p>
                         <div class="detail">
-                            <!--       <input type="radio" class="sex_input" id="admin_editFemale" name="sex" value="F">
-            <label for="female" class="sex_label">F</label>
-            <input type="radio" class="sex_input" id="male" name="sex" value="M">
-            <label for="male" class="sex_label">M</label><br>-->
-                            <label class="admin_editGender">F</label>
+                            <input type="radio" class="admin_editGender" name="admin_editGender" id="F" value="F">
+                            <label for="female" class="sex_label">F</label>
+                            <input type="radio" class="admin_editGender" name="admin_editGender" id="M" value="M">
+                            <label for="male" class="sex_label">M</label>
 
                         </div>
                     </div>
@@ -501,21 +371,22 @@
                         <p>Age:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="number" class="form-control" id="admin_editAge" min="1" maxlength="3">
+                            <input type="number" class="form-control" id="admin_editAge" min="1" maxlength="3" name="admin_editAge">
                         </div>
                     </div>
 
-                    <!--                    <div style="clear: both;">
-                            <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute;"></div>
-                            <p style="font-size:16px; color: black; margin-left: 10px; display: inline;">Info</p>
+                    <!--                    <div style="clear: both; ">
+                            <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute; "></div>
+                            <p style="font-size:16px; color: black; margin-left: 10px; display: inline; ">Info</p>
                         </div>-->
                     <div class="edit-group">
                         <p>Contact:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="admin_editContact">
+                            <input type="text" class="form-control" id="admin_editContact" name="admin_editContact">
                         </div>
                     </div>
+
 
                     <div class="admin_searchUserEditDetail_btn">
 
@@ -526,50 +397,133 @@
                             Back
                         </button>
                     </div>
+                </div>
+                <div class="modal-footer " style="border: none; ">
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
 
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Account and data?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to save?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="submit" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="update">
+                        Confirm save
+                    </button>
                 </div>
                 <div class="modal-footer" style="border: none;">
                 </div>
             </div>
         </div>
     </div>
+	</form>
+
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "></script>
     <!-- AdminLTE -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.js "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- getdatepicker -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
     <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js "></script>
+    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js "></script>-->
+    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js "></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js "></script>
 
     <script>
-        $(".nav .nav-link").on("click", function () {
-            $(".nav").find(".active").removeClass("active");
-            $(this).addClass("active");
+        $(".nav .nav-link ").on("click ", function() {
+            $(".nav ").find(".active ").removeClass("active ");
+            $(this).addClass("active ");
         });
-        
-        $(function () {
+
+        $(function() {
 
             $('#searchUser').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                "paging ": true,
+                "lengthChange ": true,
+                "searching ": true,
+                "ordering ": true,
+                "info ": true,
+                "autoWidth ": true,
+                "responsive ": true,
             });
         });
+		
+		function detail(i)
+		{
+			var id = "detail" + i;
+			var email = document.getElementById(id).value;
+			document.getElementById("admin_searchUserEmail").innerHTML = email;
+			document.getElementById("admin_searchUserEmail").value = email;
+			
+			var name = document.getElementById("getName"+i).value;
+			document.getElementById("admin_searchUserFullName").innerHTML = name;
+			document.getElementById("admin_searchUserFullName").value = name;
+			
+			var getID = document.getElementById("getID"+i).value;
+			document.getElementById("admin_searchUserAccountID").innerHTML = getID;
+			document.getElementById("admin_searchUserAccountID").value = getID;
+			
+			var age = document.getElementById("getAge"+i).value;
+			document.getElementById("admin_searchUserAge").innerHTML = age;
+			document.getElementById("admin_searchUserAge").value = age;
+			
+			var sex = document.getElementById("getSex"+i).value;
+			document.getElementById("admin_searchUserGender").innerHTML = sex;
+			document.getElementById("admin_searchUserGender").value = sex;
+			
+			var contact = document.getElementById("getContact"+i).value;
+			document.getElementById("admin_searchUserPhoneNo").innerHTML = contact;
+			document.getElementById("admin_searchUserPhoneNo").value = contact;
+			
+			var pwd = document.getElementById("getPwd"+i).value;
+			document.getElementById("admin_searchUserPwd").innerHTML = pwd;
+			document.getElementById("admin_searchUserPwd").value = pwd;
+			
+		}
+		
+		function edit()
+		{
+			var ID = document.getElementById("admin_searchUserAccountID").value;
+			document.getElementById("admin_editID").value = ID;
+			
+			var email = document.getElementById("admin_searchUserEmail").value;
+			document.getElementById("admin_editemail").value = email;
+			
+			var name = document.getElementById("admin_searchUserFullName").value;
+			document.getElementById("admin_editFullName").value = name;
+			
+			var age =document.getElementById("admin_searchUserAge").value;
+			document.getElementById("admin_editAge").value = age;
+			
+			var sex = document.getElementById("admin_searchUserGender").value;
+			document.getElementById(sex).checked = true;
+			
+			var contact = document.getElementById("admin_searchUserPhoneNo").value;
+			document.getElementById("admin_editContact").value = contact;
+			
+			var pwd = document.getElementById("admin_searchUserPwd").value;
+			document.getElementById("admin_editPassword").value = pwd;
+
+		}
+		
+		
     </script>
-	
-	
 
 </body>
 

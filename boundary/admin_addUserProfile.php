@@ -156,7 +156,7 @@
                                 <label for="inputUserName" class="col-sm-2 col-form-label">User Profile:</label>
                                 <div class="col-sm-4">
                                     <!--   <select class="form-control" id="userUserProfile">-->
-                                    <select class="form-control select2" id="admin_addProfile[]" name="admin_addProfile[]" data-dropdown-css-class="select2-purple"  multiple="multiple" style="width: 100%;">
+                                    <select class="form-control select2" id="admin_addProfile" name="admin_addProfile[]" data-dropdown-css-class="select2-purple"  multiple="multiple" style="width: 100%;">
                                         <option value="reviewer">Reviewer</option>
                                         <option value="author">Author</option>
                                         <option value="userAdmin">User Admin</option>
@@ -168,13 +168,12 @@
                             <div class="form-group row">
                                 <label for="inputUserEmail" class="col-sm-2 col-form-label">Email address:</label>
                                 <div class="col-sm-4">
-
                                     <input type="text" class="form-control" id="admin_addEmail" name="admin_addEmail">
                                 </div>
                             </div>
 
 
-                            <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#addUserModal">
+                            <button type="button" class="detail_action_btn" data-toggle="modal" data-target="#addUserModal" onclick="check()">
                                 Add user profile
                             </button>
 
@@ -191,25 +190,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div style="margin-top: 25px; float:left;width: 3px;height: 28px; background: #FED666;"></div>
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">User has been added successfully</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Are you sure to continue?</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Full Name:&nbsp;</p>
+                    <p>Email:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserName from DB-->
-                        <label id="addUserName">Mike Doe</label>
+                        <label id="addUserEmail"></label>
                     </div>
                     <p>User Profile:&nbsp;</p>
                     <div class="detail">
                         <!-- get UserProfile from DB-->
-                        <label id="addUserProfile">Author</label>
+                        <label id="addUserProfile"></label>
                     </div>
-                    <input type="submit" name="create" style="float:right;" class="detail_action_btn" value="ok">
+                    
                 </div>
                 <div class="modal-footer" style="border: none;">
+				<input type="submit" name="create" style="float:right;" class="detail_action_btn" value="ok">
                 </div>
             </div>
         </div>
@@ -244,7 +244,33 @@
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             });
-        })
+        });
+		
+		function check()
+		{
+			var email = document.getElementById("admin_addEmail").value;
+			document.getElementById("addUserEmail").innerHTML = email;
+			
+			
+			
+			var selected = [];
+			for (var option of document.getElementById('admin_addProfile').options)
+			{
+				if (option.selected) {
+					selected.push(option.value);
+				}
+			}
+			
+			var profile = "";
+			for (var i = 0; i<selected.length;i++)
+			{
+				profile = profile + selected[i] + "<br>";
+			}
+			
+			document.getElementById("addUserProfile").innerHTML = profile;
+			
+			
+		}
     </script>
     <?php
         require("../controller/addProfileController.php");
@@ -263,15 +289,19 @@
                 }
             }
             else{
+				$counter = 0;
                 foreach ($profile_type as $userProfile){
                     $controller = new addProfileController();
                     $result = $controller->profileDetails($account_email, $userProfile);
-                    if($result["result"] == TRUE)
-                        displaySuccess();
-                    else {
+                    if($result["result"] != TRUE){
                         $fail = $result["errorMsg"];
                         displayFail($fail);
-                    }
+						$counter++;
+					}
+                    
+                }
+				if ($counter==0){
+                    displaySuccess();
                 }
             }
         }

@@ -20,9 +20,6 @@
             return $this->result;
         }
 		
-		
-		
-		
     }
 	
 	
