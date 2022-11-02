@@ -212,7 +212,7 @@
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body">
 						
-                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <table id="searchUserProfileTable" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Email</th>
@@ -412,14 +412,14 @@
 
         $(function() {
 
-            $('#searchUser').DataTable({
-                "paging ": true,
-                "lengthChange ": true,
-                "searching ": true,
-                "ordering ": true,
-                "info ": true,
-                "autoWidth ": true,
-                "responsive ": true,
+            $('#searchUserProfileTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
             });
             //Initialize Select2 Elements
             $('.select2').select2();
