@@ -142,27 +142,230 @@
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="reviewer_viewPaperID">
+                                                <!-- 12345678 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="reviewer_viewPaperName">
+                                                <!-- PaperA -->
+                                            </label>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <p class="col-sm-4">Author name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve Author name -->
+                                    <label class="reviewer_viewPaperAuthor">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Review:</p>
+                                <div class="col-sm-8">
+                                    <!-- retieve Review -->
+                                    <label class="reviewer_viewPaperReview">
+                                                <!-- reeee -->
+                                            </label>
+                                    <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#reviewer_commentReviewModal">
+                                                Comment others review
+                
+                                            </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="col-sm-4">Rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve Rating -->
+                                    <label class="reviewer_viewPaperRating">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="reviewer_viewPaperEditDetail_btn">
+                                <button type="button" id="reviewer_editDetail" class="blue_btn" data-toggle="modal" data-target="#reviewer_editPaperModal">
+                                            Edit Detail
+                                        </button>
+                                <!-- <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
+                                        Delete paper
+                                        </button> -->
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reviewer_commentReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img style="margin-left: 10px; margin-top: 20px" src="../img/blue arrow.svg" data-dismiss="modal" aria-label="Close"></i>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 15px; margin-left: 15px; display: inline;">Edit Paper Details</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <p>Review ID:&nbsp;</p>
+                    <div class="detail ">
+                        <!-- get paperID from DB-->
+                        <label id="reviewer_commentReviewID "></label>
+                    </div>
+                    <p class="searchLeft ">Review detail</p>
+                    <div class="detail ">
+                        <label id="reviewer_commentReviewDetail"></label>
+                    </div>
+                    <p class="searchLeft ">Enter comment</p>
+                    <div class="detail ">
+                        <textarea id="reviewer_bReviewComment" rows="10" cols="30"></textarea>
+                    </div>
+                    <br>
+
+
+                </div>
+                <div class="modal-footer " style="border: none; ">
+                    <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
+                        Back
+                    </button>
+                    <!-- <button type="button " id="reviewer_saveEditPaper " style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
+                        Save
+                    </button> -->
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="reviewer_saveEditPaper">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reviewer_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img style="margin-left: 10px; margin-top: 20px" src="../img/blue arrow.svg" data-dismiss="modal" aria-label="Close"></i>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 15px; margin-left: 15px; display: inline;">Edit Paper Details</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <p>Paper ID:&nbsp;</p>
+                    <div class="detail ">
+                        <!-- get paperID from DB-->
+                        <label id="reviewer_editPaperID "></label>
+                    </div>
+                    <p>Paper name:&nbsp;</p>
+                    <div class="detail ">
+                        <!-- get PaperName from DB-->
+                        <label id="reviewer_editPaperName"></label>
+                    </div>
+                    <p class="searchLeft ">reviewer name</p>
+                    <div class="detail ">
+                        <label id="reviewer_editreviewerName"></label>
+                    </div>
+                    <p class="searchLeft ">Enter review</p>
+                    <div class="detail ">
+                        <textarea id="reviewer_editReview" rows="10" cols="30"></textarea>
+                    </div>
+                    <br>
+                    <p class=" searchLeft ">Select rating </p>
+                    <div class="col-sm-9">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating active">
+                                                <input type="radio" id="reviewer_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
+                                            </label>
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio"  id="reviewer_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
+                                            </label>
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio"  id="reviewer_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
+                                            </label>
+
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio" id="reviewer_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
+                                            </label>
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio" id="reviewer_viewPaperAddRatingMinus1" autocomplete="off"> -1<br>(weak reject)
+                                            </label>
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio" id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
+                                            </label>
+                            <label class="btn btn-secondary reviewer_viewPaperAddRating">
+                                                <input type="radio"  id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
+                                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer " style="border: none; ">
+                    <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
+                        Back
+                    </button>
+                    <!-- <button type="button " id="reviewer_saveEditPaper " style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
+                        Save
+                    </button> -->
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="reviewer_saveEditPaper">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Review and rating?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to save?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
                 </div>
             </div>
         </div>
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "></script>
     <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js "></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
     <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js "></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js "></script>
+    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js "></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js "></script>
     <script>
         $(".nav .nav-link ").on("click ", function() {
             $(".nav ").find(".active ").removeClass("active ");
@@ -192,13 +395,13 @@
                 search: {
                     return: false,
                 },
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                "paging ": true,
+                "lengthChange ": true,
+                "searching ": true,
+                "ordering ": true,
+                "info ": true,
+                "autoWidth ": true,
+                "responsive ": true,
             });
         });
     </script>
