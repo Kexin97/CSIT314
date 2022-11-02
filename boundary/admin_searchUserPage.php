@@ -371,7 +371,7 @@
                         <p>Age:&nbsp;</p>
                         <div class="detail">
                             <!-- get userName from DB-->
-                            <input type="number" class="form-control" id="admin_editAge" min="1" maxlength="3" name="admin_editAge">
+                            <input type="number" class="form-control" id="admin_editAge" placeholder="Age" min="1" max="100" min="1" maxlength="3" name="admin_editAge">
                         </div>
                     </div>
 
@@ -382,8 +382,8 @@
                     <div class="edit-group">
                         <p>Contact:&nbsp;</p>
                         <div class="detail">
-                            <!-- get userName from DB-->
-                            <input type="text" class="form-control" id="admin_editContact" name="admin_editContact">
+                            <!-- get user contact from DB-->
+                            <input type="tel" class="form-control" id="admin_editContact" name="admin_editContact">
                         </div>
                     </div>
 
