@@ -167,7 +167,7 @@
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
 
-                                    <input type="number" class="form-control" id="admin_addAge" name="admin_addAge" placeholder="Age" max="99">
+                                    <input type="number" class="form-control" id="admin_addAge" name="admin_addAge" min="1" max="100" min="1" maxlength="3" maxlength="3">
                                 </div>
                             </div>
                             <div class="form-group row">
