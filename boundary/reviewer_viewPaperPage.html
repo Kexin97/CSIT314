@@ -143,7 +143,7 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search paper</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View review & rating </p>
                     </div>
 
                     <div class="card-body">
@@ -159,6 +159,10 @@
 
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View review & rating </p>
+                    </div>
                     <div class="card-body">
                         <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
@@ -233,28 +237,7 @@
         });
 
         $(document).ready(function() {
-
-            // $('#reviewer_viewPaper').DataTable({
-            //     search: {
-            //         return: false,
-            //     },
-            // });
-            //Initialize Select2 Elements
-            $('.select2').select2();
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            });
-        });
-        $(document).ready(function() {
             $('#reviewer_viewPaper').DataTable({
-                // lengthMenu: [
-                //     [10, 25, 50, -1],
-                //     [10, 25, 50, 'All'],
-                // ],
-                search: {
-                    return: false,
-                },
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
@@ -262,6 +245,12 @@
                 "info": true,
                 "autoWidth": true,
                 "responsive": true,
+            });
+            //Initialize Select2 Elements
+            $('.select2').select2();
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
             });
         });
     </script>
