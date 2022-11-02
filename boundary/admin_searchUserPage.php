@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontawesome-free@1.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -29,10 +29,10 @@
 	<?php
 	require("../controller/viewUserController.php");
 	require("../controller/updateUserController.php");
-	
+
 	$control = new ViewAccountController();
 	$list = $control->viewUsers();
-	
+
 	if(isset($_POST['update'])){
 				$account_email = $_POST["admin_editemail"];
 				$account_password = $_POST["admin_editPassword"];
@@ -40,13 +40,13 @@
 				$account_sex = $_POST["admin_editGender"];
 				$account_age = $_POST["admin_editAge"];
 				$account_contact = $_POST["admin_editContact"];
-				
-				
+
+
 
 				if(empty($account_password) || empty($account_fullName) || empty($account_sex) || empty($account_age) ||  empty($account_contact)){
-					
+
 						echo "<script> alert('Update failed! Please fill in user profile!'); </script>";
-					
+
 				}
 				else{
 					$controller = new updateUserController();
@@ -55,14 +55,14 @@
 						{
 							echo "<script> alert('" . $result["errorMsg"] . "')</script>";
 						}
-						
+
 					$control = new ViewAccountController();
 					$list = $control->viewUsers();
 				}
 			}
-	
+
 	?>
-	
+
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -206,7 +206,7 @@
                         <table id="searchUserTable" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Full Name</th>
 									<th>Email</th>
                                     <th>Action</th>
@@ -218,10 +218,10 @@
 									<tr>
 									<td><?php echo $list[$i]["account_fullName"]; ?></td>
 									<td><?php echo $list[$i]["account_email"]; ?></td>
-									<td><?php 
+									<td><?php
 											$temp = $list[$i]["account_email"];
 											echo "<button id='detail" . $i . "' type='button' class='detail_action_btn' data-toggle='modal' data-target='#searchUserModal' onclick='detail(" . $i . ")' value='" . $temp . "'>
-                                            Details</button>"; 
+                                            Details</button>";
 											//hidden, get data for detail use
 											echo "<input id='getID" . $i . "' type='hidden' value='" . $list[$i]["account_ID"] . "'>";
 											echo "<input id='getAge" . $i . "' type='hidden' value='" . $list[$i]["account_age"] . "'>";
@@ -230,7 +230,7 @@
 											echo "<input id='getPwd" . $i . "' type='hidden' value='" . $list[$i]["account_password"] . "'>";
 											echo "<input id='getName" . $i . "' type='hidden' value='" . $list[$i]["account_fullName"] . "'>";
 										?></td>
-									
+
 								<?php endfor; ?>
 
                             </tbody>
@@ -330,7 +330,7 @@
 							<input type="text " class="form-control " id="admin_editID" name="admin_editID" readonly='true'>
                         </div>
                     </div>
-					
+
                     <div class="edit-group">
                         <p>Email:&nbsp;</p>
                         <div class="detail">
@@ -345,7 +345,7 @@
                             <input type="password" class="form-control" id="admin_editPassword" name="admin_editPassword">
                         </div>
                     </div>
-                    
+
                     <div style="clear: both; ">
                         <div style="float:left;width: 3px;height: 28px; background: #F7685B;position: absolute; "></div>
                         <p style="font-size:16px; color: black; margin-left: 10px; display: inline; ">Info</p>
@@ -403,7 +403,7 @@
             </div>
         </div>
     </div>
-	
+
 	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -432,18 +432,19 @@
 
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.js "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js "></script>
-    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js "></script>-->
-    <!--    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js "></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js "></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
 
     <script>
         $(".nav .nav-link ").on("click ", function() {
@@ -463,66 +464,66 @@
                 "responsive": true,
             });
         });
-		
+
 		function detail(i)
 		{
 			var id = "detail" + i;
 			var email = document.getElementById(id).value;
 			document.getElementById("admin_searchUserEmail").innerHTML = email;
 			document.getElementById("admin_searchUserEmail").value = email;
-			
+
 			var name = document.getElementById("getName"+i).value;
 			document.getElementById("admin_searchUserFullName").innerHTML = name;
 			document.getElementById("admin_searchUserFullName").value = name;
-			
+
 			var getID = document.getElementById("getID"+i).value;
 			document.getElementById("admin_searchUserAccountID").innerHTML = getID;
 			document.getElementById("admin_searchUserAccountID").value = getID;
-			
+
 			var age = document.getElementById("getAge"+i).value;
 			document.getElementById("admin_searchUserAge").innerHTML = age;
 			document.getElementById("admin_searchUserAge").value = age;
-			
+
 			var sex = document.getElementById("getSex"+i).value;
 			document.getElementById("admin_searchUserGender").innerHTML = sex;
 			document.getElementById("admin_searchUserGender").value = sex;
-			
+
 			var contact = document.getElementById("getContact"+i).value;
 			document.getElementById("admin_searchUserPhoneNo").innerHTML = contact;
 			document.getElementById("admin_searchUserPhoneNo").value = contact;
-			
+
 			var pwd = document.getElementById("getPwd"+i).value;
 			document.getElementById("admin_searchUserPwd").innerHTML = pwd;
 			document.getElementById("admin_searchUserPwd").value = pwd;
-			
+
 		}
-		
+
 		function edit()
 		{
 			var ID = document.getElementById("admin_searchUserAccountID").value;
 			document.getElementById("admin_editID").value = ID;
-			
+
 			var email = document.getElementById("admin_searchUserEmail").value;
 			document.getElementById("admin_editemail").value = email;
-			
+
 			var name = document.getElementById("admin_searchUserFullName").value;
 			document.getElementById("admin_editFullName").value = name;
-			
+
 			var age =document.getElementById("admin_searchUserAge").value;
 			document.getElementById("admin_editAge").value = age;
-			
+
 			var sex = document.getElementById("admin_searchUserGender").value;
 			document.getElementById(sex).checked = true;
-			
+
 			var contact = document.getElementById("admin_searchUserPhoneNo").value;
 			document.getElementById("admin_editContact").value = contact;
-			
+
 			var pwd = document.getElementById("admin_searchUserPwd").value;
 			document.getElementById("admin_editPassword").value = pwd;
 
 		}
-		
-		
+
+
     </script>
 
 </body>
