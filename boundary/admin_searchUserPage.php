@@ -203,7 +203,7 @@
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body">
-                        <table id="searchUser" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <table id="searchUserTable" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     
@@ -453,14 +453,14 @@
 
         $(function() {
 
-            $('#searchUser').DataTable({
-                "paging ": true,
-                "lengthChange ": true,
-                "searching ": true,
-                "ordering ": true,
-                "info ": true,
-                "autoWidth ": true,
-                "responsive ": true,
+            $('#searchUserTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
             });
         });
 		
