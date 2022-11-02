@@ -141,7 +141,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper. Doctor Home Page -->
+        <!-- Content Wrapper-->
         <div class="content-wrapper ">
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">

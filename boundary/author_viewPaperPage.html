@@ -166,140 +166,140 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper. Doctor Home Page -->
+        <!-- Content Wrapper -->
         <div class="content-wrapper ">
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                                <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                                    <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                                    <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <p class="col-sm-4">Paper ID:</p>
-                                        <div class="col-sm-4">
-                                            <!-- retieve paper id -->
-                                            <label id="author_viewPaperID">
+            <!-- <section class="content">
+                <div class="container-fluid"> -->
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="author_viewPaperID">
                                                 <!-- 12345678 -->
                                             </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <p class="col-sm-4">Paper name:</p>
-                                        <div class="col-sm-4">
-                                            <!-- retieve paper name -->
-                                            <label id="author_viewPaperName ">
-                                                <!-- PaperA -->
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <p class="col-sm-4">Conference:</p>
-                                        <div class="col-sm-4">
-                                            <!-- retieve paper conference -->
-
-                                            <label id="author_viewPaperConference ">
-                                                <!-- Conference1 -->
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <p class="col-sm-4">Author:</p>
-                                        <div class="col-sm-4">
-                                            <!-- retieve author name -->
-                                            <label class="author_viewPaperAuthor ">
-                                                <!-- Author1 -->
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="author_viewPaperEditDetail_btn">
-                                        <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
-                                            Edit Detail
-                                        </button>
-                                        <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
-                                        Delete paper
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-7 " id="author_viewRevRatContainer ">
-                            <div class="card " style="margin-top: 20px;margin-bottom: 0; ">
-                                <div class="card-header " style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white; ">
-                                    <div style="float:left;width: 3px;height: 28px; background: #109CF1; "></div>
-                                    <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline; ">Paper review and rating</p>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="author_viewPaperName ">
+                                                <!-- PaperA -->
+                                            </label>
                                 </div>
-                                <div class="card-body ">
-                                    <div class="row">
-                                        <p class="col-sm-4">Paper rating:</p>
-                                        <div class="col-sm-4">
-                                            <!-- retrieve paper rating -->
-                                            <label id="author_viewPaperRating">
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Conference:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper conference -->
+
+                                    <label id="author_viewPaperConference ">
+                                                <!-- Conference1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Author:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve author name -->
+                                    <label class="author_viewPaperAuthor ">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="author_viewPaperEditDetail_btn">
+                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+                                            Edit Detail
+                                        </button>
+                                <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
+                                        Delete paper
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7 " id="author_viewRevRatContainer ">
+                    <div class="card " style="margin-top: 20px;margin-bottom: 0; ">
+                        <div class="card-header " style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white; ">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1; "></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline; ">Paper review and rating</p>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <p class="col-sm-4">Paper rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retrieve paper rating -->
+                                    <label id="author_viewPaperRating">
                                                 <!-- 2.5 -->
 
                                             </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <p class="col-sm-4">Paper review:</p>
-                                        <div class="col-sm-7">
-                                            <!-- retrieve the review of paper-->
-                                            <p id="author_viewPaperReview ">
-                                                <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper review:</p>
+                                <div class="col-sm-7">
+                                    <!-- retrieve the review of paper-->
+                                    <p id="author_viewPaperReview ">
+                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
                                                 potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
-                                            </p>
-                                        </div>
-                                        <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
+                                    </p>
+                                </div>
+                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
                                             <label for="customRadio3" class="custom-control-label">
                                             3 (strong accept)</label>
                                             <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
                                             <label for="customRadio2" class="custom-control-label">
                                                 2s(accept)</label> -->
 
-                                    </div>
-                                    <div class="card-body table-responsive pad">
+                            </div>
+                            <div class="card-body table-responsive pad">
 
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-secondary author_viewPaperAddRating active ">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary author_viewPaperAddRating active ">
                                                         <input type="radio" id="author_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
                                                     </label>
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio"  id="author_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
                                                     </label>
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio"  id="author_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
                                                     </label>
 
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio" id="author_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
                                                     </label>
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 (weak reject)
                                                     </label>
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio" id="author_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
                                                     </label>
-                                            <label class="btn btn-secondary author_viewPaperAddRating">
+                                    <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio"  id="author_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
                                                     </label>
-                                        </div>
-                                    </div>
-                                    <!-- insert the review rating select above-->
-                                    <button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
+                                </div>
+                            </div>
+                            <!-- insert the review rating select above-->
+                            <button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
                                                  Add review rating
                                             </button>
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+            <!-- </div>
+            </section> -->
 
         </div>
     </div>
