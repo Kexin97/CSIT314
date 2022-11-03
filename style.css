@@ -471,3 +471,8 @@
             #reviewer_editPaperModal .modal-dialog {
                 min-width: 600px;
             }
+            
+            .deleteText {
+                clear: right !important;
+                width: 100% !important;
+            }

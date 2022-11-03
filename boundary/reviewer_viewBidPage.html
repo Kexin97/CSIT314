@@ -137,89 +137,108 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper -->
+        <!-- Content Wrapper. Doctor Home Page -->
         <div class="content-wrapper ">
+            <!-- <div class="col-12">
+                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View Bid </p>
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <p class="searchLeft">Enter paper name: </p>
+                            <input type="search" id="author_searchEnterPaperName" class="form-control form-control-lg">
+                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View Bid </p>
+                    </div>
                     <div class="card-body">
-                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Add review and rating of paper </p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <label class="searchLeft col-sm-2 ">Paper name</label>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper id -->
-                                    <label id="reviewer_viewPaperID">
-                                                <!-- 12345678 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="searchLeft col-sm-2 ">Enter review</label>
-                                <div class="detail ">
-                                    <textarea id="reviewer_addReview" rows="10" cols="30"></textarea>
-                                </div>
-                                <br>
-                            </div>
-                            <div class="form-group row">
-                                <label class="searchLeft col-sm-2 ">Select rating</label>
+                        <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Paper ID</th>
+                                    <th>Paper Name</th>
+                                    <th>Number of reviewer bid</th>
+                                    <th>Action</th>
 
-                                <div class="col-sm-9">
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating active">
-                                                        <input type="radio" id="reviewer_addRating3" autocomplete="off" checked> 3<br>(strong accept)
-                                                    </label>
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio"  id="reviewer_addRating2" autocomplete="off"> 2<br>(accept)
-                                                    </label>
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio"  id="reviewer_addRating1" autocomplete="off"> 1<br>(weak accept)
-                                                    </label>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <!-- retrieve paper id -->
+                                        12345678
+                                    </td>
+                                    <td>
+                                        <!-- retrieve paper name -->
 
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio" id="reviewer_addRating0" autocomplete="off">0<br>(borderline paper)
-                                                    </label>
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio" id="reviewer_addRatingMinus1" autocomplete="off"> -1<br>(weak reject)
-                                                    </label>
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio" id="reviewer_addRatingMinus3" autocomplete="off"> -2<br>(reject)
-                                                    </label>
-                                        <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                        <input type="radio"  id="reviewer_addRatingMinus3" autocomplete="off"> -3<br>(strong reject)
-                                                    </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addRatingReviewModal" value="Add">
+                                        PaperA
+                                    </td>
+                                    <td>
+                                        <!-- retrieve author name -->
 
-                        </div>
+                                        2
+                                    </td>
 
+                                    <td>
+                                        <button type="button" class="red_btn" data-toggle="modal" data-target="#deleteBidModal">
+                                            Delete bid
+                                            </button>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="addRatingReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Review and rating?</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Bid?</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
                 <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to save?</p>
+                    <p>Paper ID:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get paperID from DB-->
+                        <label class="reviewer_deletePaperID">
+                            
+                        </label>
+                    </div>
+                    <p>Paper name:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get userFullName from DB-->
+                        <label class="reviewer_deletePaperName"></label>
+                    </div>
+
+                    <p class="deleteText">Deleting this bid mean you would want to reduce or change your mind on the amount of bids. .
+                    </p>
+
+
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
+                            Cancel
                     </button>
-                    <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm save
+                    <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm Deletion
                     </button>
                 </div>
                 <div class="modal-footer" style="border: none;">
@@ -229,19 +248,19 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js "></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js "></script>
-    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js "></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js "></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
     <script>
         $(".nav .nav-link ").on("click ", function() {
             $(".nav ").find(".active ").removeClass("active ");
@@ -249,35 +268,20 @@
         });
 
         $(document).ready(function() {
-
-            // $('#reviewer_viewPaper').DataTable({
-            //     search: {
-            //         return: false,
-            //     },
-            // });
+            $('#reviewer_viewPaper').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
+            });
             //Initialize Select2 Elements
             $('.select2').select2();
             //Initialize Select2 Elements
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
-            });
-        });
-        $(document).ready(function() {
-            $('#reviewer_viewPaper').DataTable({
-                // lengthMenu: [
-                //     [10, 25, 50, -1],
-                //     [10, 25, 50, 'All'],
-                // ],
-                search: {
-                    return: false,
-                },
-                "paging ": true,
-                "lengthChange ": true,
-                "searching ": true,
-                "ordering ": true,
-                "info ": true,
-                "autoWidth ": true,
-                "responsive ": true,
             });
         });
     </script>
