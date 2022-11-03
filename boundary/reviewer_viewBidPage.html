@@ -95,7 +95,7 @@
                             </a>
 
                         </li>
-                        <li class="nav-item active">
+                        <!-- <li class="nav-item active">
                             <a href="reviewer_addBidPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
@@ -103,7 +103,7 @@
                                 </p>
                             </a>
 
-                        </li>
+                        </li> -->
                         <li class="nav-item active">
                             <a href="reviewer_viewBidPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
@@ -164,127 +164,203 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View Bid </p>
                     </div>
                     <div class="card-body">
-                        <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Paper ID</th>
-                                    <th>Paper Name</th>
-                                    <th>Number of reviewer bid</th>
-                                    <th>Action</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper id -->
-                                        12345678
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper name -->
+                        <div class="row">
+                            <label class="searchLeft col-sm-4 ">Number of paper(s) to review</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" id="reviewer_addNoPaperReview" name="reviewer_addNoPaperReview" min="1" max="100" min="1" maxlength="3" maxlength="3">
 
-                                        PaperA
-                                    </td>
-                                    <td>
-                                        <!-- retrieve author name -->
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#saveNoPaperReviewModal" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
 
-                                        2
-                                    </td>
 
-                                    <td>
-                                        <button type="button" class="red_btn" data-toggle="modal" data-target="#deleteBidModal">
+                        <div class="row">
+                            <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Paper ID</th>
+                                        <th>Paper Name</th>
+                                        <th>Number of reviewer bid</th>
+                                        <th>Add Bid</th>
+                                        <th>Delete Bid</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <!-- retrieve paper id -->
+                                            12345678
+                                        </td>
+                                        <td>
+                                            <!-- retrieve paper name -->
+
+                                            PaperA
+                                        </td>
+                                        <td>
+                                            <!-- retrieve author name -->
+
+                                            2
+                                        </td>
+                                        <td>
+
+                                            <!-- <a href="reviewer_addBidPage.html">
+                                            <button type="button" class="detail_action_btn">
+                                                    Add bid
+
+                                            </button>
+                                        </a> -->
+                                            <button id="reviewer_addBid" type="button" class="detail_action_btn" data-toggle="modal" data-target="#addBidModal">
+                                            Add bid
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button id="reviewer_deleteBid" type="button" class="reviewer_deleteBid" data-toggle="modal" data-target="#deleteBidModal">
                                             Delete bid
                                             </button>
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Bid?</p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save number of review you would like to review?</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to save number of review you would like to review?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm save
+                        </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add bid?</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                </div>
-                <div class="modal-body">
-                    <p>Paper ID:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get paperID from DB-->
-                        <label class="reviewer_deletePaperID">
-                            
-                        </label>
                     </div>
-                    <p>Paper name:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get userFullName from DB-->
-                        <label class="reviewer_deletePaperName"></label>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to add bid?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                        <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
                     </div>
-
-                    <p class="deleteText">Deleting this bid mean you would want to reduce or change your mind on the amount of bids. .
-                    </p>
-
-
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                    </button>
-                    <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm Deletion
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
+                    <div class="modal-footer" style="border: none;">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+        <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
-    <script>
-        $(".nav .nav-link ").on("click ", function() {
-            $(".nav ").find(".active ").removeClass("active ");
-            $(this).addClass("active ");
-        });
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Bid?</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Paper ID:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get paperID from DB-->
+                            <label class="reviewer_deletePaperID">
+                            
+                        </label>
+                        </div>
+                        <p>Paper name:&nbsp;</p>
+                        <div class="detail">
+                            <!-- get userFullName from DB-->
+                            <label class="reviewer_deletePaperName"></label>
+                        </div>
 
-        $(document).ready(function() {
-            $('#reviewer_viewPaper').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                        <p class="deleteText">Deleting this bid mean you would want to reduce or change your mind on the amount of bids. .
+                        </p>
+
+
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                    </button>
+                        <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm Deletion
+                    </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./wrapper -->
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE -->
+        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- datatable -->
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+        <script>
+            $(".nav .nav-link ").on("click ", function() {
+                $(".nav ").find(".active ").removeClass("active ");
+                $(this).addClass("active ");
             });
-            //Initialize Select2 Elements
-            $('.select2').select2();
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
+
+            $(document).ready(function() {
+                $('#reviewer_viewPaper').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "responsive": true,
+                });
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                    theme: 'bootstrap4'
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
