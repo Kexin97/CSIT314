@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html>
 <head>
 	<!--<title>Page Title</title> -->
@@ -6,9 +9,17 @@
 <body>
 
 	<h1>LOGGERD IN!!</h1>
-	<p>gratz.</p>
+	<p>testtest.php</p>
 	
 	<?php
+	
+	echo $_SESSION["favcolor"] = "green" , "  " . $_SESSION["favanimal"] = "cat";
+	
+	//echo  $cookie_name , " is a " . $_COOKIE[$cookie_name] . $cookie_value , " I SAY!!!";
+	
+	
+	
+	/*
 		$servername = "localhost";
 		$username = "username";
 		$password = "password";
@@ -37,7 +48,7 @@
 			echo $sql . "<br>" . $e->getMessage();
 		}
 
-		$conn = null;
+		$conn = null;*/
 
 	?>
 	

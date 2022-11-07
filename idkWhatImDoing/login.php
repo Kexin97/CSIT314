@@ -8,6 +8,9 @@
 	<h1>login page</h1>
 	<p>lalala</p>
 	
+	 <?php print $_SERVER['PHP_SELF'];?>
+	 <?php print $_SERVER["PHP_SELF"];?>
+	
 	<form method="post" action="<?php print $_SERVER['PHP_SELF'];?>">
 		<label for="username">Username:</label><br>
 		<input type="text" id="username" name="username" placeholder="Johnny bravo"><br>
@@ -22,7 +25,7 @@
         $password = "";
         
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=my", $username, $password);
+          $conn = new PDO("mysql:host=$servername;dbname=testdb", $username, $password);
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           echo "Connected successfully";
@@ -30,6 +33,11 @@
           echo "Connection failed: " . $e->getMessage();
         }
         echo "<br>";echo "<br>";
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST") 
+		{
+			echo $_POST['username'];
+		}
 	?>
 		
 </body>

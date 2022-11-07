@@ -5,7 +5,7 @@
 		<hr/>
 	</head>
 	<body>
-		<h1>lalalala</h1>
+		<h1>lala.php</h1>
 		
 
         <form method="post" action="<?php print $_SERVER['PHP_SELF'];?>">
@@ -14,15 +14,8 @@
         </form>
 
 		<?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          // collect value of input field
-          $name = $_POST['fname'];
-          if (empty($name)) {
-            echo "Name is empty";
-          } else {
-            echo $name;
-          }
-        }
+        echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
+		phpinfo();
         ?>
 
 	</body>

@@ -64,7 +64,7 @@
 			  }
 			?>
 			<option value="<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];?>" checked>
-			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?></option>
+			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?>  2 </option>
 			
 			<?php
 			  if ($numOfRows >= $atWhichRowNow)
@@ -76,7 +76,7 @@
 			  }
 			?>
 			<option value="<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];?>">
-			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?></option>
+			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?>  5 </option>
 			
 			<?php
 			  if ($numOfRows >= $atWhichRowNow)
@@ -88,7 +88,7 @@
 			  }
 			?>
 			<option value="<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];?>">
-			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?></option>
+			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?>  2 </option>
 			
 			<?php
 			  if ($numOfRows >= $atWhichRowNow)
@@ -100,7 +100,7 @@
 			  }
 			?>
 			<option value="<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];?>">
-			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?></option>
+			<?php if ($numOfRows >= $atWhichRowNow) echo $v["paperTitle"];$atWhichRowNow++;?>   3 </option>
 			
 			<?php
 			  if ($numOfRows >= $atWhichRowNow)

@@ -20,12 +20,12 @@
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$lala = "paper6";
-			$content = '$lala $lala $lala<br> $lala $lala $lala $lala<br> 
+			$content = $lala $lala $lala<br> $lala $lala $lala $lala<br> 
 						$lala $lala $lala $lala<br> $lala $lala $lala $lala<br>
 						$lala $lala $lala<br> $lala $lala $lala $lala<br> 
 						$lala $lala $lala $lala<br> $lala $lala $lala $lala<br>
 						$lala $lala $lala<br> $lala $lala $lala $lala<br> 
-						$lala $lala $lala $lala<br> $lala $lala $lala $lala<br>';
+						$lala $lala $lala $lala<br> $lala $lala $lala $lala<br>;
 						
 			$sql = "INSERT INTO Papers (authorName, paperTitle, paperContent)
 			VALUES ('author3', '$lala', '$lala $lala $lala<br> $lala $lala $lala $lala<br> 

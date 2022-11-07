@@ -5,7 +5,7 @@
 		<hr/>
 	</head>
 	<body>
-		<h1>lalalala</h1>
+		<h1>lala.html</h1>
 		
 
         <form method="post" action="<?php print $_SERVER['PHP_SELF'];?>">
@@ -14,15 +14,9 @@
         </form>
 
 		<?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          // collect value of input field
-          $name = $_POST['fname'];
-          if (empty($name)) {
-            echo "Name is empty";
-          } else {
-            echo $name;
-          }
-        }
+		echo " ECHOED FROM LALA.HTML!!!<br>";
+		echo  $cookie_name , " is a " . $_COOKIE[$cookie_name] . $cookie_value , " I SAY!!!";
+        include 'lala.php';
         ?>
 
 	</body>
