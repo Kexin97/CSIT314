@@ -14,8 +14,30 @@
         </form>
 
 		<?php
+		echo $testVar_1;
 		echo " ECHOED FROM LALA.HTML!!!<br>";
+		echo $_COOKIE[$cookie_name] , $_COOKIE[$cookie_name] , $_COOKIE[$cookie_name] , "<br>";
 		echo  $cookie_name , " is a " . $_COOKIE[$cookie_name] . $cookie_value , " I SAY!!!";
+		
+		echo ' <form method="post" action="">
+				<label for="username">Username:</label><br>
+				<input type="text" id="username" name="username" placeholder="Johnny bravo"><br>
+				<label for="Password">Password:</label><br>
+				<input type="text" id="Password" name="Password" placeholder="qwerty123"><br><br>
+				<input type="submit" value="Submit">
+				</form> ';
+		
+		echo "<br>";
+		print_r ($_POST);
+		echo "<br>";
+		//if ($_POST)
+		if ($_SERVER["REQUEST_METHOD"] == "POST") 
+		{
+			echo $_POST['username'] , " post username here <<<< ";
+		}
+		
+		echo "<br>";
+		
         include 'lala.php';
         ?>
 

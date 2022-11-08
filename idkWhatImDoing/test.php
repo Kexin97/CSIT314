@@ -25,8 +25,10 @@ session_start();
 		$_SESSION["favcolor"] = "green";
 		$_SESSION["favanimal"] = "cat";
 		
-		header("Location: testtest.php");
+		//header("Location: testtest.php");
 		
+		
+		$testVar_1 = "testing variable";
 		echo "<br>";
 		include 'lala.html';
 		echo "<br>";
