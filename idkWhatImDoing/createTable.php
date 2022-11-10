@@ -23,10 +23,11 @@
 			// sql to create table
 			$sql = "CREATE TABLE Papers 
 			(
-				paperID int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 				authorName VARCHAR(30) NOT NULL,
-				paperTitle VARCHAR(30) NOT NULL,
-				paperContent VARCHAR(3000) NOT NULL
+				paperName VARCHAR(30) NOT NULL PRIMARY KEY,
+				paperContent VARCHAR(3000) NOT NULL,
+				review VARCHAR(500),
+				rating int(10)
 			)";
 
 			// use exec() because no results are returned

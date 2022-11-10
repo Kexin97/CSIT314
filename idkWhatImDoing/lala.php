@@ -64,6 +64,49 @@
 		</table>
 
 		<?php
+		
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "testDB";
+
+		try {
+		  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+		  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		  //$email = $_POST['email'];
+		  //$password = $_POST['password'];
+		  $fname = $_POST['fname'];
+		  echo $_POST['fname'] , "@@@@@@@@@@@@@@@@";
+		  echo "<br>";
+		  
+		  //$lalaName = "person2";
+		  /*$stmt = $conn->prepare("SELECT email, password, userProfile FROM users WHERE email=?");
+		  $personVar = "person2";
+		  //$stmt->execute([$_POST['fname']]);
+		  $stmt->execute([$personVar]);*/
+		  
+		  $personVar = $_POST['fname'];
+		  $personVar = "person2";
+		  $stmt = $conn->prepare("SELECT email, password, userProfile FROM users WHERE email='$personVar'");
+		  //$stmt->execute([$_POST['fname']]);
+		  $stmt->execute();
+		  
+		  echo $stmt->fetch()["password"] , "  password column here << ";
+
+		  // set the resulting array to associative
+		  //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+		  //foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) 
+		  //foreach(($stmt->fetchAll()) as $v)
+		  //$v = $stmt->fetch();
+		  //echo $v["password"];
+		  //echo $stmt->fetch()["password"] , "  password column here << ";
+		  
+		} catch(PDOException $e) {
+		  echo "Error: " . $e->getMessage();
+		}
+		$conn = null;
+		
+		
         echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//phpinfo();
         ?>

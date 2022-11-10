@@ -178,8 +178,11 @@
                             </thead>
 							
                             <tbody>
-							<?php for ($x = 0; $x < $numOfRows; $x++)
+							<?php 
+							//for ($x = 0; $x < $numOfRows; $x++)
+							foreach(($stmt->fetchAll()) as $v)
 							{
+								//$stmt->execute([]);
 								echo '
                                 <tr>
                                     <td>
@@ -189,14 +192,14 @@
                                     </td>
                                     <td>
                                         <!-- retrieve paper name --> 
-										' , $array1[$x] , '
+										' , $v["paperName"] , '
                                         <!-- PaperA --> 
                                     </td>
                                     <td>
                                         <!-- retrieve author name -->
-
-                                        author
-                                    </td>
+										' , $v["authorName"] , '
+                                        <!-- author -->
+                                    </td> 
                                     <td>
                                         <a href="../boundary/reviewer_addRatingReviewPage.html">
                                             <button type="button" class="detail_action_btn">
@@ -205,11 +208,16 @@
                                         </a>
                                     </td>
                                     <td>
+										<form method="post" action="../controller/viewPaperDetailController.php">
+										  <button name="paperName" value="';echo $v["paperName"]; echo '" 
+										  class="detail_action_btn">View Detail</button>
+										</form>
+										<!--
                                         <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">
                                             <button type="button" class="detail_action_btn">
                                             View Detail
                                         </button>
-                                        </a>
+                                        </a> --> 
                                     </td>
                                 </tr>
 								'; 

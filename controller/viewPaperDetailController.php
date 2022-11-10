@@ -39,30 +39,28 @@ session_start();*/
         //echo "<br>";echo "<br>";
 		try 
 		{
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST["paperName"];
+			$daPaperName = $_POST["paperName"];
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $daPaperName;
+			//$daPaperName = 'paper1';
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $daPaperName;
+			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating FROM papers WHERE paperName='$daPaperName'");
 			$stmt->execute();
-
-			// set the resulting array to associative
-			//$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-			//foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) 
-			$numOfRows = 0;
-			/*foreach(($stmt->fetchAll()) as $v)
+			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			//echo $stmt->fetch()["review"];
+			if ($stmt->fetch()["review"] == null)
 			{
-				echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-				echo $v["paperName"];
-				echo "<br>";
-				$array1[$numOfRows] = $v["paperName"];
-				
-				echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-				echo $numOfRows, "  ";
-				//echo $v["paperName"];
-				echo "<br>";echo "<br>";
-				echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-				echo $array1[$numOfRows];
-				echo "<br>";echo "<br>";
-				$numOfRows++;
-			}*/
-			//$stmt = $conn->prepare("SELECT paperName FROM papers WHERE paperName=?");
+				echo "its nulllll";
+				//echo $stmt->fetch()["paperName"];
+			}
+			//else if ($stmt->fetch()["review"] != null)
+			{
+				echo "its not nulllll";
+				//echo $stmt->fetch()["paperName"];
+			}
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
@@ -72,7 +70,7 @@ session_start();*/
 			echo $e->getMessage();
         }
 		
-		include '../boundary/reviewer_viewPaperPage.html';
+		include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		$conn = null;
