@@ -207,8 +207,8 @@
                                         </button>
                                         </a>
                                     </td>
-                                    <td>
-										<!-- <form method="post" action="../controller/viewPaperDetailController.php">
+                                    <!-- <td>
+										<form method="post" action="../controller/viewPaperDetailController.php">
 										  <button name="paperName" value="';echo $v["paperName"]; echo '" 
 										  class="detail_action_btn">View Detail</button>
 										</form> -->

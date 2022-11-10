@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+include '../boundary/reviewer_viewPaperPage.php';
 /*$cookie_name = "cookie_1";
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
@@ -72,7 +73,7 @@ session_start();*/
 			echo $e->getMessage();
         }
 		
-		include '../boundary/reviewer_viewPaperPage.html';
+		// include '../boundary/reviewer_viewPaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		$conn = null;
