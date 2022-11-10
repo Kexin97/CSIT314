@@ -165,7 +165,7 @@
                     </div>
                     <div class="card-body">
                         <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-
+							
                             <thead>
                                 <tr>
                                     <th>Paper ID</th>
@@ -176,9 +176,9 @@
 
                                 </tr>
                             </thead>
-
+							
                             <tbody>
-                                <?php 
+							<?php 
 							//for ($x = 0; $x < $numOfRows; $x++)
 							foreach(($stmt->fetchAll()) as $v)
 							{
@@ -208,23 +208,23 @@
                                         </a>
                                     </td>
                                     <td>
-										<!-- <form method="post" action="../controller/viewPaperDetailController.php">
+										<form method="post" action="../controller/viewPaperDetailController.php">
 										  <button name="paperName" value="';echo $v["paperName"]; echo '" 
 										  class="detail_action_btn">View Detail</button>
-										</form> -->
+										</form>
+										<!--
                                         <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">
                                             <button type="button" class="detail_action_btn">
-                                                View Detail
+                                            View Detail
                                         </button>
-                                        </a>
-
+                                        </a> --> 
                                     </td>
                                 </tr>
 								'; 
 							}
 							?>
                             </tbody>
-
+							
                         </table>
                     </div>
                 </div>
