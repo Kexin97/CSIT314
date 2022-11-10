@@ -304,7 +304,9 @@
             
             #admin_searchUserName,
             #searchUserProfile,
-            #author_searchEnterPaperName {
+            #author_searchEnterPaperName,
+            #author_searchEnterAllocatedPaperName,
+            #conferenceChair_searchEnterPaperName {
                 font-size: 16px;
                 display: inline-block;
                 width: 300px;
@@ -487,4 +489,8 @@
                 padding-top: 5px;
                 padding-bottom: 5px;
                 border-style: solid;
+            }
+            
+            .nav-link {
+                height: auto;
             }
