@@ -87,7 +87,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewPaperPage.html" class="nav-link">
+                            <a href="../controller/reviewerViewPaperController.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -144,7 +144,7 @@
                     <div class="card-body">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper detail</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-4">Paper name:</p>
+                                <p class="col-sm-4">Paper name: <?php $stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?></p>
                                 <div class="col-sm-4">
                                     <!-- retieve paper name -->
                                     <label id="reviewer_viewPaperName">
@@ -167,7 +167,7 @@
                             </div>
 
                             <div class="row">
-                                <p class="col-sm-4">Author name:</p>
+                                <p class="col-sm-4">Author name: <?php $stmt->execute(); echo $stmt->fetch()["authorName"];?></p>
                                 <div class="col-sm-4">
                                     <!-- retieve Author name -->
                                     <label class="reviewer_viewPaperAuthor">
@@ -176,7 +176,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-4">Review:</p>
+                                <p class="col-sm-4">Review: <?php $stmt->execute(); 
+								if ($stmt->fetch()["review"] == null)
+								{
+									echo "Not reviewed yet";
+								}
+								else
+								{
+									$stmt->execute();
+									echo $stmt->fetch()["review"];
+								}
+								?></p>
                                 <div class="col-sm-8">
                                     <!-- retieve Review -->
                                     <label class="reviewer_viewPaperReview">
@@ -190,7 +200,17 @@
                             </div>
 
                             <div class="row">
-                                <p class="col-sm-4">Rating:</p>
+                                <p class="col-sm-4">Rating: <?php $stmt->execute(); 
+								if ($stmt->fetch()["rating"] == null)
+								{
+									echo "No ratings yet";
+								}
+								else
+								{
+									$stmt->execute();
+									echo $stmt->fetch()["rating"];
+								}
+								?></p>
                                 <div class="col-sm-4">
                                     <!-- retieve Rating -->
                                     <label class="reviewer_viewPaperRating">

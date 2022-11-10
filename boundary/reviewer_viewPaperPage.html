@@ -87,7 +87,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewPaperPage.html" class="nav-link">
+                            <a href="../boundary/reviewer_viewPaperPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -105,7 +105,7 @@
 
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewBidPage.html" class="nav-link">
+                            <a href="../boundary/reviewer_viewBidPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View bid
@@ -114,7 +114,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profilePage.html" class="nav-link ">
+                            <a href="../boundary/reviewer_profilePage.html" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -165,6 +165,7 @@
                     </div>
                     <div class="card-body">
                         <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+							
                             <thead>
                                 <tr>
                                     <th>Paper ID</th>
@@ -175,40 +176,55 @@
 
                                 </tr>
                             </thead>
+							
                             <tbody>
+							<?php 
+							//for ($x = 0; $x < $numOfRows; $x++)
+							foreach(($stmt->fetchAll()) as $v)
+							{
+								//$stmt->execute([]);
+								echo '
                                 <tr>
                                     <td>
                                         <!-- retrieve paper id -->
                                         12345678
+										//echo " echo $cookie_name";
                                     </td>
                                     <td>
-                                        <!-- retrieve paper name -->
-
-                                        PaperA
+                                        <!-- retrieve paper name --> 
+										' , $v["paperName"] , '
+                                        <!-- PaperA --> 
                                     </td>
                                     <td>
                                         <!-- retrieve author name -->
-
-                                        author
-                                    </td>
+										' , $v["authorName"] , '
+                                        <!-- author -->
+                                    </td> 
                                     <td>
-                                        <a href="reviewer_addRatingReviewPage.html">
+                                        <a href="../boundary/reviewer_addRatingReviewPage.html">
                                             <button type="button" class="detail_action_btn">
                                             Add
                                         </button>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="reviewer_viewDetailUpdatePaperPage.html">
+										<form method="post" action="../controller/viewPaperDetailController.php">
+										  <button name="paperName" value="';echo $v["paperName"]; echo '" 
+										  class="detail_action_btn">View Detail</button>
+										</form>
+										<!--
+                                        <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">
                                             <button type="button" class="detail_action_btn">
                                             View Detail
                                         </button>
-                                        </a>
+                                        </a> --> 
                                     </td>
-
                                 </tr>
-
+								'; 
+							}
+							?>
                             </tbody>
+							
                         </table>
                     </div>
                 </div>
