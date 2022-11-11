@@ -8,9 +8,9 @@ session_start();*/
 ?>
 <html>
 	<head>
-		<title>lallalaaaaaaaaaaaaaaaaaaaaaa</title>
+		<!-- <title>lallalaaaaaaaaaaaaaaaaaaaaaa</title>
 		la &nbsp; la
-		<hr/>
+		<hr/> -->
 	</head>
 	<body>
 		<h1>ReviewerViewPaperController.php</h1>

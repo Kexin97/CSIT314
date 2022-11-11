@@ -14,12 +14,12 @@ session_start();*/
 		<hr/> -->
 	</head>
 	<body>
-		<h1>ReviewerViewPaperController.php</h1>
+		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1>
 		
 
 
 		<?php
-		include '../entity/reviewerEntity.php';
+		
 		
 		/*$servername = "localhost";
 		$username = "root";
@@ -36,7 +36,7 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }*/
+        }
         //echo "<br>";echo "<br>";
 		try 
 		{
@@ -67,16 +67,16 @@ session_start();*/
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        } 
+        /*} 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
-		
-		//include '../boundary/reviewer_viewPaperPage.html';
+        }*/
+		include '../controller/reviewerViewPaperController.php';
+		include '../boundary/reviewer_viewPaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		//$conn = null;
+		$conn = null;
         ?>
 
 	</body>

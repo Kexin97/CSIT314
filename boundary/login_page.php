@@ -41,6 +41,7 @@
         }
     </script>
     <?php
+		session_start();	//opened by zk
         //$_POST['userEmail'], $_POST['userPassword'],
         require '../controller/accountController.php';
         require '../controller/accountProfileController.php';
@@ -124,6 +125,7 @@
             }
             else if ($loginType == "reviewer"){
                 echo'<script>alert("User type = reviewer");</script>';
+				header("Location: reviewer_viewPaper.php");
             }
             else{
                 echo'<script>alert("Account with this profile type does not exist");</script>';

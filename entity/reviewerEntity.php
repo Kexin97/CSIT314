@@ -14,14 +14,14 @@ session_start();*/
 		<hr/> -->
 	</head>
 	<body>
-		<h1>ReviewerViewPaperController.php</h1>
+		<h1>ReviewerEntity.php</h1>
 		
 
 
 		<?php
-		include '../entity/reviewerEntity.php';
 		
-		/*$servername = "localhost";
+		
+		$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "testDB";
@@ -36,9 +36,9 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }*/
+        }
         //echo "<br>";echo "<br>";
-		try 
+		/*try 
 		{
 			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
 			$stmt->execute();
@@ -67,11 +67,11 @@ session_start();*/
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        } 
+        /*} 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
+        }*/
 		
 		//include '../boundary/reviewer_viewPaperPage.html';
 		
