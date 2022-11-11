@@ -107,9 +107,11 @@
 
         function searchReviewerAccount(){
             $validityCheck;
+            $validityCheck1;
             $query = "SELECT * FROM account_profile";
             $stmt = mysqli_stmt_init($this->conn);
-            $reviwerAccounts = array();
+            $reviewerAccounts = array();
+            $reviewerNames = array();
 
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
@@ -125,17 +127,43 @@
             }
             else{
                 $validityCheck = "validLogin";
-                $qGet1 = $this->conn->query($query);
-                $counter = 0;
-                if(($res = $qGet1->num_rows) > 0){
-                    while(($Row = $qGet1->fetch_assoc()) !== NULL){
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
                         if($Row["reviewer_type"] == "reviewer"){
-                            $reviwerAccounts[] = $Row["account_email"];
+                            $reviewerAccounts[] = $Row["account_email"];
                         }
                     }
                 }
             }
-            return $reviwerAccounts;
+
+            $query = "SELECT * FROM `account`";
+            $stmt = mysqli_stmt_init($this->conn);
+            
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                echo "<script>console.log('Failed, error');</script>";
+            }
+            else{
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        for($z=0; $z<count($reviewerAccounts);$z++){
+                            if($Row["account_email"] == $reviewerAccounts[$z]){
+                                $reviewerNames[] = $Row["account_fullName"];
+                            }
+                        }
+                    }
+                }
+            }
+            return $reviewerNames;
         }
 
         function allocatePaper(){

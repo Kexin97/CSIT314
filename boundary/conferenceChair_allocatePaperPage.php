@@ -159,6 +159,7 @@
                         </div>
                     </div>
                     <div style="padding: 30px;">
+                    <form method="POST">
                         <div class="form-group" style="display: flex;">
                             <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
                             <div class="col-sm-4">
@@ -171,13 +172,11 @@
                             <select id="conferenceChair_allocateReviewerName" name="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock">
                                 <!-- retrieve reviewer name from db -->
                                 <?php
-                                    require("../controller/allocatePaperController.php");
+                                    require_once("../controller/allocatePaperController.php");
 
                                     if(isset($_GET["cc"])){
                                         $controller = new allocatePaperController();
                                         $result = $controller->searchAccounts();
-                                        echo "count: " . count($result);
-                                        echo "<script>console.log(".count($result).");</script>";
                                         for($x=0;$x<count($result);$x++){
                                             echo "<option value='$result[$x]'>$result[$x]</option>";
                                         }
@@ -188,7 +187,7 @@
 
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocated paper">
-
+                    </form>
                     </div>
                 </div>
 
@@ -210,7 +209,7 @@
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
-                        <button type="button" id="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        <button type="button" id="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="allocatePaperFunction()">
                             Confirm save
                         </button>
                     </div>
@@ -267,20 +266,14 @@
                 }
             }
 
+            function allocatePaperFunction(){
+                
+            }
+
             console.log("cookies: "+document.cookie);
         </script>
         <?php
-            require("../controller/allocatePaperController.php");
 
-            if(isset($_GET["cc"])){
-                $controller = new allocatePaperController();
-                $result = $controller->searchAccounts();
-                echo "count: " . count($result);
-                echo "<script>console.log(".count($result).");</script>";
-                for($x=0;$x<count($result);$x++){
-                    echo "<script>console.log('test: ' + '$result[$x]');</script>";
-                }
-            }
         ?>
 </body>
 
