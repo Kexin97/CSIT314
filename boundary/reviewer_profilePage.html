@@ -167,7 +167,9 @@
                                 <label for="adminName" class="col-sm-2 col-form-label">Reviewer Name:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer name -->
+
                                     <p class="form-control" id="reviewer_profileName" style="border: none; margin-left: -10px;">
+									<?php $stmt->execute(); echo $stmt->fetch()["account_fullName"];?>
                                     </p>
                                 </div>
                             </div>
@@ -175,7 +177,9 @@
                                 <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer gender -->
+
                                     <p class="form-control" id="reviewer_profileGender" style="border: none; margin-left: -10px;">
+									<?php $stmt->execute(); echo $stmt->fetch()["account_sex"];?>
                                     </p>
                                 </div>
                             </div>
@@ -183,7 +187,30 @@
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer age -->
+
                                     <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
+									<?php $stmt->execute(); echo $stmt->fetch()["account_age"];?>
+                                    </p>
+                                </div>
+                            </div>
+
+							<div class="form-group row">
+                                <label for="inputReviews" class="col-sm-2 col-form-label">Number of reviews：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve  -->
+									
+                                    <p class="form-control" id="reviewer_profileReviews" style="border: none; margin-left: -10px;">
+									<?php $stmt2->execute([$_SESSION["reviewer_email"]]); 
+									if ($stmt2->fetch()["numOfReviews"] == null)
+									{
+										echo "Number of reviews not set yet";
+									}
+									else
+									{
+										$stmt2->execute([$_SESSION["reviewer_email"]]);
+										echo $stmt2->fetch()["numOfReviews"];
+									}
+									?>
                                     </p>
                                 </div>
                             </div>

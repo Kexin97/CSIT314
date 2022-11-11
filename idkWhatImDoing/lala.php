@@ -78,6 +78,12 @@
 		  $fname = $_POST['fname'];
 		  echo $_POST['fname'] , "@@@@@@@@@@@@@@@@";
 		  echo "<br>";
+		  $lname = $_POST['lname'];
+		  echo $_POST['lname'] , "@@@@@@@@@@@@@@@@";
+		  echo "<br>";
+		  $review = $_POST['review'];
+		  echo $_POST['review'] , "@@@@@@@@@@@@@@@@";
+		  echo "<br>";
 		  
 		  //$lalaName = "person2";
 		  /*$stmt = $conn->prepare("SELECT email, password, userProfile FROM users WHERE email=?");
