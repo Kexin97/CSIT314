@@ -87,7 +87,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -95,7 +95,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     Search allocated paper
@@ -104,7 +104,7 @@
                         </li>
 
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     Search paper
@@ -112,7 +112,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -121,7 +121,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -168,13 +168,21 @@
                         <div class="form-group">
                             <label class="searchLeft col-sm-2 ">Reviewer name</label>
                             <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock">
-                            <!-- retrieve conference name from db -->
-                            <option> </option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
+                            <select id="conferenceChair_allocateReviewerName" name="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock">
+                                <!-- retrieve reviewer name from db -->
+                                <?php
+                                    require("../controller/allocatePaperController.php");
+
+                                    if(isset($_GET["cc"])){
+                                        $controller = new allocatePaperController();
+                                        $result = $controller->searchAccounts();
+                                        echo "count: " . count($result);
+                                        echo "<script>console.log(".count($result).");</script>";
+                                        for($x=0;$x<count($result);$x++){
+                                            echo "<option value='$result[$x]'>$result[$x]</option>";
+                                        }
+                                    }
+                                ?>
                             </select>
                         </div>
 
@@ -261,6 +269,19 @@
 
             console.log("cookies: "+document.cookie);
         </script>
+        <?php
+            require("../controller/allocatePaperController.php");
+
+            if(isset($_GET["cc"])){
+                $controller = new allocatePaperController();
+                $result = $controller->searchAccounts();
+                echo "count: " . count($result);
+                echo "<script>console.log(".count($result).");</script>";
+                for($x=0;$x<count($result);$x++){
+                    echo "<script>console.log('test: ' + '$result[$x]');</script>";
+                }
+            }
+        ?>
 </body>
 
 </html>
