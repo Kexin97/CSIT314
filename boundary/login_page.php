@@ -141,6 +141,7 @@
                 echo'<script>alert("Account with this profile type does not exist");</script>';
             }
         }
+        //
     ?>
     <head>
         <meta charset="UTF-8">
