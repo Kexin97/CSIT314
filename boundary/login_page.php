@@ -39,6 +39,15 @@
             })
             return result;
         }
+
+        function signOut(){
+            document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+            var confirmMessage = "Are you sure you want to sign out?";
+            if (confirm(confirmMessage) == true) {
+                window.location.replace("../boundary/login_page.php");
+            }
+        }
+        console.log(document.cookie);
     </script>
     <?php
         //$_POST['userEmail'], $_POST['userPassword'],
@@ -55,6 +64,14 @@
                 $selectOption = "none";
             }
             if($vl[0] == 'validLogin') {
+                echo "<script>setCookie('accountEmail', '". $vl[1] . "', 7);</script>";
+                echo "<script>setCookie('accountPassword', '". $vl[2] . "', 7);</script>";
+                echo "<script>setCookie('accountAccountID', '". $vl[3] . "', 7);</script>";
+                echo "<script>setCookie('accountFullName', '". $vl[4] . "', 7);</script>";
+                echo "<script>setCookie('accountSex', '". $vl[5] . "', 7);</script>";
+                echo "<script>setCookie('accountAge', '". $vl[6] . "', 7);</script>";
+                echo "<script>setCookie('accountContact', '". $vl[7] . "', 7);</script>";
+
                 $profileType = new accountProfileController();
                 $loginType = $profileType->validateAccountType($vl[1], $selectOption);    
                 checkType($loginType[1]);            
@@ -80,9 +97,6 @@
                 $selectOption = "none";
             }
             if($vl[0] == 'validLogin') {
-                $profileType = new accountProfileController();
-                $loginType = $profileType->validateAccountType($vl[1], $selectOption); 
-
                 echo "<script>setCookie('accountEmail', '". $vl[1] . "', 7);</script>";
                 echo "<script>setCookie('accountPassword', '". $vl[2] . "', 7);</script>";
                 echo "<script>setCookie('accountAccountID', '". $vl[3] . "', 7);</script>";
@@ -91,8 +105,9 @@
                 echo "<script>setCookie('accountAge', '". $vl[6] . "', 7);</script>";
                 echo "<script>setCookie('accountContact', '". $vl[7] . "', 7);</script>";
 
-                checkType($loginType[1]);
-            
+                $profileType = new accountProfileController();
+                $loginType = $profileType->validateAccountType($vl[1], $selectOption); 
+                checkType($loginType[1]);  
             }
 
             else if($vl[0] == 'invalidLogin') {
@@ -105,20 +120,22 @@
         }
 
         function checkType($loginType){
-            echo "<script>setCookie('accountProfile', '". $loginType[1] . "', 7);</script>";
+            echo "<script>setCookie('accountProfile', '". $loginType . "', 7);</script>";
             if($loginType == "userAdmin"){
                 $new_url = "../boundary/admin_addUserPage.php";
-                header('Location: ' . $new_url);
+                echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "conferenceChair"){
                 $new_url = "../boundary/conferenceChair_allocatePaperPage.php";
-                header('Location: ' . $new_url);
+                echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "author"){
-                echo'<script>alert("User type = author");</script>';
+                $new_url = "../boundary/author_addPaperPage.html";
+                echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "reviewer"){
-                echo'<script>alert("User type = reviewer");</script>';
+                $new_url = "../boundary/reviewer_addRatingReviewPage.html";
+                echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else{
                 echo'<script>alert("Account with this profile type does not exist");</script>';
