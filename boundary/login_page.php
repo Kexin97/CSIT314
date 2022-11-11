@@ -79,45 +79,40 @@
             else{
                 $selectOption = "none";
             }
-            $checkTOF = false;
             if($vl[0] == 'validLogin') {
                 $profileType = new accountProfileController();
                 $loginType = $profileType->validateAccountType($vl[1], $selectOption); 
 
-                if($vl[0] = "userAdmin"){
-                    echo "<script>setCookie('accountEmail', '". $vl[1] . "', 7);</script>";
-                    echo "<script>setCookie('accountPassword', '". $vl[2] . "', 7);</script>";
-                    echo "<script>setCookie('accountAccountID', '". $vl[3] . "', 7);</script>";
-                    echo "<script>setCookie('accountFullName', '". $vl[4] . "', 7);</script>";
-                    echo "<script>setCookie('accountSex', '". $vl[5] . "', 7);</script>";
-                    echo "<script>setCookie('accountAge', '". $vl[6] . "', 7);</script>";
-                    echo "<script>setCookie('accountContact', '". $vl[7] . "', 7);</script>";
-                    echo "<script>window.location.href = '../boundary/admin_addUserPage.php';</script>";
-                }
-                else{
-                    checkType($loginType[1]);
-                }
+                echo "<script>setCookie('accountEmail', '". $vl[1] . "', 7);</script>";
+                echo "<script>setCookie('accountPassword', '". $vl[2] . "', 7);</script>";
+                echo "<script>setCookie('accountAccountID', '". $vl[3] . "', 7);</script>";
+                echo "<script>setCookie('accountFullName', '". $vl[4] . "', 7);</script>";
+                echo "<script>setCookie('accountSex', '". $vl[5] . "', 7);</script>";
+                echo "<script>setCookie('accountAge', '". $vl[6] . "', 7);</script>";
+                echo "<script>setCookie('accountContact', '". $vl[7] . "', 7);</script>";
+
+                checkType($loginType[1]);
+            
             }
 
             else if($vl[0] == 'invalidLogin') {
-                echo '<script> alert("admin invalid login"); </script>';
+                echo '<script> alert("Invalid login"); </script>';
             }
 
             else {
-                echo '<script> alert("admin Missing fields!"); </script>';
-            }
-            if($checkTOF == true){
-                checkType($loginType[1]);
+                echo '<script> alert("Missing fields!"); </script>';
             }
         }
 
         function checkType($loginType){
+            echo "<script>setCookie('accountProfile', '". $loginType[1] . "', 7);</script>";
             if($loginType == "userAdmin"){
                 $new_url = "../boundary/admin_addUserPage.php";
                 header('Location: ' . $new_url);
             }
             else if ($loginType == "conferenceChair"){
-                echo'<script>alert("User type = conferenceChair");</script>';
+                $new_url = "../boundary/conferenceChair_allocatePaperPage.php";
+                header('Location: ' . $new_url);
             }
             else if ($loginType == "author"){
                 echo'<script>alert("User type = author");</script>';
