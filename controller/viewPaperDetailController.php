@@ -47,8 +47,7 @@ session_start();*/
 			//$daPaperName = 'paper1';
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $daPaperName;
-			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating, bidWinner
-									FROM papers WHERE paperName='$daPaperName'");
+			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating FROM papers WHERE paperName='$daPaperName'");
 			$stmt->execute();
 			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["review"];
