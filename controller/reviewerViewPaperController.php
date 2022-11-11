@@ -20,7 +20,7 @@ session_start();*/
 
 		<?php
 		include '../entity/reviewerEntity.php';
-		
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -40,13 +40,21 @@ session_start();*/
         //echo "<br>";echo "<br>";
 		try 
 		{
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
+			//$emailName = $_SESSION["reviewer_email"];
+			$stmt = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");
+			$stmt->execute([$_SESSION["reviewer_email"]]);
+			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $stmt->fetch()["account_fullName"];
+			
+			$stmt->execute();
+			$bidWinner = $stmt->fetch()["account_fullName"];
+			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers WHERE bidWinner ='$bidWinner'");
 			$stmt->execute();
 
 			// set the resulting array to associative
 			//$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 			//foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) 
-			$numOfRows = 0;
+			//$numOfRows = 0;
 			/*foreach(($stmt->fetchAll()) as $v)
 			{
 				echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";

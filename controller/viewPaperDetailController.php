@@ -13,14 +13,14 @@ session_start();*/
 		<hr/> -->
 	</head>
 	<body>
-		<h1>ReviewerViewPaperController.php</h1>
+		<h1>viewPaperDetailController.php</h1>
 		
 
 
 		<?php
+		include '../entity/reviewerEntity.php';
 		
-		
-		$servername = "localhost";
+		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "testDB";
@@ -35,7 +35,7 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }
+        }*/
         //echo "<br>";echo "<br>";
 		try 
 		{
@@ -70,10 +70,10 @@ session_start();*/
 			echo $e->getMessage();
         }
 		
-		include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>

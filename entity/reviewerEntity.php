@@ -24,7 +24,7 @@ session_start();*/
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
-		$dbname = "testDB";
+		$dbname = "314_project";
 
 		try 
 		{

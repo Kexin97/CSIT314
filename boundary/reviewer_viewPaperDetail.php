@@ -5,7 +5,7 @@
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
-session_start();
+//session_start();
 ?>
 <html>
 	<head>
@@ -14,13 +14,13 @@ session_start();
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1>
+		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaperDetail.php</h1>
 		
 
 
 		<?php
 		
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
+		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -72,11 +72,12 @@ session_start();
 		{
 			echo $e->getMessage();
         }*/
-		include '../controller/reviewerViewPaperController.php';
-		include '../boundary/reviewer_viewPaperPage.html';
+		include '../controller/viewPaperDetailController.php';
+		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <?php
-
 /*$cookie_name = "cookie_1";
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
-session_start();
+//session_start();
 ?>
 <html>
 	<head>
@@ -14,13 +13,13 @@ session_start();
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1>
+		<h1>reviewerProfileController.php</h1>
 		
 
 
 		<?php
+		include '../entity/reviewerEntity.php';
 		
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -36,17 +35,18 @@ session_start();
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }
+        }*/
         //echo "<br>";echo "<br>";
 		try 
 		{
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
-			$stmt->execute();
+			$stmt = $conn->prepare("SELECT account_fullName, account_sex, account_age FROM account ");
+			$stmt2 = $conn->prepare("SELECT numOfReviews FROM account_profile WHERE account_email=?");
+			//$stmt->execute();
 
 			// set the resulting array to associative
 			//$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 			//foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) 
-			$numOfRows = 0;
+			//$numOfRows = 0;
 			/*foreach(($stmt->fetchAll()) as $v)
 			{
 				echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
@@ -67,16 +67,24 @@ session_start();
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        /*} 
+        } 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }*/
-		include '../controller/reviewerViewPaperController.php';
-		include '../boundary/reviewer_viewPaperPage.html';
+        }
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST['email'];
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST["password"];
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST["number"];
+		}
+		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>

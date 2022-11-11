@@ -46,6 +46,7 @@
         require '../controller/accountController.php';
         require '../controller/accountProfileController.php';
         if (isset($_POST['user_login_btn'])){
+			$_SESSION["reviewer_email"] = $_POST['userEmail'];	//zk sess var
             $lc = new accountController();
             $vl = $lc->validateAccountDetails($_POST['userEmail'], $_POST['userPassword'], "user");
             $selectOption;

@@ -14,13 +14,13 @@ session_start();
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1>
+		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_profile.php</h1>
 		
 
 
 		<?php
 		
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
+		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -72,11 +72,20 @@ session_start();
 		{
 			echo $e->getMessage();
         }*/
-		include '../controller/reviewerViewPaperController.php';
-		include '../boundary/reviewer_viewPaperPage.html';
-		
+		include '../controller/reviewerProfileController.php';
+		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		include '../boundary/reviewer_profilePage.html';
+		/*if ($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST['email'];
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST["password"];
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $_POST["number"];
+		}*/
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>
