@@ -41,5 +41,11 @@
 
             return $this->result;
         }
+
+        public function getReviewerDetails($reviewerName){
+            $this->result = $this->entity->searchReviewerDetails($reviewerName);
+
+            return $this->result;
+        }
     }
 ?>

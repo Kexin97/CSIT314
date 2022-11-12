@@ -110,7 +110,7 @@
             $query = "SELECT * FROM papers";
             $stmt = mysqli_stmt_init($this->conn);
             $paperNames = array();
-
+            $returnResults;
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
                 exit();
@@ -130,7 +130,9 @@
                     }
                 }
             }
-
+            if(count($paperNames) == 0){
+                $paperNames[] = "The are no papers to allocate";
+            }
             return $paperNames;
         }
 
@@ -263,6 +265,7 @@
             $resultMessage;
             $resultMessage1;
             $resultMessage2;
+            $noPapers = false;
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
                 exit();
@@ -277,6 +280,7 @@
             }
             else{
                 $resultMessage = "failed to allocate paper with reviewer name";
+                $noPapers = true;
             }
 
             $query = "UPDATE `account_profile` SET numOfAllocatedPapers='" . $numOfAllocatedPapers . "' WHERE account_email='" . $reviewerEmail . "'";
@@ -298,6 +302,10 @@
             }
 
             $resultMessage2 = $resultMessage . " AND " . $resultMessage1;
+
+            if($noPapers == true){
+                $resultMessage2 = "There are no papers to allocate";
+            }
             return $resultMessage2 ;
         }
 
@@ -359,6 +367,62 @@
                 }
             }
             return $reviewNum;
+        }
+
+        function searchReviewerDetails($reviewerName){
+            $query = "SELECT * FROM `account`";
+            $stmt = mysqli_stmt_init($this->conn);
+            $rEmail;
+            
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                echo "<script>console.log('Failed, error');</script>";
+            }
+            else{
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if($Row["account_fullName"] == $reviewerName){
+                            $rEmail = $Row["account_email"];
+                        }   
+                    }
+                }
+            }
+
+            $query = "SELECT * FROM `account_profile`";
+            $stmt = mysqli_stmt_init($this->conn);
+            $rNum;
+            
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                echo "<script>console.log('Failed, error');</script>";
+            }
+            else{
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if($Row["account_email"] == $rEmail){
+                            $rNum = $Row["numOfAllocatedPapers"];
+                        }   
+                    }
+                }
+            }
+
+            return array($rEmail, $rNum);
         }
     }
 ?>

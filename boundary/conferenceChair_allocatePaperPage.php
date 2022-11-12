@@ -88,7 +88,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -200,11 +200,31 @@
                         </div>
 
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
-                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocated paper">
+                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocate paper">
                     </div>
                     <div style="padding: 30px;" id="toggleDisplay1" style="display:none">
+                        <div class="form-group">
+                            <label class="searchLeft col-sm-2 " style="width:224px;">Reviewer name:</label>
+                            <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
+                            <select id="conferenceChair_allocateReviewerNameAll" name="conferenceChair_allocateReviewerNameAll" class="form-control select2 col-sm-4 inlineBlock">
+                                <!-- retrieve reviewer name from db -->
+                                <?php
+                                    require_once("../controller/allocatePaperController.php");
+
+                                    if(isset($_GET["cc"])){
+                                        $controller = new allocatePaperController();
+                                        $result = $controller->searchAccountNames();
+                                        for($x=0;$x<count($result);$x++){
+                                            echo "<option value='$result[$x]'>$result[$x]</option>";
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
-                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal1" value=" Allocated paper">
+                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal1" value=" Allocate paper">
+                        </br><br><text style="margin-left:70px">OR</text></br></br>
+                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal2" value=" Allocate evenly">
                     </div>
                 </div>
             </div>
@@ -221,12 +241,12 @@
                             </button> -->
                     </div>
                     <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to save?</p>
+                        <p class="deleteText">Are you sure you want to allocate this paper to this reviewer?</p>
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
                         <button type="submit" id="author_save" name="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
+                            Confirm allocation
                         </button>
                     </div>
                     <div class="modal-footer" style="border: none;">
@@ -246,12 +266,37 @@
                             </button> -->
                     </div>
                     <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to save?</p>
+                        <p class="deleteText">Are you sure you want to allocate all papers to this reviewer?</p>
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
                         <button type="submit" id="author_save1" name="author_save1" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
+                            Confirm allocation
+                        </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addPaperModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add paper?</p>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button> -->
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to allocate papers evenly to all reviewers?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="submit" id="author_save2" name="author_save2" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm allocation
                         </button>
                     </div>
                     <div class="modal-footer" style="border: none;">
@@ -331,8 +376,22 @@
                 echo "<script>alert('$result');</script>";
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }  
-            
+
             if(isset($_POST['author_save1'])){
+                $controller = new allocatePaperController();
+                $paperNamesArray = $controller->searchPapers();
+                $reviewerDetails = $controller->getReviewerDetails($_POST['conferenceChair_allocateReviewerNameAll']);
+                $result;
+                for($z=0; $z<count($paperNamesArray); $z++){
+                    //echo "<script>console.log('$reviewerDetails[$z]');</script>";
+                    $tempNum = $reviewerDetails[1] + $z + 1;
+                    $result = $controller->assignReviewer($paperNamesArray[$z], $_POST['conferenceChair_allocateReviewerNameAll'], $reviewerDetails[0], $tempNum);
+                }
+                echo "<script>alert('$result');</script>";
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
+            }
+            
+            if(isset($_POST['author_save2'])){
                 $controller = new allocatePaperController();
                 $paperNamesArray = $controller->searchPapers();
                 $reviewerNamesArray = $controller->searchAccountNames();
