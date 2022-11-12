@@ -328,41 +328,17 @@
             if(isset($_POST['author_save'])){
                 $controller = new allocatePaperController();
                 $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $_POST['conferenceChair_allocateReviewerName']);
-                /*for($z=0;$z<count($result);$z++){
-                    echo "<script>console.log('$result[$z]');</script>";
-                }*/
                 echo "<script>alert('$result');</script>";
-                //header("Location: conferenceChair_allocatePaperPage.php?cc");
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }  
             
             if(isset($_POST['author_save1'])){
-                /*$controller = new allocatePaperController();
-                $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $_POST['conferenceChair_allocateReviewerName']);
-                echo "<script>alert('$result');</script>";
-                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";*/
                 $controller = new allocatePaperController();
                 $paperNamesArray = $controller->searchPapers();
                 $reviewerNamesArray = $controller->searchAccountNames();
                 $reviewerEmailsArray = $controller->searchAccountEmail();
                 $numOfAllocatedPapersArray = $controller->getNumOfAllocatedPapersArray();
                 echo "<script>console.log('ArrayCount: " . count($reviewerNamesArray) . "');</script>";
-                /*for($x=0; $x<count($paperNamesArray); $x++){
-                    echo "<script> 
-                    console.log('ArrayPaperName[$x]: $paperNamesArray[$x]');
-                    </script>";
-                }
-                for($x=0; $x<count($reviewerNamesArray); $x++){
-                    echo "<script> 
-                    console.log('ArrayReviewerName[$x]: $reviewerNamesArray[$x]');
-                    </script>";
-                }
-                for($x=0; $x<count($numOfAllocatedPapersArray); $x++){
-                    echo "<script> 
-                    console.log('ArrayNum[$x]: $numOfAllocatedPapersArray[$x]');
-                    </script>";
-                }*/
-                
                 for($x=0; $x<count($reviewerEmailsArray); $x++){
                     echo "<script> 
                     console.log('ArrayEmails[$x]: $reviewerEmailsArray[$x]');
@@ -377,43 +353,12 @@
                     for($y=0; $y<count($numOfAllocatedPapersArray); $y++){
                         if($lowestReviewNum >= $numOfAllocatedPapersArray[$y]){
                             $lowestReviewNum = $numOfAllocatedPapersArray[$y];
-                            /*echo "<script> 
-                                console.log('num: $numOfAllocatedPapersArray[$y]');
-                                console.log('email: $reviewerEmailsArray[$y]');
-                                console.log('low: $lowestReviewNum');
-                                console.log('==========================');
-                            </script>";*/
                         }
                     }
                     for($y=0; $y<count($numOfAllocatedPapersArray); $y++){                        
                         if($numOfAllocatedPapersArray[$y] == $lowestReviewNum){
-                            
-                            
-                            /*echo "<script> 
-                                console.log('num: $numOfAllocatedPapersArray[$y]');
-                            </script>";
-                            echo "<script> 
-                                console.log('low: $lowestReviewNum');
-                                console.log('==========================');
-                            </script>";*/
                             $numOfAllocatedPapersArray[$y]++;
                             $result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $numOfAllocatedPapersArray[$y]);
-                            //$result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $tempNum);
-                            
-                            /*echo "<script> 
-                                console.log('ArrayPName[$x]: $paperNamesArray[$x]');
-                            </script>";
-                            echo "<script> 
-                                console.log('ArrayRName[$y]: $reviewerNamesArray[$y]');
-                            </script>";
-                            echo "<script> 
-                                console.log('ArrayEmail[$y]: $reviewerEmailsArray[$y]');
-                            </script>";
-                            echo "<script> 
-                                console.log('ArrayAllocated[$y]: " . $tempNum . "');
-                            </script>";*/
-                            
-                            //$numOfAllocatedPapersArray[$y]+1;
                             echo "<script> 
                                 console.log('email: " . $reviewerEmailsArray[$y] . "');
                                 console.log('temp: " . $tempNum . "');
@@ -422,16 +367,7 @@
                             break;
                         }
                     }
-                    //$result = $controller->assignReviewer($paperName, $reviewerName);
                 }
-                
-                /*echo "<script> 
-                    console.log('LowestNum: $numOfAllocatedPapersArray[0]');
-                    console.log('LowestNum: $numOfAllocatedPapersArray[1]');
-                    console.log('LowestNum: $numOfAllocatedPapersArray[2]');
-                    console.log('LowestNum: $numOfAllocatedPapersArray[3]');
-                    </script>";*/
-                //echo "<script>alert('Nice try');</script>";
             }  
         ?>
     </form>
