@@ -26,6 +26,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <form method="POST">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -159,11 +160,10 @@
                         </div>
                     </div>
                     <div style="padding: 30px;">
-                    <form method="POST">
                         <div class="form-group" style="display: flex;">
                             <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control inlineBlock" id="conferenceChair_allocatePaperName">
+                                <input type="text" class="form-control inlineBlock" id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName">
                             </div>
                         </div>
                         <div class="form-group">
@@ -187,7 +187,6 @@
 
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocated paper">
-                    </form>
                     </div>
                 </div>
 
@@ -209,7 +208,7 @@
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
-                        <button type="button" id="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" onclick="allocatePaperFunction()">
+                        <button type="submit" id="author_save" name="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                             Confirm save
                         </button>
                     </div>
@@ -265,16 +264,19 @@
                     window.location.replace("../boundary/login_page.php");
                 }
             }
-
-            function allocatePaperFunction(){
-                
-            }
-
             console.log("cookies: "+document.cookie);
         </script>
         <?php
-
+            if(isset($_POST['author_save'])){
+                $controller = new allocatePaperController();
+                $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $_POST['conferenceChair_allocateReviewerName']);
+                /*for($z=0;$z<count($result);$z++){
+                    echo "<script>console.log('$result[$z]');</script>";
+                }*/
+                echo "<script>alert('$result');</script>";
+            }
         ?>
+    </form>
 </body>
 
 </html>

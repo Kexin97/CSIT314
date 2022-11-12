@@ -167,7 +167,27 @@
         }
 
         function allocatePaper(){
+            $validityCheck;
+            $query = "UPDATE `papers` SET reviewerName='" . $this->reviewerName . "' WHERE paperName='" . $this->paperName . "'";
+            $stmt = mysqli_stmt_init($this->conn);
+            $resultMessage;
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
 
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_affected_rows($this->conn);
+
+            if($results == 1){
+                $resultMessage = "Successfully allocated paper with reviewer name";
+            }
+            else{
+                $resultMessage = "failed to allocate paper with reviewer name";
+            }
+
+            return $resultMessage ;
         }
     }
 ?>

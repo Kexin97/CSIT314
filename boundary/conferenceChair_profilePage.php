@@ -79,7 +79,7 @@
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
