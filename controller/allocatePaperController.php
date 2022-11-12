@@ -10,6 +10,12 @@
             $this->result = array();
         }
 
+        public function searchPapers(){
+            $this->result = $this->entity->searchPaperNames();
+
+            return $this->result;
+        }
+
         public function searchAccounts(){
             $this->result = $this->entity->searchReviewerAccount();
 

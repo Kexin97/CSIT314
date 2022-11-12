@@ -162,12 +162,26 @@
                     <div style="padding: 30px;">
                         <div class="form-group" style="display: flex;">
                             <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
-                            <div class="col-sm-4">
+                            <!--div class="col-sm-4">
                                 <input type="text" class="form-control inlineBlock" id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName">
-                            </div>
+                            </div-->
+                            <select id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName" class="form-control select2 col-sm-4 inlineBlock">
+                                <!-- retrieve paper name from db -->
+                                <?php
+                                    require_once("../controller/allocatePaperController.php");
+
+                                    if(isset($_GET["cc"])){
+                                        $controller = new allocatePaperController();
+                                        $result = $controller->searchPapers();
+                                        for($x=0;$x<count($result);$x++){
+                                            echo "<option value='$result[$x]'>$result[$x]</option>";
+                                        }
+                                    }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2 ">Reviewer name</label>
+                            <label class="searchLeft col-sm-2 " style="width:224px;">Reviewer name:</label>
                             <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
                             <select id="conferenceChair_allocateReviewerName" name="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock">
                                 <!-- retrieve reviewer name from db -->
@@ -274,7 +288,9 @@
                     echo "<script>console.log('$result[$z]');</script>";
                 }*/
                 echo "<script>alert('$result');</script>";
-            }
+                //header("Location: conferenceChair_allocatePaperPage.php?cc");
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
+            }  
         ?>
     </form>
 </body>

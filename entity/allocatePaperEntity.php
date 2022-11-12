@@ -105,6 +105,35 @@
             return $this->reviewedStatus;
         }*/
 
+        function searchPaperNames(){
+            $validityCheck;
+            $query = "SELECT * FROM papers";
+            $stmt = mysqli_stmt_init($this->conn);
+            $paperNames = array();
+
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(mysqli_num_rows($results)){
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if(empty($Row["reviewerName"])){
+                            $paperNames[] = $Row["paperName"];
+                        }
+                    }
+                }
+            }
+
+            return $paperNames;
+        }
+
         function searchReviewerAccount(){
             $validityCheck;
             $validityCheck1;
