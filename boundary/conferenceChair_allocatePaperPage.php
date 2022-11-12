@@ -338,17 +338,8 @@
                 $reviewerNamesArray = $controller->searchAccountNames();
                 $reviewerEmailsArray = $controller->searchAccountEmail();
                 $numOfAllocatedPapersArray = $controller->getNumOfAllocatedPapersArray();
-                echo "<script>console.log('ArrayCount: " . count($reviewerNamesArray) . "');</script>";
-                for($x=0; $x<count($reviewerEmailsArray); $x++){
-                    echo "<script> 
-                    console.log('ArrayEmails[$x]: $reviewerEmailsArray[$x]');
-                    </script>";
-                }
+                $result;
                 for($x=0; $x<count($paperNamesArray); $x++){                  
-                    echo "<script> 
-                                console.log('==========================');
-                                console.log('x: $x');
-                            </script>";
                     $lowestReviewNum=$numOfAllocatedPapersArray[0];
                     for($y=0; $y<count($numOfAllocatedPapersArray); $y++){
                         if($lowestReviewNum >= $numOfAllocatedPapersArray[$y]){
@@ -359,15 +350,12 @@
                         if($numOfAllocatedPapersArray[$y] == $lowestReviewNum){
                             $numOfAllocatedPapersArray[$y]++;
                             $result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $numOfAllocatedPapersArray[$y]);
-                            echo "<script> 
-                                console.log('email: " . $reviewerEmailsArray[$y] . "');
-                                console.log('temp: " . $tempNum . "');
-                                console.log('ArrayResult: " . $numOfAllocatedPapersArray[$y] . "');
-                            </script>";
                             break;
                         }
                     }
                 }
+                echo "<script>alert('$result');</script>";
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }  
         ?>
     </form>
