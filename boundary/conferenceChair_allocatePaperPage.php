@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="checkToggle()">
     <form method="POST">
     <div class="wrapper">
         <!-- Preloader -->
@@ -154,12 +154,12 @@
                             Allocated paper</p>
                         <div class="form-group">
                             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" style="float: right;">
-                                <input type="checkbox" class="custom-control-input" id="conferenceChair_allocateAutomatically">
+                                <input type="checkbox" class="custom-control-input" id="conferenceChair_allocateAutomatically" onclick="checkToggle()">
                                 <label class="custom-control-label" for="conferenceChair_allocateAutomatically">Toggle this to swtich allocation to automatically</label>
                             </div>
                         </div>
                     </div>
-                    <div style="padding: 30px;">
+                    <div style="padding: 30px;" id="toggleDisplay" style="display:block">
                         <div class="form-group" style="display: flex;">
                             <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
                             <!--div class="col-sm-4">
@@ -190,7 +190,7 @@
 
                                     if(isset($_GET["cc"])){
                                         $controller = new allocatePaperController();
-                                        $result = $controller->searchAccounts();
+                                        $result = $controller->searchAccountNames();
                                         for($x=0;$x<count($result);$x++){
                                             echo "<option value='$result[$x]'>$result[$x]</option>";
                                         }
@@ -202,8 +202,11 @@
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocated paper">
                     </div>
+                    <div style="padding: 30px;" id="toggleDisplay1" style="display:none">
+                        <!-- insert into database paper detail: paper name, conference, author name, file upload -->
+                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal1" value=" Allocated paper">
+                    </div>
                 </div>
-
             </div>
         </div>
 
@@ -223,6 +226,31 @@
                             Cancel
                         </button>
                         <button type="submit" id="author_save" name="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm save
+                        </button>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addPaperModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add paper?</p>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button> -->
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to save?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="submit" id="author_save1" name="author_save1" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                             Confirm save
                         </button>
                     </div>
@@ -271,11 +299,27 @@
                     theme: 'bootstrap4'
                 });
             });
+
             function signOut(){
                 document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                 var confirmMessage = "Are you sure you want to sign out?";
                 if (confirm(confirmMessage) == true) {
                     window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            function checkToggle(){
+                if(document.getElementById("conferenceChair_allocateAutomatically").checked == true){
+                    console.log("true");
+                    document.getElementById("toggleDisplay").style.display = "none";
+                    document.getElementById("toggleDisplay1").style.display = "block";
+                    document.getElementById("toggleDisplay1").style.visibility = "visible";
+                }
+                else{
+                    console.log("false");
+                    document.getElementById("toggleDisplay").style.display = "block";
+                    document.getElementById("toggleDisplay1").style.display = "none";
+                    document.getElementById("toggleDisplay1").style.visibility = "hidden";
                 }
             }
             console.log("cookies: "+document.cookie);
@@ -290,6 +334,104 @@
                 echo "<script>alert('$result');</script>";
                 //header("Location: conferenceChair_allocatePaperPage.php?cc");
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
+            }  
+            
+            if(isset($_POST['author_save1'])){
+                /*$controller = new allocatePaperController();
+                $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $_POST['conferenceChair_allocateReviewerName']);
+                echo "<script>alert('$result');</script>";
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";*/
+                $controller = new allocatePaperController();
+                $paperNamesArray = $controller->searchPapers();
+                $reviewerNamesArray = $controller->searchAccountNames();
+                $reviewerEmailsArray = $controller->searchAccountEmail();
+                $numOfAllocatedPapersArray = $controller->getNumOfAllocatedPapersArray();
+                echo "<script>console.log('ArrayCount: " . count($reviewerNamesArray) . "');</script>";
+                /*for($x=0; $x<count($paperNamesArray); $x++){
+                    echo "<script> 
+                    console.log('ArrayPaperName[$x]: $paperNamesArray[$x]');
+                    </script>";
+                }
+                for($x=0; $x<count($reviewerNamesArray); $x++){
+                    echo "<script> 
+                    console.log('ArrayReviewerName[$x]: $reviewerNamesArray[$x]');
+                    </script>";
+                }
+                for($x=0; $x<count($numOfAllocatedPapersArray); $x++){
+                    echo "<script> 
+                    console.log('ArrayNum[$x]: $numOfAllocatedPapersArray[$x]');
+                    </script>";
+                }*/
+                
+                for($x=0; $x<count($reviewerEmailsArray); $x++){
+                    echo "<script> 
+                    console.log('ArrayEmails[$x]: $reviewerEmailsArray[$x]');
+                    </script>";
+                }
+                for($x=0; $x<count($paperNamesArray); $x++){                  
+                    echo "<script> 
+                                console.log('==========================');
+                                console.log('x: $x');
+                            </script>";
+                    $lowestReviewNum=$numOfAllocatedPapersArray[0];
+                    for($y=0; $y<count($numOfAllocatedPapersArray); $y++){
+                        if($lowestReviewNum >= $numOfAllocatedPapersArray[$y]){
+                            $lowestReviewNum = $numOfAllocatedPapersArray[$y];
+                            /*echo "<script> 
+                                console.log('num: $numOfAllocatedPapersArray[$y]');
+                                console.log('email: $reviewerEmailsArray[$y]');
+                                console.log('low: $lowestReviewNum');
+                                console.log('==========================');
+                            </script>";*/
+                        }
+                    }
+                    for($y=0; $y<count($numOfAllocatedPapersArray); $y++){                        
+                        if($numOfAllocatedPapersArray[$y] == $lowestReviewNum){
+                            
+                            
+                            /*echo "<script> 
+                                console.log('num: $numOfAllocatedPapersArray[$y]');
+                            </script>";
+                            echo "<script> 
+                                console.log('low: $lowestReviewNum');
+                                console.log('==========================');
+                            </script>";*/
+                            $numOfAllocatedPapersArray[$y]++;
+                            $result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $numOfAllocatedPapersArray[$y]);
+                            //$result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $tempNum);
+                            
+                            /*echo "<script> 
+                                console.log('ArrayPName[$x]: $paperNamesArray[$x]');
+                            </script>";
+                            echo "<script> 
+                                console.log('ArrayRName[$y]: $reviewerNamesArray[$y]');
+                            </script>";
+                            echo "<script> 
+                                console.log('ArrayEmail[$y]: $reviewerEmailsArray[$y]');
+                            </script>";
+                            echo "<script> 
+                                console.log('ArrayAllocated[$y]: " . $tempNum . "');
+                            </script>";*/
+                            
+                            //$numOfAllocatedPapersArray[$y]+1;
+                            echo "<script> 
+                                console.log('email: " . $reviewerEmailsArray[$y] . "');
+                                console.log('temp: " . $tempNum . "');
+                                console.log('ArrayResult: " . $numOfAllocatedPapersArray[$y] . "');
+                            </script>";
+                            break;
+                        }
+                    }
+                    //$result = $controller->assignReviewer($paperName, $reviewerName);
+                }
+                
+                /*echo "<script> 
+                    console.log('LowestNum: $numOfAllocatedPapersArray[0]');
+                    console.log('LowestNum: $numOfAllocatedPapersArray[1]');
+                    console.log('LowestNum: $numOfAllocatedPapersArray[2]');
+                    console.log('LowestNum: $numOfAllocatedPapersArray[3]');
+                    </script>";*/
+                //echo "<script>alert('Nice try');</script>";
             }  
         ?>
     </form>

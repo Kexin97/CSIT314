@@ -16,16 +16,28 @@
             return $this->result;
         }
 
-        public function searchAccounts(){
+        public function searchAccountNames(){
             $this->result = $this->entity->searchReviewerAccount();
 
             return $this->result;
         }
 
-        public function assignReviewer($paperName, $reviewerName){
+        public function searchAccountEmail(){
+            $this->result = $this->entity->searchReviewerEmail();
+
+            return $this->result;
+        }
+
+        public function assignReviewer($paperName, $reviewerName, $reviewerEmail, $numOfAllocatedPapers){
             $this->entity->setPaperName($paperName);
             $this->entity->setReviewerName($reviewerName);
-            $this->result = $this->entity->allocatePaper();
+            $this->result = $this->entity->allocatePaper($paperName, $reviewerName, $reviewerEmail, $numOfAllocatedPapers);
+
+            return $this->result;
+        }
+
+        public function getNumOfAllocatedPapersArray(){
+            $this->result = $this->entity->searchNumOfAllocatedPapers();
 
             return $this->result;
         }

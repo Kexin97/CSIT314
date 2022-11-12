@@ -185,7 +185,7 @@
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
                         for($z=0; $z<count($reviewerAccounts);$z++){
-                            if($Row["account_email"] == $reviewerAccounts[$z]){
+                            if($Row["account_email"] == $reviewerAccounts[$z] && $Row["account_status"] != "inactive"){
                                 $reviewerNames[] = $Row["account_fullName"];
                             }
                         }
@@ -195,11 +195,74 @@
             return $reviewerNames;
         }
 
-        function allocatePaper(){
+        function searchReviewerEmail(){
             $validityCheck;
-            $query = "UPDATE `papers` SET reviewerName='" . $this->reviewerName . "' WHERE paperName='" . $this->paperName . "'";
+            $validityCheck1;
+            $query = "SELECT * FROM account_profile";
+            $stmt = mysqli_stmt_init($this->conn);
+            $reviewerAccounts = array();
+            $reviewerEmails = array();
+
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                $validityCheck = "invalidLogin";
+            }
+            else{
+                $validityCheck = "validLogin";
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if($Row["reviewer_type"] == "reviewer"){
+                            $reviewerAccounts[] = $Row["account_email"];
+                        }
+                    }
+                }
+            }
+
+            $query = "SELECT * FROM `account`";
+            $stmt = mysqli_stmt_init($this->conn);
+            
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                echo "<script>console.log('Failed, error');</script>";
+            }
+            else{
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        for($z=0; $z<count($reviewerAccounts);$z++){
+                            if($Row["account_email"] == $reviewerAccounts[$z] && $Row["account_status"] != "inactive"){
+                                $reviewerEmails[] = $Row["account_email"];
+                            }
+                        }
+                    }
+                }
+            }
+            return $reviewerEmails;
+        }
+
+        function allocatePaper($paperName, $reviewerName, $reviewerEmail, $numOfAllocatedPapers){
+            $validityCheck;
+            $query = "UPDATE `papers` SET reviewerName='" . $reviewerName . "' WHERE paperName='" . $paperName . "'";
             $stmt = mysqli_stmt_init($this->conn);
             $resultMessage;
+            $resultMessage1;
+            $resultMessage2;
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
                 exit();
@@ -216,7 +279,88 @@
                 $resultMessage = "failed to allocate paper with reviewer name";
             }
 
-            return $resultMessage ;
+            $query = "UPDATE `account_profile` SET numOfAllocatedPapers='" . $numOfAllocatedPapers . "' WHERE account_email='" . $reviewerEmail . "'";
+            $stmt = mysqli_stmt_init($this->conn);
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_affected_rows($this->conn);
+
+            if($results == 1){
+                //$resultMessage1 = "successfully updated reviewer allocated paper count";
+                $resultMessage1 = $numOfAllocatedPapers . "/" . $reviewerEmail;
+            }
+            else{
+                //$resultMessage1 = "failed to update reviewer allocated paper count";
+                $resultMessage1 = $numOfAllocatedPapers . "//" . $reviewerEmail;
+            }
+
+            $resultMessage2 = $resultMessage . " AND " . $resultMessage1;
+            return $resultMessage2 ;
+        }
+
+        function searchNumOfAllocatedPapers(){
+            $validityCheck;
+            $query = "SELECT * FROM `account`";
+            $stmt = mysqli_stmt_init($this->conn);
+            $reviewerAccount = array();
+            $reviewNum = array();
+            
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(!mysqli_num_rows($results)){
+                echo "<script>console.log('Failed, error');</script>";
+            }
+            else{
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if($Row["account_status"] != "inactive"){
+                            $reviewerAccount[] = $Row["account_email"];
+                        }                        
+                    }
+                }
+            }
+
+            $query = "SELECT * FROM account_profile";
+            $stmt = mysqli_stmt_init($this->conn);
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $query)){
+                exit();
+            } 
+
+            mysqli_stmt_execute($stmt);
+
+            $results = mysqli_stmt_get_result($stmt);
+
+            if(mysqli_num_rows($results)){
+                $qGet = $this->conn->query($query);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        for($x=0; $x< count($reviewerAccount); $x++){
+                            if($Row["account_email"] == $reviewerAccount[$x] && $Row["reviewer_type"] == "reviewer"){
+                                if($Row["numOfAllocatedPapers"] == ""){
+                                    $reviewNum[] = 0;
+                                }
+                                else{
+                                    $reviewNum[] = $Row["numOfAllocatedPapers"];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return $reviewNum;
         }
     }
 ?>
