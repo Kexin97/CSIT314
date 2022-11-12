@@ -291,12 +291,10 @@
             $results = mysqli_affected_rows($this->conn);
 
             if($results == 1){
-                //$resultMessage1 = "successfully updated reviewer allocated paper count";
-                $resultMessage1 = $numOfAllocatedPapers . "/" . $reviewerEmail;
+                $resultMessage1 = "successfully updated reviewer allocated paper count";
             }
             else{
-                //$resultMessage1 = "failed to update reviewer allocated paper count";
-                $resultMessage1 = $numOfAllocatedPapers . "//" . $reviewerEmail;
+                $resultMessage1 = "failed to update reviewer allocated paper count";
             }
 
             $resultMessage2 = $resultMessage . " AND " . $resultMessage1;
