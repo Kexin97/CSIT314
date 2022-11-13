@@ -456,6 +456,10 @@
                 clear: both;
             }
             
+            .select2-selection--single {
+                height: 38px !important;
+            }
+            
             .author_viewPaperAddRating {
                 font-size: 12px;
             }
