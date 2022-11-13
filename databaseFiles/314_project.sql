@@ -73,6 +73,29 @@ INSERT INTO `account_profile` (`profile_ID`, `account_email`, `reviewer_type`, `
 (3, 'a', '', 'author', '', ''),
 (4, 'assda@gmail.com', 'reviewer', 'author', '', 'userAdmin');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paper`
+--
+
+CREATE TABLE `paper` (
+  `paper_ID` int(255) NOT NULL,
+  `paper_name` varchar(999) NOT NULL,
+  `conference` varchar(999) NOT NULL,
+  `author` varchar(999) NOT NULL,
+  `paper_file` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `paper`
+--
+
+INSERT INTO `paper` (`paper_ID`,`paper_name`,`conference`,`author`,`paper_file`) VALUES
+(1, 'test1', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/5.Testing.pdf'),
+(2, 'test2', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/6.CI-CD.pdf'),
+(3, 'test3', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/7.DevOps.pdf');
+
 --
 -- Indexes for dumped tables
 --
@@ -90,6 +113,12 @@ ALTER TABLE `account_profile`
   ADD PRIMARY KEY (`profile_ID`);
 
 --
+-- Indexes for table `paper`
+--
+ALTER TABLE `paper`
+  ADD PRIMARY KEY (`paper_ID`);
+  
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -104,6 +133,12 @@ ALTER TABLE `account`
 --
 ALTER TABLE `account_profile`
   MODIFY `profile_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  
+--
+-- AUTO_INCREMENT for table `paper`
+--
+ALTER TABLE `paper`
+  MODIFY `paper_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

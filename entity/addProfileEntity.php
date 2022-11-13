@@ -70,7 +70,7 @@
 					
 					$this->data = $data;
 					return $this->data;
-				}	
+				}
                 $SQLCheckP = "SELECT * FROM account WHERE account_email = '$this->account_email'";
                 $qCheckP = $this->conn->query($SQLCheckP);
                 if(($res = $qCheckP->num_rows) == 0){  

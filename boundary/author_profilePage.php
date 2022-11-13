@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Reviewer</title>
+    <title>Author</title>
     <style>
         div {
             height: auto;
@@ -43,6 +43,36 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <!-- <i class="fa-solid fa-bell"></i> -->
+                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
+
+                        <!-- retrieve number of email notification-->
+                        <span class="author_notiNo" class="author_noOfEmailNoti"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">
+                                 <!-- retrieve number of email notification-->
+                                <span class="author_noOfEmailNoti">
+                                    
+                                </span> Notifications
+                        </span>
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <!-- retrieve number of email notification-->
+                            <span class="author_noOfEmailNoti">
+                                    
+                                </span> new emails
+                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -67,10 +97,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="platform_name">
                     <span class="platform_name brand-image-xs logo-xl">
-                        Reviewer Patform
+                        Author Patform
                     </span>
                     <span class="platform_name brand-image-xl logo-xs" id="platformShort_name">
-                        Rev
+                        Aut
                     </span>
                 </div>
 
@@ -78,43 +108,35 @@
 
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
-                        <!-- <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_home_icon.svg"></i>
-                                <p class="navHeader">
-                                    Home
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewPaperPage.html" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
+                            <a href="author_addPaperPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Add paper
                                 </p>
                             </a>
 
                         </li>
-                        <!-- <li class="nav-item active">
-                            <a href="reviewer_addBidPage.html" class="nav-link">
-                                <i class="nav-icon"><img src="../img/add.svg"></i>
+                        <li class="nav-item active">
+                            <a href="author_searchPaperPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Add bid
+                                    Search paper
                                 </p>
                             </a>
 
-                        </li> -->
+                        </li>
                         <li class="nav-item active">
-                            <a href="reviewer_viewBidPage.html" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
+                            <a href="author_emailPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
-                                    View bid
+                                    View email
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profilePage.html" class="nav-link ">
+                            <a href="author_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -137,84 +159,82 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper. Doctor Home Page -->
+
+        <!-- Content Wrapper-->
         <div class="content-wrapper ">
-            <!-- <div class="col-12">
-                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View review & rating </p>
-                    </div>
-
-                    <div class="card-body">
-                        <div>
-                            <p class="searchLeft">Enter paper name: </p>
-                            <input type="search" id="author_searchEnterPaperName" class="form-control form-control-lg">
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div> -->
-
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View review & rating </p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
-                    <div class="card-body">
-                        <table id="reviewer_viewPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Paper ID</th>
-                                    <th>Paper Name</th>
-                                    <th>Author name</th>
-                                    <th>Add review & rating</th>
-                                    <th>View review & rating Update</th>
+                    <div id="settings" style="padding: 30px;">
+                        <form class="form-horizontal">
+                            <!--<div class="form-group row">
+                                <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
+                                <div class="col-sm-4">
+                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
+                                </div>
+                            </div>-->
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper id -->
-                                        12345678
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper name -->
-
-                                        PaperA
-                                    </td>
-                                    <td>
-                                        <!-- retrieve author name -->
-
-                                        author
-                                    </td>
-                                    <td>
-                                        <a href="reviewer_addRatingReviewPage.html">
-                                            <button type="button" class="detail_action_btn">
-                                            Add
-                                        </button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="reviewer_viewDetailUpdatePaperPage.html">
-                                            <button type="button" class="detail_action_btn">
-                                            View Detail
-                                        </button>
-                                        </a>
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author password -->
+                                    <input type="password" class="form-control" id="author_profilePassword">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="adminName" class="col-sm-2 col-form-label">Author Name:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author name -->
+                                    <p class="form-control" id="author_profileName" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author gender -->
+                                    <p class="form-control" id="author_profileGender" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author age -->
+                                    <p class="form-control" id="author_profileAge" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author contact number -->
+                                    <input type="tel" class="form-control" id="author_profileContact">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author email -->
+                                    <input type="email" class="form-control " id="author_profileEmail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-4">
+                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -231,29 +251,12 @@
     <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
     <script>
-        $(".nav .nav-link ").on("click ", function() {
-            $(".nav ").find(".active ").removeClass("active ");
-            $(this).addClass("active ");
-        });
-
-        $(document).ready(function() {
-            $('#reviewer_viewPaper').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
-            //Initialize Select2 Elements
-            $('.select2').select2();
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            });
+        $(".nav .nav-link").on("click", function() {
+            $(".nav").find(".active").removeClass("active");
+            $(this).addClass("active");
         });
     </script>
+
 </body>
 
 </html>
