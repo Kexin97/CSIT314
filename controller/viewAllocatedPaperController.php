@@ -1,5 +1,5 @@
 <?php
-    require_once("../entity/allocatePaperEntity.php");
+    require_once("../entity/viewAllocatedPaperEntity.php");
 
     class viewAllocatedPaperController{
         protected $entity;
@@ -10,8 +10,10 @@
             $this->result = array();
         }
 
-        function viewAllocatedPapers(){
-            
+        function viewAllocatedPapersController(){
+            $this->result = $this->entity->viewAllocatedPapers();
+
+            return $this->result;
         }
     }
 ?>
