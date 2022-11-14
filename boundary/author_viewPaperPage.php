@@ -187,8 +187,8 @@
         <div class="content-wrapper">
             <!-- <section class="content">
                 <div class="container-fluid"> -->
-            <div class="col-12" style="display: flex;">
-                <div class="col-md-5">
+            <div class="col-12">
+                <div class="col-12">
                     <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
@@ -253,7 +253,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-7" id="author_viewRevRatContainer">
+                <div class="col-12">
                     <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
