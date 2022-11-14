@@ -440,7 +440,7 @@
                                 <!-- retrieve author name from db -->
 							<?php 
 								$authorSel = explode(",",$list[0]["author"] );
-								/* for($i=0; $i<count($alist);$i++){
+								 for($i=0; $i<count($alist);$i++){
 									for($j=0;$j<count($authorSel);$j++){
 										if($alist[$i]["account_email"]== $_COOKIE["accountEmail"] && $authorSel[$j]==$_COOKIE["accountEmail"]){
 											break;
@@ -455,23 +455,23 @@
 										}
 										
 									}
-								} */
+								} 
 								
-								for($i=0;$i<count($authorSel);$i++){
-									if (in_array($authorSel[0],$alist["account_email"])){
-										echo "<option>assa in list</option>";
-									}
-									else{
-										echo "<option>assa not in list</option>";
-									}
+								// for($i=0;$i<count($authorSel);$i++){
+								// 	if (in_array($authorSel[0],$alist["account_email"])){
+								// 		echo "<option>assa in list</option>";
+								// 	}
+								// 	else{
+								// 		echo "<option>assa not in list</option>";
+								// 	}
 									
-								}
+								// }
 							?>
 						</select>
                     </div>
 					<p>
-                    <p for="exampleInputFile">Upload paper:</p>
-                    <div class="form-group">
+                    <p for="exampleInputFile" class="searchLeft">Upload paper:</p>
+                    <div class="detail">
 
                         <div class="input-group">
                             <div class="custom-file">
