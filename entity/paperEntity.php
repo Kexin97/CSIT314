@@ -19,12 +19,12 @@
             //$this->conn = mysqli_connect($this->servername,$this->username,$this->password,$this->database_name);
 
             $this->conn = $conn;
-            $this->$paper_ID = "";
-			$this->$paper_name = "";
-			$this->$conference = "";
-			$this->$author = "";
-			$this->$paper_file = "";
-			$this->$data = array();
+            $this->paper_ID = "";
+			$this->paper_name = "";
+			$this->conference = "";
+			$this->author = "";
+			$this->paper_file = "";
+			$this->data = array();
 			
         }
 		
