@@ -177,18 +177,17 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search paper</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper</p>
                     </div>
 
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <div>
                             <p class="searchLeft">Enter paper name: </p>
-                            <!-- search User ID -->
                             <input type="search" id="author_searchEnterPaperName" class="form-control form-control-lg">
                             <button type="submit" class="btn btn-outline-primary search_button">search</button>
                         </div>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-12">
