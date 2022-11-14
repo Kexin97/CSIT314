@@ -136,7 +136,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="author_profilePage.php" class="nav-link ">
+                            <a href="author_profilePage.php" class="nav-link active">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile

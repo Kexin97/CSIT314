@@ -133,7 +133,7 @@
 
                         </li>
                         <li class="nav-item active">
-                            <a href="author_emailPage.php" class="nav-link">
+                            <a href="author_emailPage.php" class="nav-link active">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     View email
