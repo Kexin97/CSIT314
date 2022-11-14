@@ -6,7 +6,7 @@
         protected $result;
 
         function __construct(){
-            $this->entity = new Paper();
+            $this->entity = new allocatePaper();
             $this->result = array();
         }
 
@@ -16,34 +16,26 @@
             return $this->result;
         }
 
-        public function searchAccountNames(){
-            $this->result = $this->entity->searchReviewerAccount();
+        public function getBidderDetails(){
+            $this->result = $this->entity->bidReviewerNames();
 
             return $this->result;
         }
 
-        public function searchAccountEmail(){
-            $this->result = $this->entity->searchReviewerEmail();
+        public function getBidderWorkload(){
+            $this->result = $this->entity->bidReviewerWorkload();
 
             return $this->result;
         }
 
-        public function assignReviewer($paperName, $reviewerName, $reviewerEmail, $numOfAllocatedPapers){
-            $this->entity->setPaperName($paperName);
-            $this->entity->setReviewerName($reviewerName);
-            $this->result = $this->entity->allocatePaper($paperName, $reviewerName, $reviewerEmail, $numOfAllocatedPapers);
+        public function getBidderCurrentWorkload(){
+            $this->result = $this->entity->getBidderCurrentWorkload();
 
             return $this->result;
         }
 
-        public function getNumOfAllocatedPapersArray(){
-            $this->result = $this->entity->searchNumOfAllocatedPapers();
-
-            return $this->result;
-        }
-
-        public function getReviewerDetails($reviewerName){
-            $this->result = $this->entity->searchReviewerDetails($reviewerName);
+        public function assignReviewer($paperName, $bidderName, $bidderEmail){
+            $this->result = $this->entity->allocatePaper($paperName, $bidderName, $bidderEmail);
 
             return $this->result;
         }

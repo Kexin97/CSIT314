@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" onload="checkToggle()">
+<body class="hold-transition sidebar-mini layout-fixed" onload="checkToggle();">
     <form method="POST">
     <div class="wrapper">
         <!-- Preloader -->
@@ -91,7 +91,7 @@
                             <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Allocated paper
+                                    Allocate paper
                                 </p>
                             </a>
                         </li>
@@ -151,7 +151,7 @@
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 0; background-color: white;">
                         <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
-                            Allocated paper</p>
+                            Allocate paper</p>
                         <div class="form-group">
                             <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" style="float: right;">
                                 <input type="checkbox" class="custom-control-input" id="conferenceChair_allocateAutomatically" onclick="checkToggle()">
@@ -161,12 +161,13 @@
                     </div>
                     <div style="padding: 30px;" id="toggleDisplay" style="display:block">
                         <div class="form-group" style="display: flex;">
-                            <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
+                            <label for="inputPaperName" class="searchLeft col-sm-2" style="width:230px;">Paper name:</label>
                             <!--div class="col-sm-4">
                                 <input type="text" class="form-control inlineBlock" id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName">
                             </div-->
-                            <select id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName" class="form-control select2 col-sm-4 inlineBlock">
+                            <select id="conferenceChair_allocatePaperName" name="conferenceChair_allocatePaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="getBidderInfo()">
                                 <!-- retrieve paper name from db -->
+                                <option selected disabled>Select paper name</option>
                                 <?php
                                     require_once("../controller/allocatePaperController.php");
 
@@ -183,37 +184,31 @@
                         <div class="form-group">
                             <label class="searchLeft col-sm-2 " style="width:224px;">Reviewer name:</label>
                             <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="conferenceChair_allocateReviewerName" name="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock">
+                            <select id="conferenceChair_allocateReviewerName" name="conferenceChair_allocateReviewerName" class="form-control select2 col-sm-4 inlineBlock" onchange="checkBidderLoadInfo()">
                                 <!-- retrieve reviewer name from db -->
-                                <?php
-                                    require_once("../controller/allocatePaperController.php");
 
-                                    if(isset($_GET["cc"])){
-                                        $controller = new allocatePaperController();
-                                        $result = $controller->searchAccountNames();
-                                        for($x=0;$x<count($result);$x++){
-                                            echo "<option value='$result[$x]'>$result[$x]</option>";
-                                        }
-                                    }
-                                ?>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label class="searchLeft col-sm-2 " style="width:230px;">Preferred workload:</label><input type="text" id="reviewerPreferredWorkload" class="form-control col-sm-4 inlineBlock" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="searchLeft col-sm-2 " style="width:230px;">Current workload:</label><input type="text" id="reviewerCurrentWorkload" class="form-control col-sm-4 inlineBlock" disabled>
+                        </div>
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value=" Allocate paper">
                     </div>
                     <div style="padding: 30px;" id="toggleDisplay1" style="display:none">
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2 " style="width:224px;">Reviewer name:</label>
-                            <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="conferenceChair_allocateReviewerNameAll" name="conferenceChair_allocateReviewerNameAll" class="form-control select2 col-sm-4 inlineBlock">
-                                <!-- retrieve reviewer name from db -->
+                            <label class="searchLeft col-sm-2 " style="width:224px;">Paper name:</label>
+                            <select id="conferenceChair_allocateReviewerNameAuto" name="conferenceChair_allocateReviewerNameAuto" class="form-control select2 col-sm-4 inlineBlock">
+                                <option selected disabled>Select paper name</option>
                                 <?php
                                     require_once("../controller/allocatePaperController.php");
 
                                     if(isset($_GET["cc"])){
                                         $controller = new allocatePaperController();
-                                        $result = $controller->searchAccountNames();
+                                        $result = $controller->searchPapers();
                                         for($x=0;$x<count($result);$x++){
                                             echo "<option value='$result[$x]'>$result[$x]</option>";
                                         }
@@ -222,9 +217,7 @@
                             </select>
                         </div>
                         <!-- insert into database paper detail: paper name, conference, author name, file upload -->
-                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal1" value=" Allocate paper">
-                        </br><br><text style="margin-left:70px">OR</text></br></br>
-                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal2" value=" Allocate evenly">
+                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal1" value=" Allocate papers">
                     </div>
                 </div>
             </div>
@@ -279,32 +272,10 @@
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="addPaperModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add paper?</p>
-                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> -->
-                    </div>
-                    <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to allocate papers evenly to all reviewers?</p>
-                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>
-                        <button type="submit" id="author_save2" name="author_save2" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm allocation
-                        </button>
-                    </div>
-                    <div class="modal-footer" style="border: none;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -367,55 +338,155 @@
                     document.getElementById("toggleDisplay1").style.visibility = "hidden";
                 }
             }
-            console.log("cookies: "+document.cookie);
+
+            function setCookie(nameCookie, valueCookie, timeCookie){
+                const date = new Date();
+                date.setTime(date.getTime() +  (timeCookie * 24 * 60 * 60 * 1000));
+                let expires = "expires=" + date.toUTCString();
+                document.cookie = `${nameCookie}=${valueCookie}; ${expires}; path=/`
+            }
+
+            function getCookie(name){
+                const cDecoded = decodeURIComponent(document.cookie);
+                const cArray = cDecoded.split("; ");
+                let result = null;
+                
+                cArray.forEach(element => {
+                    if(element.indexOf(name) == 0){
+                        result = element.substring(name.length + 1)
+                    }
+                })
+                return result;
+            }
+            
+            var allBiddedPapers = [];
+            var allBidderNames = [];
+            var allBidderEmails = [];
+            var biddersNamesForCurrentPapers = [];
+            var biddersEmailsForCurrentPapers = [];
+            function getBidderInfo(){
+                allBiddedPapers = [];
+                allBidderNames = [];
+                allBidderEmails = [];
+                biddersNamesForCurrentPapers = [];
+                biddersEmailsForCurrentPapers = [];
+                var test = "<?php $controller = new allocatePaperController();?>";
+                var test2 = "<?php $result1 = $controller->getBidderDetails();?>";
+                
+                var getBiddedPaperCount = "<?php echo count($result1[0])?>";
+                var getBiddedPaperArray = "<?php $arrayPaper_to_json = json_encode(($result1[0]))?>"
+                var getReviewerNamesArray = "<?php $arrayName_to_json = json_encode(($result1[1]))?>"
+                var getReviewerEmailsArray = "<?php $arrayEmail_to_json = json_encode(($result1[2]))?>"
+
+                var fromPHP = <?php echo $arrayPaper_to_json ?>;
+                var fromPHP1 = <?php echo $arrayName_to_json ?>;
+                var fromPHP2 = <?php echo $arrayEmail_to_json ?>;
+                for(var x=0; x<getBiddedPaperCount; x++){
+                    allBiddedPapers.push(fromPHP[x]);
+                    allBidderNames.push(fromPHP1[x]);
+                    allBidderEmails.push(fromPHP2[x]);
+                }
+                for(var x=0; x<allBiddedPapers.length; x++){
+                    if(allBiddedPapers[x] == document.getElementById('conferenceChair_allocatePaperName').value){
+                        biddersNamesForCurrentPapers.push(allBidderNames[x]);
+                        biddersEmailsForCurrentPapers.push(allBidderEmails[x]);
+                    }
+                }
+                //remove all reviewer names from select
+                $("#conferenceChair_allocateReviewerName").empty();
+                //add reviewer names to select
+                var selectCounter = 0;
+                for(var x=0; x<biddersNamesForCurrentPapers.length;x++){
+                    var option = document.createElement("option");
+                    var optionText = biddersNamesForCurrentPapers[x];
+                    var optionValue = biddersEmailsForCurrentPapers[x] + "|" + biddersNamesForCurrentPapers[x];
+                    var select = document.getElementById("conferenceChair_allocateReviewerName");
+                    $('#conferenceChair_allocateReviewerName').append(new Option(optionText, optionValue));
+                }
+                checkBidderLoadInfo();
+            }
+
+            var bidderPreferredLoad = [];
+            var allBidderCurrentLoad = [];
+            var allAccountEmails = [];
+            function checkBidderLoadInfo(){
+                var selectedReviewer = document.getElementById("conferenceChair_allocateReviewerName").value;
+                var splitArray = selectedReviewer.split("|");
+                var selectedReviewerEmail = splitArray[0];
+                var selectedReviewerName = splitArray[1];
+                console.log(selectedReviewerEmail);
+                console.log(selectedReviewerName);
+                var preferredLoad = document.getElementById("reviewerPreferredWorkload");
+                var currentLoad = document.getElementById("reviewerCurrentWorkload");
+                preferredLoad.value = "";
+                currentLoad.value = "";
+                bidderPreferredLoad = [];
+                allAccountEmails = [];
+                allBidderCurrentLoad = [];
+                var bidderCurrentLoadCount = 0;
+                var test = "<?php $controller = new allocatePaperController();?>";
+                var test2 = "<?php $result1 = $controller->getBidderWorkload();?>";
+
+                var getBiddedAccountCount = "<?php echo count($result1[0])?>";
+                var getPreferredLoadArray = "<?php $arrayPreferredLoad_to_json = json_encode(($result1[0]))?>"
+                var getBidderEmailArray = "<?php $arrayBidderEmail_to_json = json_encode(($result1[1]))?>"
+
+                var fromPHP = <?php echo $arrayPreferredLoad_to_json ?>;
+                var fromPHP2 = <?php echo $arrayBidderEmail_to_json ?>;
+                for(var x=0; x<getBiddedAccountCount; x++){
+                    bidderPreferredLoad.push(fromPHP[x]);
+                    allAccountEmails.push(fromPHP2[x]);
+                }
+                var test2 = "<?php $currentLoadResult = $controller->getBidderCurrentWorkload();?>";
+                var getBidTotalCount = "<?php echo count($currentLoadResult[0])?>";
+                var getPreferredLoadArray = "<?php $arrayCurrentLoad_to_json = json_encode(($currentLoadResult[0]))?>"
+
+                var fromPHP3 = <?php echo $arrayCurrentLoad_to_json ?>;
+                for(var x=0; x<getBidTotalCount; x++){
+                    allBidderCurrentLoad.push(fromPHP3[x]);
+                }
+                for(var x=0; x<allBidderCurrentLoad.length; x++){
+                    if(allBidderCurrentLoad[x] == selectedReviewerEmail){
+                        bidderCurrentLoadCount++;
+                    }
+                }
+                for(var x=0; x<allBidderEmails.length; x++){
+                    if(allBidderEmails[x] == selectedReviewerEmail){
+                        preferredLoad.value = bidderPreferredLoad[x];
+                        currentLoad.value = bidderCurrentLoadCount;
+                        break;
+                    }
+                }
+            }
+
         </script>
         <?php
             if(isset($_POST['author_save'])){
                 $controller = new allocatePaperController();
-                $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $_POST['conferenceChair_allocateReviewerName']);
-                echo "<script>alert('$result');</script>";
-                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
-            }  
-
-            if(isset($_POST['author_save1'])){
-                $controller = new allocatePaperController();
-                $paperNamesArray = $controller->searchPapers();
-                $reviewerDetails = $controller->getReviewerDetails($_POST['conferenceChair_allocateReviewerNameAll']);
-                $result;
-                for($z=0; $z<count($paperNamesArray); $z++){
-                    //echo "<script>console.log('$reviewerDetails[$z]');</script>";
-                    $tempNum = $reviewerDetails[1] + $z + 1;
-                    $result = $controller->assignReviewer($paperNamesArray[$z], $_POST['conferenceChair_allocateReviewerNameAll'], $reviewerDetails[0], $tempNum);
+                $explodeOption = explode('|', $_POST['conferenceChair_allocateReviewerName']);
+                $result = $controller->assignReviewer($_POST['conferenceChair_allocatePaperName'], $explodeOption[1], $explodeOption[0]);
+                if($result["allocationResult"] == TRUE){
+                    if($result["statusResult"] == TRUE){
+                        echo "<script>alert('Successfully allocated paper');</script>";
+                    }
+                    else{
+                        $fail2 = $result["statusErrorMsg"];
+                        echo "<script>alert('Successfully allocated paper but $fail2');</script>";
+                    }
                 }
-                echo "<script>alert('$result');</script>";
+                else{
+                    $fail1 = $result["allocationErrorMsg"];
+                    $fail2 = $result["statusErrorMsg"];
+                    echo '<script> alert("Errors: ' . $fail . ' and ' . $fail2 . '"); </script>';
+                }
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }
-            
-            if(isset($_POST['author_save2'])){
-                $controller = new allocatePaperController();
-                $paperNamesArray = $controller->searchPapers();
-                $reviewerNamesArray = $controller->searchAccountNames();
-                $reviewerEmailsArray = $controller->searchAccountEmail();
-                $numOfAllocatedPapersArray = $controller->getNumOfAllocatedPapersArray();
-                $result;
-                for($x=0; $x<count($paperNamesArray); $x++){                  
-                    $lowestReviewNum=$numOfAllocatedPapersArray[0];
-                    for($y=0; $y<count($numOfAllocatedPapersArray); $y++){
-                        if($lowestReviewNum >= $numOfAllocatedPapersArray[$y]){
-                            $lowestReviewNum = $numOfAllocatedPapersArray[$y];
-                        }
-                    }
-                    for($y=0; $y<count($numOfAllocatedPapersArray); $y++){                        
-                        if($numOfAllocatedPapersArray[$y] == $lowestReviewNum){
-                            $numOfAllocatedPapersArray[$y]++;
-                            $result = $controller->assignReviewer($paperNamesArray[$x], $reviewerNamesArray[$y], $reviewerEmailsArray[$y], $numOfAllocatedPapersArray[$y]);
-                            break;
-                        }
-                    }
-                }
-                echo "<script>alert('$result');</script>";
-                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
-            }  
+            //echo "<script>document.writeln(p1);</script>";
+            //echo $_POST['paperName'];
+            /*if(isset($_POST['paperName'])){
+                echo "<script>alert('LMAO');</script>";
+            }
+            echo "<script>console.log(document.getElementById('conferenceChair_allocatePaperName').value)</script>";*/
         ?>
     </form>
 </body>
