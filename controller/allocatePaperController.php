@@ -39,5 +39,11 @@
 
             return $this->result;
         }
+
+        public function allocatePapersAuto($paperName){
+            $this->result = $this->entity->autoAllocatePapers($paperName);
+
+            return $this->result;
+        }
     }
 ?>

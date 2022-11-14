@@ -156,7 +156,7 @@
                 $data["allocationErrorMsg"] = "Failed to allocate paper";
             }
 
-            $this->data = $data;
+            
 
             $SQLInsert = "UPDATE papersbid SET " . "allocationStatus = 'allocated'" . 
                         "WHERE account_email = '$bidderEmail' AND paperName = '$paperName'";
@@ -168,6 +168,8 @@
                 $data["statusResult"] = FALSE;
                 $data["statusErrorMsg"] = "failed to update allocation status";
             }
+
+            $this->data = $data;
 
             return $data;
         }
@@ -197,6 +199,52 @@
 
             $totalOccurences = array_count_values($currentWorkLoad);
             return array($currentWorkLoad);
+        }
+
+        function autoAllocatePapers($paperName){
+            $SQLSelect = "SELECT * FROM papersbid WHERE allocationStatus!='allocated'";
+            $stmt = mysqli_stmt_init($this->conn);
+            $currentWorkLoad = array();
+            
+            //Exit if failed to connect to DB
+            if(!mysqli_stmt_prepare($stmt, $SQLSelect)){
+                exit();
+            } 
+            
+            mysqli_stmt_execute($stmt);
+            $results = mysqli_stmt_get_result($stmt);
+            if(mysqli_num_rows($results)){
+            $qGet = $this->conn->query($SQLSelect);
+                if(($res = $qGet->num_rows) > 0){
+                    while(($Row = $qGet->fetch_assoc()) !== NULL){
+                        if($Row['paperName'] == $paperName){
+                            $SQLUpdate = "UPDATE papersbid SET " . "allocationStatus = 'allocated' WHERE paperName='$paperName'";
+                            $qUpdate = $this->conn->query($SQLUpdate);
+                            if($qUpdate == TRUE){   
+                                $data["statusResult"] = TRUE;
+                            }    
+                            else{
+                                $data["statusResult"] = FALSE;
+                                $data["statusErrorMsg"] = "failed to update allocation status";
+                            }
+                            $query = "INSERT INTO bidwinner(paperName, bidWinnerName, bidWinnerEmail, 
+                                    bidWinnerRating, bidWinnerReview)" .
+                                    "VALUES ('$paperName', '". $Row['reviewerName'] ."', '" . $Row['account_email'] ."',
+                                    '', '')";
+                            $qInsert = $this->conn->query($query);
+                            if($qInsert == TRUE){   
+                                $data["allocationResult"] = TRUE;
+                            }    
+                            else{
+                                $data["allocationResult"] = FALSE;
+                                $data["allocationErrorMsg"] = "Failed to allocate paper";
+                            }
+                        }
+                    }
+                }
+            }
+            $this->data = $data;
+            return $data;
         }
     }
 ?>

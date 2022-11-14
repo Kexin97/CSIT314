@@ -201,7 +201,7 @@
                     <div style="padding: 30px;" id="toggleDisplay1" style="display:none">
                         <div class="form-group">
                             <label class="searchLeft col-sm-2 " style="width:224px;">Paper name:</label>
-                            <select id="conferenceChair_allocateReviewerNameAuto" name="conferenceChair_allocateReviewerNameAuto" class="form-control select2 col-sm-4 inlineBlock">
+                            <select id="conferenceChair_allocatePaperNameAuto" name="conferenceChair_allocatePaperNameAuto" class="form-control select2 col-sm-4 inlineBlock">
                                 <option selected disabled>Select paper name</option>
                                 <?php
                                     require_once("../controller/allocatePaperController.php");
@@ -259,7 +259,7 @@
                             </button> -->
                     </div>
                     <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to allocate all papers to this reviewer?</p>
+                        <p class="deleteText">Are you sure you want to allocate to all bidders of this paper?</p>
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
@@ -477,16 +477,30 @@
                 else{
                     $fail1 = $result["allocationErrorMsg"];
                     $fail2 = $result["statusErrorMsg"];
-                    echo '<script> alert("Errors: ' . $fail . ' and ' . $fail2 . '"); </script>';
+                    echo '<script> alert("Errors: ' . $fail1 . ' and ' . $fail2 . '"); </script>';
                 }
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }
-            //echo "<script>document.writeln(p1);</script>";
-            //echo $_POST['paperName'];
-            /*if(isset($_POST['paperName'])){
-                echo "<script>alert('LMAO');</script>";
+
+            if(isset($_POST['author_save1'])){
+                $controller = new allocatePaperController();
+                $result = $controller->allocatePapersAuto($_POST['conferenceChair_allocatePaperNameAuto']);
+                if($result["allocationResult"] == TRUE){
+                    if($result["statusResult"] == TRUE){
+                        echo "<script>alert('Successfully allocated paper');</script>";
+                    }
+                    else{
+                        $fail2 = $result["statusErrorMsg"];
+                        echo "<script>alert('Successfully allocated paper but $fail2');</script>";
+                    }
+                }
+                else{
+                    $fail1 = $result["allocationErrorMsg"];
+                    $fail2 = $result["statusErrorMsg"];
+                    echo '<script> alert("Errors: ' . $fail1 . ' and ' . $fail2 . '"); </script>';
+                }
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }
-            echo "<script>console.log(document.getElementById('conferenceChair_allocatePaperName').value)</script>";*/
         ?>
     </form>
 </body>
