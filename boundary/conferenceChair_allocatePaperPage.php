@@ -108,7 +108,7 @@
                             <a href="conferenceChair_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Update paper status
                                 </p>
                             </a>
                         </li>
