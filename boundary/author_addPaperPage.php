@@ -127,7 +127,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="author_addPaperPage.php" class="nav-link active">
+                            <a href="author_addPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Add paper
@@ -139,7 +139,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Search paper
                                 </p>
                             </a>
 
@@ -199,9 +199,18 @@
                             <select id="author_addConference" name="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
                             <!-- retrieve conference name from db -->
 							<option value="">--Select a conference--</option>
-							<?php for($i = 0; $i < count($clist); $i++): ?>
-								<?php echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "'>" . $clist[$i]["account_email"]; ?></option>
-								<?php endfor; ?> 
+								<?php 
+									for($i = 0; $i < count($clist); $i++){ 
+										if($clist[$i]["account_email"]== $_COOKIE["accountEmail"]){
+													//do nothing
+										}
+										else{
+											echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "'>" . $clist[$i]["account_email"]."</option>";
+										}
+										
+									}
+								?></option>
+								
                             
                             </select>
                         </div>
@@ -209,11 +218,18 @@
 
                             <label class="searchLeft col-sm-2 ">Other author: </label>
                             <select id="author_addAuthorName" name="author_addAuthorName[]" class="form-control select2 col-sm-4 inlineBlock" multiple="multiple">
-                                <!-- retrieve author name from db -->
-								<?php for($i = 0; $i < count($alist); $i++): ?>
-								<?php echo "<option value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]; ?></option>
-								<?php endfor; ?>
-
+							<!-- retrieve author name from db -->
+							<?php 
+								for($i = 0; $i < count($alist); $i++){ 
+										if($alist[$i]["account_email"]== $_COOKIE["accountEmail"]){
+													//do nothing
+										}
+										else{
+											echo "<option name='author_addConference' value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
+										}
+										
+								}
+							?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -222,8 +238,8 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <!-- save the file upload in db -->
-                                        <label class="custom-file-label" for="author_addPaperUploadFile">Choose file</label>
-                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile" name="author_addPaperUploadFile" accept=".pdf">
+                                        <label class="custom-file-label" for="author_addPaperUploadFile" name="uploadFile" id="uploadFile">Choose file</label>
+                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile" onchange="getFile()" name="author_addPaperUploadFile" accept=".pdf">
                                     </div>
                                     
                                 </div>
@@ -311,6 +327,12 @@
             }
 
             console.log("cookies: "+document.cookie);
+			
+			function getFile(){
+			var x = document.getElementById("author_addPaperUploadFile");
+			var filename = x.files.item(0).name;
+			document.getElementById("uploadFile").innerHTML = filename;
+			}
         </script>
 		<?php
 		require("../controller/addPaperController.php");
@@ -349,6 +371,7 @@
         function displayFail($fail) {
         echo '<script> alert("Failed to add paper: ' . $fail . '"); </script>';
         }
+		
 		
 		
 		?>

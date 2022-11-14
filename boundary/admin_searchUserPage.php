@@ -135,7 +135,7 @@
                             <a href="admin_searchUserPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View user
+                                    Search user
                                 </p>
                             </a>
                         </li>
@@ -143,7 +143,7 @@
                             <a href="admin_searchUserProfilePage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                View user profile
+                                    Search user profile
                                 </p>
                             </a>
                         </li>
@@ -178,7 +178,7 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View User</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search User</p>
                     </div>
 
                     <!--<div class="card-body">
@@ -457,7 +457,7 @@
             $('#searchUserTable').DataTable({
                 "paging": true,
                 "lengthChange": true,
-                "searching": false,
+                "searching": true,
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,

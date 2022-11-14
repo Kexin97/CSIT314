@@ -49,6 +49,18 @@
 					$this->data = $data;
 					return $this->data;
 				}
+				
+				//make the paper name unique 
+				$SQLCheckP = "SELECT * FROM paper WHERE paper_name = '$this->paper_name'";
+                $qCheckP = $this->conn->query($SQLCheckP);
+				if(($res = $qCheckP->num_rows) > 0)
+				{
+					$data["result"] = FALSE;
+					$data["errorMsg"] = "Paper name exist";
+					
+					$this->data = $data;
+					return $this->data;
+				}
 				else{
 					//file dir
 					$targetDir = "../databaseFiles/paper/";
@@ -77,8 +89,7 @@
 								
 							}
 							
-							$this->data = $data;
-							return $this->data;
+							
 						}
 						else{
 							$data["result"] = FALSE;
@@ -90,6 +101,8 @@
 						$data["errorMsg"] = "Only pdf paper is allowed" ;
 					}
 					
+					$this->data = $data;
+					return $this->data;
 				
 				}
 				
@@ -160,5 +173,98 @@
             return $data;
 		}
 
+		public function updatePaperDetail($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename){
+			$this->paper_ID = $paper_ID;
+			$this->paper_name = $paper_name;
+            $this->paper_conference = $paper_conference;
+			$this->paper_author = $paper_author;
+			$this->paper_filename = $paper_filename;
+			
+			try
+            {   
+				
+				if(empty($this->paper_name) || empty($this->paper_conference)){	
+					$data["result"] = FALSE;
+					$data["errorMsg"] = "Please fill in all fields";
+					
+					$this->data = $data;
+					return $this->data;
+				}
+				
+				if(empty($this->paper_filename)){
+					$SQLUpdate = "UPDATE paper 
+										SET paper_name = '$this->paper_name',
+											conference = '$this->paper_conference',
+											author = '$this->paper_author'
+										WHERE paper_ID = '$this->paper_ID'";
+					$qUpdate = $this->conn->query($SQLUpdate);
+					
+					if($qUpdate == TRUE){   
+						$data["result"] = TRUE;
+					}    
+					else{
+						$data["result"] = FALSE;
+						$data["errorMsg"] = "1st update " ;
+					}
+							
+					$this->data = $data;
+					return $this->data;
+				}
+				else{
+					//file dir
+					$targetDir = "../databaseFiles/paper/";
+					$folder = $targetDir . $this->paper_name.".pdf";
+					$tmp_file = $_FILES["author_addPaperUploadFile"]["tmp_name"];
+					
+					$paper_ex = pathinfo($paper_filename, PATHINFO_EXTENSION);
+					$paper_ex_lc = strtolower($paper_ex);
+		
+					$allowed_exs = array("pdf"); 
+		
+					if (in_array($paper_ex_lc, $allowed_exs)) {
+						if(move_uploaded_file($tmp_file, $folder)){
+						
+							//update database when everything is okay
+							$SQLUpdate = "UPDATE paper 
+										SET paper_name = '$this->paper_name',
+											conference = '$this->paper_conference',
+											author = '$this->paper_author',
+											paper_file = '$folder'
+										WHERE paper_ID = '$this->paper_ID'";
+							$qUpdate = $this->conn->query($SQLUpdate);
+							
+							if($qUpdate == TRUE){   
+								$data["result"] = TRUE;
+							}    
+							else{
+								$data["result"] = FALSE;
+								$data["errorMsg"] = "Cannot create paper " ;
+							}
+						}
+						else{
+							$data["result"] = FALSE;
+							$data["errorMsg"] = "Paper upload failed " ;
+						}
+					}
+					else{
+						$data["result"] = FALSE;
+						$data["errorMsg"] = "Only pdf paper is allowed" ;
+					}
+					
+					$this->data = $data;
+					return $this->data;
+				
+				}
+				
+			}
+			catch(mysqli_sql_exception $e){
+                //To ensure that the instance variables is empty if there is an error detected
+                $this->paper_name = "";
+                $this->paper_conference = "";
+				$this->paper_author = "";
+            }
+		}
+		
+		
 	}
 ?>
