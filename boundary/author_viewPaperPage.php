@@ -146,7 +146,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search paper
+                                View paper
                                 </p>
                             </a>
 
@@ -187,8 +187,8 @@
         <div class="content-wrapper">
             <!-- <section class="content">
                 <div class="container-fluid"> -->
-            <div class="col-12" style="display: flex;">
-                <div class="col-md-5">
+            <div class="col-12">
+                <div class="col-12">
                     <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
@@ -253,7 +253,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-7" id="author_viewRevRatContainer">
+                <div class="col-12">
                     <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
@@ -440,7 +440,7 @@
                                 <!-- retrieve author name from db -->
 							<?php 
 								$authorSel = explode(",",$list[0]["author"] );
-								/* for($i=0; $i<count($alist);$i++){
+								 for($i=0; $i<count($alist);$i++){
 									for($j=0;$j<count($authorSel);$j++){
 										if($alist[$i]["account_email"]== $_COOKIE["accountEmail"] && $authorSel[$j]==$_COOKIE["accountEmail"]){
 											break;
@@ -455,23 +455,23 @@
 										}
 										
 									}
-								} */
+								} 
 								
-								for($i=0;$i<count($authorSel);$i++){
-									if (in_array($authorSel[0],$alist["account_email"])){
-										echo "<option>assa in list</option>";
-									}
-									else{
-										echo "<option>assa not in list</option>";
-									}
+								// for($i=0;$i<count($authorSel);$i++){
+								// 	if (in_array($authorSel[0],$alist["account_email"])){
+								// 		echo "<option>assa in list</option>";
+								// 	}
+								// 	else{
+								// 		echo "<option>assa not in list</option>";
+								// 	}
 									
-								}
+								// }
 							?>
 						</select>
                     </div>
 					<p>
-                    <p for="exampleInputFile">Upload paper:</p>
-                    <div class="form-group">
+                    <p for="exampleInputFile" class="searchLeft">Upload paper:</p>
+                    <div class="detail">
 
                         <div class="input-group">
                             <div class="custom-file">
