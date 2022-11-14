@@ -89,7 +89,7 @@
                             <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search allocated paper
+                                    View allocated paper
                                 </p>
                             </a>
                         </li>
@@ -97,7 +97,7 @@
                             <a href="conferenceChair_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search paper
+                                    View paper
                                 </p>
                             </a>
                         </li>
@@ -140,7 +140,7 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search allocated paper</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
                     </div>
 
                     <div class="card-body">

@@ -1,5 +1,5 @@
 <?php
-    class searchAllocatedPaper{
+    class viewAllocatedPaper{
         protected $conn = NULL;
         protected $paperID;
         protected $paperName;

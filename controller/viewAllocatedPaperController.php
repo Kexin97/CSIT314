@@ -1,16 +1,16 @@
 <?php
     require_once("../entity/allocatePaperEntity.php");
 
-    class searchAllocatedPaperController{
+    class viewAllocatedPaperController{
         protected $entity;
         protected $result;
 
         function __construct(){
-            $this->entity = new searchAllocatedPaper();
+            $this->entity = new viewAllocatedPaper();
             $this->result = array();
         }
 
-        function searchAllocatedPapers(){
+        function viewAllocatedPapers(){
             
         }
     }

@@ -99,7 +99,7 @@
                             <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search allocated paper
+                                    View allocated paper
                                 </p>
                             </a>
                         </li>
@@ -108,7 +108,7 @@
                             <a href="conferenceChair_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search paper
+                                    View paper
                                 </p>
                             </a>
                         </li>
@@ -476,8 +476,17 @@
                 }
                 else{
                     $fail1 = $result["allocationErrorMsg"];
-                    $fail2 = $result["statusErrorMsg"];
-                    echo '<script> alert("Errors: ' . $fail1 . ' and ' . $fail2 . '"); </script>';
+                    $fail3 = $result["statusErrorMsg"];
+                    if($fail1 == ""){
+                        $fail1 = "There is nothing to allocate";
+                    }
+                    if($fail3 == "" && $result["statusResult"] == FALSE){
+                        $fail3 = "there is nothing to update";
+                    }
+                    else{
+                        $fail3 = "updated allocation status";
+                    }
+                    echo '<script> alert("Errors: ' . $fail1 . " and " . $fail3 . '"); </script>';
                 }
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }
@@ -496,8 +505,17 @@
                 }
                 else{
                     $fail1 = $result["allocationErrorMsg"];
-                    $fail2 = $result["statusErrorMsg"];
-                    echo '<script> alert("Errors: ' . $fail1 . ' and ' . $fail2 . '"); </script>';
+                    $fail3 = $result["statusErrorMsg"];
+                    if($fail1 == ""){
+                        $fail1 = "There is nothing to allocate";
+                    }
+                    if($fail3 == "" && $result["statusResult"] == FALSE){
+                        $fail3 = "there is nothing to update";
+                    }
+                    else{
+                        $fail3 = "updated allocation status";
+                    }
+                    echo '<script> alert("Errors: ' . $fail1 . " and " . $fail3 . '"); </script>';
                 }
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
             }
