@@ -127,7 +127,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="author_addPaperPage.php" class="nav-link">
+                            <a href="author_addPaperPage.php" class="nav-link active">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Add paper
