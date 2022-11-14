@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Author</title>
+    <title>Conference Chair</title>
     <style>
         div {
             height: auto;
@@ -43,34 +43,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <!-- <i class="fa-solid fa-bell"></i> -->
-                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
-                        <span class="sss">15</span>
-
-
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">
-                            <span id="author_noOfEmailNoti">
-                                4
-                            </span> Notifications
-                        </span>
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.html" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span id="author_noOfEmailNoti">
-                                4
-                            </span> new emails
-                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.html" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -95,10 +67,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="platform_name">
                     <span class="platform_name brand-image-xs logo-xl">
-                        Author Patform
+                        Conference Chair Patform
                     </span>
                     <span class="platform_name brand-image-xl logo-xs" id="platformShort_name">
-                        Aut
+                        CC
                     </span>
                 </div>
 
@@ -115,34 +87,41 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="author_addPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Add paper
+                                    Allocated paper
                                 </p>
                             </a>
-
                         </li>
                         <li class="nav-item active">
-                            <a href="author_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/search.svg"></i>
+                                <p class="navHeader">
+                                    Search allocated paper
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a href="conferenceChair_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     Search paper
                                 </p>
                             </a>
-
                         </li>
                         <li class="nav-item active">
-                            <a href="author_emailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
-                                    View email
+                                    Send email
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="author_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -151,12 +130,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <div class="nav-link" style="cursor:pointer" onclick="signOut()">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
                                 </p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                     <!--<img src="img/nav_bk.svg" id="nav_bk" />-->
@@ -171,57 +150,9 @@
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 0; background-color: white;">
                         <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
-                            Add paper</p>
+                            Send Email</p>
                     </div>
                     <div style="padding: 30px;">
-                        <div class="form-group" style="display: flex;">
-                            <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control inlineBlock" id="author_paperName">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="searchLeft col-sm-2 ">Select conference </label>
-                            <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
-                            <!-- retrieve conference name from db -->
-                            <option> </option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-
-                            <label class="searchLeft col-sm-2 ">Select author </label>
-                            <select id="author_addAuthorName" class="form-control select2 col-sm-4 inlineBlock" multiple="multiple">
-                                <!-- retrieve author name from db -->
-                                <option> </option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="searchLeft col-sm-2" for="author_addPaperUploadFile">Upload paper:</label>
-                            <div class="col-sm-4 inlineBlock">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <!-- save the file upload in db -->
-                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile">
-                                        <label class="custom-file-label" for="author_addPaperUploadFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- insert into database paper detail: paper name, conference, author name, file upload -->
-                        <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value="Add Paper">
 
                     </div>
                 </div>
@@ -229,30 +160,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="addPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
 
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add paper?</p>
-                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> -->
-                    </div>
-                    <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to save?</p>
-                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>
-                        <button type="button" id="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
-                        </button>
-                    </div>
-                    <div class="modal-footer" style="border: none;">
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- ./wrapper -->
         <!-- jQuery -->
@@ -293,7 +201,15 @@
                     theme: 'bootstrap4'
                 });
             });
-            console.log(document.cookie);
+            function signOut(){
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                var confirmMessage = "Are you sure you want to sign out?";
+                if (confirm(confirmMessage) == true) {
+                    window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            console.log("cookies: "+document.cookie);
         </script>
 </body>
 

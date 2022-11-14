@@ -127,10 +127,10 @@
             }
             else if ($loginType == "conferenceChair"){
                 $new_url = "../boundary/conferenceChair_allocatePaperPage.php";
-                echo '<script>window.location.href="'.$new_url.'";</script>';
+                echo '<script>window.location.href="'.$new_url.'?cc";</script>';
             }
             else if ($loginType == "author"){
-                $new_url = "../boundary/author_addPaperPage.php";
+                $new_url = "../boundary/author_addPaperPage.html";
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "reviewer"){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 04:25 PM
+-- Generation Time: Nov 12, 2022 at 03:03 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -45,8 +45,8 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`account_ID`, `account_password`, `account_fullName`, `account_sex`, `account_age`, `account_contact`, `account_email`, `account_status`) VALUES
 (1, 'potatopopcorn', 'potato popcorn', 'F', '99', '98765432', 'potatopopcorn314@gmail.com', 'active'),
 (2, 'lucas', 'lucas lee', 'M', '99', '91239122', 'lucasleeht@gmail.com', 'active'),
-(3, 'b', 'a', 'M', '23', '91239999', 'assda@gmail.com', 'active'),
-(4, '123', 'bababa', 'M', '78', '09121290', 'bab@gmail.com', 'Inactive');
+(3, 'b', 'b', 'M', '23', '91239999', 'assda@gmail.com', 'inactive'),
+(4, '123', 'bababa', 'M', '78', '09121290', 'bab@gmail.com', 'active');
 
 -- --------------------------------------------------------
 
@@ -60,41 +60,47 @@ CREATE TABLE `account_profile` (
   `reviewer_type` varchar(999) NOT NULL,
   `author_type` varchar(999) NOT NULL,
   `conferenceChair_type` varchar(999) NOT NULL,
-  `userAdmin_type` varchar(999) NOT NULL
+  `userAdmin_type` varchar(999) NOT NULL,
+  `numOfAllocatedPapers` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account_profile`
 --
 
-INSERT INTO `account_profile` (`profile_ID`, `account_email`, `reviewer_type`, `author_type`, `conferenceChair_type`, `userAdmin_type`) VALUES
-(1, 'potatopopcorn314@gmail.com', '', '', '', 'userAdmin'),
-(2, 'lucasleeht@gmail.com', 'reviewer', 'author', '', 'userAdmin'),
-(3, 'a', '', 'author', '', ''),
-(4, 'assda@gmail.com', 'reviewer', 'author', '', 'userAdmin');
+INSERT INTO `account_profile` (`profile_ID`, `account_email`, `reviewer_type`, `author_type`, `conferenceChair_type`, `userAdmin_type`, `numOfAllocatedPapers`) VALUES
+(1, 'potatopopcorn314@gmail.com', 'reviewer', '', '', 'userAdmin', 5),
+(2, 'lucasleeht@gmail.com', 'reviewer', 'author', 'conferenceChair', 'userAdmin', 4),
+(3, 'assda@gmail.com', 'reviewer', 'author', '', '', 1),
+(4, 'bab@gmail.com', 'reviewer', 'author', '', 'userAdmin', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paper`
+-- Table structure for table `papers`
 --
 
-CREATE TABLE `paper` (
-  `paper_ID` int(255) NOT NULL,
-  `paper_name` varchar(999) NOT NULL,
+CREATE TABLE `papers` (
+  `paperID` int(255) NOT NULL,
+  `paperName` varchar(999) NOT NULL,
   `conference` varchar(999) NOT NULL,
-  `author` varchar(999) NOT NULL,
-  `paper_file` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `authorName` varchar(999) NOT NULL,
+  `paperRating` varchar(999) NOT NULL,
+  `paperReview` varchar(999) NOT NULL,
+  `reviewedStatus` varchar(999) NOT NULL,
+  `reviewerName` varchar(999) NOT NULL,
+  `paperStatus` varchar(999) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `paper`
+-- Dumping data for table `papers`
 --
 
-INSERT INTO `paper` (`paper_ID`,`paper_name`,`conference`,`author`,`paper_file`) VALUES
-(1, 'test1', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/5.Testing.pdf'),
-(2, 'test2', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/6.CI-CD.pdf'),
-(3, 'test3', 'potatopopcorn314@gmail.com', 'assda@gmail.com', '../databaseFiles/paper/7.DevOps.pdf');
+INSERT INTO `papers` (`paperID`, `paperName`, `conference`, `authorName`, `paperRating`, `paperReview`, `reviewedStatus`, `reviewerName`, `paperStatus`) VALUES
+(1, 'Paper Name 1', '', 'Author Name 1', '', '', 'unreviewed', '', ''),
+(2, 'Paper Name 2', '', 'Author Name 2', '', '', 'unreviewed', '', ''),
+(3, 'Paper Name 3', '', 'Author Name 3', '', '', 'unreviewed', '', ''),
+(4, 'Paper Name 4', '', 'Author Name 4', '', '', 'unreviewed', '', '');
 
 --
 -- Indexes for dumped tables
@@ -113,11 +119,11 @@ ALTER TABLE `account_profile`
   ADD PRIMARY KEY (`profile_ID`);
 
 --
--- Indexes for table `paper`
+-- Indexes for table `papers`
 --
-ALTER TABLE `paper`
-  ADD PRIMARY KEY (`paper_ID`);
-  
+ALTER TABLE `papers`
+  ADD PRIMARY KEY (`paperID`);
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -133,12 +139,12 @@ ALTER TABLE `account`
 --
 ALTER TABLE `account_profile`
   MODIFY `profile_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-  
+
 --
--- AUTO_INCREMENT for table `paper`
+-- AUTO_INCREMENT for table `papers`
 --
-ALTER TABLE `paper`
-  MODIFY `paper_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `papers`
+  MODIFY `paperID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
