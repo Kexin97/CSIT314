@@ -59,37 +59,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <!-- <i class="fa-solid fa-bell"></i> -->
-                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
-
-                        <!-- retrieve number of email notification-->
-                        <span class="author_notiNo" class="author_noOfEmailNoti"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">
-                                 <!-- retrieve number of email notification-->
-                                <span class="author_noOfEmailNoti">
-                                    
-                                </span> Notifications
-                        </span>
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <!-- retrieve number of email notification-->
-                            <span class="author_noOfEmailNoti">
-                                    
-                                </span> new emails
-                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -151,14 +120,6 @@
                             </a>
 
                         </li>
-                        <li class="nav-item active">
-                            <a href="author_emailPage.php" class="nav-link">
-                                <i class="nav-icon"><img src="../img/email.png"></i>
-                                <p class="navHeader">
-                                    View email
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
                             <a href="author_profilePage.php" class="nav-link">
@@ -219,7 +180,7 @@
                                     <!-- retieve author name -->
                                     <label class="author_viewPaperAuthor">
 										<?php 
-										$author = explode(",",$list[0]["author"] );
+										$author = explode(", ",$list[0]["author"] );
 										for($i=0; $i<count($author);$i++){
 											echo $author[$i]."</br>";
 										}
@@ -260,83 +221,85 @@
                             <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
                         </div>
                         <div class="card-body">
-						
-						
-                            <!--<div class="row">
-                                <p class="col-sm-4">Paper rating:</p>
-                                <div class="col-sm-4">
-                                    <!-- retrieve paper rating -->
-                                    <!--<label id="author_viewPaperRating">
-                                                <!-- 2.5 -->
-
-                                            <!--</label>
-                                </div>
-                            </div>-->
-                            <table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-
-                            <thead>
-								<tr>
-                                    <th>Paper rating</th>
-                                    <th>Paper review</th>
-                                    <th>Action</th>
-                                </tr>
-							</thead>
-							<tbody>
-							<tr>
-							<td>123</td>
-							<td style="word-break: break-word;white-space: normal">
-                                         What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
-                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
-                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. 
-                                    </td>
-							<td><button>add review rating</button></td>
-							</tr>
-							</tbody>
+							<table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%;">
+								<thead>
+									<tr>
+										<th>Paper rating</th>
+										<th>Paper review</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>123</td>
+										<td style="word-break: break-word;white-space: normal">
+											 What is a review article? A review article can  
+											 also be called a literature review, or a review 
+											 of literature. It is a survey of previously published
+											 research on a topic. It should give an overview 
+											 of current thinking on the topic. And, unlike an original
+											 research article, it will not present new experimental
+											 results. Writing a review of literature is to provide
+											 a critical evaluation of the data available from existing
+											 studies. Review articles can identify potential research
+											 areas to explore next, and sometimes they will
+											 draw new conclusions from the existing data. 
+										</td>
+										<td><button data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">Add review rating</button></td>
+									</tr>
+								</tbody>
 							</table>
-							
-                            
-                           <!--<div class="card-body table-responsive pad">
-
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary author_viewPaperAddRating active">
-                                                        <input type="radio" id="author_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
-                                                    </label>
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio"  id="author_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
-                                                    </label>
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio"  id="author_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
-                                                    </label>
-
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio" id="author_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
-                                                    </label>
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 <br>(weak reject)
-                                                    </label>
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio" id="author_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
-                                                    </label>
-                                    <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio"  id="author_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
-                                                    </label>
-                                </div>
-                            </div>-->
-                            <!-- insert the review rating select above-->
-                            <button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
-                                                 Add review rating
-                                            </button>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- </div>
-            </section> -->
-
         </div>
     </div>
+	
+	<div class="modal fade" id="addReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:150%;">
+                <div class="modal-header">
 
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add Rating</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+				<div class="modal-body">
+					<div class="card-body table-responsive pad">
+
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary author_viewPaperAddRating active">
+								<input type="radio" id="author_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio"  id="author_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio"  id="author_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio" id="author_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 <br>(weak reject)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio" id="author_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
+							</label>
+							<label class="btn btn-secondary author_viewPaperAddRating">
+								<input type="radio"  id="author_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
+							</label>
+						</div>
+						<button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
+                                                 Add review rating
+                                            </button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <div class="modal fade" id="deletePapereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -348,18 +311,12 @@
                             <span aria-hidden="true">&times;</span>
                         </button> -->
                 </div>
+				<form method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <p>Paper ID:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get paperID from DB-->
-                        <label class="author_deletePaperID">
-                            
-                        </label>
-                    </div>
                     <p>Paper name:&nbsp;</p>
                     <div class="detail">
                         <!-- get userFullName from DB-->
-                        <label class="author_deletePaperName"></label>
+                        <label class="author_deletePaperName"><?php echo $list[0]["paper_name"]; ?></label>
                     </div>
 
                     <p class="deleteText">Deleting this paper mean you would be able to resubmit the correct version.</p>
@@ -368,10 +325,9 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                     </button>
-                    <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm Deletion
-                    </button>
+                    <input type="submit" id="author_confirmDletion" name="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" value="Confirm Deletion">
                 </div>
+				</form>
                 <div class="modal-footer" style="border: none;">
                 </div>
             </div>
@@ -401,6 +357,7 @@
             </div>
         </div>
     </div>
+	
 	<form method="POST" enctype="multipart/form-data">
     <div class="modal fade" id="author_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -574,6 +531,7 @@
     </script>
 	<?php
 		require ("../controller/updatePaperController.php");
+		require ("../controller/deletePaperController.php");
 		
 		if(isset($_POST["author_saveEditPaper"]) && isset ($_FILES["author_updatePaperUploadFile"])){
             $paper_name = $_POST["author_editPaperName"];
@@ -587,7 +545,7 @@
 			//change other_author from array to string
 			foreach ($other_author as $author){
 				if ($author != $_COOKIE["accountEmail"]){
-					$paper_author = $paper_author."," . $author;
+					$paper_author = $paper_author.", " . $author;
 				}
 			}
 			
@@ -602,18 +560,30 @@
 					displaySuccess();
 					echo '<script>window.location.href="../boundary/author_viewPaperPage.php";</script>';
 				}
-			
-				
-			
         }
 
         function displaySuccess() {
-        echo '<script> alert("Paper has been successfully updated."); </script>';
+			echo '<script> alert("Paper has been successfully updated."); </script>';
         }
 
         function displayFail($fail) {
-        echo '<script> alert("Failed to update paper: ' . $fail . '"); </script>';
+			echo '<script> alert("Failed to update paper: ' . $fail . '"); </script>';
         }
+		
+		if(isset($_POST["author_confirmDletion"])){
+			$paper_ID = $_COOKIE["paper_ID"];
+			
+			$controller = new deletePaperController();
+			$result = $controller->deletePaper($paper_ID);
+			if($result["result"] != TRUE){
+				$fail = $result["errorMsg"];
+				echo '<script> alert("Failed to delete paper: ' . $fail . '"); </script>';
+			}
+			else{
+				echo '<script> alert("Paper has been successfully deleted."); </script>';
+				echo '<script>window.location.href="../boundary/author_searchPaperPage.php";</script>';
+			}
+		}
 	?>
 
 </body>
