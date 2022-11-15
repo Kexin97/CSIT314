@@ -130,11 +130,11 @@
                 echo '<script>window.location.href="'.$new_url.'?cc";</script>';
             }
             else if ($loginType == "author"){
-                $new_url = "../boundary/author_addPaperPage.html";
+                $new_url = "../boundary/author_addPaperPage.php";
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "reviewer"){
-                $new_url = "../boundary/reviewer_addRatingReviewPage.html";
+                $new_url = "../boundary/reviewer_addRatingReviewPage.php";
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else{
