@@ -52,6 +52,7 @@
             $allocatedPaperID = array();
             $allocatedPaperName = array();
             $allocatedPaperAuthor = array();
+            $allocatedPaperReviewer = array();
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
                 exit();
@@ -84,6 +85,7 @@
                                             $allocatedPaperAuthor[] = $Row1["authorName"];
                                             $allocatedPaperID[] = $Row["paperID"];
                                             $allocatedPaperName[] = $Row["paperName"]; 
+                                            $allocatedPaperReviewer[] = $Row["reviewerName"];
                                         }
                                     }
                                 }
@@ -92,7 +94,7 @@
                     }
                 }
             }
-            return array($allocatedPaperID, $allocatedPaperName, $allocatedPaperAuthor);
+            return array($allocatedPaperID, $allocatedPaperName, $allocatedPaperAuthor, $allocatedPaperReviewer);
         }
     }
 ?>

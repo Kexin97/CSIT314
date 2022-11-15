@@ -147,7 +147,7 @@
                         <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Paper name:</label>
                         <select id="conferenceChair_viewPaperName" name="conferenceChair_viewPaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="displayTableData()">
                             <!-- retrieve paper name from db -->
-                            <option selected disabled>Select paper name</option>
+                            <option value="">Select paper name</option>
                         </select>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
                                 <tr>
                                     <th>Paper ID</th>
                                     <th>Paper Name</th>
-                                    <th>Author name</th>
-                                    <th>Action</th>
+                                    <th>Author Name</th>
+                                    <th>Reviewer Name</th>
                                 </tr>
                             </thead>
                             <tbody id="displayAllocatedPaperTable" name="displayAllocatedPaperTable">
@@ -176,16 +176,14 @@
                                         <!-- PaperA -->
                                     </td>
                                     <td>
-                                        <!-- retrieve paper reviewed/unreviewed -->
+                                        <!-- retrieve paper author name -->
 
                                         <!-- PaperA -->
                                     </td>
                                     <td>
-                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.php">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
-                                            Details
-                                        </button>
-                                        </a>
+                                        <!-- retrieve paper reviewer name -->
+
+                                        <!-- PaperA -->
                                     </td>
                                 </tr>
 
@@ -241,6 +239,7 @@
         var allPaperID = [];
         var allPaperName = [];
         var allPaperAuthor = [];
+        var allPaperReviewer = [];
         var searchList = [];
         function getAllocatedPapersInfo(){
             <?php require_once("../controller/viewAllocatedPaperController.php"); ?>
@@ -248,6 +247,7 @@
             allPaperID = [];
             allPaperName = [];
             allPaperAuthor = [];
+            allPaperReviewer = [];
             var test = "<?php $controller = new viewAllocatedPaperController();?>";
             var test2 = "<?php $result1 = $controller->viewAllocatedPapersController();?>";
             
@@ -256,14 +256,17 @@
             var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
             var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[1]))?>"
             var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[2]))?>"
+            var getPaperReviewer = "<?php $arrayPaperReviewer_to_json = json_encode(($result1[3]))?>"
 
             var fromPHP = <?php echo $arrayPaperID_to_json ?>;
             var fromPHP1 = <?php echo $arrayPaperName_to_json ?>;
             var fromPHP2 = <?php echo $arrayPaperAuthor_to_json ?>;
+            var fromPHP3 = <?php echo $arrayPaperReviewer_to_json ?>;
             for(var x=0; x<getAllocatedPaperCount; x++){
                 allPaperID.push(fromPHP[x]);
                 allPaperName.push(fromPHP1[x]);
                 allPaperAuthor.push(fromPHP2[x]);
+                allPaperReviewer.push(fromPHP3[x]);
             }
             var tableID = document.getElementById("displayAllocatedPaperTable");
             for(var x=0; x<allPaperID.length; x++){
@@ -274,9 +277,7 @@
                 "<td>"+allPaperID[x]+"</td>" +
                 "<td>"+allPaperName[x]+"</td>" +
                 "<td>"+allPaperAuthor[x]+"</td>" +
-                '<td><a href="conferenceChair_viewDetailAllocatedPaperPage.php">'+
-                    '<button type="button" class="detail_action_btn" data-toggle="modal">'+
-                    'Details</button></a></td>'+
+                "<td>"+allPaperReviewer[x]+"</td>" +
                 "</tr>");
             }
         }
@@ -301,9 +302,7 @@
                     "<td>"+allPaperID[x]+"</td>" +
                     "<td>"+allPaperName[x]+"</td>" +
                     "<td>"+allPaperAuthor[x]+"</td>" +
-                    '<td><a href="conferenceChair_viewDetailAllocatedPaperPage.php">'+
-                        '<button type="button" class="detail_action_btn" data-toggle="modal">'+
-                        'Details</button></a></td>'+
+                    "<td>"+allPaperReviewer[x]+"</td>" +
                     "</tr>");
                 }
             }
