@@ -39,7 +39,7 @@ session_start();*/
         //echo "<br>";echo "<br>";
 		try 
 		{
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
+			$stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");
 			$stmt->execute();
 
 			// set the resulting array to associative
@@ -72,7 +72,21 @@ session_start();*/
 			echo $e->getMessage();
         }
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo $_POST["reviewer_addNoPaperReview"];
 		
+		if (isset($_POST['reviewer_addNoPaperReview']) && ($_POST['reviewer_addNoPaperReview']) != "")
+		{
+			$currentEmail = $_SESSION["reviewer_email"];
+			$reviewer_addNoPaperReview = $_POST['reviewer_addNoPaperReview'];
+			$stmt2 = $conn->prepare("UPDATE account_profile SET maxReviewNumber='$reviewer_addNoPaperReview'
+									WHERE account_email='$currentEmail' ");
+			$stmt2->execute();
+
+			// echo a message to say the UPDATE succeeded
+			echo $stmt2->rowCount() . " records UPDATED successfully";
+		}
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//$conn = null;
         ?>

@@ -184,14 +184,45 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-2">Review:
+                                <p class="col-sm-2">Others Review:
                                     
                                 </p>
                                 <div class="col-sm-10">
-                                    <!-- retieve Review -->
+                                    <!-- retieve other Review -->
 									
-                                    <label class="reviewer_viewPaperReview">
+                                    <label class="reviewer_viewPaperReview_others">
                                                 <!-- reeee -->
+												
+                                            </label>
+                                    <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
+                                                Comment others review
+                
+                                            </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="col-sm-2">Others Rating:
+                                    
+                                </p>
+                                <div class="col-sm-10">
+                                    <!-- retrieve other Rating -->
+									
+                                    <label class="reviewer_viewPaperRating_others">
+                                                <!-- Author1 -->
+												
+                                            </label>
+                                </div>
+                            </div>
+							<div class="row">
+                                <p class="col-sm-2">Self Review:
+                                    
+                                </p>
+                                <div class="col-sm-10">
+                                    <!-- retrieve self Review -->
+									
+                                    <label class="reviewer_viewPaperReview_self">
+                                                <!-- Author1 -->
 												<?php $stmt->execute(); 
 												if ($stmt->fetch()["review"] == null)
 												{
@@ -204,21 +235,16 @@
 												}
 												?>
                                             </label>
-                                    <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
-                                                Comment others review
-                
-                                            </button>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <p class="col-sm-2">Rating:
+							<div class="row">
+                                <p class="col-sm-2">Self Rating:
                                     
                                 </p>
                                 <div class="col-sm-10">
-                                    <!-- retieve Rating -->
+                                    <!-- retrieve self Rating -->
 									
-                                    <label class="reviewer_viewPaperRating">
+                                    <label class="reviewer_viewPaperRating_self">
                                                 <!-- Author1 -->
 												<?php $stmt->execute(); 
 												if ($stmt->fetch()["rating"] == null)
@@ -290,6 +316,7 @@
             </div>
         </div>
     </div>
+	<form method="post" action="reviewer_viewPaperDetail.php">
     <div class="modal fade" id="reviewer_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -316,16 +343,18 @@
                     </div>
                     <p class="searchLeft ">reviewer name</p>
                     <div class="detail ">
-						<?php $stmt->execute(); echo $stmt->fetch()["bidWinner"];?>
-                        <label id="reviewer_editreviewerName"></label>
+						
+                        <label id="reviewer_editreviewerName">
+							<?php $stmt->execute(); echo $stmt->fetch()["bidWinner"];?>
+						</label>
                     </div>
                     <p class="searchLeft ">Enter review</p>
                     <div class="detail ">
-                        <textarea id="reviewer_editReview" rows="10" cols="30"></textarea>
+                        <textarea name ="review" id="reviewer_editReview" rows="10" cols="30"></textarea>
                     </div>
                     <br>
                     <p class=" searchLeft ">Select rating </p>
-                    <div class="col-sm-9">
+                    <div >
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary reviewer_viewPaperAddRating active">
                                                 <input type="radio" id="reviewer_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
@@ -382,15 +411,17 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                    <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+					<input type="submit" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" value="Confirm save">
+                    <!-- <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                         Confirm save
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-footer" style="border: none;">
                 </div>
             </div>
         </div>
     </div>
+	</form>
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>

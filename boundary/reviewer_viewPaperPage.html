@@ -180,24 +180,24 @@
                             <tbody>
                                 <?php 
 								//for ($x = 0; $x < $numOfRows; $x++)
-								foreach(($stmt->fetchAll()) as $v)
+								for ($x = 0; $x < count($paperArray); $x++)
 								{
 									//$stmt->execute([]);
 									echo '
 									<tr>
 										<td>
 											<!-- retrieve paper id -->
-											12345678
-											//echo " echo $cookie_name";
+											' , $idArray[$x] , '
+											
 										</td>
 										<td>
 											<!-- retrieve paper name --> 
-											' , $v["paperName"] , '
+											' , $paperArray[$x] , '
 											<!-- PaperA --> 
 										</td>
 										<td>
 											<!-- retrieve author name -->
-											' , $v["authorName"] , '
+											' , $authorArray[$x] , '
 											<!-- author -->
 										</td> 
 										<td>
@@ -209,7 +209,7 @@
 										</td>
 										<td>
 											<form method="post" action="../boundary/reviewer_viewPaperDetail.php">
-											  <button name="paperName" value="';echo $v["paperName"]; echo '" 
+											  <button name="paperName" value="';echo $idArray[$x]; echo '" 
 											  class="detail_action_btn">View Detail</button>
 											</form>
 											<!-- <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">

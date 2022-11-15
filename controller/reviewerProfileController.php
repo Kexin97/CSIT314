@@ -40,7 +40,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		try 
 		{
 			$stmt = $conn->prepare("SELECT account_fullName, account_sex, account_age FROM account ");
-			$stmt2 = $conn->prepare("SELECT numOfReviews FROM account_profile WHERE account_email=?");
+			$stmt2 = $conn->prepare("SELECT maxReviewNumber FROM account_profile WHERE account_email=?");
 			//$stmt->execute();
 
 			// set the resulting array to associative
@@ -72,15 +72,30 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		{
 			echo $e->getMessage();
         }
-		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		/*if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST['email'];
+			if (isset($_POST['email']) && ($_POST['email']) != "")
+			{
+				$currentEmail = $_SESSION["reviewer_email"];
+				$newEmail = $_POST['email'];
+				$stmt = $conn->prepare("UPDATE account_profile SET account_email='$newEmail'
+										WHERE account_email='$currentEmail' ");
+				$stmt2 = $conn->prepare("UPDATE account SET account_email='$newEmail'
+										WHERE account_email='$currentEmail' ");
+				$_SESSION["reviewer_email"] = $_POST['email'];
+				//$stmt->execute();
+				$stmt2->execute();
+
+				// echo a message to say the UPDATE succeeded
+				echo $stmt->rowCount() . " records UPDATED successfully";
+			}
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST["password"];
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST["number"];
-		}
+		}*/
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";

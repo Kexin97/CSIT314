@@ -21,6 +21,7 @@ session_start();*/
 		<?php
 		include '../entity/reviewerEntity.php';
 		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
+		echo "<br>";
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -41,15 +42,84 @@ session_start();*/
 		try 
 		{
 			//$emailName = $_SESSION["reviewer_email"];
-			$stmt = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");
+			/*$stmt = $conn->prepare("SELECT paperName FROM bidWinner WHERE bidWinnerEmail=? ");	//display viewPaperPg
+			$stmt->execute([$_SESSION["reviewer_email"]]);
+			$stmt2 = $conn->prepare("SELECT paper_ID,author FROM paper WHERE paper_name=? ");
+			$stmt3 = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");
+			foreach(($stmt->fetchAll()) as $v)
+			{
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo $v["paperName"];
+				$stmt2->execute([$v["paperName"]]);
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo $stmt2->fetch()["author"]; 
+				
+				$stmt2->execute([$v["paperName"]]);
+				
+				$bidders = explode(",", $stmt2->fetch()["author"]);
+				$bidderString = "";
+				// foreach ($bidders as $b)
+				// {
+					// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					// $bidderString .= $b . ", ";
+					// echo $b . "22222<br>";
+				// }
+				// echo "end of foreach<br>";
+			}
+			echo "<br>";
+			echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BREAK OF THE CENTURY";
+			echo "<br>";*/
+			
+			$stmt = $conn->prepare("SELECT paperName FROM bidWinner WHERE bidWinnerEmail=? ");	//display viewPaperPg
+			$stmt->execute([$_SESSION["reviewer_email"]]);
+			$stmt2 = $conn->prepare("SELECT paper_ID,author FROM paper WHERE paper_name=? ");
+			$stmt3 = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");
+			foreach(($stmt->fetchAll()) as $v)
+			{
+				// echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				// echo $v["paperName"];
+				
+				$paperArray[] = $v["paperName"];
+				// $stmt2->execute([$v["paperName"]]);
+				// echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				// echo $stmt2->fetch()["author"];
+				$stmt2->execute([$v["paperName"]]);
+				
+				$idArray[] = $stmt2->fetch()["paper_ID"];
+				//$_SESSION["idArray"] = $idArray;	//session var 3, ID array
+				$stmt2->execute([$v["paperName"]]);
+				
+				$authors = explode(",", $stmt2->fetch()["author"]);
+				$authorString = "";
+				foreach ($authors as $b)
+				{
+					echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					$stmt3->execute([$b]);
+					echo $stmt3->fetch()["account_fullName"];
+					echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					$stmt3->execute([$b]);
+					$name = $stmt3->fetch()["account_fullName"];
+					$authorString .= $name . ", ";
+					echo $name . "22222<br>";
+				}
+				echo "end of foreach<br>";
+				
+				
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;###############";
+				echo $authorString;
+				$authorString = substr($authorString, 0, -2);
+				$authorArray[] = $authorString;
+			}
+			
+			/* $stmt = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");	//old view paper pg
 			$stmt->execute([$_SESSION["reviewer_email"]]);
 			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $stmt->fetch()["account_fullName"];
 			
 			$stmt->execute();
 			$bidWinner = $stmt->fetch()["account_fullName"];
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers WHERE bidWinner ='$bidWinner'");
-			$stmt->execute();
+			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers WHERE bidWinner ='$bidWinner'");	//old view paper pg
+			$stmt->execute(); */
 
 			// set the resulting array to associative
 			//$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

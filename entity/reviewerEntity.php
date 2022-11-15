@@ -19,7 +19,64 @@ session_start();*/
 
 
 		<?php
-		
+		class reviewerProfUpdate
+		{
+			
+			function __construct(){}
+			
+			function updateProfile()
+			{
+				global $conn;
+				
+				if ($_SERVER["REQUEST_METHOD"] == "POST")
+				{
+					echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					echo $_POST['email'];
+					
+					//updateProfile();
+					$currentEmail = $_SESSION["reviewer_email"];
+					if (isset($_POST['email']) && ($_POST['email']) != "")
+					{
+						$newEmail = $_POST['email'];
+						$stmt = $conn->prepare("UPDATE account_profile SET account_email='$newEmail'
+												WHERE account_email='$currentEmail' ");
+						$stmt2 = $conn->prepare("UPDATE account SET account_email='$newEmail'
+												WHERE account_email='$currentEmail' ");
+						$_SESSION["reviewer_email"] = $_POST['email'];
+						$stmt->execute();
+						$stmt2->execute();
+
+						// echo a message to say the UPDATE succeeded
+						echo $stmt->rowCount() . " records UPDATED successfully";
+						$currentEmail = $_POST['email'];
+					}
+					if (isset($_POST['number']) && ($_POST['number']) != "")
+					{
+						$newNumber = $_POST['number'];
+						$stmt2 = $conn->prepare("UPDATE account SET account_contact='$newNumber'
+												WHERE account_email='$currentEmail' ");
+						$stmt2->execute();
+
+						// echo a message to say the UPDATE succeeded
+						echo $stmt2->rowCount() . " records UPDATED successfully";
+					}
+					if (isset($_POST['password']) && ($_POST['password']) != "")
+					{
+						$newPassword = $_POST['password'];
+						$stmt2 = $conn->prepare("UPDATE account SET account_password='$newPassword'
+												WHERE account_email='$currentEmail' ");
+						$stmt2->execute();
+
+						// echo a message to say the UPDATE succeeded
+						echo $stmt2->rowCount() . " records UPDATED successfully";
+					}
+					echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					echo $_POST["password"];
+					echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					echo $_POST["number"];
+				}
+			}
+		}
 		
 		$servername = "localhost";
 		$username = "root";
@@ -38,6 +95,7 @@ session_start();*/
 			echo "Connection failed: " . $e->getMessage();
         }
         //echo "<br>";echo "<br>";
+		
 		/*try 
 		{
 			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");

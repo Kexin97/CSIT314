@@ -138,6 +138,32 @@
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Doctor Home Page -->
+		<form method="post" action="reviewer_viewBid.php">
+		<div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save number of review you would like to review?</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to save number of review you would like to review?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+						<input type="submit" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" value="Confirm save">
+                        <!-- <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm save
+                        </button> -->
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="content-wrapper ">
             <!-- <div class="col-12">
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
@@ -176,6 +202,7 @@
                             </div>
                         </div>
                     </div>
+					
                     <div class="card-body">
 
 
@@ -202,11 +229,11 @@
                                     <tr>
                                         <td>
                                             <!-- retrieve paper id -->
-                                            12345678
+                                            ' . $v["paper_ID"] . '
                                         </td>
                                         <td>
                                             <!-- retrieve paper name -->
-											' . $v["paperName"] . '
+											' . $v["paper_name"] . '
                                             <!-- PaperA -->
                                         </td>
                                         <td>
@@ -247,31 +274,9 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save number of review you would like to review?</p>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to save number of review you would like to review?</p>
-                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>
-                        <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
-                        </button>
-                    </div>
-                    <div class="modal-footer" style="border: none;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+		</form>
+		
+        <!--<div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -294,8 +299,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        </div> -->
+		
+        <!-- <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -308,14 +314,14 @@
                     <div class="modal-body">
                         <p>Paper ID:&nbsp;</p>
                         <div class="detail">
-                            <!-- get paperID from DB-->
+                            <!-- get paperID from DB
                             <label class="reviewer_deletePaperID">
                             
                         </label>
                         </div>
                         <p>Paper name:&nbsp;</p>
                         <div class="detail">
-                            <!-- get userFullName from DB-->
+                            <!-- get userFullName from DB
                             <label class="reviewer_deletePaperName"></label>
                         </div>
 
@@ -334,7 +340,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+		
+		
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

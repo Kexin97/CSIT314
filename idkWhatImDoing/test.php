@@ -30,7 +30,11 @@ session_start();
 		
 		$testVar_1 = "testing variable";
 		echo "<br>";
-		include 'lala.html';
+		include 'lala.html';		//include is here <<<<<<<<<<<<<<<<<<
+		echo "<br>";
+		
+		echo "<br>";
+		lala();
 		echo "<br>";
 		
 		echo $_SERVER['PHP_SELF'];
