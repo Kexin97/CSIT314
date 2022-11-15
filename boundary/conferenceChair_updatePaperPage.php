@@ -374,11 +374,11 @@
 
                         </div>
                     </div>
-                    <!-- <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                   <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Back
                         </button>
   
-                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
+                     <!-- <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
                             Save
                         </button> -->
                 </div>
