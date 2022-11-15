@@ -143,7 +143,7 @@
                             <a href="admin_searchUserPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search user
+                                View user
                                 </p>
                             </a>
                         </li>
@@ -151,7 +151,7 @@
                             <a href="admin_searchUserProfilePage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search user profile
+                                View user profile
                                 </p>
                             </a>
                         </li>
@@ -414,9 +414,9 @@
         $(function() {
 
             $('#searchUserProfileTable').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": true,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
