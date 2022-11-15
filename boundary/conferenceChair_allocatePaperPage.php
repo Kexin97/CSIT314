@@ -414,8 +414,6 @@
                 var splitArray = selectedReviewer.split("|");
                 var selectedReviewerEmail = splitArray[0];
                 var selectedReviewerName = splitArray[1];
-                console.log(selectedReviewerEmail);
-                console.log(selectedReviewerName);
                 var preferredLoad = document.getElementById("reviewerPreferredWorkload");
                 var currentLoad = document.getElementById("reviewerCurrentWorkload");
                 preferredLoad.value = "";

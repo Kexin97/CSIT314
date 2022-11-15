@@ -57,7 +57,7 @@
 
         function searchPaperNames(){
             $validityCheck;
-            $query = "SELECT * FROM papers";
+            $query = "SELECT * FROM paper";
             $stmt = mysqli_stmt_init($this->conn);
             $paperNames = array();
             $returnResults;
@@ -74,7 +74,7 @@
                 $qGet = $this->conn->query($query);
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
-                        $paperNames[] = $Row["paperName"];
+                        $paperNames[] = $Row["paper_name"];
                         
                     }
                 }
