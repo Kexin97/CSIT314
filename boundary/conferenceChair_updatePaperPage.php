@@ -347,6 +347,13 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                            <div style="display: flex;">
+                                <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Reviewer name:</label>
+                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 col-sm-4 inlineBlock" onclick="checkWinnerRatingsAndReviews()">
+                                    <!-- retrieve paper name from db -->
+                                    <option value="">Select reviewer name</option>
+                                </select>
+                            </div>
                                 <p class="col-sm-4">Paper rating:</p>
                                 <div class="col-sm-4">
                                     <!-- retrieve paper rating -->
@@ -360,7 +367,7 @@
                                 <p class="col-sm-4">Paper review:</p>
                                 <div class="col-sm-7">
                                     <!-- retrieve the review of paper-->
-                                    <p id="conferenceChair_viewPaperReview">
+                                    <p id="displayPaperReview">
                                         <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
                                                 potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
@@ -418,9 +425,9 @@
             $('#conferenceChair_searchPaper').DataTable({
                 "paging": true,
                 "lengthChange": true,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
-                "info": true,
+                "info": false,
                 "autoWidth": true,
                 "responsive": true,
             });
@@ -440,20 +447,27 @@
         }
 
         var allPaperID = [];
+        var allPaperRating = [];
+        var allPaperReview = [];
         var allPaperName = [];
-        var allPaperAuthor = [];
-        var allPaperConference = [];
-        var allPaperStatus = [];
+        var allPaperEmail= [];
+        var displayPaperName = [];
+        var displayPaperID = [];
+        var displayPaperStatus = [];
+        var displayPaperAuthor = [];
         var searchList = [];
         function getAllocatedPapersInfo(){
             <?php require_once("../controller/updateAllocatedPaperStatusController.php"); ?>
             $("#displayAllocatedPaperTable tr").remove(); 
             allPaperID = [];
+            allPaperRating = [];
+            allPaperReview = [];
             allPaperName = [];
-            allPaperAuthor = [];
-            allPaperConference = [];
-            allPaperStatus = [];
-            
+            allPaperEmail= [];
+            displayPaperName = [];
+            displayPaperID = [];
+            displayPaperStatus = [];
+            displayPaperAuthor = [];
             var test = "<?php $controller = new updateAllocatedPaperStatusController();?>";
             
             var test2 = "<?php $result1 = $controller->viewAllPaper();?>";
@@ -463,33 +477,46 @@
             var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
             var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[1]))?>"
             var getPaperStatus = "<?php $arrayPaperStatus_to_json = json_encode(($result1[2]))?>"
-            var getPaperConference = "<?php $arrayPaperConference_to_json = json_encode(($result1[3]))?>"
-            var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[4]))?>"
+            var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[3]))?>"
+            var getPaperRating = "<?php $arrayPaperRating_to_json = json_encode(($result1[4]))?>"
+            var getPaperReview = "<?php $arrayPaperReview_to_json = json_encode(($result1[5]))?>"
+            var getPaperReviewerName = "<?php $arrayPaperReviewerName_to_json = json_encode(($result1[6]))?>"
+            var getPaperReviewerEmail = "<?php $arrayPaperReviewerEmail_to_json = json_encode(($result1[7]))?>"
 
             var fromPHP = <?php echo $arrayPaperID_to_json ?>;
             var fromPHP1 = <?php echo $arrayPaperName_to_json ?>;
             var fromPHP2 = <?php echo $arrayPaperStatus_to_json ?>;
-            var fromPHP3 = <?php echo $arrayPaperConference_to_json ?>;
-            var fromPHP4 = <?php echo $arrayPaperAuthor_to_json ?>;
-
+            var fromPHP3 = <?php echo $arrayPaperAuthor_to_json ?>;
+            var fromPHP4 = <?php echo $arrayPaperRating_to_json ?>;
+            var fromPHP5 = <?php echo $arrayPaperReview_to_json ?>;
+            var fromPHP6 = <?php echo $arrayPaperReviewerName_to_json ?>;
+            var fromPHP7 = <?php echo $arrayPaperReviewerEmail_to_json ?>;
+            
             for(var x=0; x<getAllocatedPaperCount; x++){
                 allPaperID.push(fromPHP[x]);
-                allPaperName.push(fromPHP1[x]);
-                allPaperStatus.push(fromPHP2[x]);
-                allPaperConference.push(fromPHP3[x]);
-                allPaperAuthor.push(fromPHP4[x]);
+                allPaperRating.push(fromPHP4[x]);
+                allPaperReview.push(fromPHP5[x]);
+                allPaperName.push(fromPHP6[x]);
+                allPaperEmail.push(fromPHP7[x]);
             }
             var tableID = document.getElementById("displayAllocatedPaperTable");
-            for(var x=0; x<allPaperID.length; x++){
-                if(!searchList.includes(allPaperName[x])){
-                    searchList.push(allPaperName[x]);
+            for(var x=0; x<getAllocatedPaperCount; x++){
+                if(!searchList.includes(fromPHP1[x])){
+                    searchList.push(fromPHP1[x]);
+                    displayPaperID.push(fromPHP[x]);
+                    displayPaperName.push(fromPHP1[x]);
+                    displayPaperStatus.push(fromPHP2[x]);
+                    displayPaperAuthor.push(fromPHP3[x]);
                 }
+            }
+            console.log(searchList.length);
+            for(var x=0; x<searchList.length; x++){
                 $("#displayAllocatedPaperTable").append("<tr>"+
-                "<td>"+allPaperID[x]+"</td>" +
-                "<td>"+allPaperName[x]+"</td>" +
-                "<td>"+allPaperStatus[x]+"</td>" +
+                "<td>"+displayPaperID[x]+"</td>" +
+                "<td>"+displayPaperName[x]+"</td>" +
+                "<td>"+displayPaperStatus[x]+"</td>" +
                 '<td>'+
-                '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
+                '<button type="button" class="detail_action_btn" id="' + x  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
                 'Details</button></td>'+
                 "</tr>");
             }
@@ -508,15 +535,15 @@
         function displayTableData(){
             var searchRequirement = document.getElementById("conferenceChair_viewPaperName").value;
             $("#displayAllocatedPaperTable tr").remove(); 
-            for(var x=0; x<allPaperID.length; x++){
-                if(allPaperID[x].includes(searchRequirement) || allPaperName[x].includes(searchRequirement)
-                || allPaperAuthor[x].includes(searchRequirement)){
+            console.log(searchList.length);
+            for(var x=0; x<searchList.length; x++){
+                if(displayPaperName[x].includes(searchRequirement)){
                     $("#displayAllocatedPaperTable").append("<tr>"+
-                    "<td>"+allPaperID[x]+"</td>" +
-                    "<td>"+allPaperName[x]+"</td>" +
-                    "<td>"+allPaperStatus[x]+"</td>" +
+                    "<td>"+displayPaperID[x]+"</td>" +
+                    "<td>"+displayPaperName[x]+"</td>" +
+                    "<td>"+displayPaperStatus[x]+"</td>" +
                     '<td>'+
-                        '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
+                        '<button type="button" class="detail_action_btn" id="' + x  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
                         'Details</button></td>'+
                     "</tr>");
                 }
@@ -526,17 +553,30 @@
         function paperDetails(paperID){
             var tempPaperID = document.getElementById("displayPaperID");
             var tempPaperName = document.getElementById("displayPaperName");
-            var tempPaperConference = document.getElementById("displayPaperConference");
             var tempPaperAuthor = document.getElementById("displayPaperAuthor");
-            console.log(allPaperID[paperID-1]);
-            console.log(allPaperName[paperID-1]);
-            console.log(allPaperConference[paperID-1]);
-            console.log(allPaperAuthor[paperID-1]);
+            var tempPaperRating = document.getElementById("displayPaperRating");
+            var tempPaperReview = document.getElementById("displayPaperReview");
+            /*console.log(displayPaperID[paperID]);
+            console.log(displayPaperName[paperID]);
+            console.log(displayPaperAuthor[paperID]);
+            console.log("Rating: " +allPaperRating[paperID]);
+            console.log("Review: " +allPaperReview[paperID]);*/
+            for(var x=0; x<allPaperID.length; x++){
+                if(paperID == allPaperID[x]){
+                    
+                }
+            }
+            
 
-            tempPaperID.innerHTML = allPaperID[paperID-1];
-            tempPaperName.innerHTML = allPaperName[paperID-1];
-            tempPaperConference.innerHTML = allPaperConference[paperID-1];
-            tempPaperAuthor.innerHTML = allPaperAuthor[paperID-1];
+            tempPaperID.innerHTML = displayPaperID[paperID];
+            tempPaperName.innerHTML = displayPaperName[paperID];
+            tempPaperAuthor.innerHTML = displayPaperAuthor[paperID];
+            tempPaperRating.innerHTML = allPaperRating[paperID];
+            tempPaperReview.innerHTML = allPaperReview[paperID];
+        }
+
+        function checkWinnerRatingsAndReviews(){
+
         }
     </script>
 

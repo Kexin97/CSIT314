@@ -160,8 +160,8 @@
                                 <tr>
                                     <th>Paper ID</th>
                                     <th>Paper Name</th>
-                                    <th>Author Name</th>
-                                    <th>Reviewer Name</th>
+                                    <th>Author Name(s)</th>
+                                    <th>Reviewer Name(s)</th>
                                 </tr>
                             </thead>
                             <tbody id="displayAllocatedPaperTable" name="displayAllocatedPaperTable">
@@ -222,9 +222,9 @@
             $('#conferenceChair_searchAllocatedPaper').DataTable({
                 "paging": true,
                 "lengthChange": true,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
-                "info": true,
+                "info": false,
                 "autoWidth": true,
                 "responsive": true,
             });
