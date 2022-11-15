@@ -10,8 +10,8 @@
             $this->result = array();
         }
 
-        public function updatePaper($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename){
-            $this->result = $this->entity->updatePaperDetail($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename);
+        public function updatePaper($paper_ID, $paper_name,$paper_author,$paper_filename){
+            $this->result = $this->entity->updatePaperDetail($paper_ID, $paper_name,$paper_author,$paper_filename);
 
             return $this->result;
         }

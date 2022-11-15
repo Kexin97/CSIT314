@@ -27,11 +27,10 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <?php
-	//for conferenceList
+	//for authList
 	require("../controller/viewUserController.php");
 
 	$control = new ViewAccountController();
-	$clist = $control->conList();
 	$alist = $control->authList();
 	
 	
@@ -193,27 +192,7 @@
                                 <input type="text" class="form-control inlineBlock" id="author_paperName" name="author_paperName">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="searchLeft col-sm-2 ">Conference: </label>
-                            <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="author_addConference" name="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
-                            <!-- retrieve conference name from db -->
-							<option value="">--Select a conference--</option>
-								<?php 
-									for($i = 0; $i < count($clist); $i++){ 
-										if($clist[$i]["account_email"]== $_COOKIE["accountEmail"]){
-													//do nothing
-										}
-										else{
-											echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "'>" . $clist[$i]["account_email"]."</option>";
-										}
-										
-									}
-								?></option>
-								
-                            
-                            </select>
-                        </div>
+                        
                         <div class="form-group">
 
                             <label class="searchLeft col-sm-2 ">Other author: </label>
@@ -225,7 +204,7 @@
 													//do nothing
 										}
 										else{
-											echo "<option name='author_addConference' value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
+											echo "<option name='author_addAuthorName' value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
 										}
 										
 								}
@@ -245,7 +224,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- insert into database paper detail: paper name, conference, author name, file upload -->
+                        <!-- insert into database paper detail: paper name, author name, file upload -->
                         <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#addPaperModal" value="Add Paper">
 
                     </div>
@@ -339,7 +318,6 @@
 		
         if(isset($_POST["author_save"]) && isset ($_FILES["author_addPaperUploadFile"])){
             $paper_name = $_POST["author_paperName"];
-            $paper_conference = $_POST["author_addConference"];
 			$paper_author = $_COOKIE["accountEmail"];
 			$other_author = $_POST["author_addAuthorName"];
 			$paper_filename = $_FILES["author_addPaperUploadFile"]["name"];
@@ -353,7 +331,7 @@
 			}
 			
 			$controller = new addPaperController();
-			$result = $controller->profileDetails($paper_name, $paper_conference,$paper_author,$paper_filename);
+			$result = $controller->profileDetails($paper_name,$paper_author,$paper_filename);
 				if($result["result"] != TRUE){
 					$fail = $result["errorMsg"];
 					displayFail($fail);
