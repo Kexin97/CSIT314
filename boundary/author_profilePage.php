@@ -26,6 +26,8 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -169,26 +171,17 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
                     <div id="settings" style="padding: 30px;">
-                        <form class="form-horizontal">
-                            <!--<div class="form-group row">
-                                <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
-                                <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
-                                </div>
-                            </div>-->
+                        
 
-                            <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
-                                <div class="col-sm-4">
-                                    <!-- retrieve author password -->
-                                    <input type="password" class="form-control" id="author_profilePassword">
-                                </div>
-                            </div>
+                            
                             <div class="form-group row">
                                 <label for="adminName" class="col-sm-2 col-form-label">Author Name:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve author name -->
                                     <p class="form-control" id="author_profileName" style="border: none; margin-left: -10px;">
+									<?php
+										echo $_COOKIE["accountFullName"];
+									?>
                                     </p>
                                 </div>
                             </div>
@@ -197,6 +190,9 @@
                                 <div class="col-sm-4">
                                     <!-- retrieve author gender -->
                                     <p class="form-control" id="author_profileGender" style="border: none; margin-left: -10px;">
+									<?php
+										echo $_COOKIE["accountSex"];
+									?>
                                     </p>
                                 </div>
                             </div>
@@ -205,6 +201,9 @@
                                 <div class="col-sm-4">
                                     <!-- retrieve author age -->
                                     <p class="form-control" id="author_profileAge" style="border: none; margin-left: -10px;">
+									<?php
+										echo $_COOKIE["accountAge"];
+									?>
                                     </p>
                                 </div>
                             </div>
@@ -212,22 +211,26 @@
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve author contact number -->
-                                    <input type="tel" class="form-control" id="author_profileContact">
+									<p class="form-control" id="author_profileContact" style="border: none; margin-left: -10px;">
+									<?php
+										echo $_COOKIE["accountContact"];
+									?>
+									</p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve author email -->
-                                    <input type="email" class="form-control " id="author_profileEmail">
+									<p class="form-control" id="author_profileEmail" style="border: none; margin-left: -10px;">
+									<?php
+										echo $_COOKIE["accountEmail"];
+									?>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-4">
-                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
-                                </div>
-                            </div>
-                        </form>
+                            
+                        
                     </div>
                 </div>
             </div>

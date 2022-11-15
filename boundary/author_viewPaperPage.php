@@ -146,7 +146,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                View paper
+                                    View paper
                                 </p>
                             </a>
 
@@ -260,35 +260,41 @@
                             <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
+						
+						
+                            <!--<div class="row">
                                 <p class="col-sm-4">Paper rating:</p>
                                 <div class="col-sm-4">
                                     <!-- retrieve paper rating -->
-                                    <label id="author_viewPaperRating">
+                                    <!--<label id="author_viewPaperRating">
                                                 <!-- 2.5 -->
 
-                                            </label>
+                                            <!--</label>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Paper review:</p>
-                                <div class="col-sm-7">
-                                    <!-- retrieve the review of paper-->
-                                    <p id="author_viewPaperReview">
+                            </div>-->
+							<table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%;table-layout:fixed;">
+							<thead>
+								<tr>
+                                    <th>Paper rating</th>
+                                    <th>Paper review</th>
+                                    <th>Action</th>
+                                </tr>
+							</thead>
+							<tbody>
+							<tr>
+							<td>123</td>
+							<td style="display: inline-block;word-break: break-word;">
                                          What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
                                                 potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. 
-                                    </p>
-                                </div>
-                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
-                                            <label for="customRadio3" class="custom-control-label">
-                                            3 (strong accept)</label>
-                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
-                                            <label for="customRadio2" class="custom-control-label">
-                                                2s(accept)</label> -->
-
-                            </div>
-                            <div class="card-body table-responsive pad">
+                                    </td>
+							<td><button>add review rating</button></td>
+							</tr>
+							</tbody>
+							</table>
+							
+                            
+                           <!--<div class="card-body table-responsive pad">
 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-secondary author_viewPaperAddRating active">
@@ -314,7 +320,7 @@
                                                         <input type="radio"  id="author_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
                                                     </label>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- insert the review rating select above-->
                             <button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
                                                  Add review rating
@@ -542,6 +548,15 @@
         });
 
         $(function() {
+			$('#author_PaperRating').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
+            });
             //Initialize Select2 Elements
             $('.select2').select2();
             //Initialize Select2 Elements
