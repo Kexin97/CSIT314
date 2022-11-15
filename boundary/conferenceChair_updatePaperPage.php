@@ -509,14 +509,14 @@
                     displayPaperAuthor.push(fromPHP3[x]);
                 }
             }
-            console.log(searchList.length);
+            
             for(var x=0; x<searchList.length; x++){
                 $("#displayAllocatedPaperTable").append("<tr>"+
                 "<td>"+displayPaperID[x]+"</td>" +
                 "<td>"+displayPaperName[x]+"</td>" +
                 "<td>"+displayPaperStatus[x]+"</td>" +
                 '<td>'+
-                '<button type="button" class="detail_action_btn" id="' + x  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
+                '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
                 'Details</button></td>'+
                 "</tr>");
             }
@@ -543,24 +543,26 @@
                     "<td>"+displayPaperName[x]+"</td>" +
                     "<td>"+displayPaperStatus[x]+"</td>" +
                     '<td>'+
-                        '<button type="button" class="detail_action_btn" id="' + x  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
+                        '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
                         'Details</button></td>'+
                     "</tr>");
                 }
             }
+            
         }
 
         function paperDetails(paperID){
+            console.log(paperID);
             var tempPaperID = document.getElementById("displayPaperID");
             var tempPaperName = document.getElementById("displayPaperName");
             var tempPaperAuthor = document.getElementById("displayPaperAuthor");
             var tempPaperRating = document.getElementById("displayPaperRating");
             var tempPaperReview = document.getElementById("displayPaperReview");
-            /*console.log(displayPaperID[paperID]);
-            console.log(displayPaperName[paperID]);
-            console.log(displayPaperAuthor[paperID]);
-            console.log("Rating: " +allPaperRating[paperID]);
-            console.log("Review: " +allPaperReview[paperID]);*/
+            console.log(displayPaperID[paperID-1]);
+            console.log(displayPaperName[paperID-1]);
+            console.log(displayPaperAuthor[paperID-1]);
+            console.log("Rating: " +allPaperRating[paperID-1]);
+            console.log("Review: " +allPaperReview[paperID-1]);
             for(var x=0; x<allPaperID.length; x++){
                 if(paperID == allPaperID[x]){
                     
@@ -568,11 +570,11 @@
             }
             
 
-            tempPaperID.innerHTML = displayPaperID[paperID];
-            tempPaperName.innerHTML = displayPaperName[paperID];
-            tempPaperAuthor.innerHTML = displayPaperAuthor[paperID];
-            tempPaperRating.innerHTML = allPaperRating[paperID];
-            tempPaperReview.innerHTML = allPaperReview[paperID];
+            tempPaperID.innerHTML = displayPaperID[paperID-1];
+            tempPaperName.innerHTML = displayPaperName[paperID-1];
+            tempPaperAuthor.innerHTML = displayPaperAuthor[paperID-1];
+            tempPaperRating.innerHTML = allPaperRating[paperID-1];
+            tempPaperReview.innerHTML = allPaperReview[paperID-1];
         }
 
         function checkWinnerRatingsAndReviews(){
