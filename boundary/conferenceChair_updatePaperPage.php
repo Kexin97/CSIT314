@@ -254,7 +254,7 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="saveStatus">
                         Confirm save
                     </button>
                 </div>
