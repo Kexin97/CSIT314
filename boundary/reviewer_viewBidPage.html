@@ -138,8 +138,8 @@
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Doctor Home Page -->
-		<form method="post" action="reviewer_viewBid.php">
-		<div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+		<!-- <form method="post" action="reviewer_viewBid.php"> -->
+		<!-- <div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -158,12 +158,12 @@
                         <!-- <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                             Confirm save
                         </button> -->
-                    </div>
+                    <!-- </div>
                     <div class="modal-footer" style="border: none;">
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="content-wrapper ">
             <!-- <div class="col-12">
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
@@ -190,17 +190,22 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View Bid </p>
                     </div>
                     <div class="card-body">
-
+						<form method="post" action="reviewer_viewBid.php">	<!-- form opening 1 -->
                         <div class="row">
+							
                             <label class="searchLeft col-sm-4 ">Number of paper(s) to review</label>
+							
                             <div class="col-sm-4">
                                 <input type="number" class="form-control" id="reviewer_addNoPaperReview" name="reviewer_addNoPaperReview" min="1" max="100" min="1" maxlength="3" maxlength="3">
 
                             </div>
                             <div class="col-sm-2">
-                                <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#saveNoPaperReviewModal" value="Save">
+								<input type="submit" class="detail_action_btn" value="Save">
+                                <!-- <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#saveNoPaperReviewModal" value="Save"> -->
                             </div>
+							
                         </div>
+						</form>	<!-- form closing 1 -->
                     </div>
 					
                     <div class="card-body">
@@ -253,6 +258,10 @@
 
                                             </button>
                                         </a> -->
+											<!-- <form method="post" action="../boundary/reviewer_viewPaperDetail.php">
+											  <button name="paperName" value="';echo $v["paper_name"]; echo '" 
+											  class="detail_action_btn">View Detail</button>
+											</form> -->
                                             <button id="reviewer_addBid" type="button" class="detail_action_btn" data-toggle="modal" data-target="#addBidModal">
                                             Add bid
                                             </button>
@@ -274,7 +283,7 @@
                 </div>
             </div>
         </div>
-		</form>
+		<!-- </form> -->
 		
         <!--<div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">

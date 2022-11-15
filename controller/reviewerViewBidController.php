@@ -4,7 +4,9 @@
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
-session_start();*/
+$_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
+*/
+session_start();
 ?>
 <html>
 	<head>
@@ -37,7 +39,12 @@ session_start();*/
 			echo "Connection failed: " . $e->getMessage();
         }*/
         //echo "<br>";echo "<br>";
-		try 
+		$viewBidObj = new reviewerViewBid();
+		//$_SESSION["viewBidObj"] = serialize($viewBidObj);	//session obj 1, viewBidObj
+		$viewBidObj->viewPapers();
+		$viewBidObj->stmt;
+		
+		/*try 	//	viewPaper()
 		{
 			$stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");
 			$stmt->execute();
@@ -66,11 +73,11 @@ session_start();*/
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        } 
+        /*} 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
+        }*/
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
@@ -87,6 +94,7 @@ session_start();*/
 			// echo a message to say the UPDATE succeeded
 			echo $stmt2->rowCount() . " records UPDATED successfully";
 		}
+		//header("Location: ../boundary/reviewer_viewBid.php");
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//$conn = null;
         ?>

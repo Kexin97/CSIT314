@@ -21,7 +21,7 @@ session_start();
 		<?php
 		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST["reviewer_addNoPaperReview"];
+		//echo $_POST["reviewer_addNoPaperReview"];
 		
 		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
@@ -75,7 +75,10 @@ session_start();
 		{
 			echo $e->getMessage();
         }*/
+		
 		include '../controller/reviewerViewBiDController.php';
+		// $viewBidObj = unserialize($_SESSION["viewBidObj"]);
+		// $viewBidObj->viewPapers();
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		include '../boundary/reviewer_viewBidPage.html';
 		

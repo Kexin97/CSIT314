@@ -19,6 +19,30 @@ session_start();*/
 
 
 		<?php
+		class reviewerViewBid
+		{
+			public $stmt;
+			
+			function __construct(){}
+			
+			function viewPapers()
+			{
+				global $conn;
+				
+				// try 
+				// {
+					$this->stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");
+					//$stmt->execute();
+					
+				// } 
+				// catch(PDOException $e) 
+				// {
+					// echo $e->getMessage();
+				// }
+			}
+			
+		}
+		
 		class reviewerProfUpdate
 		{
 			
