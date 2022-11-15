@@ -52,33 +52,7 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <!-- retrieve number of email notification-->
-                        <span class="author_notiNo" class="author_noOfEmailNoti"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">
-                             <!-- retrieve number of email notification-->
-                            <span class="author_noOfEmailNoti">
-                                
-                            </span> Notifications
-                        </span>
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <!-- retrieve number of email notification-->
-                            <span class="author_noOfEmailNoti">
-                            
-                            </span> new emails
-                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -139,15 +113,7 @@
                                 </p>
                             </a>
 
-                        </li>
-                        <li class="nav-item active">
-                            <a href="author_emailPage.php" class="nav-link">
-                                <i class="nav-icon"><img src="../img/email.png"></i>
-                                <p class="navHeader">
-                                    View email
-                                </p>
-                            </a>
-                        </li>
+                        
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
                             <a href="author_profilePage.php" class="nav-link ">

@@ -3,7 +3,6 @@
         protected $conn = NULL;
         protected $paper_ID;
         protected $paper_name;
-        protected $conference;
         protected $author;
         protected $paper_file;
         protected $data;
@@ -21,7 +20,6 @@
             $this->conn = $conn;
             $this->paper_ID = "";
 			$this->paper_name = "";
-			$this->conference = "";
 			$this->author = "";
 			$this->paper_file = "";
 			$this->data = array();
@@ -33,16 +31,15 @@
         }
 
 		//add new paper
-        public function addPaper($paper_name, $paper_conference, $paper_author, $paper_filename){
+        public function addPaper($paper_name, $paper_author, $paper_filename){
             $this->paper_name = $paper_name;
-            $this->paper_conference = $paper_conference;
 			$this->paper_author = $paper_author;
 			$this->paper_filename = $paper_filename;
 			
 			try
             {   
 				
-				if(empty($this->paper_name) || empty($this->paper_conference) || empty($this->paper_filename)){	
+				if(empty($this->paper_name) || empty($this->paper_filename)){	
 					$data["result"] = FALSE;
 					$data["errorMsg"] = "Please fill in all fields";
 					
@@ -76,8 +73,8 @@
 						if(move_uploaded_file($tmp_file, $folder)){
 						
 							//insert to database when everything is okay
-							$SQLInsert = "INSERT INTO paper(paper_name, conference, author, paper_file) " .
-										"VALUES ('$this->paper_name', '$this->paper_conference', '$this->paper_author', '$folder')";
+							$SQLInsert = "INSERT INTO paper(paper_name, author, paper_file) " .
+										"VALUES ('$this->paper_name', '$this->paper_author', '$folder')";
 							$qInsert = $this->conn->query($SQLInsert);
 							
 							if($qInsert == TRUE){   
@@ -110,7 +107,6 @@
 			catch(mysqli_sql_exception $e){
                 //To ensure that the instance variables is empty if there is an error detected
                 $this->paper_name = "";
-                $this->paper_conference = "";
 				$this->paper_author = "";
             }
 			
@@ -131,7 +127,6 @@
                 {
                     $data[$i]["paper_ID"] = $Row["paper_ID"];
                     $data[$i]["paper_name"] = $Row["paper_name"];
-					$data[$i]["conference"] = $Row["conference"];
 					$data[$i]["author"] = $Row["author"];
 					$data[$i]["paper_file"] = $Row["paper_file"];
 					$data[$i]["result"] = TRUE;
@@ -164,7 +159,6 @@
                 {
                     $data[$i]["paper_ID"] = $Row["paper_ID"];
                     $data[$i]["paper_name"] = $Row["paper_name"];
-					$data[$i]["conference"] = $Row["conference"];
 					$data[$i]["author"] = $Row["author"];
 					$data[$i]["paper_file"] = $Row["paper_file"];
 					
@@ -179,17 +173,16 @@
             return $data;
 		}
 
-		public function updatePaperDetail($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename){
+		public function updatePaperDetail($paper_ID, $paper_name,$paper_author,$paper_filename){
 			$this->paper_ID = $paper_ID;
 			$this->paper_name = $paper_name;
-            $this->paper_conference = $paper_conference;
 			$this->paper_author = $paper_author;
 			$this->paper_filename = $paper_filename;
 			
 			try
             {   
 				
-				if(empty($this->paper_name) || empty($this->paper_conference)){	
+				if(empty($this->paper_name)){	
 					$data["result"] = FALSE;
 					$data["errorMsg"] = "Please fill in all fields";
 					
@@ -200,7 +193,6 @@
 				if(empty($this->paper_filename)){
 					$SQLUpdate = "UPDATE paper 
 										SET paper_name = '$this->paper_name',
-											conference = '$this->paper_conference',
 											author = '$this->paper_author'
 										WHERE paper_ID = '$this->paper_ID'";
 					$qUpdate = $this->conn->query($SQLUpdate);
@@ -233,7 +225,6 @@
 							//update database when everything is okay
 							$SQLUpdate = "UPDATE paper 
 										SET paper_name = '$this->paper_name',
-											conference = '$this->paper_conference',
 											author = '$this->paper_author',
 											paper_file = '$folder'
 										WHERE paper_ID = '$this->paper_ID'";
@@ -266,7 +257,6 @@
 			catch(mysqli_sql_exception $e){
                 //To ensure that the instance variables is empty if there is an error detected
                 $this->paper_name = "";
-                $this->paper_conference = "";
 				$this->paper_author = "";
             }
 		}

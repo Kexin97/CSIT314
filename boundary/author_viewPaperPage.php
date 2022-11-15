@@ -35,11 +35,10 @@
 		$control = new ViewPaperController();
 		$list = $control->viewPaperDetails($paper_ID);
 		
-		//for update use(conferenceList & AuthorList)
+		//for update use(AuthorList)
 		require("../controller/viewUserController.php");
 
 		$control = new ViewAccountController();
-		$clist = $control->conList();
 		$alist = $control->authList();
 	?>
 
@@ -165,15 +164,7 @@
 									</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <p class="col-sm-4">Conference:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper conference -->
-                                    <label id="author_viewPaperConference">
-										<?php echo $list[0]["conference"]; ?>
-									</label>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <p class="col-sm-4">Author:</p>
                                 <div class="col-sm-4">
@@ -377,27 +368,7 @@
                         
 
                     </div>
-                    <p class="searchLeft">Conference </p>
-                    <div class="detail">
-
-                        <select id="author_editConference" name="author_editConference" class="form-control select2" style="width: 100% !important;" >
-                            <!-- retrieve conference number from db -->
-                            <?php 
-								for($i = 0; $i < count($clist); $i++){ 
-									if($clist[$i]["account_email"]== $_COOKIE["accountEmail"]){
-												//do nothing
-									}
-									else if ($list[0]["conference"]==$clist[$i]["account_email"]){
-										echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "' selected>" . $clist[$i]["account_email"]."</option>";
-									}
-									else{
-										echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "'>" . $clist[$i]["account_email"]."</option>";
-									}
-								}
-							?>
-							
-                            </select>
-                    </div>
+                    
                     <p class="searchLeft">Author </p>
                     <div class="detail">
                         <select id="author_editAuthorName" name="author_editAuthorName[]" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
@@ -535,7 +506,6 @@
 		
 		if(isset($_POST["author_saveEditPaper"]) && isset ($_FILES["author_updatePaperUploadFile"])){
             $paper_name = $_POST["author_editPaperName"];
-            $paper_conference = $_POST["author_editConference"];
 			$paper_author = $_COOKIE["accountEmail"];
 			$other_author = $_POST["author_editAuthorName"];
 			$paper_filename = $_FILES["author_updatePaperUploadFile"]["name"];
@@ -551,7 +521,7 @@
 			
 			
 			$controller = new updatePaperController();
-			$result = $controller->updatePaper($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename);
+			$result = $controller->updatePaper($paper_ID, $paper_name, $paper_author,$paper_filename);
 				if($result["result"] != TRUE){
 					$fail = $result["errorMsg"];
 					displayFail($fail);
