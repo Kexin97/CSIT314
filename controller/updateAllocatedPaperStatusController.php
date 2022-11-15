@@ -1,5 +1,5 @@
 <?php
-    require_once("../entity/viewAllocatedPaperEntity.php");
+    require_once("../entity/updateAllocatedPaperStatusEntity.php");
 
     class updateAllocatedPaperStatusController{
         protected $entity;

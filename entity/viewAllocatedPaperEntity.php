@@ -66,9 +66,6 @@
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
                         if($Row["allocationStatus"] == "allocated"){ 
-                            $allocatedPaperID[] = $Row["paperID"];
-                            $allocatedPaperName[] = $Row["paperName"]; 
-
                             $query1 = "SELECT * FROM papers";
                             $stmt1 = mysqli_stmt_init($this->conn);
                             //Exit if failed to connect to DB
@@ -85,6 +82,8 @@
                                     while(($Row1 = $qGet1->fetch_assoc()) !== NULL){
                                         if($Row1["paperName"] == $Row["paperName"]){
                                             $allocatedPaperAuthor[] = $Row1["authorName"];
+                                            $allocatedPaperID[] = $Row["paperID"];
+                                            $allocatedPaperName[] = $Row["paperName"]; 
                                         }
                                     }
                                 }
