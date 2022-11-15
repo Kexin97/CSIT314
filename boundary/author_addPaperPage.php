@@ -139,7 +139,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search paper
+                                View paper
                                 </p>
                             </a>
 
@@ -304,7 +304,7 @@
                 $('#searchUser').DataTable({
                     "paging ": true,
                     "lengthChange ": true,
-                    "searching ": true,
+                    "searching ": false,
                     "ordering ": true,
                     "info ": true,
                     "autoWidth ": true,
