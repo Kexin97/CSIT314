@@ -54,34 +54,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <!-- <i class="fa-solid fa-bell"></i> -->
-                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
-                        <span class="sss">15</span>
-
-
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">
-                            <span id="author_noOfEmailNoti">
-                                4
-                            </span> Notifications
-                        </span>
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span id="author_noOfEmailNoti">
-                                4
-                            </span> new emails
-                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -143,14 +115,7 @@
                             </a>
 
                         </li>
-                        <li class="nav-item active">
-                            <a href="author_emailPage.php" class="nav-link">
-                                <i class="nav-icon"><img src="../img/email.png"></i>
-                                <p class="navHeader">
-                                    View email
-                                </p>
-                            </a>
-                        </li>
+                        
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
                             <a href="author_profilePage.php" class="nav-link ">
@@ -326,7 +291,7 @@
 			//change other_author from array to string
 			foreach ($other_author as $author){
 				if ($author != $_COOKIE["accountEmail"]){
-					$paper_author = $paper_author."," . $author;
+					$paper_author = $paper_author.", " . $author;
 				}
 			}
 			
