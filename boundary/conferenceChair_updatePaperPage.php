@@ -246,7 +246,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Paper?</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save status?</p>
                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button> -->
@@ -265,30 +265,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to add review?</p>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
-                    </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm save
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="conferenceChair_updateStatusPaperPage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -354,7 +331,7 @@
                                 </div>
                             </div>
                             <div class="author_viewPaperEditDetail_btn">
-                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+                                <button type="button" id="conferenceChair_editDetail" class="blue_btn" data-toggle="modal" data-target="#saveModal">
                                  Update status
                                         </button>
                             </div>
@@ -399,15 +376,13 @@
 
                         </div>
                     </div>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Back
                         </button>
-                    <!-- <button type="button" id="author_saveEditPaper" style="float: right; color: white; margin-right: 10px;" class="blue_btn" data-toggle="modal" data-target="#saveModal">
-                            Save
-                        </button> -->
+  
                     <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
                             Save
-                        </button>
+                        </button> -->
                 </div>
                 <div class="modal-footer" style="border: none;">
                 </div>
