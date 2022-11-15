@@ -271,6 +271,25 @@
             }
 		}
 		
+		public function deletePaperDetail($paper_ID){
+			$this->paper_ID = $paper_ID;
+			
+			$SQLDelete = "DELETE FROM `paper` WHERE paper_ID='$this->paper_ID'";
+            $qDelete = $this->conn->query($SQLDelete);
+
+            if($qDelete==TRUE)
+            {
+                $data["result"] = TRUE;
+            }else
+			{
+				$data["result"] = FALSE;
+				$data["errorMsg"] = "Paper delete failed " ;
+			}
+            
+            $this->data = $data;
+            return $data;
+		}
+		
 		
 	}
 ?>
