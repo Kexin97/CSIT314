@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="getAllocatedPapersInfo();displaySearchList()">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -143,14 +143,12 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search paper</p>
                     </div>
 
-                    <div class="card-body">
-                        <div>
-                            <p class="searchLeft">Enter paper name: </p>
-                            <!-- search User ID -->
-                            <input type="search" id="conferenceChair_searchEnterPaperName" class="form-control form-control-lg">
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
-                        </div>
-
+                    <div class="card-body" style="display: flex;">
+                        <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Paper name:</label>
+                        <select id="conferenceChair_viewPaperName" name="conferenceChair_viewPaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="displayTableData()">
+                            <!-- retrieve paper name from db -->
+                            <option value="">Select paper name</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -162,11 +160,11 @@
                                 <tr>
                                     <th>Paper ID</th>
                                     <th>Paper Name</th>
-                                    <th>Status (reviewed/unreviewed)</th>
+                                    <th>Accepted/Rejected</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="displayAllocatedPaperTable" name="displayAllocatedPaperTable">
                                 <tr>
                                     <td>
                                         <!-- retrieve paper id -->
@@ -183,11 +181,11 @@
                                         <!-- PaperA -->
                                     </td>
                                     <td>
-                                        <a href="conferenceChair_viewPaperPage.php">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
+                                        <!-- <a href="conferenceChair_viewPaperPage.php"> -->
+                                            <button type="button" class="detail_action_btn" data-toggle="modal"  data-target='#conferenceChair_updateStatusPaperPage'>
                                             Details
                                         </button>
-                                        </a>
+                                        <!-- </a> -->
                                     </td>
 
 
@@ -246,7 +244,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Paper?</p>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save status?</p>
                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button> -->
@@ -256,7 +254,7 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="saveStatus">
                         Confirm save
                     </button>
                 </div>
@@ -265,31 +263,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to add review?</p>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
-                    </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm save
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="author_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="conferenceChair_updateStatusPaperPage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -300,65 +275,116 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Paper ID:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get paperID from DB-->
-                        <label class="author_editPaperID">12345678</label>
-                    </div>
-                    <p>Paper name:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get PaperName from DB-->
-                        <input type="text" class="form-control" id="author_editPaperName">
-
-                    </div>
-                    <p class="searchLeft">Select conference </p>
-                    <div class="detail">
-
-                        <select id="author_editConference" class="form-control select2" style="width: 100% !important;">
-                            <!-- retrieve conference number from db -->
-                            <!-- <option>Conference1 </option>
-                            <option>Conference2</option>
-                            <option>Conference3</option>
-                            <option>Conference4</option>
-                            <option>Conference5</option> -->
-                            </select>
-                    </div>
-                    <p class="searchLeft">Select author </p>
-                    <div class="detail">
-
-
-                        <select id="author_editAuthorName" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
-                                <!-- retrieve author name from db -->
-                                <!-- <option>Author1 </option>
-                                <option>Author2</option>
-                                <option>Author3</option>
-                                <option>Author4</option>
-                                <option>Author5</option> -->
-
-                            </select>
-                    </div>
-                    <p for="exampleInputFile">Upload paper:</p>
-                    <div class="form-group">
-
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="conferenceChair_viewPaperID">
+                                                <!-- 12345678 -->
+                                                <text id="displayPaperID"></text>
+                                            </label>
+                                </div>
                             </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="conferenceChair_viewPaperName">
+                                                <!-- PaperA -->
+                                                <text id="displayPaperName"></text>
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Conference:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper conference -->
+
+                                    <label id="conferenceChair_viewPaperConference">
+                                                <!-- Conference1 -->
+                                                <text id="displayPaperConference"></text>
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Author:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve author name -->
+                                    <label class="conferenceChair_viewPaperAuthor">
+                                                <!-- Author1 -->
+                                                <text id="displayPaperAuthor"></text>
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Accept/reject paper:</p>
+                                <div class="col-sm-4">
+                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
+                                <!-- retrieve conference name from db -->
+                                <option>Accept</option>
+                                <option>Reject</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="author_viewPaperEditDetail_btn">
+                                <button type="button" id="conferenceChair_editDetail" class="blue_btn" data-toggle="modal" data-target="#saveModal">
+                                 Update status
+                                        </button>
                             </div>
                         </div>
+                </div>
+
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retrieve paper rating -->
+                                    <label id="conferenceChair_viewPaperRating">
+                                                <!-- 2.5 -->
+                                                <text id="displayPaperRating"></text>
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper review:</p>
+                                <div class="col-sm-7">
+                                    <!-- retrieve the review of paper-->
+                                    <p id="conferenceChair_viewPaperReview">
+                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
+                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
+                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
+                                    </p>
+                                </div>
+                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
+                                            <label for="customRadio3" class="custom-control-label">
+                                            3 (strong accept)</label>
+                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
+                                            <label for="customRadio2" class="custom-control-label">
+                                                2s(accept)</label> -->
+
+                            </div>
+
+
+                        </div>
                     </div>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                   <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Back
                         </button>
-                    <!-- <button type="button" id="author_saveEditPaper" style="float: right; color: white; margin-right: 10px;" class="blue_btn" data-toggle="modal" data-target="#saveModal">
+  
+                     <!-- <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
                             Save
                         </button> -->
-                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
-                            Save
-                        </button>
                 </div>
                 <div class="modal-footer" style="border: none;">
                 </div>
@@ -406,16 +432,113 @@
             });
         });
         function signOut(){
-                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-                var confirmMessage = "Are you sure you want to sign out?";
-                if (confirm(confirmMessage) == true) {
-                    window.location.replace("../boundary/login_page.php");
+            document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+            var confirmMessage = "Are you sure you want to sign out?";
+            if (confirm(confirmMessage) == true) {
+                window.location.replace("../boundary/login_page.php");
+            }
+        }
+
+        var allPaperID = [];
+        var allPaperName = [];
+        var allPaperAuthor = [];
+        var allPaperConference = [];
+        var allPaperStatus = [];
+        var searchList = [];
+        function getAllocatedPapersInfo(){
+            <?php require_once("../controller/updateAllocatedPaperStatusController.php"); ?>
+            $("#displayAllocatedPaperTable tr").remove(); 
+            allPaperID = [];
+            allPaperName = [];
+            allPaperAuthor = [];
+            allPaperConference = [];
+            allPaperStatus = [];
+            
+            var test = "<?php $controller = new updateAllocatedPaperStatusController();?>";
+            
+            var test2 = "<?php $result1 = $controller->viewAllPaper();?>";
+            console.log("hi");
+            var getAllocatedPaperCount = "<?php echo count($result1[0])?>";
+            
+            var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
+            var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[1]))?>"
+            var getPaperStatus = "<?php $arrayPaperStatus_to_json = json_encode(($result1[2]))?>"
+            var getPaperConference = "<?php $arrayPaperConference_to_json = json_encode(($result1[3]))?>"
+            var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[4]))?>"
+
+            var fromPHP = <?php echo $arrayPaperID_to_json ?>;
+            var fromPHP1 = <?php echo $arrayPaperName_to_json ?>;
+            var fromPHP2 = <?php echo $arrayPaperStatus_to_json ?>;
+            var fromPHP3 = <?php echo $arrayPaperConference_to_json ?>;
+            var fromPHP4 = <?php echo $arrayPaperAuthor_to_json ?>;
+
+            for(var x=0; x<getAllocatedPaperCount; x++){
+                allPaperID.push(fromPHP[x]);
+                allPaperName.push(fromPHP1[x]);
+                allPaperStatus.push(fromPHP2[x]);
+                allPaperConference.push(fromPHP3[x]);
+                allPaperAuthor.push(fromPHP4[x]);
+            }
+            var tableID = document.getElementById("displayAllocatedPaperTable");
+            for(var x=0; x<allPaperID.length; x++){
+                if(!searchList.includes(allPaperName[x])){
+                    searchList.push(allPaperName[x]);
+                }
+                $("#displayAllocatedPaperTable").append("<tr>"+
+                "<td>"+allPaperID[x]+"</td>" +
+                "<td>"+allPaperName[x]+"</td>" +
+                "<td>"+allPaperStatus[x]+"</td>" +
+                '<td>'+
+                '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
+                'Details</button></td>'+
+                "</tr>");
+            }
+        }
+
+        function displaySearchList(){
+            for(var x=0; x<searchList.length; x++){
+                var option = document.createElement("option");
+                var optionText = searchList[x];
+                var optionValue = searchList[x];
+                var select = document.getElementById("conferenceChair_viewPaperName");
+                $('#conferenceChair_viewPaperName').append(new Option(optionText, optionValue));
+            }
+        }
+
+        function displayTableData(){
+            var searchRequirement = document.getElementById("conferenceChair_viewPaperName").value;
+            $("#displayAllocatedPaperTable tr").remove(); 
+            for(var x=0; x<allPaperID.length; x++){
+                if(allPaperID[x].includes(searchRequirement) || allPaperName[x].includes(searchRequirement)
+                || allPaperAuthor[x].includes(searchRequirement)){
+                    $("#displayAllocatedPaperTable").append("<tr>"+
+                    "<td>"+allPaperID[x]+"</td>" +
+                    "<td>"+allPaperName[x]+"</td>" +
+                    "<td>"+allPaperStatus[x]+"</td>" +
+                    '<td>'+
+                        '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
+                        'Details</button></td>'+
+                    "</tr>");
                 }
             }
+        }
 
-            console.log("cookies: "+document.cookie);
+        function paperDetails(paperID){
+            var tempPaperID = document.getElementById("displayPaperID");
+            var tempPaperName = document.getElementById("displayPaperName");
+            var tempPaperConference = document.getElementById("displayPaperConference");
+            var tempPaperAuthor = document.getElementById("displayPaperAuthor");
+            console.log(allPaperID[paperID-1]);
+            console.log(allPaperName[paperID-1]);
+            console.log(allPaperConference[paperID-1]);
+            console.log(allPaperAuthor[paperID-1]);
+
+            tempPaperID.innerHTML = allPaperID[paperID-1];
+            tempPaperName.innerHTML = allPaperName[paperID-1];
+            tempPaperConference.innerHTML = allPaperConference[paperID-1];
+            tempPaperAuthor.innerHTML = allPaperAuthor[paperID-1];
+        }
     </script>
 
 </body>
-
 </html>
