@@ -183,11 +183,11 @@
                                         <!-- PaperA -->
                                     </td>
                                     <td>
-                                        <a href="conferenceChair_viewPaperPage.php">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
+                                        <!-- <a href="conferenceChair_viewPaperPage.php"> -->
+                                            <button type="button" class="detail_action_btn" data-toggle="modal"  data-target='#conferenceChair_updateStatusPaperPage'>
                                             Details
                                         </button>
-                                        </a>
+                                        <!-- </a> -->
                                     </td>
 
 
@@ -289,7 +289,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="author_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="conferenceChair_updateStatusPaperPage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -300,54 +300,103 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Paper ID:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get paperID from DB-->
-                        <label class="author_editPaperID">12345678</label>
-                    </div>
-                    <p>Paper name:&nbsp;</p>
-                    <div class="detail">
-                        <!-- get PaperName from DB-->
-                        <input type="text" class="form-control" id="author_editPaperName">
-
-                    </div>
-                    <p class="searchLeft">Select conference </p>
-                    <div class="detail">
-
-                        <select id="author_editConference" class="form-control select2" style="width: 100% !important;">
-                            <!-- retrieve conference number from db -->
-                            <!-- <option>Conference1 </option>
-                            <option>Conference2</option>
-                            <option>Conference3</option>
-                            <option>Conference4</option>
-                            <option>Conference5</option> -->
-                            </select>
-                    </div>
-                    <p class="searchLeft">Select author </p>
-                    <div class="detail">
-
-
-                        <select id="author_editAuthorName" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
-                                <!-- retrieve author name from db -->
-                                <!-- <option>Author1 </option>
-                                <option>Author2</option>
-                                <option>Author3</option>
-                                <option>Author4</option>
-                                <option>Author5</option> -->
-
-                            </select>
-                    </div>
-                    <p for="exampleInputFile">Upload paper:</p>
-                    <div class="form-group">
-
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="conferenceChair_viewPaperID">
+                                                <!-- 12345678 -->
+                                            </label>
+                                </div>
                             </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="conferenceChair_viewPaperName">
+                                                <!-- PaperA -->
+                                            </label>
+                                </div>
                             </div>
+                            <div class="row">
+                                <p class="col-sm-4">Conference:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper conference -->
+
+                                    <label id="conferenceChair_viewPaperConference">
+                                                <!-- Conference1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Author:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve author name -->
+                                    <label class="conferenceChair_viewPaperAuthor">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Accept/reject paper:</p>
+                                <div class="col-sm-4">
+                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
+                                <!-- retrieve conference name from db -->
+                                <option>Accept</option>
+                                <option>Reject</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="author_viewPaperEditDetail_btn">
+                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+                                 Update status
+                                        </button>
+                            </div>
+                        </div>
+                </div>
+
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retrieve paper rating -->
+                                    <label id="conferenceChair_viewPaperRating">
+                                                <!-- 2.5 -->
+
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper review:</p>
+                                <div class="col-sm-7">
+                                    <!-- retrieve the review of paper-->
+                                    <p id="conferenceChair_viewPaperReview">
+                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
+                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
+                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
+                                    </p>
+                                </div>
+                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
+                                            <label for="customRadio3" class="custom-control-label">
+                                            3 (strong accept)</label>
+                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
+                                            <label for="customRadio2" class="custom-control-label">
+                                                2s(accept)</label> -->
+
+                            </div>
+
+
                         </div>
                     </div>
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
