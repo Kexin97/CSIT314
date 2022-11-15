@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="getAllocatedPapersInfo();displaySearchList()">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -78,7 +78,7 @@
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View allocated paper
@@ -94,15 +94,15 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Update paper status
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -111,7 +111,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -136,114 +136,66 @@
         </aside>
         <!-- Content Wrapper -->
         <div class="content-wrapper ">
-            <div class="col-12" style="display: flex;">
-                <div class="col-md-5">
-                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="col-sm-4">Paper ID:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper id -->
-                                    <label id="author_viewPaperID">
-                                                <!-- 12345678 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Paper name:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper name -->
-                                    <label id="author_viewPaperName">
-                                                <!-- PaperA -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Conference:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper conference -->
+            <div class="col-12">
+                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
+                    </div>
 
-                                    <label id="author_viewPaperConference">
-                                                <!-- Conference1 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Author:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve author name -->
-                                    <label class="author_viewPaperAuthor">
-                                                <!-- Author1 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Accept/reject paper:</p>
-                                <div class="col-sm-4">
-                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
-                                <!-- retrieve conference name from db -->
-                                <option>Accept</option>
-                                <option>Reject</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="author_viewPaperEditDetail_btn">
-                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
-                                 Update status
-                                        </button>
-                            </div>
-                        </div>
+                    <div class="card-body" style="display: flex;">
+                        <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Paper name:</label>
+                        <select id="conferenceChair_viewPaperName" name="conferenceChair_viewPaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="displayTableData()">
+                            <!-- retrieve paper name from db -->
+                            <option selected disabled>Select paper name</option>
+                        </select>
                     </div>
                 </div>
+            </div>
+            <div class="col-12">
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <table id="conferenceChair_searchAllocatedPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Paper ID</th>
+                                    <th>Paper Name</th>
+                                    <th>Author name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="displayAllocatedPaperTable" name="displayAllocatedPaperTable">
+                                <tr>
+                                    <td>
+                                        <!-- retrieve paper id -->
+                                        <!-- 12345678 -->
+                                    </td>
+                                    <td>
+                                        <!-- retrieve paper name -->
 
-                <div class="col-md-7" id="author_viewRevRatContainer">
-                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="col-sm-4">Paper rating:</p>
-                                <div class="col-sm-4">
-                                    <!-- retrieve paper rating -->
-                                    <label id="author_viewPaperRating">
-                                                <!-- 2.5 -->
+                                        <!-- PaperA -->
+                                    </td>
+                                    <td>
+                                        <!-- retrieve paper reviewed/unreviewed -->
 
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Paper review:</p>
-                                <div class="col-sm-7">
-                                    <!-- retrieve the review of paper-->
-                                    <p id="author_viewPaperReview">
-                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
-                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
-                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
-                                    </p>
-                                </div>
-                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
-                                            <label for="customRadio3" class="custom-control-label">
-                                            3 (strong accept)</label>
-                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
-                                            <label for="customRadio2" class="custom-control-label">
-                                                2s(accept)</label> -->
+                                        <!-- PaperA -->
+                                    </td>
+                                    <td>
+                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.php">
+                                            <button type="button" class="detail_action_btn" data-toggle="modal">
+                                            Details
+                                        </button>
+                                        </a>
+                                    </td>
+                                </tr>
 
-                            </div>
-
-
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- ./wrapper -->
     <!-- jQuery -->
@@ -262,12 +214,22 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
 
     <script>
+        <?php require_once("../controller/viewAllocatedPaperController.php");?>
         $(".nav .nav-link").on("click", function() {
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
 
         $(function() {
+            $('#conferenceChair_searchAllocatedPaper').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": true,
+            });
             //Initialize Select2 Elements
             $('.select2').select2();
             //Initialize Select2 Elements
@@ -275,8 +237,79 @@
                 theme: 'bootstrap4'
             });
         });
-    </script>
 
+        var allPaperID = [];
+        var allPaperName = [];
+        var allPaperAuthor = [];
+        var searchList = [];
+        function getAllocatedPapersInfo(){
+            <?php require_once("../controller/viewAllocatedPaperController.php"); ?>
+            $("#displayAllocatedPaperTable tr").remove(); 
+            allPaperID = [];
+            allPaperName = [];
+            allPaperAuthor = [];
+            var test = "<?php $controller = new viewAllocatedPaperController();?>";
+            var test2 = "<?php $result1 = $controller->viewAllocatedPapersController();?>";
+            
+            var getAllocatedPaperCount = "<?php echo count($result1[0])?>";
+            
+            var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
+            var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[1]))?>"
+            var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[2]))?>"
+
+            var fromPHP = <?php echo $arrayPaperID_to_json ?>;
+            var fromPHP1 = <?php echo $arrayPaperName_to_json ?>;
+            var fromPHP2 = <?php echo $arrayPaperAuthor_to_json ?>;
+            for(var x=0; x<getAllocatedPaperCount; x++){
+                allPaperID.push(fromPHP[x]);
+                allPaperName.push(fromPHP1[x]);
+                allPaperAuthor.push(fromPHP2[x]);
+            }
+            var tableID = document.getElementById("displayAllocatedPaperTable");
+            for(var x=0; x<allPaperID.length; x++){
+                if(!searchList.includes(allPaperName[x])){
+                    searchList.push(allPaperName[x]);
+                }
+                $("#displayAllocatedPaperTable").append("<tr>"+
+                "<td>"+allPaperID[x]+"</td>" +
+                "<td>"+allPaperName[x]+"</td>" +
+                "<td>"+allPaperAuthor[x]+"</td>" +
+                '<td><a href="conferenceChair_viewDetailAllocatedPaperPage.php">'+
+                    '<button type="button" class="detail_action_btn" data-toggle="modal">'+
+                    'Details</button></a></td>'+
+                "</tr>");
+            }
+        }
+
+        function displaySearchList(){
+            for(var x=0; x<searchList.length; x++){
+                var option = document.createElement("option");
+                var optionText = searchList[x];
+                var optionValue = searchList[x];
+                var select = document.getElementById("conferenceChair_viewPaperName");
+                $('#conferenceChair_viewPaperName').append(new Option(optionText, optionValue));
+            }
+        }
+
+        function displayTableData(){
+            var searchRequirement = document.getElementById("conferenceChair_viewPaperName").value;
+            $("#displayAllocatedPaperTable tr").remove(); 
+            for(var x=0; x<allPaperID.length; x++){
+                if(allPaperID[x].includes(searchRequirement) || allPaperName[x].includes(searchRequirement)
+                || allPaperAuthor[x].includes(searchRequirement)){
+                    $("#displayAllocatedPaperTable").append("<tr>"+
+                    "<td>"+allPaperID[x]+"</td>" +
+                    "<td>"+allPaperName[x]+"</td>" +
+                    "<td>"+allPaperAuthor[x]+"</td>" +
+                    '<td><a href="conferenceChair_viewDetailAllocatedPaperPage.php">'+
+                        '<button type="button" class="detail_action_btn" data-toggle="modal">'+
+                        'Details</button></a></td>'+
+                    "</tr>");
+                }
+            }
+        }
+        
+    </script>
 </body>
 
 </html>

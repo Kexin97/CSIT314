@@ -87,7 +87,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="../boundary/reviewer_viewPaper.php" class="nav-link">
+                            <a href="reviewer_viewPaperPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -105,7 +105,7 @@
 
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewBid.php" class="nav-link">
+                            <a href="reviewer_viewBidPage.html" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View bid
@@ -114,7 +114,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profile.php" class="nav-link ">
+                            <a href="reviewer_profilePage.html" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -144,12 +144,12 @@
                     <div class="card-body">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                             <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper detail</p>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <p class="col-sm-2">Paper ID:</p>
-                                <div class="col-sm-10">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
                                     <!-- retieve paper id -->
                                     <label id="reviewer_viewPaperID">
                                                 <!-- 12345678 -->
@@ -157,42 +157,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-2">Paper name:
-                                    
-                                </p>
-                                <div class="col-sm-10">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
                                     <!-- retieve paper name -->
-									
                                     <label id="reviewer_viewPaperName">
                                                 <!-- PaperA -->
-												<?php $stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
                                             </label>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <p class="col-sm-2">Author name:
-                                    
-                                </p>
-                                <div class="col-sm-10">
+                                <p class="col-sm-4">Author name:</p>
+                                <div class="col-sm-4">
                                     <!-- retieve Author name -->
-									
                                     <label class="reviewer_viewPaperAuthor">
                                                 <!-- Author1 -->
-												<?php $stmt->execute(); echo $stmt->fetch()["authorName"];?>
                                             </label>
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-2">Others Review:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retieve other Review -->
-									
-                                    <label class="reviewer_viewPaperReview_others">
+                                <p class="col-sm-4">Review:</p>
+                                <div class="col-sm-8">
+                                    <!-- retieve Review -->
+                                    <label class="reviewer_viewPaperReview">
                                                 <!-- reeee -->
-												
                                             </label>
                                     <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
                                                 Comment others review
@@ -202,61 +190,11 @@
                             </div>
 
                             <div class="row">
-                                <p class="col-sm-2">Others Rating:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve other Rating -->
-									
-                                    <label class="reviewer_viewPaperRating_others">
+                                <p class="col-sm-4">Rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve Rating -->
+                                    <label class="reviewer_viewPaperRating">
                                                 <!-- Author1 -->
-												
-                                            </label>
-                                </div>
-                            </div>
-							<div class="row">
-                                <p class="col-sm-2">Self Review:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve self Review -->
-									
-                                    <label class="reviewer_viewPaperReview_self">
-                                                <!-- Author1 -->
-												<?php $stmt->execute(); 
-												if ($stmt->fetch()["review"] == null)
-												{
-													echo "Not reviewed yet";
-												}
-												else
-												{
-													$stmt->execute();
-													echo $stmt->fetch()["review"];
-												}
-												?>
-                                            </label>
-                                </div>
-                            </div>
-							<div class="row">
-                                <p class="col-sm-2">Self Rating:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve self Rating -->
-									
-                                    <label class="reviewer_viewPaperRating_self">
-                                                <!-- Author1 -->
-												<?php $stmt->execute(); 
-												if ($stmt->fetch()["rating"] == null)
-												{
-													echo "No ratings yet";
-												}
-												else
-												{
-													$stmt->execute();
-													echo $stmt->fetch()["rating"];
-												}
-												?>
                                             </label>
                                 </div>
                             </div>
@@ -316,7 +254,6 @@
             </div>
         </div>
     </div>
-	<form method="post" action="reviewer_viewPaperDetail.php">
     <div class="modal fade" id="reviewer_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -336,25 +273,19 @@
                     <p>Paper name:&nbsp;</p>
                     <div class="detail ">
                         <!-- get PaperName from DB-->
-						
-                        <label id="reviewer_editPaperName">
-							<?php $stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
-						</label>
+                        <label id="reviewer_editPaperName"></label>
                     </div>
                     <p class="searchLeft ">reviewer name</p>
                     <div class="detail ">
-						
-                        <label id="reviewer_editreviewerName">
-							<?php $stmt->execute(); echo $stmt->fetch()["bidWinner"];?>
-						</label>
+                        <label id="reviewer_editreviewerName"></label>
                     </div>
                     <p class="searchLeft ">Enter review</p>
                     <div class="detail ">
-                        <textarea name ="review" id="reviewer_editReview" rows="10" cols="30"></textarea>
+                        <textarea id="reviewer_editReview" rows="10" cols="30"></textarea>
                     </div>
                     <br>
                     <p class=" searchLeft ">Select rating </p>
-                    <div >
+                    <div class="col-sm-9">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary reviewer_viewPaperAddRating active">
                                                 <input type="radio" id="reviewer_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
@@ -411,17 +342,15 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-					<input type="submit" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" value="Confirm save">
-                    <!-- <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                    <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                         Confirm save
-                    </button> -->
+                    </button>
                 </div>
                 <div class="modal-footer" style="border: none;">
                 </div>
             </div>
         </div>
     </div>
-	</form>
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js "></script>

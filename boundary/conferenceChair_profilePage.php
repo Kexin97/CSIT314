@@ -78,16 +78,8 @@
 
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
-                        <!-- <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_home_icon.svg"></i>
-                                <p class="navHeader">
-                                    Home
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -95,24 +87,23 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View allocated paper
                                 </p>
                             </a>
                         </li>
-
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Update paper status
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -121,7 +112,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -144,64 +135,104 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper -->
+
+        <!-- Content Wrapper-->
         <div class="content-wrapper ">
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
-                    <div class="card-header" style="padding-top: 0; padding-bottom: 0; background-color: white;">
-                        <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
-                            Send Email</p>
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
-                    <div style="padding: 30px;">
+                    <div id="settings" style="padding: 30px;">
+                        <form class="form-horizontal">
+                            <!--<div class="form-group row">
+                                <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
+                                <div class="col-sm-4">
+                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
+                                </div>
+                            </div>-->
 
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author password -->
+                                    <input type="password" class="form-control" id="author_profilePassword">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="adminName" class="col-sm-2 col-form-label">Author Name:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author name -->
+                                    <p class="form-control" id="author_profileName" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author gender -->
+                                    <p class="form-control" id="author_profileGender" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author age -->
+                                    <p class="form-control" id="author_profileAge" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author contact number -->
+                                    <input type="tel" class="form-control" id="author_profileContact">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author email -->
+                                    <input type="email" class="form-control " id="author_profileEmail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-4">
+                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
 
 
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
 
-        <!-- ./wrapper -->
-        <!-- jQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE -->
-        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- datatable -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+    <script>
+        $(".nav .nav-link").on("click", function() {
+            $(".nav").find(".active").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <!-- datatable -->
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-        <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
-        <script>
-            $(".nav .nav-link ").on("click ", function() {
-                $(".nav ").find(".active ").removeClass("active ");
-                $(this).addClass("active ");
-            });
-
-            $(function() {
-
-                $('#searchUser').DataTable({
-                    "paging ": true,
-                    "lengthChange ": true,
-                    "searching ": true,
-                    "ordering ": true,
-                    "info ": true,
-                    "autoWidth ": true,
-                    "responsive ": true,
-                });
-                //Initialize Select2 Elements
-                $('.select2').select2();
-                //Initialize Select2 Elements
-                $('.select2bs4').select2({
-                    theme: 'bootstrap4'
-                });
-            });
-        </script>
 </body>
 
 </html>

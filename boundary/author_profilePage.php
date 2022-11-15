@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Conference Chair</title>
+    <title>Author</title>
     <style>
         div {
             height: auto;
@@ -29,6 +29,7 @@
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
+            <!-- <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
         </div>
 
         <!-- Navbar -->
@@ -42,6 +43,36 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <!-- <i class="fa-solid fa-bell"></i> -->
+                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
+
+                        <!-- retrieve number of email notification-->
+                        <span class="author_notiNo" class="author_noOfEmailNoti"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">
+                                 <!-- retrieve number of email notification-->
+                                <span class="author_noOfEmailNoti">
+                                    
+                                </span> Notifications
+                        </span>
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <!-- retrieve number of email notification-->
+                            <span class="author_noOfEmailNoti">
+                                    
+                                </span> new emails
+                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -66,10 +97,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="platform_name">
                     <span class="platform_name brand-image-xs logo-xl">
-                        Conference Chair Patform
+                        Author Patform
                     </span>
                     <span class="platform_name brand-image-xl logo-xs" id="platformShort_name">
-                        CC
+                        Aut
                     </span>
                 </div>
 
@@ -78,40 +109,34 @@
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="author_addPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Allocated paper
+                                    Add paper
                                 </p>
                             </a>
+
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
-                                <i class="nav-icon"><img src="../img/search.svg"></i>
-                                <p class="navHeader">
-                                    View allocated paper
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View paper
                                 </p>
                             </a>
+
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="author_emailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
-                                    Send email
+                                    View email
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="author_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -134,110 +159,75 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Content Wrapper -->
+
+        <!-- Content Wrapper-->
         <div class="content-wrapper ">
-            <div class="col-12" style="display: flex;">
-                <div class="col-md-5">
-                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="col-sm-4">Paper ID:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper id -->
-                                    <label id="author_viewPaperID">
-                                                <!-- 12345678 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Paper name:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper name -->
-                                    <label id="author_viewPaperName">
-                                                <!-- PaperA -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Conference:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper conference -->
-
-                                    <label id="author_viewPaperConference">
-                                                <!-- Conference1 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Author:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve author name -->
-                                    <label class="author_viewPaperAuthor">
-                                                <!-- Author1 -->
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="col-sm-4">Accept/reject paper:</p>
-                                <div class="col-sm-4">
-                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
-                                <!-- retrieve conference name from db -->
-                                <option>Accept</option>
-                                <option>Reject</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="author_viewPaperEditDetail_btn">
-                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
-                                 Update status
-                                        </button>
-                            </div>
-                        </div>
+            <div class="col-12">
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
-                </div>
-
-                <div class="col-md-7" id="author_viewRevRatContainer">
-                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="col-sm-4">Paper rating:</p>
+                    <div id="settings" style="padding: 30px;">
+                        <form class="form-horizontal">
+                            <!--<div class="form-group row">
+                                <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve paper rating -->
-                                    <label id="author_viewPaperRating">
-                                                <!-- 2.5 -->
+                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
+                                </div>
+                            </div>-->
 
-                                            </label>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author password -->
+                                    <input type="password" class="form-control" id="author_profilePassword">
                                 </div>
                             </div>
-                            <div class="row">
-                                <p class="col-sm-4">Paper review:</p>
-                                <div class="col-sm-7">
-                                    <!-- retrieve the review of paper-->
-                                    <p id="author_viewPaperReview">
-                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
-                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
-                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
+                            <div class="form-group row">
+                                <label for="adminName" class="col-sm-2 col-form-label">Author Name:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author name -->
+                                    <p class="form-control" id="author_profileName" style="border: none; margin-left: -10px;">
                                     </p>
                                 </div>
-                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
-                                            <label for="customRadio3" class="custom-control-label">
-                                            3 (strong accept)</label>
-                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
-                                            <label for="customRadio2" class="custom-control-label">
-                                                2s(accept)</label> -->
-
                             </div>
-
-
-                        </div>
+                            <div class="form-group row">
+                                <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author gender -->
+                                    <p class="form-control" id="author_profileGender" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author age -->
+                                    <p class="form-control" id="author_profileAge" style="border: none; margin-left: -10px;">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author contact number -->
+                                    <input type="tel" class="form-control" id="author_profileContact">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve author email -->
+                                    <input type="email" class="form-control " id="author_profileEmail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-4">
+                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -260,20 +250,10 @@
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
-
     <script>
         $(".nav .nav-link").on("click", function() {
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
-        });
-
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2();
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            });
         });
     </script>
 

@@ -20,7 +20,19 @@
             return $this->result;
         }
 		
-		
+		//for addPaper use
+		public function conList()
+        {
+            $this->result = $this->entity->conferenceList();
+
+            return $this->result;
+        }
+		public function authList()
+        {
+            $this->result = $this->entity->authorList();
+
+            return $this->result;
+        }
 		
 		
     }

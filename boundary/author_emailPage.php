@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Conference Chair</title>
+    <title>Author</title>
     <style>
         div {
             height: auto;
@@ -43,6 +43,34 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <!-- <i class="fa-solid fa-bell"></i> -->
+                        <!-- <span class="badge badge-warning navbar-badge">15</span> -->
+                        <span class="sss">15</span>
+
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">
+                            <span id="author_noOfEmailNoti">
+                                4
+                            </span> Notifications
+                        </span>
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span id="author_noOfEmailNoti">
+                                4
+                            </span> new emails
+                            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -67,10 +95,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="platform_name">
                     <span class="platform_name brand-image-xs logo-xl">
-                        Conference Chair Patform
+                        Author Patform
                     </span>
                     <span class="platform_name brand-image-xl logo-xs" id="platformShort_name">
-                        CC
+                        Aut
                     </span>
                 </div>
 
@@ -87,41 +115,34 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="author_addPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Allocated paper
+                                    Add paper
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
-                                <i class="nav-icon"><img src="../img/search.svg"></i>
-                                <p class="navHeader">
-                                    View allocated paper
-                                </p>
-                            </a>
-                        </li>
 
+                        </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View paper
                                 </p>
                             </a>
+
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="author_emailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
-                                    Send email
+                                    View email
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="author_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -150,16 +171,17 @@
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 0; background-color: white;">
                         <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
-                            Send Email</p>
+                            View email</p>
                     </div>
                     <div style="padding: 30px;">
+                        <div class="form-group">
 
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
-
 
 
         <!-- ./wrapper -->
@@ -186,13 +208,13 @@
             $(function() {
 
                 $('#searchUser').DataTable({
-                    "paging ": true,
-                    "lengthChange ": true,
-                    "searching ": true,
-                    "ordering ": true,
-                    "info ": true,
-                    "autoWidth ": true,
-                    "responsive ": true,
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "responsive": true,
                 });
                 //Initialize Select2 Elements
                 $('.select2').select2();

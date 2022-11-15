@@ -26,6 +26,18 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+<?php
+	//for conferenceList
+	require("../controller/viewUserController.php");
+
+	$control = new ViewAccountController();
+	$clist = $control->conList();
+	$alist = $control->authList();
+	
+	
+	
+	
+?>
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -59,7 +71,7 @@
                             </span> Notifications
                         </span>
                         <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.html" class="dropdown-item">
+                        <a href="author_emailPage.php" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i>
                             <span id="author_noOfEmailNoti">
                                 4
@@ -68,7 +80,7 @@
                         </a>
 
                         <div class="dropdown-divider"></div>
-                        <a href="author_emailPage.html" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        <a href="author_emailPage.php" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -115,7 +127,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="author_addPaperPage.html" class="nav-link">
+                            <a href="author_addPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Add paper
@@ -124,16 +136,16 @@
 
                         </li>
                         <li class="nav-item active">
-                            <a href="author_searchPaperPage.html" class="nav-link">
+                            <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    Search paper
+                                View paper
                                 </p>
                             </a>
 
                         </li>
                         <li class="nav-item active">
-                            <a href="author_emailPage.html" class="nav-link">
+                            <a href="author_emailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     View email
@@ -142,7 +154,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="author_profilePage.html" class="nav-link ">
+                            <a href="author_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -151,12 +163,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <div class="nav-link" style="cursor:point" onclick="signOut()">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
                                 </p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                     <!--<img src="img/nav_bk.svg" id="nav_bk" />-->
@@ -166,6 +178,7 @@
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper -->
+		<form class="form-horizontal" method="POST" enctype="multipart/form-data">
         <div class="content-wrapper ">
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
@@ -177,46 +190,58 @@
                         <div class="form-group" style="display: flex;">
                             <label for="inputPaperName" class="searchLeft col-sm-2 ">Paper name:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control inlineBlock" id="author_paperName">
+                                <input type="text" class="form-control inlineBlock" id="author_paperName" name="author_paperName">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2 ">Select conference </label>
+                            <label class="searchLeft col-sm-2 ">Conference: </label>
                             <!-- <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock" data-dropdown-css-class="select2-purple" multiple="multiple"> -->
-                            <select id="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
+                            <select id="author_addConference" name="author_addConference" class="form-control select2 col-sm-4 inlineBlock">
                             <!-- retrieve conference name from db -->
-                            <option> </option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
+							<option value="">--Select a conference--</option>
+								<?php 
+									for($i = 0; $i < count($clist); $i++){ 
+										if($clist[$i]["account_email"]== $_COOKIE["accountEmail"]){
+													//do nothing
+										}
+										else{
+											echo "<option name='author_addConference' value='" . $clist[$i]["account_email"] . "'>" . $clist[$i]["account_email"]."</option>";
+										}
+										
+									}
+								?></option>
+								
+                            
                             </select>
                         </div>
                         <div class="form-group">
 
-                            <label class="searchLeft col-sm-2 ">Select author </label>
-                            <select id="author_addAuthorName" class="form-control select2 col-sm-4 inlineBlock" multiple="multiple">
-                                <!-- retrieve author name from db -->
-                                <option> </option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-
+                            <label class="searchLeft col-sm-2 ">Other author: </label>
+                            <select id="author_addAuthorName" name="author_addAuthorName[]" class="form-control select2 col-sm-4 inlineBlock" multiple="multiple">
+							<!-- retrieve author name from db -->
+							<?php 
+								for($i = 0; $i < count($alist); $i++){ 
+										if($alist[$i]["account_email"]== $_COOKIE["accountEmail"]){
+													//do nothing
+										}
+										else{
+											echo "<option name='author_addConference' value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
+										}
+										
+								}
+							?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="searchLeft col-sm-2" for="author_addPaperUploadFile">Upload paper:</label>
+                            <label class="searchLeft col-sm-2">Upload paper:</label>
                             <div class="col-sm-4 inlineBlock">
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <!-- save the file upload in db -->
-                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile">
-                                        <label class="custom-file-label" for="author_addPaperUploadFile">Choose file</label>
+                                        <label class="custom-file-label" for="author_addPaperUploadFile" name="uploadFile" id="uploadFile">Choose file</label>
+                                        <input type="file" class="custom-file-input" id="author_addPaperUploadFile" onchange="getFile()" name="author_addPaperUploadFile" accept=".pdf">
                                     </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -244,15 +269,14 @@
                         <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                             Cancel
                         </button>
-                        <button type="button" id="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
-                        </button>
+                        <input value="Confirm save" type="submit" id="author_save" name="author_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
                     </div>
                     <div class="modal-footer" style="border: none;">
                     </div>
                 </div>
             </div>
         </div>
+		</form>
 
         <!-- ./wrapper -->
         <!-- jQuery -->
@@ -280,7 +304,7 @@
                 $('#searchUser').DataTable({
                     "paging ": true,
                     "lengthChange ": true,
-                    "searching ": true,
+                    "searching ": false,
                     "ordering ": true,
                     "info ": true,
                     "autoWidth ": true,
@@ -293,8 +317,64 @@
                     theme: 'bootstrap4'
                 });
             });
-            console.log(document.cookie);
+			
+			function signOut(){
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                var confirmMessage = "Are you sure you want to sign out?";
+                if (confirm(confirmMessage) == true) {
+                    window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            console.log("cookies: "+document.cookie);
+			
+			function getFile(){
+			var x = document.getElementById("author_addPaperUploadFile");
+			var filename = x.files.item(0).name;
+			document.getElementById("uploadFile").innerHTML = filename;
+			}
         </script>
+		<?php
+		require("../controller/addPaperController.php");
+		
+        if(isset($_POST["author_save"]) && isset ($_FILES["author_addPaperUploadFile"])){
+            $paper_name = $_POST["author_paperName"];
+            $paper_conference = $_POST["author_addConference"];
+			$paper_author = $_COOKIE["accountEmail"];
+			$other_author = $_POST["author_addAuthorName"];
+			$paper_filename = $_FILES["author_addPaperUploadFile"]["name"];
+			
+			
+			//change other_author from array to string
+			foreach ($other_author as $author){
+				if ($author != $_COOKIE["accountEmail"]){
+					$paper_author = $paper_author."," . $author;
+				}
+			}
+			
+			$controller = new addPaperController();
+			$result = $controller->profileDetails($paper_name, $paper_conference,$paper_author,$paper_filename);
+				if($result["result"] != TRUE){
+					$fail = $result["errorMsg"];
+					displayFail($fail);
+				}
+				else{
+					displaySuccess();
+				}
+			
+        }
+
+        function displaySuccess() {
+        echo '<script> alert("New paper has been successfully created."); </script>';
+        }
+
+        function displayFail($fail) {
+        echo '<script> alert("Failed to add paper: ' . $fail . '"); </script>';
+        }
+		
+		
+		
+		?>
 </body>
 
 </html>

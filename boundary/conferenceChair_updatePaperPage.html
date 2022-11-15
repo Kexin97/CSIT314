@@ -140,15 +140,13 @@
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                     <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
                         <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
+                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper</p>
                     </div>
-                    <!-- 
 
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <div>
                             <p class="searchLeft">Enter paper name: </p>
-                           //search User ID 
-                            <input type="search" id="author_searchEnterAllocatedPaperName" class="form-control form-control-lg">
+                            <input type="search" id="conferenceChair_searchEnterPaperName" class="form-control form-control-lg">
                             <button type="submit" class="btn btn-outline-primary search_button">search</button>
                         </div>
 
@@ -158,12 +156,12 @@
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body">
-                        <table id="conferenceChair_searchAllocatedPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <table id="conferenceChair_searchPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Paper ID</th>
                                     <th>Paper Name</th>
-                                    <th>Reviewer name</th>
+                                    <th>Status (reviewed/unreviewed)</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -184,7 +182,7 @@
                                         <!-- PaperA -->
                                     </td>
                                     <td>
-                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.html">
+                                        <a href="conferenceChair_viewPaperPage.html">
                                             <button type="button" class="detail_action_btn" data-toggle="modal">
                                             Details
                                         </button>
@@ -197,6 +195,171 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="deletePapereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Delete Paper?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p>Paper ID:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get paperID from DB-->
+                        <label class="author_deletePaperID">
+                            
+                        </label>
+                    </div>
+                    <p>Paper name:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get userFullName from DB-->
+                        <label class="author_deletePaperName"></label>
+                    </div>
+
+                    <p class="deleteText">Deleting this paper mean you would be able to resubmit the correct version.</p>
+
+
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                    </button>
+                    <button type="button" id="author_confirmDletion" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm Deletion
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save Paper?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to save?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to add review?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="author_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img style="margin-left: 10px; margin-top: 20px" src="../img/blue arrow.svg" data-dismiss="modal" aria-label="Close"></i>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 15px; margin-left: 15px; display: inline;">Edit Paper Details</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Paper ID:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get paperID from DB-->
+                        <label class="author_editPaperID">12345678</label>
+                    </div>
+                    <p>Paper name:&nbsp;</p>
+                    <div class="detail">
+                        <!-- get PaperName from DB-->
+                        <input type="text" class="form-control" id="author_editPaperName">
+
+                    </div>
+                    <p class="searchLeft">Select conference </p>
+                    <div class="detail">
+
+                        <select id="author_editConference" class="form-control select2" style="width: 100% !important;">
+                            <!-- retrieve conference number from db -->
+                            <!-- <option>Conference1 </option>
+                            <option>Conference2</option>
+                            <option>Conference3</option>
+                            <option>Conference4</option>
+                            <option>Conference5</option> -->
+                            </select>
+                    </div>
+                    <p class="searchLeft">Select author </p>
+                    <div class="detail">
+
+
+                        <select id="author_editAuthorName" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
+                                <!-- retrieve author name from db -->
+                                <!-- <option>Author1 </option>
+                                <option>Author2</option>
+                                <option>Author3</option>
+                                <option>Author4</option>
+                                <option>Author5</option> -->
+
+                            </select>
+                    </div>
+                    <p for="exampleInputFile">Upload paper:</p>
+                    <div class="form-group">
+
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Back
+                        </button>
+                    <!-- <button type="button" id="author_saveEditPaper" style="float: right; color: white; margin-right: 10px;" class="blue_btn" data-toggle="modal" data-target="#saveModal">
+                            Save
+                        </button> -->
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="author_saveEditPaper">
+                            Save
+                        </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
                 </div>
             </div>
         </div>
@@ -225,7 +388,7 @@
         });
 
         $(function() {
-            $('#conferenceChair_searchAllocatedPaper').DataTable({
+            $('#conferenceChair_searchPaper').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": false,
