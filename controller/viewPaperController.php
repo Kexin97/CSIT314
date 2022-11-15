@@ -13,9 +13,9 @@
             $this->result = array();
         }
 
-		public function viewPaper()
+		public function viewPaper($author)
         {
-            $this->result = $this->entity->viewPaperList();
+            $this->result = $this->entity->viewPaperList($author);
 
             return $this->result;
         }

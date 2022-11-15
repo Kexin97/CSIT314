@@ -436,7 +436,7 @@
                     </div>
                     <p class="searchLeft">Author </p>
                     <div class="detail">
-                        <select id="author_editAuthorName" name="author_editAuthorName" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
+                        <select id="author_editAuthorName" name="author_editAuthorName[]" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
                                 <!-- retrieve author name from db -->
 							<?php 
 								$authorSel = explode(",",$list[0]["author"] );
@@ -575,6 +575,7 @@
 				}
 			}
 			
+			
 			$controller = new updatePaperController();
 			$result = $controller->updatePaper($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename);
 				if($result["result"] != TRUE){
@@ -583,7 +584,10 @@
 				}
 				else{
 					displaySuccess();
+					echo '<script>window.location.href="../boundary/author_viewPaperPage.php";</script>';
 				}
+			
+				
 			
         }
 

@@ -117,8 +117,10 @@
 			
 		}
 		
-		public function viewPaperList(){
-			$SQLGet = "SELECT * FROM `paper`";
+		public function viewPaperList($author){
+			$this->author = $author;
+			
+			$SQLGet = "SELECT * FROM `paper` WHERE author LIKE '%$this->author%'";
             $qGet = $this->conn->query($SQLGet);
 
             if(($res = $qGet->num_rows) > 0)
@@ -132,11 +134,15 @@
 					$data[$i]["conference"] = $Row["conference"];
 					$data[$i]["author"] = $Row["author"];
 					$data[$i]["paper_file"] = $Row["paper_file"];
-					
+					$data[$i]["result"] = TRUE;
 
                     $i++;
                 }
             }
+			else{
+				$data[0]["result"] = FALSE;
+				$data[0]["errorMsg"] = "No paper is submitted" ;
+			}
             
             
             $this->data = $data;
@@ -214,7 +220,7 @@
 					//file dir
 					$targetDir = "../databaseFiles/paper/";
 					$folder = $targetDir . $this->paper_name.".pdf";
-					$tmp_file = $_FILES["author_addPaperUploadFile"]["tmp_name"];
+					$tmp_file = $_FILES["author_updatePaperUploadFile"]["tmp_name"];
 					
 					$paper_ex = pathinfo($paper_filename, PATHINFO_EXTENSION);
 					$paper_ex_lc = strtolower($paper_ex);

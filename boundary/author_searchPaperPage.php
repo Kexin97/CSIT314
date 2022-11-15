@@ -28,9 +28,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<?php
 		require("../controller/viewPaperController.php");
-
+		
+		$author = $_COOKIE["accountEmail"];
+		
 		$control = new ViewPaperController();
-		$list = $control->viewPaper();
+		$list = $control->viewPaper($author);
 		
 	?>
     <div class="wrapper">
@@ -202,24 +204,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-								<?php for($i = 0; $i < count($list); $i++): ?>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper name -->
-                                        <?php echo $list[$i]["paper_name"]; ?>
-                                    </td>
-                                    
-                                    <td>
-                                        <a href="author_viewPaperPage.php">
-                                            <?php echo '<button type="button" class="detail_action_btn" data-toggle="modal" onclick="paperIDCookie('. $list[$i]["paper_ID"] .')">';?>
-                                            Details
-                                        </button>
-                                        </a>
-                                    </td>
-
-
-                                </tr>
-								<?php endfor; ?>
+								
+								<?php
+								if ($list[0]['result']!=FALSE){
+									for($i = 0; $i < count($list); $i++){
+										echo "<tr><td>".$list[0]["paper_name"]."</td>";
+										echo '<td>
+												<a href="author_viewPaperPage.php">
+												<button type="button" class="detail_action_btn" data-toggle="modal" onclick="paperIDCookie('. $list[$i]["paper_ID"] .')">
+													Details
+												</button>
+												</a>
+											  </td></tr>'; 
+									}
+								}
+								
+								?>
                             </tbody>
                         </table>
                     </div>
