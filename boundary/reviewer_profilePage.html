@@ -88,7 +88,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewPaperPage.html" class="nav-link">
+                            <a href="../boundary/reviewer_viewPaper.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -106,7 +106,7 @@
 
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewBidPage.html" class="nav-link">
+                            <a href="reviewer_viewBid.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View bid
@@ -115,7 +115,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profilePage.html" class="nav-link ">
+                            <a href="reviewer_profile.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -148,7 +148,7 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
                     <div id="settings" style="padding: 30px;">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="post" action="../controller/profileUpdateController.php">
                             <!--<div class="form-group row">
                                 <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
                                 <div class="col-sm-4">
@@ -160,14 +160,16 @@
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer password -->
-                                    <input type="password" class="form-control" id="reviewer_profilePassword">
+                                    <input type="password" class="form-control" id="reviewer_profilePassword" name="password">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="adminName" class="col-sm-2 col-form-label">Reviewer Name:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer name -->
+									
                                     <p class="form-control" id="reviewer_profileName" style="border: none; margin-left: -10px;">
+									<?php $stmt->execute(); echo $stmt->fetch()["account_fullName"];?>
                                     </p>
                                 </div>
                             </div>
@@ -175,7 +177,9 @@
                                 <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer gender -->
+									
                                     <p class="form-control" id="reviewer_profileGender" style="border: none; margin-left: -10px;">
+										<?php $stmt->execute(); echo $stmt->fetch()["account_sex"];?>
                                     </p>
                                 </div>
                             </div>
@@ -183,7 +187,29 @@
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer age -->
+									
                                     <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
+										<?php $stmt->execute(); echo $stmt->fetch()["account_age"];?>
+                                    </p>
+                                </div>
+                            </div>
+							<div class="form-group row">
+                                <label for="inputReviews" class="col-sm-2 col-form-label">Number of reviews：</label>
+                                <div class="col-sm-4">
+                                    <!-- retrieve  -->
+									
+                                    <p class="form-control" id="reviewer_profileReviews" style="border: none; margin-left: -10px;">
+										<?php $stmt2->execute([$_SESSION["reviewer_email"]]); 
+										if ($stmt2->fetch()["maxReviewNumber"] == null)
+										{
+											echo "Number of recommended reviews not set yet";
+										}
+										else
+										{
+											$stmt2->execute([$_SESSION["reviewer_email"]]);
+											echo $stmt2->fetch()["maxReviewNumber"];
+										}
+										?>
                                     </p>
                                 </div>
                             </div>
@@ -191,14 +217,14 @@
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer contact number -->
-                                    <input type="tel" class="form-control" id="reviewer_profileContact">
+                                    <input type="tel" class="form-control" id="reviewer_profileContact" name="number">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer email -->
-                                    <input type="email" class="form-control " id="reviewer_profileEmail">
+                                    <input type="email" class="form-control " id="reviewer_profileEmail" name="email">
                                 </div>
                             </div>
                             <div class="form-group row">

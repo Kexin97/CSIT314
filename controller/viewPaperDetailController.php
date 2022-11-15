@@ -8,19 +8,19 @@ session_start();*/
 ?>
 <html>
 	<head>
-		<title>lallalaaaaaaaaaaaaaaaaaaaaaa</title>
+		<!-- <title>lallalaaaaaaaaaaaaaaaaaaaaaa</title>
 		la &nbsp; la
-		<hr/>
+		<hr/> -->
 	</head>
 	<body>
-		<h1>ReviewerViewPaperController.php</h1>
+		<h1>viewPaperDetailController.php</h1>
 		
 
 
 		<?php
+		include '../entity/reviewerEntity.php';
 		
-		
-		$servername = "localhost";
+		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "testDB";
@@ -35,19 +35,37 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }
+        }*/
         //echo "<br>";echo "<br>";
 		try 
 		{
+			
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST["paperName"];
-			$daPaperName = $_POST["paperName"];
+			
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-			echo $daPaperName;
+			if (!isset($_POST["paperName"]))
+			{
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo "its empty@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+				$daPaperName = $_SESSION["paperDetailName"];
+				
+				if (!isset($_POST['review']))
+				{
+					
+				}
+			}
+			else if ($_POST["paperName"] != null)
+			{
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo "its NOT empty@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+				$_SESSION["paperDetailName"] = $_POST["paperName"];		//session var2 paperDetailName!
+				$daPaperName = $_POST["paperName"];
+			}
 			//$daPaperName = 'paper1';
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $daPaperName;
-			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating FROM papers WHERE paperName='$daPaperName'");
+			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating, bidWinner FROM papers WHERE paperName='$daPaperName'");
 			$stmt->execute();
 			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["review"];
@@ -70,10 +88,10 @@ session_start();*/
 			echo $e->getMessage();
         }
 		
-		include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>

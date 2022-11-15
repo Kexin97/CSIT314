@@ -323,5 +323,68 @@ JOIN account_profile ON account.account_email=account_profile.account_email";
                 $this->checkProfile = "";
             }
         }
+		
+		//view conference user for addPaper use
+		function conferenceList(){
+            $SQLGet = "SELECT account.account_ID,account.account_email,account.account_fullName,account_profile.conferenceChair_type FROM `account` 
+JOIN account_profile ON account.account_email=account_profile.account_email";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+					if($Row["conferenceChair_type"]!= ""){
+						$dataArray[$i]["account_ID"] = $Row["account_ID"];
+						$dataArray[$i]["conferenceChair_type"] = $Row["conferenceChair_type"];
+						$dataArray[$i]["account_fullName"] = $Row["account_fullName"];
+						$dataArray[$i]["account_email"] = $Row["account_email"];
+
+						$i++;
+					}
+                }
+            }
+            
+            
+            $this->dataArray = $dataArray;
+
+            return $dataArray;
+        }
+		
+		//view author user for addPaper use
+		function authorList(){
+            $SQLGet = "SELECT account.account_ID,account.account_email,account.account_fullName,account_profile.author_type FROM `account` 
+JOIN account_profile ON account.account_email=account_profile.account_email";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+					if($Row["author_type"]!= ""){
+						$dataArray[$i]["account_ID"] = $Row["account_ID"];
+						$dataArray[$i]["author_type"] = $Row["author_type"];
+						$dataArray[$i]["account_fullName"] = $Row["account_fullName"];
+						$dataArray[$i]["account_email"] = $Row["account_email"];
+
+						$i++;
+					}
+                }
+            }
+            
+            
+            $this->dataArray = $dataArray;
+
+            return $dataArray;
+        }
+		
+		
+		
+		
+		
 	}
 ?>
