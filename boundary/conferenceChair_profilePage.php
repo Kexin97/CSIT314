@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="loadProfile()">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -149,58 +149,37 @@
                             <!--<div class="form-group row">
                                 <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
                                 <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
+                                    <p class="form-control" id="conference_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
                                 </div>
                             </div>-->
-
                             <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                                <label for="adminName" class="col-sm-2 col-form-label">Admin Name:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve author password -->
-                                    <input type="password" class="form-control" id="author_profilePassword">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="adminName" class="col-sm-2 col-form-label">Author Name:</label>
-                                <div class="col-sm-4">
-                                    <!-- retrieve author name -->
-                                    <p class="form-control" id="author_profileName" style="border: none; margin-left: -10px;">
-                                    </p>
+                                    <p class="form-control" id="conference_profileName" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve author gender -->
-                                    <p class="form-control" id="author_profileGender" style="border: none; margin-left: -10px;">
-                                    </p>
+                                    <p class="form-control" id="conference_profileGender" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve author age -->
-                                    <p class="form-control" id="author_profileAge" style="border: none; margin-left: -10px;">
-                                    </p>
+                                    <p class="form-control" id="conference_profileAge" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve author contact number -->
-                                    <input type="tel" class="form-control" id="author_profileContact">
+                                    <p class="form-control" id="conference_profileContact" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve author email -->
-                                    <input type="email" class="form-control " id="author_profileEmail">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-4">
-                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                    <p class="form-control " id="conference_profileEmail" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                         </form>
@@ -231,6 +210,40 @@
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
+
+        function setCookie(nameCookie, valueCookie, timeCookie){
+            const date = new Date();
+            date.setTime(date.getTime() +  (timeCookie * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + date.toUTCString();
+            document.cookie = `${nameCookie}=${valueCookie}; ${expires}; path=/`
+        }
+
+        function deleteCookie(nameOfCookie){
+            setCookie(nameOfCookie, null, null);
+        }
+
+        function getCookie(name){
+            const cDecoded = decodeURIComponent(document.cookie);
+            const cArray = cDecoded.split("; ");
+            let result = null;
+            
+            cArray.forEach(element => {
+                if(element.indexOf(name) == 0){
+                    result = element.substring(name.length + 1)
+                }
+            })
+            return result;
+        }
+
+        function loadProfile(){
+            document.getElementById('conference_profileName').innerHTML = getCookie("accountFullName");
+            document.getElementById('conference_profileGender').innerHTML = getCookie("accountSex");
+            document.getElementById('conference_profileAge').innerHTML = getCookie("accountAge");
+            document.getElementById('conference_profileContact').innerHTML = getCookie("accountContact");
+            document.getElementById('conference_profileEmail').innerHTML = getCookie("accountEmail");
+        }
+
+        console.log(document.cookie);
     </script>
 
 </body>
