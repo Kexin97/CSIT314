@@ -127,13 +127,13 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                View paper
+                                    Search paper
                                 </p>
                             </a>
 
                         </li>
                         <li class="nav-item active">
-                            <a href="author_emailPage.php" class="nav-link active">
+                            <a href="author_emailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     View email

@@ -121,7 +121,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                View paper
+                                    Search paper
                                 </p>
                             </a>
 
@@ -136,7 +136,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="author_profilePage.php" class="nav-link active">
+                            <a href="author_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile

@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Author</title>
+    <title>Admin</title>
     <style>
         div {
             height: auto;
@@ -146,7 +146,7 @@
                             <a href="author_searchPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                View paper
+                                    Search paper
                                 </p>
                             </a>
 
@@ -275,9 +275,9 @@
                                 <div class="col-sm-7">
                                     <!-- retrieve the review of paper-->
                                     <p id="author_viewPaperReview">
-                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
+                                         What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
-                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
+                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. 
                                     </p>
                                 </div>
                                 <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
@@ -305,7 +305,7 @@
                                                         <input type="radio" id="author_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
                                                     </label>
                                     <label class="btn btn-secondary author_viewPaperAddRating">
-                                                        <input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 (weak reject)
+                                                        <input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 <br>(weak reject)
                                                     </label>
                                     <label class="btn btn-secondary author_viewPaperAddRating">
                                                         <input type="radio" id="author_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
@@ -409,14 +409,14 @@
                     <p>Paper name:&nbsp;</p>
                     <div class="detail">
                         <!-- get PaperName from DB-->
-						<?php echo '<input type="text" class="form-control" id="author_editPaperName" value='.$list[0]["paper_name"].'>'; ?>
+						<?php echo '<input type="text" class="form-control" id="author_editPaperName" name="author_editPaperName" value='.$list[0]["paper_name"].'>'; ?>
                         
 
                     </div>
                     <p class="searchLeft">Conference </p>
                     <div class="detail">
 
-                        <select id="author_editConference" class="form-control select2" style="width: 100% !important;" >
+                        <select id="author_editConference" name="author_editConference" class="form-control select2" style="width: 100% !important;" >
                             <!-- retrieve conference number from db -->
                             <?php 
 								for($i = 0; $i < count($clist); $i++){ 
@@ -436,48 +436,47 @@
                     </div>
                     <p class="searchLeft">Author </p>
                     <div class="detail">
-                        <select id="author_editAuthorName" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
+                        <select id="author_editAuthorName" name="author_editAuthorName[]" class="form-control select2 col-sm-4" multiple="multiple" style="width: 100% !important;">
                                 <!-- retrieve author name from db -->
 							<?php 
 								$authorSel = explode(",",$list[0]["author"] );
-								 for($i=0; $i<count($alist);$i++){
+								$count = count($alist);
+								for($i=0; $i<count($alist);$i++){
 									for($j=0;$j<count($authorSel);$j++){
 										if($alist[$i]["account_email"]== $_COOKIE["accountEmail"] && $authorSel[$j]==$_COOKIE["accountEmail"]){
+											array_splice($alist,$i,1);
+											$count--;
+											$i--;
 											break;
 										}
 										else if($alist[$i]["account_email"] == $authorSel[$j]){
 											echo "<option value='".$authorSel[$j]."' selected>" . $alist[$i]["account_email"]."</option>";
+											array_splice($alist,$i,1);
+											$count--;
+											$i--;
 											break;
 										}
-										else if ($authorSel[$j]!=$alist[$i]["account_email"]){
-											echo "<option value='".$authorSel[$j]."' >" . $alist[$i]["account_email"]."</option>"; 
-											
-										}
-										
 									}
-								} 
+								}
 								
-								// for($i=0;$i<count($authorSel);$i++){
-								// 	if (in_array($authorSel[0],$alist["account_email"])){
-								// 		echo "<option>assa in list</option>";
-								// 	}
-								// 	else{
-								// 		echo "<option>assa not in list</option>";
-								// 	}
+								
+								for($i=0; $i<$count;$i++){
+									echo "<option value='".$alist[$i]["account_email"]."'>" . $alist[$i]["account_email"]."</option>";
 									
-								// }
+								}
+								
 							?>
 						</select>
                     </div>
 					<p>
+                    
                     <p for="exampleInputFile" class="searchLeft">Upload paper:</p>
                     <div class="detail">
 
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile" onchange="getFile()">
-                                <label class="custom-file-label" for="exampleInputFile" id="uploadFile">
-								<?php echo $filename[3];?></label>
+                                <label class="custom-file-label" for="author_updatePaperUploadFile" name="uploadFile" id="uploadFile"><?php echo $filename[3];?></label>
+								<input type="file" class="custom-file-input" id="author_updatePaperUploadFile" onchange="getFile()" name="author_updatePaperUploadFile" accept=".pdf">
                             </div>
                         </div>
                     </div>
@@ -552,12 +551,53 @@
         });
 		
 		function getFile(){
-			var x = "<?php echo $filename[3];?>";
-			document.getElementById("uploadFile").innerHTML = x;
-		}
+			var x = document.getElementById("author_updatePaperUploadFile");
+			var filename = x.files.item(0).name;
+			document.getElementById("uploadFile").innerHTML = filename;
+			}
     </script>
 	<?php
+		require ("../controller/updatePaperController.php");
 		
+		if(isset($_POST["author_saveEditPaper"]) && isset ($_FILES["author_updatePaperUploadFile"])){
+            $paper_name = $_POST["author_editPaperName"];
+            $paper_conference = $_POST["author_editConference"];
+			$paper_author = $_COOKIE["accountEmail"];
+			$other_author = $_POST["author_editAuthorName"];
+			$paper_filename = $_FILES["author_updatePaperUploadFile"]["name"];
+			$paper_ID = $list[0]["paper_ID"];
+			
+			
+			//change other_author from array to string
+			foreach ($other_author as $author){
+				if ($author != $_COOKIE["accountEmail"]){
+					$paper_author = $paper_author."," . $author;
+				}
+			}
+			
+			
+			$controller = new updatePaperController();
+			$result = $controller->updatePaper($paper_ID, $paper_name, $paper_conference,$paper_author,$paper_filename);
+				if($result["result"] != TRUE){
+					$fail = $result["errorMsg"];
+					displayFail($fail);
+				}
+				else{
+					displaySuccess();
+					echo '<script>window.location.href="../boundary/author_viewPaperPage.php";</script>';
+				}
+			
+				
+			
+        }
+
+        function displaySuccess() {
+        echo '<script> alert("Paper has been successfully updated."); </script>';
+        }
+
+        function displayFail($fail) {
+        echo '<script> alert("Failed to update paper: ' . $fail . '"); </script>';
+        }
 	?>
 
 </body>
