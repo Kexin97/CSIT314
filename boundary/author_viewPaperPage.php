@@ -272,8 +272,9 @@
                                             <!--</label>
                                 </div>
                             </div>-->
-							<table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%;table-layout:fixed;">
-							<thead>
+                            <table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+
+                            <thead>
 								<tr>
                                     <th>Paper rating</th>
                                     <th>Paper review</th>
@@ -283,7 +284,7 @@
 							<tbody>
 							<tr>
 							<td>123</td>
-							<td style="display: inline-block;word-break: break-word;">
+							<td style="word-break: break-word;white-space: normal">
                                          What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
                                                 potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. 
@@ -549,9 +550,9 @@
 
         $(function() {
 			$('#author_PaperRating').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": true,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
