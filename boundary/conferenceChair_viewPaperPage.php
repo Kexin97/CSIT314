@@ -78,7 +78,7 @@
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -86,23 +86,23 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View allocated paper
+                                    Search allocated paper
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Search paper
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -111,7 +111,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -120,12 +120,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <div class="nav-link" style="cursor:pointer" onclick="signOut()">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
                                 </p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                     <!--<img src="img/nav_bk.svg" id="nav_bk" />-->
@@ -136,71 +136,114 @@
         </aside>
         <!-- Content Wrapper -->
         <div class="content-wrapper ">
-            <div class="col-12">
-                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
-                    </div>
-                    <!-- 
-
-                    <div class="card-body">
-                        <div>
-                            <p class="searchLeft">Enter paper name: </p>
-                           //search User ID 
-                            <input type="search" id="author_searchEnterAllocatedPaperName" class="form-control form-control-lg">
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
+            <div class="col-12" style="display: flex;">
+                <div class="col-md-5">
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
                         </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="author_viewPaperID">
+                                                <!-- 12345678 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="author_viewPaperName">
+                                                <!-- PaperA -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Conference:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper conference -->
 
-                    </div> -->
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="card" style="margin-top: 20px;">
-                    <div class="card-body">
-                        <table id="conferenceChair_searchAllocatedPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Paper ID</th>
-                                    <th>Paper Name</th>
-                                    <th>Reviewer name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper id -->
-                                        <!-- 12345678 -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper name -->
-
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper reviewed/unreviewed -->
-
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.html">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
-                                            Details
+                                    <label id="author_viewPaperConference">
+                                                <!-- Conference1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Author:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve author name -->
+                                    <label class="author_viewPaperAuthor">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Accept/reject paper:</p>
+                                <div class="col-sm-4">
+                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
+                                <!-- retrieve conference name from db -->
+                                <option>Accept</option>
+                                <option>Reject</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="author_viewPaperEditDetail_btn">
+                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+                                 Update status
                                         </button>
-                                        </a>
-                                    </td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7" id="author_viewRevRatContainer">
+                    <div class="card" style="margin-top: 20px;margin-bottom: 0;">
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper rating:</p>
+                                <div class="col-sm-4">
+                                    <!-- retrieve paper rating -->
+                                    <label id="author_viewPaperRating">
+                                                <!-- 2.5 -->
+
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper review:</p>
+                                <div class="col-sm-7">
+                                    <!-- retrieve the review of paper-->
+                                    <p id="author_viewPaperReview">
+                                        <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
+                                                research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
+                                                potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
+                                    </p>
+                                </div>
+                                <!-- <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio2">
+                                            <label for="customRadio3" class="custom-control-label">
+                                            3 (strong accept)</label>
+                                            <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio2">
+                                            <label for="customRadio2" class="custom-control-label">
+                                                2s(accept)</label> -->
+
+                            </div>
 
 
-                                </tr>
-
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- ./wrapper -->
     <!-- jQuery -->
@@ -225,15 +268,6 @@
         });
 
         $(function() {
-            $('#conferenceChair_searchAllocatedPaper').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
             //Initialize Select2 Elements
             $('.select2').select2();
             //Initialize Select2 Elements
@@ -241,6 +275,15 @@
                 theme: 'bootstrap4'
             });
         });
+        function signOut(){
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                var confirmMessage = "Are you sure you want to sign out?";
+                if (confirm(confirmMessage) == true) {
+                    window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            console.log("cookies: "+document.cookie);
     </script>
 
 </body>

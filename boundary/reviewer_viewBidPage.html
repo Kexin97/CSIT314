@@ -87,7 +87,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewPaperPage.html" class="nav-link">
+                            <a href="reviewer_viewPaper.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -105,7 +105,7 @@
 
                         </li> -->
                         <li class="nav-item active">
-                            <a href="reviewer_viewBidPage.html" class="nav-link">
+                            <a href="reviewer_viewBid.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
                                 <p class="navHeader">
                                     View bid
@@ -114,7 +114,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profilePage.html" class="nav-link ">
+                            <a href="reviewer_profile.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -138,6 +138,32 @@
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Doctor Home Page -->
+		<!-- <form method="post" action="reviewer_viewBid.php"> -->
+		<!-- <div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save number of review you would like to review?</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="deleteText">Are you sure you want to save number of review you would like to review?</p>
+                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+						<input type="submit" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" value="Confirm save">
+                        <!-- <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                            Confirm save
+                        </button> -->
+                    <!-- </div>
+                    <div class="modal-footer" style="border: none;">
+                    </div>
+                </div>
+            </div>
+        </div> -->
         <div class="content-wrapper ">
             <!-- <div class="col-12">
                 <div class="card" style="margin-top: 20px;margin-bottom: 0;">
@@ -164,18 +190,24 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View Bid </p>
                     </div>
                     <div class="card-body">
-
+						<form method="post" action="reviewer_viewBid.php">	<!-- form opening 1 -->
                         <div class="row">
+							
                             <label class="searchLeft col-sm-4 ">Number of paper(s) to review</label>
+							
                             <div class="col-sm-4">
                                 <input type="number" class="form-control" id="reviewer_addNoPaperReview" name="reviewer_addNoPaperReview" min="1" max="100" min="1" maxlength="3" maxlength="3">
 
                             </div>
                             <div class="col-sm-2">
-                                <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#saveNoPaperReviewModal" value="Save">
+								<input type="submit" class="detail_action_btn" value="Save">
+                                <!-- <input type="button" class="detail_action_btn" data-toggle="modal" data-target="#saveNoPaperReviewModal" value="Save"> -->
                             </div>
+							
                         </div>
+						</form>	<!-- form closing 1 -->
                     </div>
+					
                     <div class="card-body">
 
 
@@ -185,6 +217,7 @@
                                     <tr>
                                         <th>Paper ID</th>
                                         <th>Paper Name</th>
+                                        <th>Open paper</th>
                                         <th>Number of reviewer bid</th>
                                         <th>Add Bid</th>
                                         <th>Delete Bid</th>
@@ -192,21 +225,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+								<?php 
+								//for ($x = 0; $x < $numOfRows; $x++)
+								foreach(($stmt->fetchAll()) as $v)
+								{
+									//$stmt->execute([]);
+									echo '
                                     <tr>
                                         <td>
                                             <!-- retrieve paper id -->
-                                            12345678
+                                            ' . $v["paper_ID"] . '
                                         </td>
                                         <td>
                                             <!-- retrieve paper name -->
+											' . $v["paper_name"] . '
+                                            <!-- PaperA -->
+                                        </td>
+                                        <td>
 
-                                            PaperA
                                         </td>
                                         <td>
                                             <!-- retrieve author name -->
 
                                             2
                                         </td>
+
                                         <td>
 
                                             <!-- <a href="reviewer_addBidPage.html">
@@ -215,6 +258,10 @@
 
                                             </button>
                                         </a> -->
+											<!-- <form method="post" action="../boundary/reviewer_viewPaperDetail.php">
+											  <button name="paperName" value="';echo $v["paper_name"]; echo '" 
+											  class="detail_action_btn">View Detail</button>
+											</form> -->
                                             <button id="reviewer_addBid" type="button" class="detail_action_btn" data-toggle="modal" data-target="#addBidModal">
                                             Add bid
                                             </button>
@@ -226,7 +273,9 @@
                                         </td>
 
                                     </tr>
-
+									';
+								}
+								?>
                                 </tbody>
                             </table>
                         </div>
@@ -234,31 +283,9 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="saveNoPaperReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save number of review you would like to review?</p>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="deleteText">Are you sure you want to save number of review you would like to review?</p>
-                        <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>
-                        <button type="button" id="reviewer_save" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                            Confirm save
-                        </button>
-                    </div>
-                    <div class="modal-footer" style="border: none;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+		<!-- </form> -->
+		
+        <!--<div class="modal fade" id="addBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -281,8 +308,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        </div> -->
+		
+        <!-- <div class="modal fade" id="deleteBidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -295,14 +323,14 @@
                     <div class="modal-body">
                         <p>Paper ID:&nbsp;</p>
                         <div class="detail">
-                            <!-- get paperID from DB-->
+                            <!-- get paperID from DB
                             <label class="reviewer_deletePaperID">
                             
                         </label>
                         </div>
                         <p>Paper name:&nbsp;</p>
                         <div class="detail">
-                            <!-- get userFullName from DB-->
+                            <!-- get userFullName from DB
                             <label class="reviewer_deletePaperName"></label>
                         </div>
 
@@ -321,7 +349,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+		
+		
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

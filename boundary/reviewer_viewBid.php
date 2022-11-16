@@ -5,7 +5,7 @@
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
-//session_start();
+session_start();
 ?>
 <html>
 	<head>
@@ -19,6 +19,9 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
 
 		<?php
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		//echo $_POST["reviewer_addNoPaperReview"];
 		
 		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
@@ -72,10 +75,17 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		{
 			echo $e->getMessage();
         }*/
+		
 		include '../controller/reviewerViewBiDController.php';
+		// $viewBidObj = unserialize($_SESSION["viewBidObj"]);
+		// $viewBidObj->viewPapers();
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		include '../boundary/reviewer_viewBidPage.html';
 		
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo $_POST["reviewer_addNoPaperReview"];
+
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//$conn = null;
         ?>

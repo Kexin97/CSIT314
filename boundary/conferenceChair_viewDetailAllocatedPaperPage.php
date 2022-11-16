@@ -78,7 +78,7 @@
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View allocated paper
@@ -94,7 +94,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View paper
@@ -102,7 +102,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -111,7 +111,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -120,12 +120,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <div class="nav-link" style="cursor:pointer" onclick="signOut()">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
                                 </p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                     <!--<img src="img/nav_bk.svg" id="nav_bk" />-->
@@ -136,72 +136,130 @@
         </aside>
         <!-- Content Wrapper -->
         <div class="content-wrapper ">
-            <div class="col-12">
-                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
-                    </div>
-                    <!-- 
 
-                    <div class="card-body">
-                        <div>
-                            <p class="searchLeft">Enter paper name: </p>
-                           //search User ID 
-                            <input type="search" id="author_searchEnterAllocatedPaperName" class="form-control form-control-lg">
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
-                        </div>
-
-                    </div> -->
-                </div>
-            </div>
             <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body">
-                        <table id="conferenceChair_searchAllocatedPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Paper ID</th>
-                                    <th>Paper Name</th>
-                                    <th>Reviewer name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper id -->
-                                        <!-- 12345678 -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper name -->
+                        <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                            <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
+                            <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View paper deatil</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-sm-4">Paper ID:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper id -->
+                                    <label id="conferenceChair__viewAllocatedPaperID">
+                                                <!-- 12345678 -->
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-4">Paper name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve paper name -->
+                                    <label id="conferenceChair__viewAllocatedPaperName">
+                                                <!-- PaperA -->
+                                            </label>
+                                </div>
+                            </div>
 
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper reviewed/unreviewed -->
+                            <div class="row">
+                                <p class="col-sm-4">Reviewer name:</p>
+                                <div class="col-sm-4">
+                                    <!-- retieve Author name -->
+                                    <label class="conferenceChair__viewAllocatedPaperRevewer">
+                                                <!-- Author1 -->
+                                            </label>
+                                </div>
+                            </div>
 
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.html">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
-                                            Details
+                            <div class="reviewer_viewPaperEditDetail_btn">
+                                <button type="button" id="conferenceChair__editAllocatedDetail" class="blue_btn" data-toggle="modal" data-target="#conferenceChair__editAllocatedPaperModal">
+                                            Edit Detail
                                         </button>
-                                        </a>
-                                    </td>
-
-
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                <!-- <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
+                                        Delete paper
+                                        </button> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="conferenceChair__editAllocatedPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img style="margin-left: 10px; margin-top: 20px" src="../img/blue arrow.svg" data-dismiss="modal" aria-label="Close"></i>
+                    <p style="font-size:20px; color: #109CF1;margin-top: 15px; margin-left: 15px; display: inline;">Edit Paper Details</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <p>Paper ID:&nbsp;</p>
+                    <div class="detail ">
+                        <!-- get paperID from DB-->
+                        <label id="conferenceChair__editAllocatedPaperID "></label>
+                    </div>
+                    <p>Paper name:&nbsp;</p>
+                    <div class="detail ">
+                        <!-- get PaperName from DB-->
+                        <label id="conferenceChair__editAllocatedPaperName"></label>
+                    </div>
+                    <p class="searchLeft ">Reviewer name</p>
+                    <div class="detail">
+                        <select id="conferenceChair_allocatedReviewerName" class="form-control select2 inlineBlock" style="width: 200px;">
+                            <!-- retrieve conference name from db -->
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            </select>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer " style="border: none; ">
+                    <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
+                        Back
+                    </button>
+                    <!-- <button type="button " id="reviewer_saveEditPaper " style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
+                        Save
+                    </button> -->
+                    <button type="button" class="blue_btn" data-toggle="modal" data-target="#saveModal" id="reviewer_saveEditPaper">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Save reviewer?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+                    <p class="deleteText">Are you sure you want to save?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <button type="button" id="conferenceChair_allocatedSave" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                        Confirm save
+                    </button>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -225,15 +283,6 @@
         });
 
         $(function() {
-            $('#conferenceChair_searchAllocatedPaper').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
             //Initialize Select2 Elements
             $('.select2').select2();
             //Initialize Select2 Elements
@@ -241,6 +290,15 @@
                 theme: 'bootstrap4'
             });
         });
+        function signOut(){
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                var confirmMessage = "Are you sure you want to sign out?";
+                if (confirm(confirmMessage) == true) {
+                    window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            console.log("cookies: "+document.cookie);
     </script>
 
 </body>

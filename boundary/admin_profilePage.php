@@ -156,13 +156,6 @@
                                     <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
                                 </div>
                             </div>-->
-
-                            <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
-                                <div class="col-sm-4">
-                                    <input type="password" class="form-control" id="admin_profilePassword" placeholder="Password">
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label for="adminName" class="col-sm-2 col-form-label">Admin Name:</label>
                                 <div class="col-sm-4">
@@ -184,18 +177,13 @@
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="admin_profileContact" placeholder="Contact Number">
+                                    <p class="form-control" id="admin_profileContact" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control " id="admin_profileEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-4">
-                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                    <p class="form-control " id="admin_profileEmail" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                         </form>
@@ -255,8 +243,8 @@
             document.getElementById('admin_profileName').innerHTML = getCookie("accountFullName");
             document.getElementById('admin_profileGender').innerHTML = getCookie("accountSex");
             document.getElementById('admin_profileAge').innerHTML = getCookie("accountAge");
-            document.getElementById('admin_profileContact').value = getCookie("accountContact");
-            document.getElementById('admin_profileEmail').value = getCookie("accountEmail");
+            document.getElementById('admin_profileContact').innerHTML = getCookie("accountContact");
+            document.getElementById('admin_profileEmail').innerHTML = getCookie("accountEmail");
         }
 
         console.log(document.cookie);

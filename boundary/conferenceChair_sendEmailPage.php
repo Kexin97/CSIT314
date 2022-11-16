@@ -29,6 +29,7 @@
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
+            <!-- <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
         </div>
 
         <!-- Navbar -->
@@ -77,8 +78,16 @@
 
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
+                        <!-- <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon"><img src="../img/nav_home_icon.svg"></i>
+                                <p class="navHeader">
+                                    Home
+                                </p>
+                            </a>
+                        </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper
@@ -86,23 +95,24 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchAllocatedPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
                                     View allocated paper
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item active">
-                            <a href="conferenceChair_searchPaperPage.html" class="nav-link">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View paper
+                                    Update paper status
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="conferenceChair_sendEmailPage.html" class="nav-link">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/email.png"></i>
                                 <p class="navHeader">
                                     Send email
@@ -111,7 +121,7 @@
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="conferenceChair_profilePage.html" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -120,12 +130,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../boundary/login_page.php" class="nav-link ">
+                            <div class="nav-link" style="cursor:pointer" onclick="signOut()">
                                 <i class="nav-icon"><img src="../img/nav_logout_icon.svg"></i>
                                 <p class="navHeader">
                                     Logout
                                 </p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                     <!--<img src="img/nav_bk.svg" id="nav_bk" />-->
@@ -137,112 +147,70 @@
         <!-- Content Wrapper -->
         <div class="content-wrapper ">
             <div class="col-12">
-                <div class="card" style="margin-top: 20px;margin-bottom: 0;">
-                    <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
-                        <div style="float:left;width: 3px;height: 28px; background: #109CF1;"></div>
-                        <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">View allocated paper</p>
-                    </div>
-                    <!-- 
-
-                    <div class="card-body">
-                        <div>
-                            <p class="searchLeft">Enter paper name: </p>
-                           //search User ID 
-                            <input type="search" id="author_searchEnterAllocatedPaperName" class="form-control form-control-lg">
-                            <button type="submit" class="btn btn-outline-primary search_button">search</button>
-                        </div>
-
-                    </div> -->
-                </div>
-            </div>
-            <div class="col-12">
                 <div class="card" style="margin-top: 20px;">
-                    <div class="card-body">
-                        <table id="conferenceChair_searchAllocatedPaper" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Paper ID</th>
-                                    <th>Paper Name</th>
-                                    <th>Reviewer name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <!-- retrieve paper id -->
-                                        <!-- 12345678 -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper name -->
+                    <div class="card-header" style="padding-top: 0; padding-bottom: 0; background-color: white;">
+                        <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
+                            Send Email</p>
+                    </div>
+                    <div style="padding: 30px;">
 
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <!-- retrieve paper reviewed/unreviewed -->
-
-                                        <!-- PaperA -->
-                                    </td>
-                                    <td>
-                                        <a href="conferenceChair_viewDetailAllocatedPaperPage.html">
-                                            <button type="button" class="detail_action_btn" data-toggle="modal">
-                                            Details
-                                        </button>
-                                        </a>
-                                    </td>
-
-
-                                </tr>
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
 
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- datatable -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
 
-    <script>
-        $(".nav .nav-link").on("click", function() {
-            $(".nav").find(".active").removeClass("active");
-            $(this).addClass("active");
-        });
+        <!-- ./wrapper -->
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE -->
+        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
 
-        $(function() {
-            $('#conferenceChair_searchAllocatedPaper').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- datatable -->
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+        <script>
+            $(".nav .nav-link ").on("click ", function() {
+                $(".nav ").find(".active ").removeClass("active ");
+                $(this).addClass("active ");
             });
-            //Initialize Select2 Elements
-            $('.select2').select2();
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            });
-        });
-    </script>
 
+            $(function() {
+
+                $('#searchUser').DataTable({
+                    "paging ": true,
+                    "lengthChange ": true,
+                    "searching ": true,
+                    "ordering ": true,
+                    "info ": true,
+                    "autoWidth ": true,
+                    "responsive ": true,
+                });
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                    theme: 'bootstrap4'
+                });
+            });
+            function signOut(){
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                var confirmMessage = "Are you sure you want to sign out?";
+                if (confirm(confirmMessage) == true) {
+                    window.location.replace("../boundary/login_page.php");
+                }
+            }
+
+            console.log("cookies: "+document.cookie);
+        </script>
 </body>
 
 </html>

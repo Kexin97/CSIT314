@@ -6,6 +6,7 @@ $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
 session_start();
+//$_SESSION["idArray"] = $idArray;	//session var 3, ID array
 ?>
 <html>
 	<head>

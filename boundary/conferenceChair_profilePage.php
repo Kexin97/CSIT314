@@ -17,7 +17,7 @@
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Reviewer</title>
+    <title>Conference Chair</title>
     <style>
         div {
             height: auto;
@@ -25,10 +25,9 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="loadProfile()">
     <div class="wrapper">
         <!-- Preloader -->
-		
         <div class="preloader flex-column justify-content-center align-items-center">
             <!-- <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
         </div>
@@ -68,10 +67,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="platform_name">
                     <span class="platform_name brand-image-xs logo-xl">
-                        Reviewer Platform
+                        Conference Chair Patform
                     </span>
                     <span class="platform_name brand-image-xl logo-xs" id="platformShort_name">
-                        Rev
+                        CC
                     </span>
                 </div>
 
@@ -79,44 +78,41 @@
 
                 <nav class=" mt-2 ">
                     <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu " data-accordion="false ">
-                        <!-- <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_home_icon.svg"></i>
-                                <p class="navHeader">
-                                    Home
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item active">
-                            <a href="../boundary/reviewer_viewPaper.php" class="nav-link">
-                                <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
-                                <p class="navHeader">
-                                    View paper
-                                </p>
-                            </a>
-
-                        </li>
-                        <!-- <li class="nav-item active">
-                            <a href="reviewer_addBidPage.html" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
-                                    Add bid
+                                    Allocated paper
                                 </p>
                             </a>
-
-                        </li> -->
+                        </li>
                         <li class="nav-item active">
-							<a href="../controller/reviewerViewBidController.php" class="nav-link">
-                            <!-- <a href="reviewer_viewBid.php" class="nav-link"> -->
-                                <i class="nav-icon"><img src="../img/nav_record_icon.svg"></i>
+                            <a href="conferenceChair_searchAllocatedPaperPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/search.svg"></i>
                                 <p class="navHeader">
-                                    View bid
+                                    View allocated paper
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="conferenceChair_updatePaperPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/search.svg"></i>
+                                <p class="navHeader">
+                                    Update paper status
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="conferenceChair_sendEmailPage.php" class="nav-link">
+                                <i class="nav-icon"><img src="../img/email.png"></i>
+                                <p class="navHeader">
+                                    Send email
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr color="#EBEFF2" style="border:1; margin-top:10px; opacity: 0.8;">
-                            <a href="reviewer_profile.php" class="nav-link ">
+                            <a href="conferenceChair_profilePage.php" class="nav-link ">
                                 <i class="nav-icon"><img src="../img/nav_profile_icon.svg"></i>
                                 <p class="navHeader">
                                     Profile
@@ -149,88 +145,41 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Personal Profile</p>
                     </div>
                     <div id="settings" style="padding: 30px;">
-                        <form class="form-horizontal" method="post" action="../controller/profileUpdateController.php">
+                        <form class="form-horizontal">
                             <!--<div class="form-group row">
                                 <label for="NRIC" class="col-sm-2 col-form-label">NRIC:</label>
                                 <div class="col-sm-4">
-                                    <p class="form-control" id="admin_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
+                                    <p class="form-control" id="conference_profileNRIC" style="border: none; margin-left: -10px;">S123456789</p>
                                 </div>
                             </div>-->
-
                             <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                                <label for="adminName" class="col-sm-2 col-form-label">Admin Name:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer password -->
-                                    <input type="password" class="form-control" id="reviewer_profilePassword" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="adminName" class="col-sm-2 col-form-label">Reviewer Name:</label>
-                                <div class="col-sm-4">
-                                    <!-- retrieve reviewer name -->
-									
-                                    <p class="form-control" id="reviewer_profileName" style="border: none; margin-left: -10px;">
-									<?php $stmt->execute(); echo $stmt->fetch()["account_fullName"];?>
-                                    </p>
+                                    <p class="form-control" id="conference_profileName" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputSex" class="col-sm-2 col-form-label">Gender：</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer gender -->
-									
-                                    <p class="form-control" id="reviewer_profileGender" style="border: none; margin-left: -10px;">
-										<?php $stmt->execute(); echo $stmt->fetch()["account_sex"];?>
-                                    </p>
+                                    <p class="form-control" id="conference_profileGender" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputAge" class="col-sm-2 col-form-label">Age：</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer age -->
-									
-                                    <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
-										<?php $stmt->execute(); echo $stmt->fetch()["account_age"];?>
-                                    </p>
-                                </div>
-                            </div>
-							<div class="form-group row">
-                                <label for="inputReviews" class="col-sm-2 col-form-label">Number of reviews：</label>
-                                <div class="col-sm-4">
-                                    <!-- retrieve  -->
-									
-                                    <p class="form-control" id="reviewer_profileReviews" style="border: none; margin-left: -10px;">
-										<?php $stmt2->execute([$_SESSION["reviewer_email"]]); 
-										if ($stmt2->fetch()["maxReviewNumber"] == null)
-										{
-											echo "Number of recommended reviews not set yet";
-										}
-										else
-										{
-											$stmt2->execute([$_SESSION["reviewer_email"]]);
-											echo $stmt2->fetch()["maxReviewNumber"];
-										}
-										?>
-                                    </p>
+                                    <p class="form-control" id="conference_profileAge" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer contact number -->
-                                    <input type="tel" class="form-control" id="reviewer_profileContact" name="number">
+                                    <p class="form-control" id="conference_profileContact" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+                                <label for="inputContact" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer email -->
-                                    <input type="email" class="form-control " id="reviewer_profileEmail" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-4">
-                                    <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
+                                    <p class="form-control " id="conference_profileEmail" style="border: none; margin-left: -10px;"></p>
                                 </div>
                             </div>
                         </form>
@@ -261,6 +210,40 @@
             $(".nav").find(".active").removeClass("active");
             $(this).addClass("active");
         });
+
+        function setCookie(nameCookie, valueCookie, timeCookie){
+            const date = new Date();
+            date.setTime(date.getTime() +  (timeCookie * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + date.toUTCString();
+            document.cookie = `${nameCookie}=${valueCookie}; ${expires}; path=/`
+        }
+
+        function deleteCookie(nameOfCookie){
+            setCookie(nameOfCookie, null, null);
+        }
+
+        function getCookie(name){
+            const cDecoded = decodeURIComponent(document.cookie);
+            const cArray = cDecoded.split("; ");
+            let result = null;
+            
+            cArray.forEach(element => {
+                if(element.indexOf(name) == 0){
+                    result = element.substring(name.length + 1)
+                }
+            })
+            return result;
+        }
+
+        function loadProfile(){
+            document.getElementById('conference_profileName').innerHTML = getCookie("accountFullName");
+            document.getElementById('conference_profileGender').innerHTML = getCookie("accountSex");
+            document.getElementById('conference_profileAge').innerHTML = getCookie("accountAge");
+            document.getElementById('conference_profileContact').innerHTML = getCookie("accountContact");
+            document.getElementById('conference_profileEmail').innerHTML = getCookie("accountEmail");
+        }
+
+        console.log(document.cookie);
     </script>
 
 </body>

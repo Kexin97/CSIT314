@@ -4,7 +4,9 @@
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
-session_start();*/
+$_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
+*/
+session_start();
 ?>
 <html>
 	<head>
@@ -37,9 +39,14 @@ session_start();*/
 			echo "Connection failed: " . $e->getMessage();
         }*/
         //echo "<br>";echo "<br>";
-		try 
+		$viewBidObj = new reviewerViewBid();
+		//$_SESSION["viewBidObj"] = serialize($viewBidObj);	//session obj 1, viewBidObj
+		$viewBidObj->viewPapers();
+		$viewBidObj->stmt;
+		
+		/*try 	//	viewPaper()
 		{
-			$stmt = $conn->prepare("SELECT paperName, authorName FROM papers ");
+			$stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");
 			$stmt->execute();
 
 			// set the resulting array to associative
@@ -66,13 +73,28 @@ session_start();*/
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        } 
+        /*} 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
+        }*/
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo $_POST["reviewer_addNoPaperReview"];
 		
+		if (isset($_POST['reviewer_addNoPaperReview']) && ($_POST['reviewer_addNoPaperReview']) != "")
+		{
+			$currentEmail = $_SESSION["reviewer_email"];
+			$reviewer_addNoPaperReview = $_POST['reviewer_addNoPaperReview'];
+			$stmt2 = $conn->prepare("UPDATE account_profile SET maxReviewNumber='$reviewer_addNoPaperReview'
+									WHERE account_email='$currentEmail' ");
+			$stmt2->execute();
+
+			// echo a message to say the UPDATE succeeded
+			echo $stmt2->rowCount() . " records UPDATED successfully";
+		}
+		//header("Location: ../boundary/reviewer_viewBid.php");
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//$conn = null;
         ?>

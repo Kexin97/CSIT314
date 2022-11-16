@@ -5,7 +5,7 @@
 $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
-//session_start();
+session_start();
 ?>
 <html>
 	<head>
@@ -19,7 +19,10 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
 
 		<?php
-		
+		$fname = $_POST['review'];
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo $_POST['review'] , "review is here@@@@@@@@@@@@@@@@";
+		echo "<br>";
 		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";

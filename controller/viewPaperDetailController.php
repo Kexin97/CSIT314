@@ -39,15 +39,33 @@ session_start();*/
         //echo "<br>";echo "<br>";
 		try 
 		{
+			
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST["paperName"];
-			$daPaperName = $_POST["paperName"];
+			
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-			echo $daPaperName;
+			if (!isset($_POST["paperName"]))
+			{
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo "its empty@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+				$daPaperName = $_SESSION["paperDetailName"];
+				
+				if (!isset($_POST['review']))
+				{
+					
+				}
+			}
+			else if ($_POST["paperName"] != null)
+			{
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+				echo "its NOT empty@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+				$_SESSION["paperDetailName"] = $_POST["paperName"];		//session var2 paperDetailName!
+				$daPaperName = $_POST["paperName"];
+			}
 			//$daPaperName = 'paper1';
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $daPaperName;
-			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating FROM papers WHERE paperName='$daPaperName'");
+			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating, bidWinner FROM papers WHERE paperName='$daPaperName'");
 			$stmt->execute();
 			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["review"];

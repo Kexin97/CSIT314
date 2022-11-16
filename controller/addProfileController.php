@@ -1,5 +1,5 @@
 <?php
-    require_once("../Entity/addProfileEntity.php");
+    require_once("../entity/addProfileEntity.php");
 
     class addProfileController{
         protected $entity;

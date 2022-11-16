@@ -51,9 +51,11 @@
     </script>
     <?php
         //$_POST['userEmail'], $_POST['userPassword'],
+		session_start();
         require '../controller/accountController.php';
         require '../controller/accountProfileController.php';
         if (isset($_POST['user_login_btn'])){
+			$_SESSION["reviewer_email"] = $_POST['userEmail'];	//zk session var
             $lc = new accountController();
             $vl = $lc->validateAccountDetails($_POST['userEmail'], $_POST['userPassword'], "user");
             $selectOption;
@@ -127,14 +129,15 @@
             }
             else if ($loginType == "conferenceChair"){
                 $new_url = "../boundary/conferenceChair_allocatePaperPage.php";
-                echo '<script>window.location.href="'.$new_url.'?cc";</script>';
+                echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "author"){
                 $new_url = "../boundary/author_addPaperPage.php";
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "reviewer"){
-                $new_url = "../boundary/reviewer_addRatingReviewPage.html";
+                $new_url = "../boundary/reviewer_viewPaper.php";
+
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else{
