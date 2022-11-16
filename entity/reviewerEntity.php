@@ -83,7 +83,7 @@ session_start();*/
 				
 				$stmt2->execute([$paperName]);
 				
-				$authors = explode(",", $stmt2->fetch()["author"]);
+				$authors = explode(", ", $stmt2->fetch()["author"]);
 				$authorString = "";
 				foreach ($authors as $b)
 				{
@@ -251,7 +251,8 @@ session_start();*/
 				$servername = "localhost";
 				$username = "root";
 				$password = "";
-				$dbname = "314_project";
+				// $dbname = "314_project";
+				$dbname = "testdb3";
 
 				try 
 				{

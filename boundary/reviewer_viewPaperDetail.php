@@ -19,10 +19,10 @@ session_start();
 
 
 		<?php
-		$fname = $_POST['review'];
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST['review'] , "review is here@@@@@@@@@@@@@@@@";
-		echo "<br>";
+		// $fname = $_POST['review'];
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo $_POST['review'] , "review is here@@@@@@@@@@@@@@@@";
+		// echo "<br>";
 		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
