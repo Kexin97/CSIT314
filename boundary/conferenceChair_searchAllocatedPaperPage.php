@@ -220,11 +220,11 @@
 
         $(function() {
             $('#conferenceChair_searchAllocatedPaper').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": true,
                 "searching": false,
                 "ordering": true,
-                "info": false,
+                "info": true,
                 "autoWidth": true,
                 "responsive": true,
             });

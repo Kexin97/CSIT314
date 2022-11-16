@@ -340,9 +340,9 @@
                                 <input type="text" id="clickedPaperID" name="clickedPaperID" hidden>
                             </div>
                             <div class="row">
-                                <p for="inputPaperName" class="searchLeft col-sm-4" >Reviewer name:</label>
-                                <div class="col-sm-6">
-                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 inlineBlock" onchange="checkWinnerRatingsAndReviews()">
+                                <p for="inputPaperName" class="col-sm-4" >Reviewer name:</label>
+                                <div class="col-sm-6" id="conferenceChair_reviewerDropdown">
+                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 inlineBlock" style="min-width:200px;"onchange="checkWinnerRatingsAndReviews()">
                                     <!-- retrieve paper name from db -->
 
                                 </select>
@@ -353,17 +353,17 @@
                                 <p class="col-sm-4">Paper rating:</p>
                                 <div class="col-sm-4">
                                     <!-- retrieve paper rating -->
-                                    <label id="conferenceChair_viewPaperRating">
+                                    <p id="displayPaperRating">
                                                 <!-- 2.5 -->
-                                                <text id="displayPaperRating"></text>
-                                            </label>
+                                              
+    </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <p class="col-sm-4">Paper review:</p>
                                 <div class="col-sm-7">
                                     <!-- retrieve the review of paper-->
-                                    <p id="displayPaperReview">
+                                    <p id="displayPaperReview" style="width:auto;word-break: break-word;white-space: normal">
                                         <!-- What is a review article? A review article can also be called a literature review, or a review of literature. It is a survey of previously published research on a topic. It should give an overview of current thinking on the topic. And, unlike an original
                                                 research article, it will not present new experimental results. Writing a review of literature is to provide a critical evaluation of the data available from existing studies. Review articles can identify
                                                 potential research areas to explore next, and sometimes they will draw new conclusions from the existing data. -->
@@ -420,11 +420,11 @@
 
         $(function() {
             $('#conferenceChair_searchPaper').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": true,
                 "searching": false,
                 "ordering": true,
-                "info": false,
+                "info": true,
                 "autoWidth": true,
                 "responsive": true,
             });
