@@ -295,6 +295,7 @@
                 {
 					if ($Row["bidWinnerRating"]!=NULL){
                     $data[$i]["paperName"] = $Row["paperName"];
+                    $data[$i]["bidID"] = $Row["winnerID"];
 					$data[$i]["bidWinnerName"] = $Row["bidWinnerName"];
 					$data[$i]["bidWinnerEmail"] = $Row["bidWinnerEmail"];
 					$data[$i]["bidWinnerRating"] = $Row["bidWinnerRating"];
@@ -309,6 +310,28 @@
 			else{
 				$data[0]["result"]= FALSE;
 			}
+            $this->data = $data;
+            return $data;
+			
+		}
+		
+		public function authorAddRate($bid_ID, $author_rate){
+			$this->bid_ID = $bid_ID;
+			$this->author_rate = $author_rate;
+			
+            $SQLUpdate = "UPDATE bidwinner 
+							SET author_rating = '$this->author_rate'
+							WHERE winnerID='$this->bid_ID'";
+			$qUpdate = $this->conn->query($SQLUpdate);
+			
+			if($qUpdate == TRUE){   
+				$data["result"] = TRUE;
+			}    
+			else{
+				$data["result"] = FALSE;
+				$data["errorMsg"] = "Cannot rate " ;
+			}
+							
             $this->data = $data;
             return $data;
 			

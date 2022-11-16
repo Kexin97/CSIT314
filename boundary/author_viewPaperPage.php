@@ -38,15 +38,15 @@
 		//for update use(AuthorList)
 		require("../controller/viewUserController.php");
 
-		$control = new ViewAccountController();
-		$alist = $control->authList();
+		$acontrol = new ViewAccountController();
+		$alist = $acontrol->authList();
 		
 		//for get review and rating
 		require("../controller/viewRatingController.php");
 		$paperName = $list[0]["paper_name"];
 		
-		$control = new ViewRatingController();
-		$ratinglist = $control->reviewRatingList($paperName);
+		$rcontrol = new ViewRatingController();
+		$ratinglist = $rcontrol->reviewRatingList($paperName);
 		
 		
 	?>
@@ -203,10 +203,11 @@
                                 </div>
                             </div>
                             <div class="author_viewPaperEditDetail_btn">
-							<button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+							
+							<button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal" <?php if($list[0]["paper_status"]!=""){echo "disabled";}?>>
                                         Edit Detail
                                         </button>
-										<button type="button" class="red_btn" data-toggle="modal" data-target="#deletePapereModal">
+										<button type="button" class="red_btn" data-toggle="modal" data-target="#deletePapereModal" <?php if($list[0]["paper_status"]!=""){echo "disabled";}?>>
                                         Delete paper
                                         </button>
                             </div>
@@ -239,7 +240,8 @@
 										<td style="word-break: break-word;white-space: normal">
 											<?php echo $ratinglist[$i]["bidWinnerReview"]; ?></td>
 										<td><?php echo $ratinglist[$i]["bidWinnerName"]; ?></td>
-										<td><button data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">Add review rating</button></td>
+										<td><?php echo '<button onclick="bidIDCookie('. $ratinglist[$i]["bidID"] .')" data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">'; ?>
+										Add review rating</button></td>
 									</tr>
 									<?php endfor; endif;?>
 								</tbody>
@@ -250,7 +252,7 @@
             </div>
         </div>
     </div>
-	
+	<form method="POST" enctype="multipart/form-data">
 	<div class="modal fade" id="addReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content" style="width:150%;">
@@ -266,35 +268,63 @@
 
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary author_viewPaperAddRating active">
-								<input type="radio" id="author_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
+								<input type="radio" name="author_viewPaperAddRating" id="author_viewPaperAddRating3" value="3" autocomplete="off" checked> 3<br>(strong accept)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio"  id="author_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
+								<input type="radio"  name="author_viewPaperAddRating" id="author_viewPaperAddRating2" value="2" autocomplete="off"> 2<br>(accept)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio"  id="author_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
+								<input type="radio"  name="author_viewPaperAddRating" id="author_viewPaperAddRating1" value="1" autocomplete="off"> 1<br>(weak accept)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio" id="author_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
+								<input type="radio" name="author_viewPaperAddRating" id="author_viewPaperAddRating0" value="0" autocomplete="off">0<br>(borderline paper)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio" name="options" id="author_viewPaperAddRatingMinus1" autocomplete="off"> -1 <br>(weak reject)
+								<input type="radio" name="author_viewPaperAddRating" id="author_viewPaperAddRatingMinus1" value="-1" autocomplete="off"> -1 <br>(weak reject)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio" id="author_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
+								<input type="radio" name="author_viewPaperAddRating" id="author_viewPaperAddRatingMinus2" value="-2" autocomplete="off"> -2<br>(reject)
 							</label>
 							<label class="btn btn-secondary author_viewPaperAddRating">
-								<input type="radio"  id="author_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
+								<input type="radio"  name="author_viewPaperAddRating" id="author_viewPaperAddRatingMinus3" value="-3" autocomplete="off"> -3<br>(strong reject)
 							</label>
 						</div>
+						<button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+						</button>
 						<button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
-                                                 Add review rating
-                                            </button>
+							 Add review rating
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	    <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                </div>
+                <div class="modal-body">
+				
+                    <p class="deleteText">Are you sure you want to add review?</p>
+                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                    <input name="author_addRating" value="Confirm save" type="submit" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
+                </div>
+                <div class="modal-footer" style="border: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+	</form>
 
     <div class="modal fade" id="deletePapereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -328,30 +358,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addReviewRatingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index:1060">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
 
-                    <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add review review?</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
-                </div>
-                <div class="modal-body">
-                    <p class="deleteText">Are you sure you want to add review?</p>
-                    <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                        Cancel
-                    </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn">
-                        Confirm save
-                    </button>
-                </div>
-                <div class="modal-footer" style="border: none;">
-                </div>
-            </div>
-        </div>
-    </div>
 	
 	<form method="POST" enctype="multipart/form-data">
     <div class="modal fade" id="author_editPaperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -368,7 +375,7 @@
                     <p>Paper name:&nbsp;</p>
                     <div class="detail">
                         <!-- get PaperName from DB-->
-						<?php echo '<input type="text" class="form-control" id="author_editPaperName" name="author_editPaperName" value='.$list[0]["paper_name"].'>'; ?>
+						<?php echo '<input type="text" class="form-control" id="author_editPaperName" name="author_editPaperName" value="'.$list[0]["paper_name"].'">'; ?>
                         
 
                     </div>
@@ -503,10 +510,15 @@
 			var filename = x.files.item(0).name;
 			document.getElementById("uploadFile").innerHTML = filename;
 			}
+			
+		function bidIDCookie(id){
+		document.cookie = "bid_ID = "+id;
+		}
     </script>
 	<?php
 		require ("../controller/updatePaperController.php");
 		require ("../controller/deletePaperController.php");
+		require ("../controller/authorAddRatingController.php");
 		
 		if(isset($_POST["author_saveEditPaper"]) && isset ($_FILES["author_updatePaperUploadFile"])){
             $paper_name = $_POST["author_editPaperName"];
@@ -556,6 +568,23 @@
 			else{
 				echo '<script> alert("Paper has been successfully deleted."); </script>';
 				echo '<script>window.location.href="../boundary/author_searchPaperPage.php";</script>';
+			}
+		}
+		
+		if(isset($_POST["author_addRating"])){
+			$bid_ID = $_COOKIE["bid_ID"];;
+			$author_rate = $_POST["author_viewPaperAddRating"];
+			
+			$controller = new authorAddRatingController();
+			$result = $controller->authorAddRating($bid_ID, $author_rate);
+			
+			if($result["result"] != TRUE){
+				$fail = $result["errorMsg"];
+				echo '<script> alert("Failed to rate review: ' . $fail . '"); </script>';
+			}
+			else{
+				echo '<script> alert("Review has been successfully rated."); </script>';
+				echo '<script>window.location.href="../boundary/author_viewPaperPage.php";</script>';
 			}
 		}
 	?>
