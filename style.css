@@ -494,3 +494,7 @@
             .nav-link {
                 height: auto;
             }
+            
+            #conferenceChair_reviewerDropdown .select2-container .selection .select2-selection {
+                min-width: 200px;
+            }
