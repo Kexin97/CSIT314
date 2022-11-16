@@ -251,8 +251,8 @@ session_start();*/
 				$servername = "localhost";
 				$username = "root";
 				$password = "";
-				// $dbname = "314_project";
-				$dbname = "testdb3";
+				$dbname = "314_project";
+				// $dbname = "testdb3";
 
 				try 
 				{
