@@ -19,7 +19,30 @@ session_start();*/
 
 
 		<?php
-		class reviewerViewPaper extends DBconn
+		class reviewerViewPaperDetail extends DBconn	//reviewerViewPaperDetail @@@@@@@@@@@@@
+		{
+			function __construct(){}
+			
+			function viewOthersReviewsAndRatings()
+			{
+				$stmt = $this->conn()->prepare("SELECT bidWinnerName, bidWinnerEmail, bidWinnerRating, bidWinnerReview
+				FROM bidWinner 
+				WHERE bidWinnerRating IS NOT NULL AND paperName=? AND bidWinnerEmail !=?");
+				return $stmt;
+			}
+			
+			function viewSelfReviewsAndRatings()
+			{
+				$stmt = $this->conn()->prepare("SELECT bidWinnerName, bidWinnerEmail, bidWinnerRating, bidWinnerReview
+				FROM bidWinner 
+				WHERE paperName=? AND bidWinnerEmail=?");
+				return $stmt;
+			}
+			
+			
+		}
+		
+		class reviewerViewPaper extends DBconn	//reviewerViewPaper @@@@@@@@@@@@@
 		{
 			function __construct(){}
 			
@@ -63,7 +86,7 @@ session_start();*/
 			}
 		}
 		
-		class reviewerViewBid extends DBconn
+		class reviewerViewBid extends DBconn	//reviewerViewBid @@@@@@@@@@@@@
 		{
 			function __construct(){}
 			
@@ -101,9 +124,55 @@ session_start();*/
 				// echo a message to say the UPDATE succeeded
 				echo $stmt2->rowCount() . " records UPDATED successfully";
 			}
+			
+			function addBid()
+			{
+				$stmt = $this->conn()->
+				prepare("INSERT INTO papersbid (paperName, reviewerName, account_email)
+					VALUES (?, ?, ?)");
+				return $stmt;
+				
+				/* $sql = "INSERT INTO papersbid (paperName, reviewerName, account_email)
+				VALUES ('author23', '$lala', '')";
+				// use exec() because no results are returned
+				$conn->exec($sql); */
+				echo "New record inserted successfully";
+			}
+			
+			function delBid()
+			{
+				$stmt = $this->conn()->prepare("DELETE FROM papersbid WHERE paperName=? AND account_email=?");
+				return $stmt;
+			}
 		}
 		
-		class reviewerProfUpdate
+		class reviewerProfView extends DBconn	//reviewerProfView @@@@@@@@@@@@@
+		{
+			protected $accountEmail;
+			
+			function __construct()
+			{
+				$this->accountEmail = $_SESSION["reviewer_email"];
+			}
+			
+			function viewProfile()
+			{
+				$stmt = $this->conn()->prepare("SELECT account_fullName, account_sex, account_age, account_contact 
+						FROM account WHERE account_email=?");
+				return $stmt;
+			}
+			
+			function viewNumOfReviewsSet()
+			{
+				//$stmt = $this->conn()->prepare("SELECT maxReviewNumber 
+				//		FROM account_profile WHERE account_email='$accountEmail'");
+				$stmt = $this->conn()->prepare("SELECT maxReviewNumber 
+						FROM account_profile WHERE account_email=?");
+				return $stmt;
+			}
+		}
+		
+		class reviewerProfUpdate	//removed stuff @@@@@@@@@@@@@
 		{
 			function __construct(){}
 			
@@ -187,7 +256,7 @@ session_start();*/
 			}
 		}
 		
-		$servername = "localhost";		// CONNECTIONNNNNNNNNNNNNNNNNNN
+		/* $servername = "localhost";		// CONNECTIONNNNNNNNNNNNNNNNNNN
 		$username = "root";
 		$password = "";
 		$dbname = "314_project";
@@ -202,7 +271,7 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        } 
+        }  */
 		
         //echo "<br>";echo "<br>";
 		

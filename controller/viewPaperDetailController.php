@@ -20,24 +20,52 @@ session_start();*/
 		<?php
 		include '../entity/reviewerEntity.php';
 		
-		/*$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "testDB";
-
-		try 
+		if (isset($_POST["paperID"]))
 		{
-			$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			// set the PDO error mode to exception
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			//echo "Connected successfully";
-        } 
-		catch(PDOException $e) 
+			$_SESSION["paperID"] = $_POST["paperID"];	//session var3, paperID
+		}
+		if (isset($_POST["paperName"]))
 		{
-			echo "Connection failed: " . $e->getMessage();
-        }*/
-        //echo "<br>";echo "<br>";
-		try 
+			$_SESSION["paperName"] = $_POST["paperName"];	//session var4, paperName
+		}
+			if (isset($_POST["authorNames"]))
+		{
+			$_SESSION["authorNames"] = $_POST["authorNames"];	//session var5, authorNames
+		}
+		
+		$viewPaperDetailObj = new reviewerViewPaperDetail();
+		$stmt = $viewPaperDetailObj->viewOthersReviewsAndRatings();
+		
+		$stmt2 = $viewPaperDetailObj->viewSelfReviewsAndRatings();
+		$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+		$selfReview = $stmt->fetch()["bidWinnerReview"];
+		$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+		$selfRating = $stmt->fetch()["bidWinnerRating"];
+		// $stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+		// $selfName = $stmt->fetch()["bidWinnerRating"];
+		
+		$stmt->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;IMPORTANT START HERE";
+		foreach(($stmt->fetchAll()) as $v)
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+			echo $v["bidWinnerName"] . " " . $v["bidWinnerEmail"] . " " . $v["bidWinnerRating"] . " " . $v["bidWinnerReview"] . " ";
+		}
+		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		echo $_SESSION["reviewer_email"] . " current logged in dude ";
+		
+		if (isset($_POST["review"]))
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;REVIEW HERE !!!!!!!!!!!!";
+			echo $_POST["review"];
+		}
+		if (isset($_POST["rating"]))
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RATING HERE !!!!!!!!!!!!";
+			echo $_POST["rating"];
+		}
+		
+		/* try 
 		{
 			
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
@@ -65,8 +93,8 @@ session_start();*/
 			//$daPaperName = 'paper1';
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $daPaperName;
-			$stmt = $conn->prepare("SELECT paperName, authorName, review, rating, bidWinner FROM papers WHERE paperName='$daPaperName'");
-			$stmt->execute();
+			//$stmt = $conn->prepare("SELECT paperName, authorName, review, rating, bidWinner FROM papers WHERE paperName='$daPaperName'");
+			//$stmt->execute();
 			echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["review"];
 			if ($stmt->fetch()["review"] == null)
@@ -86,7 +114,7 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
+        } */
 		
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		

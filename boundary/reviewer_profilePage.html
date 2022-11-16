@@ -157,20 +157,23 @@
                                 </div>
                             </div>-->
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
                                 <div class="col-sm-4">
-                                    <!-- retrieve reviewer password -->
+								
                                     <input type="password" class="form-control" id="reviewer_profilePassword" name="password">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <label for="adminName" class="col-sm-2 col-form-label">Reviewer Name:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer name -->
 									
                                     <p class="form-control" id="reviewer_profileName" style="border: none; margin-left: -10px;">
-									<?php $stmt->execute(); echo $stmt->fetch()["account_fullName"];?>
+									<?php $stmt->execute([$_SESSION["reviewer_email"]]); 
+									$_SESSION["reviewer_name"] = $stmt->fetch()["account_fullName"];	//2nd sess var, reviewer_name
+									echo $_SESSION["reviewer_name"];
+									?>
                                     </p>
                                 </div>
                             </div>
@@ -180,7 +183,7 @@
                                     <!-- retrieve reviewer gender -->
 									
                                     <p class="form-control" id="reviewer_profileGender" style="border: none; margin-left: -10px;">
-										<?php $stmt->execute(); echo $stmt->fetch()["account_sex"];?>
+										<?php $stmt->execute([$_SESSION["reviewer_email"]]); echo $stmt->fetch()["account_sex"];?>
                                     </p>
                                 </div>
                             </div>
@@ -190,23 +193,25 @@
                                     <!-- retrieve reviewer age -->
 									
                                     <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
-										<?php $stmt->execute(); echo $stmt->fetch()["account_age"];?>
+										<?php $stmt->execute([$_SESSION["reviewer_email"]]); echo $stmt->fetch()["account_age"];?>
                                     </p>
                                 </div>
                             </div>
 							<div class="form-group row">
-                                <label for="inputReviews" class="col-sm-2 col-form-label">Number of reviews：</label>
+                                <label for="inputReviews" class="col-sm-2 col-form-label">Number of reviews set：</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve  -->
 									
                                     <p class="form-control" id="reviewer_profileReviews" style="border: none; margin-left: -10px;">
-										<?php $stmt2->execute([$_SESSION["reviewer_email"]]); 
+										<?php //$stmt2->execute(); 
+										$stmt2->execute([$_SESSION["reviewer_email"]]); 
 										if ($stmt2->fetch()["maxReviewNumber"] == null)
 										{
 											echo "Number of recommended reviews not set yet";
 										}
 										else
 										{
+											//$stmt2->execute(); 
 											$stmt2->execute([$_SESSION["reviewer_email"]]);
 											echo $stmt2->fetch()["maxReviewNumber"];
 										}
@@ -218,21 +223,25 @@
                                 <label for="inputContact" class="col-sm-2 col-form-label">Contact Number:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer contact number -->
-                                    <input type="tel" class="form-control" id="reviewer_profileContact" name="number">
+                                    <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
+										<?php $stmt->execute([$_SESSION["reviewer_email"]]); echo $stmt->fetch()["account_contact"];?>
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
                                 <div class="col-sm-4">
                                     <!-- retrieve reviewer email -->
-                                    <input type="email" class="form-control " id="reviewer_profileEmail" name="email">
+                                    <p class="form-control" id="reviewer_profileAge" style="border: none; margin-left: -10px;">
+										<?php echo $_SESSION["reviewer_email"]; ?>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-4">
                                     <button type="submit" id="update_change" class="btn detail_action_btn">Update Change</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

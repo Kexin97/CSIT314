@@ -71,7 +71,7 @@ session_start();*/
 			echo "<br>";*/
 			$viewPaperObj = new reviewerViewPaper();
 			$stmt = $viewPaperObj->viewPapers();
-			$stmt->execute([$_SESSION["reviewer_email"]]);
+			//$stmt->execute([$_SESSION["reviewer_email"]]);
 			
 			$stmt2 = $viewPaperObj->viewPaperID();
 			$stmt3 = $viewPaperObj->viewAuthorNames();
