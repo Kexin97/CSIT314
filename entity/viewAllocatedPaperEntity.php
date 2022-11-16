@@ -83,7 +83,7 @@
                                     while(($Row1 = $qGet1->fetch_assoc()) !== NULL){
                                         if($Row1["paper_name"] == $Row["paperName"]){
                                             $allocatedPaperAuthor[] = $Row1["author"];
-                                            $allocatedPaperID[] = $Row["paperID"];
+                                            $allocatedPaperID[] = $Row1["paper_ID"];
                                             $allocatedPaperName[] = $Row["paperName"]; 
                                             $allocatedPaperReviewer[] = $Row["reviewerName"];
                                         }

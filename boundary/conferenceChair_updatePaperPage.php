@@ -340,13 +340,16 @@
                                 <input type="text" id="clickedPaperID" name="clickedPaperID" hidden>
                             </div>
                             <div class="row">
-                            <div style="display: flex;">
-                                <label for="inputPaperName" class="searchLeft col-sm-2" >Reviewer name:</label>
-                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="checkWinnerRatingsAndReviews()">
+                                <p for="inputPaperName" class="searchLeft col-sm-4" >Reviewer name:</label>
+                                <div class="col-sm-6">
+                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 inlineBlock" onchange="checkWinnerRatingsAndReviews()">
                                     <!-- retrieve paper name from db -->
-                                    
+
                                 </select>
+                                </div>
                             </div>
+                            <div class="row">
+
                                 <p class="col-sm-4">Paper rating:</p>
                                 <div class="col-sm-4">
                                     <!-- retrieve paper rating -->
@@ -596,11 +599,11 @@
             $controller = new updateAllocatedPaperStatusController();
             $result = $controller->updatePaperCurrentStatus($_POST['clickedPaperID'], $_POST['conferenceChair_acceptRejectPaper']);
             if($result["statusResult"] == TRUE){
-                echo "<script>alert('Successfully udpated paper status');</script>";
+                echo "<script>alert('Successfully udpated paper status'); window.location.replace('conferenceChair_updatePaperPage.php');</script>";
             }
             else{
                 $fail2 = $result["statusErrorMsg"];
-                echo "<script>alert('Failed to update paper status');</script>";
+                echo "<script>alert('Failed to update paper status'); window.location.replace('conferenceChair_updatePaperPage.php');</script>";
             }
         }
     ?>

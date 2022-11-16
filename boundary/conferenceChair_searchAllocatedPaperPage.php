@@ -161,7 +161,7 @@
                                     <th>Paper ID</th>
                                     <th>Paper Name</th>
                                     <th>Author Name(s)</th>
-                                    <th>Reviewer Name(s)</th>
+                                    <th>Reviewer Name</th>
                                 </tr>
                             </thead>
                             <tbody id="displayAllocatedPaperTable" name="displayAllocatedPaperTable">
@@ -252,7 +252,7 @@
             var test2 = "<?php $result1 = $controller->viewAllocatedPapersController();?>";
             
             var getAllocatedPaperCount = "<?php echo count($result1[0])?>";
-            
+            console.log(getAllocatedPaperCount);
             var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
             var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[1]))?>"
             var getPaperAuthor = "<?php $arrayPaperAuthor_to_json = json_encode(($result1[2]))?>"
