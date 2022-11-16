@@ -152,8 +152,8 @@
                                 <div class="col-sm-10">
                                     <!-- retieve paper id -->
                                     <label id="reviewer_viewPaperID">
-                                                <!-- 12345678 -->
-                                            </label>
+										<!-- 12345678 -->
+									</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -164,9 +164,10 @@
                                     <!-- retieve paper name -->
 									
                                     <label id="reviewer_viewPaperName">
-                                                <!-- PaperA -->
-												<?php $stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
-                                            </label>
+										<!-- PaperA -->
+										<?php echo $_POST["authorName"];
+										//$stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
+									</label>
                                 </div>
                             </div>
 
@@ -178,9 +179,9 @@
                                     <!-- retieve Author name -->
 									
                                     <label class="reviewer_viewPaperAuthor">
-                                                <!-- Author1 -->
-												<?php $stmt->execute(); echo $stmt->fetch()["authorName"];?>
-                                            </label>
+										<!-- Author1 -->
+										<?php $stmt->execute(); echo $stmt->fetch()["authorName"];?>
+									</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -191,13 +192,13 @@
                                     <!-- retieve other Review -->
 									
                                     <label class="reviewer_viewPaperReview_others">
-                                                <!-- reeee -->
-												
-                                            </label>
+										<!-- reeee -->
+										
+									</label>
                                     <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
-                                                Comment others review
-                
-                                            </button>
+										Comment others review
+		
+									</button>
                                 </div>
                             </div>
 
@@ -209,9 +210,9 @@
                                     <!-- retrieve other Rating -->
 									
                                     <label class="reviewer_viewPaperRating_others">
-                                                <!-- Author1 -->
-												
-                                            </label>
+										<!-- Author1 -->
+										
+									</label>
                                 </div>
                             </div>
 							<div class="row">
@@ -222,19 +223,19 @@
                                     <!-- retrieve self Review -->
 									
                                     <label class="reviewer_viewPaperReview_self">
-                                                <!-- Author1 -->
-												<?php $stmt->execute(); 
-												if ($stmt->fetch()["review"] == null)
-												{
-													echo "Not reviewed yet";
-												}
-												else
-												{
-													$stmt->execute();
-													echo $stmt->fetch()["review"];
-												}
-												?>
-                                            </label>
+										<!-- Author1 -->
+										<?php $stmt->execute(); 
+										if ($stmt->fetch()["review"] == null)
+										{
+											echo "Not reviewed yet";
+										}
+										else
+										{
+											$stmt->execute();
+											echo $stmt->fetch()["review"];
+										}
+										?>
+									</label>
                                 </div>
                             </div>
 							<div class="row">
@@ -245,28 +246,28 @@
                                     <!-- retrieve self Rating -->
 									
                                     <label class="reviewer_viewPaperRating_self">
-                                                <!-- Author1 -->
-												<?php $stmt->execute(); 
-												if ($stmt->fetch()["rating"] == null)
-												{
-													echo "No ratings yet";
-												}
-												else
-												{
-													$stmt->execute();
-													echo $stmt->fetch()["rating"];
-												}
-												?>
-                                            </label>
+										<!-- Author1 -->
+										<?php $stmt->execute(); 
+										if ($stmt->fetch()["rating"] == null)
+										{
+											echo "No ratings yet";
+										}
+										else
+										{
+											$stmt->execute();
+											echo $stmt->fetch()["rating"];
+										}
+										?>
+									</label>
                                 </div>
                             </div>
                             <div class="reviewer_viewPaperEditDetail_btn">
                                 <button type="button" id="reviewer_editDetail" class="blue_btn" data-toggle="modal" data-target="#reviewer_editPaperModal">
-                                            Edit Detail
-                                        </button>
+									Edit Detail
+								</button>
                                 <!-- <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
-                                        Delete paper
-                                        </button> -->
+								Delete paper
+								</button> -->
                             </div>
                         </div>
                     </div>

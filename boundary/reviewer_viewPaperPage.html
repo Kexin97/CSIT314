@@ -180,24 +180,35 @@
                             <tbody>
                                 <?php 
 								//for ($x = 0; $x < $numOfRows; $x++)
-								for ($x = 0; $x < count($paperArray); $x++)
+								//for ($x = 0; $x < count($paperArray); $x++)
+								$stmt->execute([$_SESSION["reviewer_email"]]);
+								foreach(($stmt->fetchAll()) as $v)
 								{
 									//$stmt->execute([]);
 									echo '
+									<form method="post" action="../boundary/reviewer_viewPaperDetail.php">
 									<tr>
 										<td>
 											<!-- retrieve paper id -->
-											' , $idArray[$x] , '
-											
+											'; $stmt2->execute([$v["paperName"]]);
+											echo $stmt2->fetch()["paper_ID"];
+											//echo "<br>" . $x . " this is x <<";
+											//, $idArray[$x] , 
+											echo '<input type="hidden" id="custId" name="paperName" 
+													value="'; echo $v["paperName"]; echo '">
 										</td>
 										<td>
 											<!-- retrieve paper name --> 
-											' , $paperArray[$x] , '
+											' , $v["paperName"] , '
 											<!-- PaperA --> 
 										</td>
 										<td>
 											<!-- retrieve author name -->
-											' , $authorArray[$x] , '
+											';echo $viewPaperObj->emailToNameConvertor($v["paperName"]);
+											//$authArry = $viewPaperObj->emailToNameConvertor($v["paperName"]);
+											//echo $authArry[$x];
+											//echo $authorArray[$x];
+											echo '
 											<!-- author -->
 										</td> 
 										<td>
@@ -208,10 +219,10 @@
 											</a>
 										</td>
 										<td>
-											<form method="post" action="../boundary/reviewer_viewPaperDetail.php">
-											  <button name="paperName" value="';echo $idArray[$x]; echo '" 
+											
+											  <button name="lala" value="';echo $idArray[$x]; echo '" 
 											  class="detail_action_btn">View Detail</button>
-											</form>
+											
 											<!-- <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">
 												<button type="button" class="detail_action_btn">
 													View Detail
@@ -220,7 +231,8 @@
 
 										</td>
 									</tr>
-									'; 
+									</form>
+									';
 								}
 								?>
                             </tbody>

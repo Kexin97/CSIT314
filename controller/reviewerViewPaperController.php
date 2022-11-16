@@ -69,8 +69,20 @@ session_start();*/
 			echo "<br>";
 			echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BREAK OF THE CENTURY";
 			echo "<br>";*/
+			$viewPaperObj = new reviewerViewPaper();
+			$stmt = $viewPaperObj->viewPapers();
+			$stmt->execute([$_SESSION["reviewer_email"]]);
 			
-			$stmt = $conn->prepare("SELECT paperName FROM bidWinner WHERE bidWinnerEmail=? ");	//display viewPaperPg
+			$stmt2 = $viewPaperObj->viewPaperID();
+			$stmt3 = $viewPaperObj->viewAuthorNames();
+			// foreach(($stmt->fetchAll()) as $v)
+			// {
+				
+			// }
+			
+			
+			
+			/* $stmt = $conn->prepare("SELECT paperName FROM bidWinner WHERE bidWinnerEmail=? ");	//display viewPaperPg
 			$stmt->execute([$_SESSION["reviewer_email"]]);
 			$stmt2 = $conn->prepare("SELECT paper_ID,author FROM paper WHERE paper_name=? ");
 			$stmt3 = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");
@@ -93,10 +105,10 @@ session_start();*/
 				$authorString = "";
 				foreach ($authors as $b)
 				{
-					echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					echo "<br><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 					$stmt3->execute([$b]);
 					echo $stmt3->fetch()["account_fullName"];
-					echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+					echo "  da acc full namee<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 					$stmt3->execute([$b]);
 					$name = $stmt3->fetch()["account_fullName"];
 					$authorString .= $name . ", ";
@@ -105,11 +117,15 @@ session_start();*/
 				echo "end of foreach<br>";
 				
 				
-				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;###############";
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;author string before substr ";
 				echo $authorString;
 				$authorString = substr($authorString, 0, -2);
+				echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;author string after substr ";
+				echo $authorString;
+				echo "<br>";
+				
 				$authorArray[] = $authorString;
-			}
+			} */			//display viewPaperPg
 			
 			/* $stmt = $conn->prepare("SELECT account_fullName FROM account WHERE account_email=? ");	//old view paper pg
 			$stmt->execute([$_SESSION["reviewer_email"]]);

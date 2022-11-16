@@ -19,33 +19,92 @@ session_start();*/
 
 
 		<?php
-		class reviewerViewBid
+		class reviewerViewPaper extends DBconn
 		{
-			public $stmt;
-			
 			function __construct(){}
 			
 			function viewPapers()
 			{
-				global $conn;
+				$stmt = $this->conn()->prepare("SELECT paperName FROM bidWinner WHERE bidWinnerEmail=?");
+				return $stmt;
+			}
+			
+			function viewPaperID()
+			{
+				$stmt = $this->conn()->prepare("SELECT paper_ID,author FROM paper WHERE paper_name=?");
+				return $stmt;
+			}
+			
+			function viewAuthorNames()
+			{
+				$stmt = $this->conn()->prepare("SELECT account_fullName FROM account WHERE account_email=?");
+				return $stmt;
+			}
+			
+			function emailToNameConvertor($paperName)
+			{
+				global $stmt2;
+				global $stmt3;
 				
-				// try 
+				$stmt2->execute([$paperName]);
+				
+				$authors = explode(",", $stmt2->fetch()["author"]);
+				$authorString = "";
+				foreach ($authors as $b)
+				{
+					$stmt3->execute([$b]);
+					$name = $stmt3->fetch()["account_fullName"];
+					$authorString .= $name . ", ";
+				}
+
+				$authorString = substr($authorString, 0, -2);
+
+				return $authorString;
+			}
+		}
+		
+		class reviewerViewBid extends DBconn
+		{
+			function __construct(){}
+			
+			function viewPapers()
+			{
+				$stmt = $this->conn()->prepare("SELECT paper_name, paper_ID FROM paper ");
+				return $stmt;
+				$stmt->execute();
+				// foreach(($stmt->fetchAll()) as $v)
 				// {
-					$this->stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");
-					//$stmt->execute();
-					
-				// } 
-				// catch(PDOException $e) 
-				// {
-					// echo $e->getMessage();
+					// echo $v["paper_name"];
 				// }
 			}
 			
+			function viewReviewerBid()
+			{
+				$stmt = $this->conn()->prepare("SELECT count(*) FROM papersbid WHERE paperName=?");
+				return $stmt;
+			}
+			
+			function checkIfBidded()
+			{
+				$stmt = $this->conn()->prepare("SELECT account_email FROM papersbid WHERE paperName=?");
+				return $stmt;
+			}
+			
+			function setNumOfReviews()
+			{
+				$currentEmail = $_SESSION["reviewer_email"];
+				$reviewer_addNoPaperReview = $_POST['reviewer_addNoPaperReview'];
+				$stmt2 = $this->conn()->prepare("UPDATE account_profile SET maxReviewNumber='$reviewer_addNoPaperReview'
+										WHERE account_email='$currentEmail' ");
+				$stmt2->execute();
+
+				// echo a message to say the UPDATE succeeded
+				echo $stmt2->rowCount() . " records UPDATED successfully";
+			}
 		}
 		
 		class reviewerProfUpdate
 		{
-			
 			function __construct(){}
 			
 			function updateProfile()
@@ -102,7 +161,33 @@ session_start();*/
 			}
 		}
 		
-		$servername = "localhost";
+		class DBconn
+		{
+			function __construct(){}
+
+			function conn()
+			{
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$dbname = "314_project";
+
+				try 
+				{
+					$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+					// set the PDO error mode to exception
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					//echo "Connected successfully";
+					return $conn;
+				} 
+				catch(PDOException $e) 
+				{
+					echo "Connection failed: " . $e->getMessage();
+				}
+			}
+		}
+		
+		$servername = "localhost";		// CONNECTIONNNNNNNNNNNNNNNNNNN
 		$username = "root";
 		$password = "";
 		$dbname = "314_project";
@@ -117,7 +202,8 @@ session_start();*/
 		catch(PDOException $e) 
 		{
 			echo "Connection failed: " . $e->getMessage();
-        }
+        } 
+		
         //echo "<br>";echo "<br>";
 		
 		/*try 
