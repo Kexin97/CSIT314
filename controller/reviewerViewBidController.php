@@ -54,6 +54,8 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 		
 		$stmt4 = $viewBidObj->deletePaperStatus();
 		
+		$stmt5 = $viewBidObj->openPaper();
+		
 		/* $_SESSION["reviewer_email"]
 		$_SESSION["reviewer_name"] */
 		

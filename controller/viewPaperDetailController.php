@@ -74,7 +74,9 @@ session_start();*/
 			$selfReview = $stmt2->fetch()["bidWinnerReview"];
 		}
 		
-		
+		$stmt5 = $viewPaperDetailObj->openPaper();
+		$stmt5->execute([$_SESSION["paperName"]]);
+		$linkVar = $stmt5->fetch()["paper_file"];
 		
 		/* try 
 		{

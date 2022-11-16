@@ -52,6 +52,13 @@ session_start();*/
 				WHERE paperName=? AND bidWinnerEmail=?");
 				return $stmt;
 			}
+			
+			function openPaper()
+			{
+				$stmt = $this->conn()->prepare("SELECT paper_file from paper
+				WHERE paper_name=? ");
+				return $stmt;
+			}
 		}
 		
 		class reviewerViewPaper extends DBconn	//reviewerViewPaper @@@@@@@@@@@@@
@@ -170,16 +177,18 @@ session_start();*/
 				WHERE paper_name=? ");
 				return $stmt;
 			}
+			
+			function openPaper()
+			{
+				$stmt = $this->conn()->prepare("SELECT paper_file from paper
+				WHERE paper_name=? ");
+				return $stmt;
+			}
 		}
 		
 		class reviewerProfView extends DBconn	//reviewerProfView @@@@@@@@@@@@@
 		{
-			protected $accountEmail;
-			
-			function __construct()
-			{
-				$this->accountEmail = $_SESSION["reviewer_email"];
-			}
+			function __construct(){}
 			
 			function viewProfile()
 			{

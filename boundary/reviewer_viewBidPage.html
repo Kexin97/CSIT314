@@ -243,7 +243,10 @@
                                             <!-- PaperA -->
                                         </td>
                                         <td>
-
+											'; $stmt5->execute([$v["paper_name"]]);
+											$linkVar = $stmt5->fetch()["paper_file"];
+											echo '<a href="'; echo $linkVar; echo '" 
+											target="_blank">'; echo $linkVar; echo'</a>
                                         </td>
                                         <td>
                                             <!-- retrieve author name -->
