@@ -303,17 +303,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="col-sm-4">Conference:</p>
-                                <div class="col-sm-4">
-                                    <!-- retieve paper conference -->
-
-                                    <label id="conferenceChair_viewPaperConference">
-                                                <!-- Conference1 -->
-                                                <text id="displayPaperConference"></text>
-                                            </label>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <p class="col-sm-4">Author:</p>
                                 <div class="col-sm-4">
                                     <!-- retieve author name -->
