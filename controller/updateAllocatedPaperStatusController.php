@@ -15,5 +15,11 @@
 
             return $this->result;
         }
+
+        function updatePaperCurrentStatus($paperID, $status){
+            $this->result = $this->entity->updatePaperStatus($paperID, $status);
+
+            return $this->result;
+        }
     }
 ?>

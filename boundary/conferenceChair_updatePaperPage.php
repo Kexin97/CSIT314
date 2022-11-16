@@ -26,6 +26,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed" onload="getAllocatedPapersInfo();displaySearchList()">
+<form method="POST">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -254,7 +255,7 @@
                     <button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
-                    <button type="button" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="saveStatus">
+                    <button type="submit" style="float: right;background-color: #F7685B;color: white;" class="blue_btn" name="saveStatus">
                         Confirm save
                     </button>
                 </div>
@@ -264,7 +265,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="conferenceChair_updateStatusPaperPage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="conferenceChair_updateStatusPaperPage" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -325,20 +326,20 @@
                             <div class="row">
                                 <p class="col-sm-4">Accept/reject paper:</p>
                                 <div class="col-sm-4">
-                                    <select id="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
+                                    <select id="conferenceChair_acceptRejectPaper" name="conferenceChair_acceptRejectPaper" class="form-control select2 inlineBlock">
                                 <!-- retrieve conference name from db -->
-                                <option>Accept</option>
-                                <option>Reject</option>
+                                <option value="accepted">Accept</option>
+                                <option value="rejected">Reject</option>
                                 </select>
                                 </div>
                             </div>
                             <div class="author_viewPaperEditDetail_btn">
                                 <button type="button" id="conferenceChair_editDetail" class="blue_btn" data-toggle="modal" data-target="#saveModal">
                                  Update status
-                                        </button>
+                                </button>
                             </div>
                         </div>
-                </div>
+                    </div>
 
                     <div class="card" style="margin-top: 20px;margin-bottom: 0;">
                         <div class="card-header" style="padding-top: 0; padding-bottom: 20px; padding-top: 20px; background-color: white;">
@@ -346,12 +347,15 @@
                             <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Paper review and rating</p>
                         </div>
                         <div class="card-body">
+                            <div>
+                                <input type="text" id="clickedPaperID" name="clickedPaperID" hidden>
+                            </div>
                             <div class="row">
                             <div style="display: flex;">
-                                <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Reviewer name:</label>
-                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 col-sm-4 inlineBlock" onclick="checkWinnerRatingsAndReviews()">
+                                <label for="inputPaperName" class="searchLeft col-sm-2" >Reviewer name:</label>
+                                <select id="conferenceChair_viewUpdatePaperName" name="conferenceChair_viewUpdatePaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="checkWinnerRatingsAndReviews()">
                                     <!-- retrieve paper name from db -->
-                                    <option value="">Select reviewer name</option>
+                                    
                                 </select>
                             </div>
                                 <p class="col-sm-4">Paper rating:</p>
@@ -398,6 +402,7 @@
             </div>
         </div>
     </div>
+    </form>
 
     <!-- ./wrapper -->
     <!-- jQuery -->
@@ -449,7 +454,7 @@
         var allPaperID = [];
         var allPaperRating = [];
         var allPaperReview = [];
-        var allPaperName = [];
+        var allPaperReviewerName = [];
         var allPaperEmail= [];
         var displayPaperName = [];
         var displayPaperID = [];
@@ -462,7 +467,7 @@
             allPaperID = [];
             allPaperRating = [];
             allPaperReview = [];
-            allPaperName = [];
+            allPaperReviewerName = [];
             allPaperEmail= [];
             displayPaperName = [];
             displayPaperID = [];
@@ -471,7 +476,6 @@
             var test = "<?php $controller = new updateAllocatedPaperStatusController();?>";
             
             var test2 = "<?php $result1 = $controller->viewAllPaper();?>";
-            console.log("hi");
             var getAllocatedPaperCount = "<?php echo count($result1[0])?>";
             
             var getPaperID = "<?php $arrayPaperID_to_json = json_encode(($result1[0]))?>"
@@ -496,11 +500,12 @@
                 allPaperID.push(fromPHP[x]);
                 allPaperRating.push(fromPHP4[x]);
                 allPaperReview.push(fromPHP5[x]);
-                allPaperName.push(fromPHP6[x]);
+                allPaperReviewerName.push(fromPHP6[x]);
                 allPaperEmail.push(fromPHP7[x]);
             }
             var tableID = document.getElementById("displayAllocatedPaperTable");
             for(var x=0; x<getAllocatedPaperCount; x++){
+                
                 if(!searchList.includes(fromPHP1[x])){
                     searchList.push(fromPHP1[x]);
                     displayPaperID.push(fromPHP[x]);
@@ -509,14 +514,13 @@
                     displayPaperAuthor.push(fromPHP3[x]);
                 }
             }
-            
             for(var x=0; x<searchList.length; x++){
                 $("#displayAllocatedPaperTable").append("<tr>"+
                 "<td>"+displayPaperID[x]+"</td>" +
                 "<td>"+displayPaperName[x]+"</td>" +
                 "<td>"+displayPaperStatus[x]+"</td>" +
                 '<td>'+
-                '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
+                '<button type="button" class="detail_action_btn" id="' + displayPaperID[x]  +'" name="' + displayPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
                 'Details</button></td>'+
                 "</tr>");
             }
@@ -535,7 +539,6 @@
         function displayTableData(){
             var searchRequirement = document.getElementById("conferenceChair_viewPaperName").value;
             $("#displayAllocatedPaperTable tr").remove(); 
-            console.log(searchList.length);
             for(var x=0; x<searchList.length; x++){
                 if(displayPaperName[x].includes(searchRequirement)){
                     $("#displayAllocatedPaperTable").append("<tr>"+
@@ -543,7 +546,7 @@
                     "<td>"+displayPaperName[x]+"</td>" +
                     "<td>"+displayPaperStatus[x]+"</td>" +
                     '<td>'+
-                        '<button type="button" class="detail_action_btn" id="' + allPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage">'+
+                        '<button type="button" class="detail_action_btn" id="' + displayPaperID[x]  +'" name="' + displayPaperID[x]  +'" data-toggle="modal" data-target="#conferenceChair_updateStatusPaperPage" onclick="paperDetails(this.id)">'+
                         'Details</button></td>'+
                     "</tr>");
                 }
@@ -552,35 +555,65 @@
         }
 
         function paperDetails(paperID){
-            console.log(paperID);
+            document.getElementById("clickedPaperID").value = paperID;
             var tempPaperID = document.getElementById("displayPaperID");
             var tempPaperName = document.getElementById("displayPaperName");
             var tempPaperAuthor = document.getElementById("displayPaperAuthor");
-            var tempPaperRating = document.getElementById("displayPaperRating");
-            var tempPaperReview = document.getElementById("displayPaperReview");
-            console.log(displayPaperID[paperID-1]);
-            console.log(displayPaperName[paperID-1]);
-            console.log(displayPaperAuthor[paperID-1]);
-            console.log("Rating: " +allPaperRating[paperID-1]);
-            console.log("Review: " +allPaperReview[paperID-1]);
+            var selectElement = document.getElementById('conferenceChair_viewUpdatePaperName');
+            selectElement.innerHTML = '';
+            var optionText = "Select reviewer name";
+            var optionValue = "";
+            $('#conferenceChair_viewUpdatePaperName').append(new Option(optionText, optionValue));
             for(var x=0; x<allPaperID.length; x++){
                 if(paperID == allPaperID[x]){
-                    
+                    optionText = allPaperReviewerName[x];
+                    optionValue = allPaperID[x] + "|" + allPaperEmail[x];
+                    var select = document.getElementById("conferenceChair_viewUpdatePaperName");
+                    $('#conferenceChair_viewUpdatePaperName').append(new Option(optionText, optionValue));
+                }
+            }
+            for(var x=0; x<searchList.length;x++){
+                if(displayPaperID[x] == paperID){
+                    tempPaperID.innerHTML = displayPaperID[x];
+                    tempPaperName.innerHTML = displayPaperName[x];
+                    tempPaperAuthor.innerHTML = displayPaperAuthor[x];
                 }
             }
             
-
-            tempPaperID.innerHTML = displayPaperID[paperID-1];
-            tempPaperName.innerHTML = displayPaperName[paperID-1];
-            tempPaperAuthor.innerHTML = displayPaperAuthor[paperID-1];
-            tempPaperRating.innerHTML = allPaperRating[paperID-1];
-            tempPaperReview.innerHTML = allPaperReview[paperID-1];
+            checkWinnerRatingsAndReviews();
         }
 
         function checkWinnerRatingsAndReviews(){
-
+            var tempPaperRating = document.getElementById("displayPaperRating");
+            var tempPaperReview = document.getElementById("displayPaperReview");
+            tempPaperRating.innerHTML = "";
+            tempPaperReview.innerHTML = "";
+            var checkReviewerDetails = document.getElementById("conferenceChair_viewUpdatePaperName").value;
+            var splitDetails = checkReviewerDetails.split("|");
+            var getPaperID = splitDetails[0];
+            var getReviewerEmail = splitDetails[1];
+            for(var x=0; x<allPaperID.length; x++){
+                if(allPaperID[x] == getPaperID && allPaperEmail[x] == getReviewerEmail){
+                    tempPaperRating.innerHTML = allPaperRating[x];
+                    tempPaperReview.innerHTML = allPaperReview[x];
+                }
+            }
         }
     </script>
-
+    <?php
+        require_once("../controller/updateAllocatedPaperStatusController.php");
+        //$_POST['clickedPaperID']
+        if(isset($_POST['saveStatus'])){
+            $controller = new updateAllocatedPaperStatusController();
+            $result = $controller->updatePaperCurrentStatus($_POST['clickedPaperID'], $_POST['conferenceChair_acceptRejectPaper']);
+            if($result["statusResult"] == TRUE){
+                echo "<script>alert('Successfully udpated paper status');</script>";
+            }
+            else{
+                $fail2 = $result["statusErrorMsg"];
+                echo "<script>alert('Failed to update paper status');</script>";
+            }
+        }
+    ?>
 </body>
 </html>
