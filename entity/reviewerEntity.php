@@ -266,7 +266,7 @@ session_start();*/
 				$username = "root";
 				$password = "";
 				$dbname = "314_project";
-				// $dbname = "testdb3";
+				// $dbname = "zkdb";
 
 				try 
 				{
