@@ -63,9 +63,9 @@
                 $qGet = $this->conn->query($query);
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
-                        if($Row["paper_status"] != NULL){
+                        if($Row["acceptOrReject"] != NULL){
                             $paperNames[] = $Row["paper_name"];
-                            $paperStatus[] = $Row["paper_status"];
+                            $paperStatus[] = $Row["acceptOrReject"];
                         }
                     }
                 }
