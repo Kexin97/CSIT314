@@ -437,8 +437,8 @@
                 }
                 var test2 = "<?php $currentLoadResult = $controller->getBidderCurrentWorkload();?>";
                 var getBidTotalCount = "<?php echo count($currentLoadResult[0])?>";
-                var getPreferredLoadArray = "<?php $arrayCurrentLoad_to_json = json_encode(($currentLoadResult[0]))?>"
-
+                var getCurrentLoadArray = "<?php $arrayCurrentLoad_to_json = json_encode(($currentLoadResult[0]))?>"
+                
                 var fromPHP3 = <?php echo $arrayCurrentLoad_to_json ?>;
                 for(var x=0; x<getBidTotalCount; x++){
                     allBidderCurrentLoad.push(fromPHP3[x]);
@@ -448,8 +448,8 @@
                         bidderCurrentLoadCount++;
                     }
                 }
-                for(var x=0; x<allBidderEmails.length; x++){
-                    if(allBidderEmails[x] == selectedReviewerEmail){
+                for(var x=0; x<allAccountEmails.length; x++){
+                    if(allAccountEmails[x] == selectedReviewerEmail){
                         preferredLoad.value = bidderPreferredLoad[x];
                         currentLoad.value = bidderCurrentLoadCount;
                         break;
