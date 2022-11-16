@@ -125,7 +125,7 @@
                             $qGet = $this->conn->query($query);
                             if(($res = $qGet->num_rows) > 0){
                                 while(($Row = $qGet->fetch_assoc()) !== NULL){
-                                    if($Row["bidWinnerRating"] != "" && $Row["bidWinnerReview"] != "" && $Row["paperName"] == $Row1["paper_name"]){
+                                    if($Row["bidWinnerRating"] != NULL && $Row["bidWinnerReview"] != NULL && $Row["paperName"] == $Row1["paper_name"]){
                                         $allocatedPaperStatus[] = $Row1["paperStatus"];
                                         $allocatedPaperID[] = $Row1["paper_ID"];
                                         $allocatedPaperName[] = $Row1["paper_name"]; 
@@ -145,5 +145,23 @@
                         $allocatedPaperAuthor, $allocatedPaperRating, $allocatedPaperReview,
                         $allocatedPaperReviewerName, $allocatedPaperReviewerEmail);
         }
-    }
+
+        function updatePaperStatus($paperID, $status){
+            $SQLInsert = "UPDATE paper SET " . "paperStatus = '$status'" . 
+                        "WHERE paper_ID = '$paperID'";
+            $qInsert = $this->conn->query($SQLInsert);
+            if($qInsert == TRUE){   
+                $data["statusResult"] = TRUE;
+            }    
+            else{
+                $data["statusResult"] = FALSE;
+                $data["statusErrorMsg"] = "failed to update paper status";
+            }
+
+            $this->data = $data;
+
+            return $data;
+            //return $status;
+        }    
+    }  
 ?>
