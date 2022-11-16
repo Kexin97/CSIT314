@@ -15,7 +15,7 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 		<hr/> -->
 	</head>
 	<body>
-		<h1>reviewerViewBidController.php</h1>
+		<!-- <h1>reviewerViewBidController.php</h1> -->
 		
 
 
@@ -59,11 +59,11 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 		/* $_SESSION["reviewer_email"]
 		$_SESSION["reviewer_name"] */
 		
-		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST['addBid'];
+		// echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo $_POST['addBid'];
 		
-		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST['delBid'];
+		// echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo $_POST['delBid'];
 		
 		/*try 	//	viewPaper()
 		{
@@ -100,9 +100,9 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 			echo $e->getMessage();
         }*/
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST["reviewer_addNoPaperReview"];
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo $_POST["reviewer_addNoPaperReview"];
 		
 		
 		//header("Location: ../boundary/reviewer_viewBid.php");

@@ -14,7 +14,7 @@ session_start();*/
 		<hr/> -->
 	</head>
 	<body>
-		<h1>ReviewerViewPaperController.php</h1>
+		<!-- <h1>ReviewerViewPaperController.php</h1> -->
 		
 
 

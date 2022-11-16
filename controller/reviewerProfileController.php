@@ -13,7 +13,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		<hr/> -->
 	</head>
 	<body>
-		<h1>reviewerProfileController.php</h1>
+		<!-- <h1>reviewerProfileController.php</h1> -->
 		
 
 

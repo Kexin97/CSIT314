@@ -14,13 +14,13 @@ session_start();
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaperDetail.php</h1>
+		<!-- <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaperDetail.php</h1> -->
 		
 
 
 		<?php
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		//echo $_POST["reviewer_addNoPaperReview"];
 		
 		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
