@@ -300,6 +300,7 @@
 					$data[$i]["bidWinnerEmail"] = $Row["bidWinnerEmail"];
 					$data[$i]["bidWinnerRating"] = $Row["bidWinnerRating"];
 					$data[$i]["bidWinnerReview"] = $Row["bidWinnerReview"];
+					$data[$i]["author_rating"] = $Row["author_rating"];
 					$data[$i]["result"]= TRUE;
 					
 					}

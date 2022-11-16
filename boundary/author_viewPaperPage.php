@@ -228,7 +228,7 @@
 										<th style="width:10%">Paper rating</th>
 										<th style="width:60%">Paper review</th>
 										<th style="width:15%">Reviewer</th>
-										<th style="width:15%">Action</th>
+										<th style="width:15%">Review rate</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -240,8 +240,18 @@
 										<td style="word-break: break-word;white-space: normal">
 											<?php echo $ratinglist[$i]["bidWinnerReview"]; ?></td>
 										<td><?php echo $ratinglist[$i]["bidWinnerName"]; ?></td>
-										<td><?php echo '<button onclick="bidIDCookie('. $ratinglist[$i]["bidID"] .')" data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">'; ?>
-										Add review rating</button></td>
+										<td><?php 
+											if($ratinglist[$i]["author_rating"]==9)
+											{
+												echo '<button onclick="bidIDCookie('. $ratinglist[$i]["bidID"] .')" data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">
+												Add review rating</button>'; 
+											}
+											else {
+												echo $ratinglist[$i]["author_rating"];
+											}
+											
+											?>
+											</td>
 									</tr>
 									<?php endfor; endif;?>
 								</tbody>
@@ -259,9 +269,7 @@
                 <div class="modal-header">
 
                     <p style="font-size:20px; color: #109CF1;margin-top: 25px; margin-left: 10px; display: inline;">Add Rating</p>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
+                    
                 </div>
 				<div class="modal-body">
 					<div class="card-body table-responsive pad">
