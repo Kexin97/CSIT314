@@ -297,12 +297,15 @@
 								<input type="radio"  name="author_viewPaperAddRating" id="author_viewPaperAddRatingMinus3" value="-3" autocomplete="off"> -3<br>(strong reject)
 							</label>
 						</div>
-						<button type="button" style="float: right" class="white_btn" data-dismiss="modal" aria-label="Close">
-                            Cancel
-						</button>
-						<button type="button" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn" data-toggle="modal" data-target="#addReviewRatingModal">
+                        <div class="author_viewPaperEditDetail_btn">
+                        <button type="button" id="author_addReviewRating" class="blue_btn" data-toggle="modal" data-target="#addReviewRatingModal">
 							 Add review rating
 						</button>
+						<button type="button" class="white_btn" data-dismiss="modal" aria-label="Close">
+                            Cancel
+						</button>
+
+                                        </div>
 					</div>
 				</div>
 			</div>
