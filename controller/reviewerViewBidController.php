@@ -56,24 +56,10 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 		
 		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo $_POST['addBid'];
-		$stmt4 = $viewBidObj->addBid();
-		if (isset($_POST['addBid']))
-		{//the if checks  if num of papers set is empty
-			//$viewBidObj->setNumOfReviews();
-			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-			echo "add bid is set";
-			$stmt4->execute([$_POST['addBid'], $_SESSION["reviewer_name"], $_SESSION["reviewer_email"]]);
-		}
+		
 		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo $_POST['delBid'];
-		$stmt5 = $viewBidObj->delBid();
-		if (isset($_POST['delBid']))
-		{//the if checks  if num of papers set is empty
-			//$viewBidObj->setNumOfReviews();
-			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-			echo "Delete bid is set";
-			$stmt5->execute([$_POST['delBid'], $_SESSION["reviewer_email"]]);
-		}
+		
 		/*try 	//	viewPaper()
 		{
 			$stmt = $conn->prepare("SELECT paper_name, paper_ID FROM paper ");

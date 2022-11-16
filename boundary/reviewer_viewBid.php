@@ -82,9 +82,9 @@ session_start();
 		//include '../boundary/reviewer_viewDetailUpdatePaperPage.html';
 		include '../boundary/reviewer_viewBidPage.html';
 		
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-		echo $_POST["reviewer_addNoPaperReview"];
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+		// echo $_POST["reviewer_addNoPaperReview"];
 
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
 		//$conn = null;

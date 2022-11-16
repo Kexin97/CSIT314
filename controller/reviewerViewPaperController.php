@@ -20,8 +20,8 @@ session_start();*/
 
 		<?php
 		include '../entity/reviewerEntity.php';
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
-		echo "<br>";
+		// echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
+		// echo "<br>";
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";

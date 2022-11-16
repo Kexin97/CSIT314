@@ -22,13 +22,13 @@ $_SESSION["authorNames"] = $_POST["authorNames"];	//session var5, authorNames
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1>
+		<!-- <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaper.php</h1> -->
 		
 
 
 		<?php
 		
-		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
+		//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" . $_SESSION["reviewer_email"];
 		/*$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -84,7 +84,7 @@ $_SESSION["authorNames"] = $_POST["authorNames"];	//session var5, authorNames
 		include '../boundary/reviewer_viewPaperPage.html';
 		
         //echo "<p>Copyright &copy; 1999-" . date("Y") . " W3Schools.com</p>";
-		$conn = null;
+		//$conn = null;
         ?>
 
 	</body>
