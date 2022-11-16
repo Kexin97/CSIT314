@@ -144,13 +144,12 @@
                         <p style="font-size:20px; color: black;margin-top: 25px; margin-left: 10px; display: inline;">Search paper</p>
                     </div>
 
-                    <div class="card-body" style="display: flex;">
+                    <!-- <div class="card-body" style="display: flex;">
                         <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Paper name:</label>
                         <select id="conferenceChair_viewPaperName" name="conferenceChair_viewPaperName" class="form-control select2 col-sm-4 inlineBlock" onchange="displayTableData()">
-                            <!-- retrieve paper name from db -->
                             <option value="">Select paper name</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-12">
