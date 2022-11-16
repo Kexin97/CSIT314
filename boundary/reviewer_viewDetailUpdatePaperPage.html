@@ -391,7 +391,7 @@
                     <div class="detail ">
 						
                         <label id="reviewer_editreviewerName">
-							<?php 
+							<?php echo $_SESSION["reviewer_name"];
 							//$stmt->execute(); echo $stmt->fetch()["bidWinner"];
 							?>
 						</label>
@@ -438,9 +438,9 @@
 
                 </div>
                 <div class="modal-footer " style="border: none; ">
-                    <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
+                    <!-- <button type="button " style="float: right " class="white_btn " data-dismiss="modal " aria-label="Close ">
                         Back
-                    </button>
+                    </button> -->
                     <!-- <button type="button " id="reviewer_saveEditPaper " style="float: right; color: white; margin-right: 10px; " class="blue_btn " data-toggle="modal " data-target="#saveModal ">
                         Save
                     </button> -->
