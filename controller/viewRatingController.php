@@ -1,5 +1,5 @@
 <?php
-    require_once("../entity/accountEntity.php");
+    require_once("../entity/paperEntity.php");
 
     class ViewRatingController
     {
