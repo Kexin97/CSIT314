@@ -40,6 +40,15 @@
 
 		$control = new ViewAccountController();
 		$alist = $control->authList();
+		
+		//for get review and rating
+		require("../controller/viewRatingController.php");
+		$paperName = $list[0]["paper_name"];
+		
+		$control = new ViewRatingController();
+		$ratinglist = $control->reviewRatingList($paperName);
+		
+		
 	?>
 
     <div class="wrapper">
@@ -194,10 +203,10 @@
                                 </div>
                             </div>
                             <div class="author_viewPaperEditDetail_btn">
-                                <button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
+							<button type="button" id="author_editDetail" class="blue_btn" data-toggle="modal" data-target="#author_editPaperModal">
                                         Edit Detail
                                         </button>
-                                <button type="button" class="red_btn" data-toggle="modal" data-target="#deletePapereModal">
+										<button type="button" class="red_btn" data-toggle="modal" data-target="#deletePapereModal">
                                         Delete paper
                                         </button>
                             </div>
@@ -215,29 +224,24 @@
 							<table id="author_PaperRating" class="table table-hover table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%;">
 								<thead>
 									<tr>
-										<th>Paper rating</th>
-										<th>Paper review</th>
-										<th>Action</th>
+										<th style="width:10%">Paper rating</th>
+										<th style="width:60%">Paper review</th>
+										<th style="width:15%">Reviewer</th>
+										<th style="width:15%">Action</th>
 									</tr>
 								</thead>
 								<tbody>
+								<?php 
+								if ($ratinglist[0]["result"]!=FALSE):
+								for($i=0; $i<count($ratinglist);$i++):?>
 									<tr>
-										<td>123</td>
+										<td><?php echo $ratinglist[$i]["bidWinnerRating"]; ?></td>
 										<td style="word-break: break-word;white-space: normal">
-											 What is a review article? A review article can  
-											 also be called a literature review, or a review 
-											 of literature. It is a survey of previously published
-											 research on a topic. It should give an overview 
-											 of current thinking on the topic. And, unlike an original
-											 research article, it will not present new experimental
-											 results. Writing a review of literature is to provide
-											 a critical evaluation of the data available from existing
-											 studies. Review articles can identify potential research
-											 areas to explore next, and sometimes they will
-											 draw new conclusions from the existing data. 
-										</td>
+											<?php echo $ratinglist[$i]["bidWinnerReview"]; ?></td>
+										<td><?php echo $ratinglist[$i]["bidWinnerName"]; ?></td>
 										<td><button data-toggle="modal" data-target="#addReviewModal" id="author_addReviewRating" class="blue_btn author_viewPaperEditDetail_btn">Add review rating</button></td>
 									</tr>
+									<?php endfor; endif;?>
 								</tbody>
 							</table>
                         </div>

@@ -169,7 +169,7 @@
 													//do nothing
 										}
 										else{
-											echo "<option name='author_addAuthorName' value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
+											echo "<option value='" . $alist[$i]["account_email"] . "'>" . $alist[$i]["account_email"]."</option>";
 										}
 										
 								}

@@ -161,6 +161,7 @@
                     $data[$i]["paper_name"] = $Row["paper_name"];
 					$data[$i]["author"] = $Row["author"];
 					$data[$i]["paper_file"] = $Row["paper_file"];
+					$data[$i]["paper_status"] = $Row["paper_status"];
 					
 
                     $i++;
@@ -280,6 +281,38 @@
             return $data;
 		}
 		
+		public function reviewRating($paperName){
+			$this->paperName = $paperName;
+			
+			$SQLGet = "SELECT * FROM `bidwinner` WHERE paperName='$this->paperName'";
+            $qGet = $this->conn->query($SQLGet);
+
+            if(($res = $qGet->num_rows) > 0)
+            {
+                $i = 0;
+
+                while(($Row = $qGet->fetch_assoc()) !== NULL)
+                {
+					if ($Row["bidWinnerRating"]!=NULL){
+                    $data[$i]["paperName"] = $Row["paperName"];
+					$data[$i]["bidWinnerName"] = $Row["bidWinnerName"];
+					$data[$i]["bidWinnerEmail"] = $Row["bidWinnerEmail"];
+					$data[$i]["bidWinnerRating"] = $Row["bidWinnerRating"];
+					$data[$i]["bidWinnerReview"] = $Row["bidWinnerReview"];
+					$data[$i]["result"]= TRUE;
+					
+					}
+                    $i++;
+					
+                }
+            }
+			else{
+				$data[0]["result"]= FALSE;
+			}
+            $this->data = $data;
+            return $data;
+			
+		}
 		
 	}
 ?>
