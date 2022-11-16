@@ -39,7 +39,19 @@ session_start();*/
 				return $stmt;
 			}
 			
+			function addOrUpdateRating()
+			{
+				$stmt = $this->conn()->prepare("UPDATE bidwinner SET bidWinnerRating=?
+				WHERE paperName=? AND bidWinnerEmail=?");
+				return $stmt;
+			}
 			
+			function addOrUpdateReview()
+			{
+				$stmt = $this->conn()->prepare("UPDATE bidwinner SET bidWinnerReview=?
+				WHERE paperName=? AND bidWinnerEmail=?");
+				return $stmt;
+			}
 		}
 		
 		class reviewerViewPaper extends DBconn	//reviewerViewPaper @@@@@@@@@@@@@

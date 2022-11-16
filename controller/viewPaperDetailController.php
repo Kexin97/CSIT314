@@ -38,9 +38,9 @@ session_start();*/
 		
 		$stmt2 = $viewPaperDetailObj->viewSelfReviewsAndRatings();
 		$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
-		$selfReview = $stmt->fetch()["bidWinnerReview"];
+		$selfReview = $stmt2->fetch()["bidWinnerReview"];
 		$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
-		$selfRating = $stmt->fetch()["bidWinnerRating"];
+		$selfRating = $stmt2->fetch()["bidWinnerRating"];
 		// $stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
 		// $selfName = $stmt->fetch()["bidWinnerRating"];
 		
@@ -54,16 +54,27 @@ session_start();*/
 		echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo $_SESSION["reviewer_email"] . " current logged in dude ";
 		
-		if (isset($_POST["review"]))
-		{
-			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;REVIEW HERE !!!!!!!!!!!!";
-			echo $_POST["review"];
-		}
+		$stmt3 = $viewPaperDetailObj->addOrUpdateRating();
 		if (isset($_POST["rating"]))
 		{
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RATING HERE !!!!!!!!!!!!";
 			echo $_POST["rating"];
+			$stmt3->execute([$_POST["rating"], $_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+			$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+			$selfRating = $stmt2->fetch()["bidWinnerRating"];
 		}
+		
+		$stmt4 = $viewPaperDetailObj->addOrUpdateReview();
+		if (isset($_POST["review"]))
+		{
+			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;REVIEW HERE !!!!!!!!!!!!";
+			echo $_POST["review"];
+			$stmt4->execute([$_POST["review"], $_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+			$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+			$selfReview = $stmt2->fetch()["bidWinnerReview"];
+		}
+		
+		
 		
 		/* try 
 		{
