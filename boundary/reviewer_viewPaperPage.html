@@ -186,16 +186,16 @@
 								{
 									//$stmt->execute([]);
 									echo '
-									<form method="post" action="../boundary/reviewer_viewPaperDetail.php">
 									<tr>
+										<form method="post" action="../boundary/reviewer_viewPaperDetail.php">
 										<td>
 											<!-- retrieve paper id -->
 											'; $stmt2->execute([$v["paperName"]]);
-											echo $stmt2->fetch()["paper_ID"];
+											$paperID = $stmt2->fetch()["paper_ID"];
+											echo $paperID;
 											//echo "<br>" . $x . " this is x <<";
 											//, $idArray[$x] , 
-											echo '<input type="hidden" id="custId" name="paperName" 
-													value="'; echo $v["paperName"]; echo '">
+											echo '
 										</td>
 										<td>
 											<!-- retrieve paper name --> 
@@ -204,11 +204,18 @@
 										</td>
 										<td>
 											<!-- retrieve author name -->
-											';echo $viewPaperObj->emailToNameConvertor($v["paperName"]);
+											';$authorNames = $viewPaperObj->emailToNameConvertor($v["paperName"]);
+											echo $authorNames;
 											//$authArry = $viewPaperObj->emailToNameConvertor($v["paperName"]);
 											//echo $authArry[$x];
 											//echo $authorArray[$x];
 											echo '
+											<input type="hidden" id="paperID" name="paperID" 
+												value="'; echo $paperID; echo '">
+											<input type="hidden" id="paperName" name="paperName" 
+												value="'; echo $v["paperName"]; echo '">
+											<input type="hidden" id="authorNames" name="authorNames" 
+												value="'; echo $authorNames; echo '">
 											<!-- author -->
 										</td> 
 										<td>
@@ -220,18 +227,17 @@
 										</td>
 										<td>
 											
-											  <button name="lala" value="';echo $idArray[$x]; echo '" 
+											  <button name="lala" value="" 
 											  class="detail_action_btn">View Detail</button>
-											
+
 											<!-- <a href="../boundary/reviewer_viewDetailUpdatePaperPage.html">
 												<button type="button" class="detail_action_btn">
 													View Detail
 											</button>
 											</a> -->
-
 										</td>
+										</form>
 									</tr>
-									</form>
 									';
 								}
 								?>

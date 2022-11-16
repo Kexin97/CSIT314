@@ -37,9 +37,15 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 			echo "Connection failed: " . $e->getMessage();
         }*/
         //echo "<br>";echo "<br>";
-		try 
+		$viewProfileObj = new reviewerProfView();
+		$stmt = $viewProfileObj->viewProfile();
+		$stmt2 = $viewProfileObj->viewNumOfReviewsSet();
+		//$stmt->execute();
+		
+		/* try 
 		{
-			$stmt = $conn->prepare("SELECT account_fullName, account_sex, account_age FROM account ");
+			$stmt = $conn->prepare("SELECT account_fullName, account_sex, account_age 
+			FROM account WHERE account_email=");
 			$stmt2 = $conn->prepare("SELECT maxReviewNumber FROM account_profile WHERE account_email=?");
 			//$stmt->execute();
 
@@ -67,11 +73,11 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 			//$stmt->execute();
 			//echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			//echo $stmt->fetch()["paperName"];
-        } 
+        /* } 
 		catch(PDOException $e) 
 		{
 			echo $e->getMessage();
-        }
+        }  */
 		/*if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";

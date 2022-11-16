@@ -153,6 +153,8 @@
                                     <!-- retieve paper id -->
                                     <label id="reviewer_viewPaperID">
 										<!-- 12345678 -->
+										<?php echo $_SESSION["paperID"];
+										?>
 									</label>
                                 </div>
                             </div>
@@ -165,7 +167,7 @@
 									
                                     <label id="reviewer_viewPaperName">
 										<!-- PaperA -->
-										<?php echo $_POST["authorName"];
+										<?php echo $_SESSION["paperName"];
 										//$stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
 									</label>
                                 </div>
@@ -180,87 +182,123 @@
 									
                                     <label class="reviewer_viewPaperAuthor">
 										<!-- Author1 -->
-										<?php $stmt->execute(); echo $stmt->fetch()["authorName"];?>
+										<?php echo $_SESSION["authorNames"];
+										//$stmt->execute(); echo $stmt->fetch()["authorName"];?>
 									</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <p class="col-sm-2">Others Review:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retieve other Review -->
-									
-                                    <label class="reviewer_viewPaperReview_others">
-										<!-- reeee -->
+							<?php 
+							//$stmt->execute(["powerpull girls"]);
+							$stmt->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+							foreach(($stmt->fetchAll()) as $v)
+							{
+								if ($v["bidWinnerEmail"] != $_SESSION["reviewer_email"])
+								{
+								echo '
+								<div class="row">
+									<p class="col-sm-2">Other reviewer name:
 										
-									</label>
-                                    <button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
-										Comment others review
-		
-									</button>
-                                </div>
-                            </div>
+									</p>
+									<div class="col-sm-10">
+										<!-- retieve Author name -->
+										
+										<label class="reviewer_viewPaperReviewer_others">
+											<!-- Author1 -->
+											' , $v["bidWinnerName"] , '
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<p class="col-sm-2">Others Review:
+										
+									</p>
+									<div class="col-sm-10">
+										<!-- retieve other Review -->
+										
+										<label class="reviewer_viewPaperReview_others">
+											<!-- reeee -->
+											'; if ($v["bidWinnerReview"] != null)
+											{
+												echo $v["bidWinnerReview"];
+											}
+											else if ($v["bidWinnerReview"] == null)
+											{
+												echo "Not reviewed yet";
+											}
+											echo '
+										</label>
+										<button type="button" id="reviewer_commentReview" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#viewPaperAddRating">
+											Comment others review
+											
+										</button>
+									</div>
+								</div>
 
-                            <div class="row">
-                                <p class="col-sm-2">Others Rating:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve other Rating -->
-									
-                                    <label class="reviewer_viewPaperRating_others">
-										<!-- Author1 -->
+								<div class="row">
+									<p class="col-sm-2">Others Rating:
 										
-									</label>
-                                </div>
-                            </div>
+									</p>
+									<div class="col-sm-10">
+										<!-- retrieve other Rating -->
+										
+										<label class="reviewer_viewPaperRating_others">
+											<!-- Author1 -->
+											' . $v["bidWinnerRating"] . '
+										</label>
+									</div>
+								</div>
+								';}
+							}
+							//else if ($v["bidWinnerEmail"] == $_SESSION["reviewer_email"])
+							//$stmt2->execute([$_SESSION["paperName"], $_SESSION["reviewer_email"]]);
+							//$stmt->fetch()["bidWinnerReview"];
+							echo '
 							<div class="row">
-                                <p class="col-sm-2">Self Review:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve self Review -->
+								<p class="col-sm-2">Self Review:
 									
-                                    <label class="reviewer_viewPaperReview_self">
+								</p>
+								<div class="col-sm-10">
+									<!-- retrieve self Review -->
+									
+									<label class="reviewer_viewPaperReview_self">
 										<!-- Author1 -->
-										<?php $stmt->execute(); 
-										if ($stmt->fetch()["review"] == null)
+										'; if ($selfReview != null)
+										{
+											echo $selfReview;
+										}
+										else if ($selfReview == null)
 										{
 											echo "Not reviewed yet";
 										}
-										else
-										{
-											$stmt->execute();
-											echo $stmt->fetch()["review"];
-										}
-										?>
+										echo '
 									</label>
-                                </div>
-                            </div>
+									<!-- <button type="button" id="reviewer_editDetail" class="blue_btn reviewer_viewPaperEditDetail_btn" data-toggle="modal" data-target="#reviewer_editPaperModal"> -->
+										<!-- Edit Detail -->
+									<!-- </button> -->
+								</div>
+							</div>
 							<div class="row">
-                                <p class="col-sm-2">Self Rating:
-                                    
-                                </p>
-                                <div class="col-sm-10">
-                                    <!-- retrieve self Rating -->
+								<p class="col-sm-2">Self Rating:
 									
-                                    <label class="reviewer_viewPaperRating_self">
+								</p>
+								<div class="col-sm-10">
+									<!-- retrieve self Rating -->
+									
+									<label class="reviewer_viewPaperRating_self">
 										<!-- Author1 -->
-										<?php $stmt->execute(); 
-										if ($stmt->fetch()["rating"] == null)
+										'; if ($selfRating != null)
 										{
-											echo "No ratings yet";
+											echo $selfRating;
 										}
-										else
+										else if ($selfRating == null)
 										{
-											$stmt->execute();
-											echo $stmt->fetch()["rating"];
+											echo "Not rated yet";
 										}
-										?>
+										echo '
 									</label>
-                                </div>
-                            </div>
+								</div>
+							</div>
+							
                             <div class="reviewer_viewPaperEditDetail_btn">
                                 <button type="button" id="reviewer_editDetail" class="blue_btn" data-toggle="modal" data-target="#reviewer_editPaperModal">
 									Edit Detail
@@ -268,7 +306,9 @@
                                 <!-- <button type="button" class="red_btn " data-toggle="modal" data-target="#deletePapereModal">
 								Delete paper
 								</button> -->
-                            </div>
+                             </div> 
+							'; 
+							?>
                         </div>
                     </div>
                 </div>
@@ -332,21 +372,28 @@
                     <p>Paper ID:&nbsp;</p>
                     <div class="detail ">
                         <!-- get paperID from DB-->
-                        <label id="reviewer_editPaperID "></label>
+                        <label id="reviewer_editPaperID ">
+						<?php echo $_SESSION["paperID"];
+						?>
+						</label>
                     </div>
                     <p>Paper name:&nbsp;</p>
                     <div class="detail ">
                         <!-- get PaperName from DB-->
 						
                         <label id="reviewer_editPaperName">
-							<?php $stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];?>
+							<?php echo $_SESSION["paperName"];
+							//$stmt->execute(); echo $stmt->fetch()["paperName"];//echo $_POST["paperName"];
+							?>
 						</label>
                     </div>
                     <p class="searchLeft ">reviewer name</p>
                     <div class="detail ">
 						
                         <label id="reviewer_editreviewerName">
-							<?php $stmt->execute(); echo $stmt->fetch()["bidWinner"];?>
+							<?php 
+							//$stmt->execute(); echo $stmt->fetch()["bidWinner"];
+							?>
 						</label>
                     </div>
                     <p class="searchLeft ">Enter review</p>
@@ -358,26 +405,33 @@
                     <div >
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary reviewer_viewPaperAddRating active">
-                                                <input type="radio" id="reviewer_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
+                                                <input type="radio" name="rating" value="3"
+												id="reviewer_viewPaperAddRating3" autocomplete="off" checked> 3<br>(strong accept)
                                             </label>
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio"  id="reviewer_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
+                                                <input type="radio" name="rating" value="2"
+												id="reviewer_viewPaperAddRating2" autocomplete="off"> 2<br>(accept)
                                             </label>
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio"  id="reviewer_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
+                                                <input type="radio" name="rating" value="1"
+												id="reviewer_viewPaperAddRating1" autocomplete="off"> 1<br>(weak accept)
                                             </label>
 
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio" id="reviewer_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
+                                                <input type="radio" name="rating" value="0"
+												id="reviewer_viewPaperAddRating0" autocomplete="off">0<br>(borderline paper)
                                             </label>
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio" id="reviewer_viewPaperAddRatingMinus1" autocomplete="off"> -1<br>(weak reject)
+                                                <input type="radio" name="rating" value="-1"
+												id="reviewer_viewPaperAddRatingMinus1" autocomplete="off"> -1<br>(weak reject)
                                             </label>
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio" id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
+                                                <input type="radio" name="rating" value="-2"
+												id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -2<br>(reject)
                                             </label>
                             <label class="btn btn-secondary reviewer_viewPaperAddRating">
-                                                <input type="radio"  id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
+                                                <input type="radio" name="rating" value="-3" 
+												id="reviewer_viewPaperAddRatingMinus3" autocomplete="off"> -3<br>(strong reject)
                                             </label>
                         </div>
                     </div>

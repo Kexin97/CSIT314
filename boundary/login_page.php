@@ -136,8 +136,7 @@
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else if ($loginType == "reviewer"){
-                $new_url = "../boundary/reviewer_viewPaper.php";
-
+                $new_url = "../boundary/reviewer_profile.php";
                 echo '<script>window.location.href="'.$new_url.'";</script>';
             }
             else{

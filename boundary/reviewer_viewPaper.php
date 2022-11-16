@@ -6,7 +6,14 @@ $cookie_value = "chocolate_cookie";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 */
 session_start();
-//$_SESSION["idArray"] = $idArray;	//session var 3, ID array
+/*
+$_SESSION["reviewer_email"]
+$_SESSION["reviewer_name"]
+$_SESSION["paperID"] = $_POST["paperID"];	//session var3, paperID
+$_SESSION["paperName"] = $_POST["paperName"];	//session var4, paperName
+$_SESSION["authorNames"] = $_POST["authorNames"];	//session var5, authorNames
+
+*/
 ?>
 <html>
 	<head>
