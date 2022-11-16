@@ -229,6 +229,7 @@
 								//for ($x = 0; $x < $numOfRows; $x++)
 								foreach(($stmt->fetchAll()) as $v)
 								{
+									
 									//$stmt->execute([]);
 									echo '
                                     <tr>
@@ -247,7 +248,15 @@
                                         <td>
                                             <!-- retrieve author name -->
 
-                                            2
+                                            '; $stmt2->execute([$v["paper_name"]]);
+											if (isset($stmt2->fetch()["count(*)"]))
+											{
+												$stmt2->execute([$v["paper_name"]]);
+												echo $stmt2->fetch()["count(*)"];
+											}
+											else
+												echo "0";
+											echo '
                                         </td>
 
                                         <td>
@@ -257,20 +266,38 @@
                                                     Add bid
 
                                             </button>
-                                        </a> -->
-											<!-- <form method="post" action="../boundary/reviewer_viewPaperDetail.php">
-											  <button name="paperName" value="';echo $v["paper_name"]; echo '" 
-											  class="detail_action_btn">View Detail</button>
-											</form> -->
-                                            <button id="reviewer_addBid" type="button" class="detail_action_btn" data-toggle="modal" data-target="#addBidModal">
-                                            Add bid
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button id="reviewer_deleteBid" type="button" class="reviewer_deleteBid" data-toggle="modal" data-target="#deleteBidModal">
+                                        </a> -->';
+										$stmt3->execute([$v["paper_name"]]);
+										$biddedOrNot = false;
+										foreach(($stmt3->fetchAll()) as $v3)
+										{
+											if ($v3["account_email"] == $_SESSION["reviewer_email"])
+											{
+												$biddedOrNot = true;
+											}
+										}
+										if ($biddedOrNot == false)
+										{
+											echo '<form method="post" action="../boundary/reviewer_viewBid.php">
+											  <button id="reviewer_addBid" name="addBid" value="'; echo $v["paper_name"]; echo '" 
+											  class="detail_action_btn">Add bid</button>
+											</form>';
+										}
+                                            
+                                        echo '</td>
+                                        <td> ';
+										if ($biddedOrNot == true)
+										{
+											echo '<form method="post" action="../boundary/reviewer_viewBid.php">
+											  <button id="reviewer_deleteBid" name="delBid" value="'; echo $v["paper_name"]; echo '" 
+											  class="reviewer_deleteBid">Delete bid</button>
+											</form>
+											<!-- <button id="reviewer_deleteBid" type="button" class="reviewer_deleteBid" data-toggle="modal" data-target="#deleteBidModal">
                                             Delete bid
-                                            </button>
-                                        </td>
+                                            </button> -->';
+										} 
+                                            
+                                        echo '</td>
 
                                     </tr>
 									';
