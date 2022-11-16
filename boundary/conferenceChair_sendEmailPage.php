@@ -25,7 +25,8 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onload="loadPaperNames()">
+<form method="POST">
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -152,16 +153,21 @@
                         <p style="font-size:20px; color: black; margin-left: 10px; margin-top: 25px;">
                             Send Email</p>
                     </div>
-                    <div style="padding: 30px;">
-
+                    <div class="card-body" style="display: flex;">
+                        <label for="inputPaperName" class="searchLeft col-sm-2" style="width:130px;">Paper name:</label>
+                        <select id="conferenceChair_viewPaperNames" name="conferenceChair_viewPaperNames" class="form-control select2 col-sm-4 inlineBlock" onchange="checkSubmitValidity();getEmailAddress()">
+                            <!-- retrieve paper name from db -->
+                            <option value="" selected disabled>Select paper name</option>
+                        </select>                        
+                    </div>
+                    <div style="padding-left:20px;padding-bottom:30px">
+                        <input type="button" style="background-color: #F7685B;color: white;width:608px" class="blue_btn" name="submitEmail" id="submitEmail" value="Send emails" onclick="sendEmail()">
                     </div>
                 </div>
 
             </div>
         </div>
-
-
-
+    </form>
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -177,6 +183,14 @@
         <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
         <!-- <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function(){
+                emailjs.init("cJhx1LdoTkldeDHLa");
+            })();
+        </script>
         <script>
             $(".nav .nav-link ").on("click ", function() {
                 $(".nav ").find(".active ").removeClass("active ");
@@ -209,8 +223,113 @@
                 }
             }
 
-            console.log("cookies: "+document.cookie);
-        </script>
-</body>
+            var allPaperName = [];
+            var allPaperStatus = [];
+            function loadPaperNames(){
+                <?php require_once("../controller/sendEmailController.php"); ?>
+                allPaperName = [];
+                allPaperStatus = [];
+                var test = "<?php $controller = new sendEmailController();?>";
+                var test2 = "<?php $result1 = $controller->getPaperNames();?>"; 
+                var getPaperCount = "<?php echo count($result1)?>";
+                var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[0]))?>"
+                var getPaperStatus = "<?php $arrayPaperStatus_to_json = json_encode(($result1[1]))?>"
+                var fromPHP = <?php echo $arrayPaperName_to_json ?>;
+                var fromPHP1 = <?php echo $arrayPaperStatus_to_json ?>;
+                for(var x=0; x<getPaperCount; x++){
+                    allPaperName.push(fromPHP[x]);
+                    allPaperStatus.push(fromPHP1[x]);
+                }
+                for(var x=0; x<allPaperName.length; x++){
+                    var optionText = allPaperName[x];
+                    var optionValue = allPaperName[x];
+                    $('#conferenceChair_viewPaperNames').append(new Option(optionText, optionValue));
+                }
+                checkSubmitValidity();
+            }
 
+            function checkSubmitValidity(){
+                if(document.getElementById("conferenceChair_viewPaperNames").value == ""){
+                    document.getElementById("submitEmail").disabled = true;
+                    document.getElementById("submitEmail").style.backgroundColor = "grey";
+                }
+                else{
+                    document.getElementById("submitEmail").disabled = false;
+                    document.getElementById("submitEmail").style.backgroundColor = "#F7685B";
+                }
+            }
+
+            var reviewerEmails = [];
+            var reviewerNames = [];
+            var paperNameArray = [];
+            var viewSelectedEmails = [];
+            var viewSelectedNames = [];
+            var paperCurrentStatus;
+            function getEmailAddress(){
+                reviewerEmails= [];
+                paperNameArray = [];
+                viewSelectedEmails = [];
+                viewSelectedNames = [];
+                var test = "<?php $controller = new sendEmailController();?>";
+                var test2 = "<?php $result1 = $controller->getEmails();?>";
+                var getEmailCount = "<?php echo count($result1[0])?>";
+                var getPaperReviewerEmail = "<?php $arrayPaperReviewerEmail_to_json = json_encode(($result1[0]))?>"
+                var getPaperName = "<?php $arrayPaperNames_to_json = json_encode(($result1[1]))?>"
+                var getPaperReviewerName = "<?php $arrayPaperReviewerNames_to_json = json_encode(($result1[2]))?>"
+
+                var fromPHP = <?php echo $arrayPaperReviewerEmail_to_json ?>;
+                var fromPHP1 = <?php echo $arrayPaperNames_to_json ?>;
+                var fromPHP2 = <?php echo $arrayPaperReviewerNames_to_json ?>;
+                
+                for(var x=0; x<getEmailCount; x++){
+                    reviewerEmails.push(fromPHP[x]);
+                    paperNameArray.push(fromPHP1[x]);
+                    reviewerNames.push(fromPHP2[x]);
+                }
+
+                for(var x=0; x<paperNameArray.length; x++){
+                    if(paperNameArray[x] == document.getElementById("conferenceChair_viewPaperNames").value){
+                        viewSelectedEmails.push(reviewerEmails[x]);
+                        viewSelectedNames.push(reviewerNames[x]);
+                    }
+                }
+                console.log(viewSelectedEmails);
+                console.log(allPaperStatus);
+                console.log(document.getElementById("conferenceChair_viewPaperNames").value);
+
+                
+                for(var y=0; y<allPaperName.length; y++){
+                    if(allPaperName[y] == document.getElementById("conferenceChair_viewPaperNames").value){
+                        paperCurrentStatus = allPaperStatus[y];
+                        break;
+                    }
+                }
+                console.log("CS: " + paperCurrentStatus);
+            }
+
+            function sendEmail(){
+                const serviceID = "service_4rio2bo";
+                const templateID = "template_zei5jb8";
+                
+                for(var x=0; x<viewSelectedEmails.length; x++){
+                    console.log("Email: " + viewSelectedEmails[x]);
+                    console.log("Name: " + viewSelectedNames[x]);
+                    var params = {
+                        inputFullName: viewSelectedNames[x],
+                        inputPaperName: document.getElementById("conferenceChair_viewPaperNames").value,
+                        inputPaperStatus: paperCurrentStatus,
+                        inputEmail: viewSelectedEmails[x]
+                    }
+                    //Send email
+                    emailjs.send(serviceID, templateID, params).then(res=>{
+                        console.log(res);
+                    })
+                    .catch(err=>alert(err));
+                } 
+                alert("Emails sent!");
+            }
+        </script>
+        <?php
+        ?>
+    </body>
 </html>
