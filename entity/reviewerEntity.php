@@ -156,6 +156,20 @@ session_start();*/
 				$stmt = $this->conn()->prepare("DELETE FROM papersbid WHERE paperName=? AND account_email=?");
 				return $stmt;
 			}
+			
+			function setPaperStatus()
+			{
+				$stmt = $this->conn()->prepare("UPDATE paper SET paper_status='bidded'
+				WHERE paper_name=? ");
+				return $stmt;
+			}
+			
+			function deletePaperStatus()
+			{
+				$stmt = $this->conn()->prepare("UPDATE paper SET paper_status=null
+				WHERE paper_name=? ");
+				return $stmt;
+			}
 		}
 		
 		class reviewerProfView extends DBconn	//reviewerProfView @@@@@@@@@@@@@

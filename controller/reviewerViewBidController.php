@@ -51,6 +51,9 @@ $_SESSION["viewBidObj"] = $viewBidObj;	//session obj 1, viewBidObj
 		{//the if checks  if num of papers set is empty
 			$viewBidObj->setNumOfReviews();
 		}
+		
+		$stmt4 = $viewBidObj->deletePaperStatus();
+		
 		/* $_SESSION["reviewer_email"]
 		$_SESSION["reviewer_name"] */
 		

@@ -249,13 +249,18 @@
                                             <!-- retrieve author name -->
 
                                             '; $stmt2->execute([$v["paper_name"]]);
-											if (isset($stmt2->fetch()["count(*)"]))
+											$intVar = $stmt2->fetch()["count(*)"];
+											if (isset($intVar) && $intVar > 0)
 											{
-												$stmt2->execute([$v["paper_name"]]);
-												echo $stmt2->fetch()["count(*)"];
+												//$stmt2->execute([$v["paper_name"]]);
+												//echo $stmt2->fetch()["count(*)"];
+												echo $intVar;
 											}
-											else
-												echo "0";
+											else if ($intVar == 0)
+											{
+												echo $intVar;
+												$stmt4->execute([$v["paper_name"]]);
+											}
 											echo '
                                         </td>
 

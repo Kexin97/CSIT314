@@ -29,6 +29,9 @@ session_start();
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo "add bid is set";
 			$stmt4->execute([$_POST['addBid'], $_SESSION["reviewer_name"], $_SESSION["reviewer_email"]]);
+			
+			$stmt6 = $viewBidObj->setPaperStatus();
+			$stmt6->execute([($_POST['addBid'])]);
 			$_POST['addBid'] = NULL;
 			echo "<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 			echo $_POST['addBid'];
