@@ -1,7 +1,7 @@
 <?php
     class allocatePaper{
         protected $conn = NULL;
-        protected $paperID;
+        protected $biddingID;
         protected $paperName;
         protected $paperStatus;
         protected $reviewerName;
@@ -16,19 +16,19 @@
             $conn = @new mysqli($servername, $username, $password, $database_name);
 
             $this->conn = $conn;
-            $this->paperID = "";
+            $this->biddingID = "";
             $this->paperName = "";
             $this->paperStatus = "";
             $this->reviewerName = "";
             $this->dataArray = array();
         }
 
-        function setPaperID($paperID){
-            $this->paperID = $paperID;
+        function setbiddingID($biddingID){
+            $this->biddingID = $biddingID;
         }
 
-        function getPaperID(){
-            return $this->paperID;
+        function getbiddingID(){
+            return $this->biddingID;
         }
 
         function setPaperName($paperName){
@@ -74,8 +74,9 @@
                 $qGet = $this->conn->query($query);
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
-                        $paperNames[] = $Row["paperName"];
-                        
+                        if(!in_array($Row["paperName"], $paperNames)){
+                            $paperNames[] = $Row["paperName"];
+                        }
                     }
                 }
             }
