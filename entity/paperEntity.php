@@ -293,7 +293,7 @@
 
                 while(($Row = $qGet->fetch_assoc()) !== NULL)
                 {
-					if ($Row["bidWinnerRating"]!=NULL){
+					if ($Row["bidWinnerReview"]!=""){
                     $data[$i]["paperName"] = $Row["paperName"];
                     $data[$i]["bidID"] = $Row["winnerID"];
 					$data[$i]["bidWinnerName"] = $Row["bidWinnerName"];
@@ -304,6 +304,9 @@
 					$data[$i]["result"]= TRUE;
 					
 					}
+					else{
+					$data[0]["result"]= FALSE;
+			}
                     $i++;
 					
                 }
