@@ -57,7 +57,7 @@
 
         function searchPaperNames(){
             $validityCheck;
-            $query = "SELECT * FROM papersbid";
+            $query = "SELECT * FROM papersbid WHERE allocationStatus = ''";
             $stmt = mysqli_stmt_init($this->conn);
             $paperNames = array();
             $returnResults;
