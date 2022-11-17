@@ -290,7 +290,7 @@
 										}
 										if ($biddedOrNot == false)
 										{
-											echo '<form method="post" action="../controller/profileUpdateController.php">
+											echo '<form method="post" action="../controller/addDeleteBidController.php">
 											  <button id="reviewer_addBid" name="addBid" value="'; echo $v["paper_name"]; echo '" 
 											  class="detail_action_btn">Add bid</button>
 											</form>';
@@ -300,7 +300,7 @@
                                         <td> ';
 										if ($biddedOrNot == true)
 										{
-											echo '<form method="post" action="../controller/profileUpdateController.php">
+											echo '<form method="post" action="../controller/addDeleteBidController.php">
 											  <button id="reviewer_deleteBid" name="delBid" value="'; echo $v["paper_name"]; echo '" 
 											  class="reviewer_deleteBid">Delete bid</button>
 											</form>
