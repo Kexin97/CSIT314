@@ -14,7 +14,7 @@ session_start();
 		<hr/> -->
 	</head>
 	<body>
-		<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaperDetail.php</h1>
+		<!-- <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer_viewPaperDetail.php</h1> -->
 		
 
 
