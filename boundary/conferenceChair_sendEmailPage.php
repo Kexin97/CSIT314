@@ -88,7 +88,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocated paper

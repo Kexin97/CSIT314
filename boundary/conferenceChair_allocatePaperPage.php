@@ -88,7 +88,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item active">
-                            <a href="conferenceChair_allocatePaperPage.php?cc" class="nav-link">
+                            <a href="conferenceChair_allocatePaperPage.php" class="nav-link">
                                 <i class="nav-icon"><img src="../img/add.svg"></i>
                                 <p class="navHeader">
                                     Allocate paper
@@ -170,13 +170,10 @@
                                 <option selected disabled>Select paper name</option>
                                 <?php
                                     require_once("../controller/allocatePaperController.php");
-
-                                    if(isset($_GET["cc"])){
-                                        $controller = new allocatePaperController();
-                                        $result = $controller->searchPapers();
-                                        for($x=0;$x<count($result);$x++){
-                                            echo "<option value='$result[$x]'>$result[$x]</option>";
-                                        }
+                                    $controller = new allocatePaperController();
+                                    $result = $controller->searchPapers();
+                                    for($x=0;$x<count($result);$x++){
+                                        echo "<option value='$result[$x]'>$result[$x]</option>";
                                     }
                                 ?>
                             </select>
@@ -205,13 +202,10 @@
                                 <option selected disabled>Select paper name</option>
                                 <?php
                                     require_once("../controller/allocatePaperController.php");
-
-                                    if(isset($_GET["cc"])){
-                                        $controller = new allocatePaperController();
-                                        $result = $controller->searchPapers();
-                                        for($x=0;$x<count($result);$x++){
-                                            echo "<option value='$result[$x]'>$result[$x]</option>";
-                                        }
+                                    $controller = new allocatePaperController();
+                                    $result = $controller->searchPapers();
+                                    for($x=0;$x<count($result);$x++){
+                                        echo "<option value='$result[$x]'>$result[$x]</option>";
                                     }
                                 ?>
                             </select>
@@ -480,7 +474,7 @@
                     }
                     echo '<script> alert("Errors: ' . $fail1 . " and " . $fail3 . '"); </script>';
                 }
-                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php');</script>";
             }
 
             if(isset($_POST['author_save1'])){
@@ -509,7 +503,7 @@
                     }
                     echo '<script> alert("Errors: ' . $fail1 . " and " . $fail3 . '"); </script>';
                 }
-                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
+                echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php');</script>";
             }
         ?>
     </form>
