@@ -72,7 +72,7 @@
 
                 while(($Row = $qGet->fetch_assoc()) !== NULL)
                 {
-                    if($Row["account_email"]){
+                    if($Row["account_email"] == $account_email){
                         if($Row["reviewer_type"] == $checkProfile){
                             $this->setProfileType($Row["reviewer_type"]);
                             break;
