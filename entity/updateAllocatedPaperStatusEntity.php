@@ -5,7 +5,7 @@
         protected $paperName;
         protected $authorName;
         protected $conferenceChairName;
-        protected $paper_status;
+        protected $acceptOrReject;
         protected $paperRating;
         protected $paperReview;
 
@@ -23,7 +23,7 @@
             $this->paperName = "";
             $this->authorName = "";
             $this->conferenceChairName = "";
-            $this->paper_status = "";
+            $this->acceptOrReject = "";
             $this->paperRating = "";
             $this->paperReview = "";
             $this->dataArray = array();
@@ -61,12 +61,12 @@
             return $this->conferenceChairName;
         }
 
-        function setPaperStatus($paper_status){
-            $this->paper_status = $paper_status;
+        function setPaperStatus($acceptOrReject){
+            $this->acceptOrReject = $acceptOrReject;
         }
 
         function getPaperStatus(){
-            return $this->paper_status;
+            return $this->acceptOrReject;
         }
 
         function setPaperRating($paperRating){
@@ -126,7 +126,7 @@
                             if(($res = $qGet->num_rows) > 0){
                                 while(($Row = $qGet->fetch_assoc()) !== NULL){
                                     if($Row["bidWinnerRating"] != NULL && $Row["bidWinnerReview"] != NULL && $Row["paperName"] == $Row1["paper_name"]){
-                                        $allocatedPaperStatus[] = $Row1["paper_status"];
+                                        $allocatedPaperStatus[] = $Row1["acceptOrReject"];
                                         $allocatedPaperID[] = $Row1["paper_ID"];
                                         $allocatedPaperName[] = $Row1["paper_name"]; 
                                         $allocatedPaperAuthor[] = $Row1["author"];     
@@ -147,7 +147,7 @@
         }
 
         function updatePaperStatus($paperID, $status){
-            $SQLInsert = "UPDATE paper SET " . "paper_status = '$status'" . 
+            $SQLInsert = "UPDATE paper SET " . "acceptOrReject = '$status'" . 
                         "WHERE paper_ID = '$paperID'";
             $qInsert = $this->conn->query($SQLInsert);
             if($qInsert == TRUE){   
