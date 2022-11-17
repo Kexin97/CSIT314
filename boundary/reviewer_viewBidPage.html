@@ -229,6 +229,8 @@
                                 <tbody>
                                     <?php 
 								//for ($x = 0; $x < $numOfRows; $x++)
+								
+											
 								foreach(($stmt->fetchAll()) as $v)
 								{
 									
@@ -247,9 +249,10 @@
                                         <td>
 											'; $stmt5->execute([$v["paper_name"]]);
 											$linkVar = $stmt5->fetch()["paper_file"];
+											$filename = explode("/",$linkVar);
 											echo '<a href="'; echo $linkVar; echo '" 
 											target="_blank">
-                                            '; echo $linkVar; echo'
+                                            '; echo $filename[3]; echo'
                                         </a>
                                         </td>
                                         <td>
