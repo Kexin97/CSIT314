@@ -478,12 +478,6 @@
                     if($fail1 == ""){
                         $fail1 = "There is nothing to allocate";
                     }
-                    if($fail3 == "" && $result["statusResult"] == FALSE){
-                        $fail3 = "there is nothing to update";
-                    }
-                    else{
-                        $fail3 = "updated allocation status";
-                    }
                     echo '<script> alert("Errors: ' . $fail1 . " and " . $fail3 . '"); </script>';
                 }
                 echo "<script>window.location.replace('conferenceChair_allocatePaperPage.php?cc');</script>";
