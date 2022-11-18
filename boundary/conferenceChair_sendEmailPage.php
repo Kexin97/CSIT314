@@ -231,7 +231,7 @@
                 allPaperStatus = [];
                 var test = "<?php $controller = new sendEmailController();?>";
                 var test2 = "<?php $result1 = $controller->getPaperNames();?>"; 
-                var getPaperCount = "<?php echo count($result1)?>";
+                var getPaperCount = "<?php echo count($result1[0])?>";
                 var getPaperName = "<?php $arrayPaperName_to_json = json_encode(($result1[0]))?>"
                 var getPaperStatus = "<?php $arrayPaperStatus_to_json = json_encode(($result1[1]))?>"
                 var fromPHP = <?php echo $arrayPaperName_to_json ?>;
@@ -259,38 +259,35 @@
                 }
             }
 
-            var reviewerEmails = [];
-            var reviewerNames = [];
+            var authorEmails = [];
             var paperNameArray = [];
             var viewSelectedEmails = [];
-            var viewSelectedNames = [];
+            var splitEmail;
             var paperCurrentStatus;
             function getEmailAddress(){
-                reviewerEmails= [];
+                authorEmails= [];
                 paperNameArray = [];
                 viewSelectedEmails = [];
-                viewSelectedNames = [];
                 var test = "<?php $controller = new sendEmailController();?>";
                 var test2 = "<?php $result1 = $controller->getEmails();?>";
                 var getEmailCount = "<?php echo count($result1[0])?>";
                 var getPaperReviewerEmail = "<?php $arrayPaperReviewerEmail_to_json = json_encode(($result1[0]))?>"
                 var getPaperName = "<?php $arrayPaperNames_to_json = json_encode(($result1[1]))?>"
-                var getPaperReviewerName = "<?php $arrayPaperReviewerNames_to_json = json_encode(($result1[2]))?>"
 
                 var fromPHP = <?php echo $arrayPaperReviewerEmail_to_json ?>;
                 var fromPHP1 = <?php echo $arrayPaperNames_to_json ?>;
-                var fromPHP2 = <?php echo $arrayPaperReviewerNames_to_json ?>;
-                
+                //console.log(fromPHP);
                 for(var x=0; x<getEmailCount; x++){
-                    reviewerEmails.push(fromPHP[x]);
+                    authorEmails.push(fromPHP[x]);
                     paperNameArray.push(fromPHP1[x]);
-                    reviewerNames.push(fromPHP2[x]);
                 }
 
                 for(var x=0; x<paperNameArray.length; x++){
                     if(paperNameArray[x] == document.getElementById("conferenceChair_viewPaperNames").value){
-                        viewSelectedEmails.push(reviewerEmails[x]);
-                        viewSelectedNames.push(reviewerNames[x]);
+                        splitEmail = authorEmails[x].split(", ");
+                        for(var y=0; y<splitEmail.length; y++){
+                            viewSelectedEmails.push(splitEmail[y]);
+                        }
                     }
                 }
                 console.log(viewSelectedEmails);
@@ -313,9 +310,7 @@
                 
                 for(var x=0; x<viewSelectedEmails.length; x++){
                     console.log("Email: " + viewSelectedEmails[x]);
-                    console.log("Name: " + viewSelectedNames[x]);
                     var params = {
-                        inputFullName: viewSelectedNames[x],
                         inputPaperName: document.getElementById("conferenceChair_viewPaperNames").value,
                         inputPaperStatus: paperCurrentStatus,
                         inputEmail: viewSelectedEmails[x]

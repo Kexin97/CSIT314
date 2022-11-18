@@ -77,7 +77,7 @@
             $emailArray = array();
             $paperNameArray = array();
             $nameArray = array();
-            $query = "SELECT * FROM bidwinner";
+            $query = "SELECT * FROM paper";
             $stmt = mysqli_stmt_init($this->conn);
             //Exit if failed to connect to DB
             if(!mysqli_stmt_prepare($stmt, $query)){
@@ -92,9 +92,8 @@
                 $qGet = $this->conn->query($query);
                 if(($res = $qGet->num_rows) > 0){
                     while(($Row = $qGet->fetch_assoc()) !== NULL){
-                        $emailArray[] = $Row["bidWinnerEmail"];
-                        $paperNameArray[] = $Row["paperName"];
-                        $nameArray[] = $Row["bidWinnerName"];
+                        $emailArray[] = $Row["author"];
+                        $paperNameArray[] = $Row["paper_name"];
                     }
                 }
             }
